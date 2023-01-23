@@ -1,4 +1,4 @@
-package com.project.planit.chatting.controller;
+package com.project.planit.members.dto;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

@@ -1,12 +1,12 @@
-package com.project.planit.chatting.controller;
+package com.project.planit.members.entity;
 
 /**
- * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY
+ * packageName    : com.project.planit.users.entity fileName       : Role author         : SSAFY
  * date           : 2023-01-20 description    :
  * =========================================================== DATE              AUTHOR
  * NOTE ----------------------------------------------------------- 2023-01-20        SSAFY       최초
  * 생성
  */
-public class test {
-
+public enum Role {
+  ADMIN, MEMBER
 }
