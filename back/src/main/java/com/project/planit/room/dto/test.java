@@ -1,4 +1,4 @@
-package com.project.planit.rooms.dto;
+package com.project.planit.room.dto;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

@@ -1,4 +1,4 @@
-package com.project.planit.members.entity;
+package com.project.planit.member.entity;
 
 /**
  * packageName    : com.project.planit.users.entity fileName       : Role author         : SSAFY

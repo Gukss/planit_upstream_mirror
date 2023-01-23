@@ -1,14 +1,10 @@
-package com.project.planit.rooms.entity;
+package com.project.planit.room.entity;
 
 import com.project.planit.util.BaseEntity;
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * packageName    : com.project.planit.rooms.entity
@@ -23,19 +19,21 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Getter
+@Table(name="room")
 public class Room {
     @Id
     @GeneratedValue
     @Column(name="room_id")
     private Long id;
 
-    private String room_name;
+    @Column(name="room_name")
+    private String roomName;
 
-    private LocalDate start_date;
+    @Column(name="start_date")
+    private LocalDate startDate;
 
-    private LocalDate end_date;
+    @Column(name="end_date")
+    private LocalDate endDate;
 
     private BaseEntity baseEntity;
-
-
 }

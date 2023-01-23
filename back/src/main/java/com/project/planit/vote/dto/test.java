@@ -1,4 +1,4 @@
-package com.project.planit.votes.dto;
+package com.project.planit.vote.dto;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

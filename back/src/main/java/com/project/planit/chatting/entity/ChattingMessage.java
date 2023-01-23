@@ -1,5 +1,14 @@
-package com.project.planit.chatting.entity;/**
- *packageName    : com.project.planit.chatting.entity
+package com.project.planit.chatting.entity;
+
+import com.project.planit.member.entity.Member;
+import com.project.planit.room.entity.Room;
+import com.project.planit.util.BaseEntity;
+import lombok.Getter;
+
+import javax.persistence.*;
+
+/**
+ * packageName    : com.project.planit.chatting.entity
  * fileName       : ChattingMessage
  * author         : dongk
  * date           : 2023-01-23
@@ -8,5 +17,26 @@ package com.project.planit.chatting.entity;/**
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 2023-01-23        dongk       최초 생성
- */public class ChattingMessage {
+ */
+@Entity
+@Getter
+@Table(name="chatting_message")
+public class ChattingMessage {
+
+    @Id @GeneratedValue
+    @Column(name="chatting_id")
+    private Long id;
+
+    private String message;
+
+    @Embedded
+    private BaseEntity baseEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="member_id")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="room_id")
+    private Room room;
 }

@@ -1,13 +1,9 @@
-package com.project.planit.members.entity;
+package com.project.planit.member.entity;
 
 import javax.persistence.*;
 
-import com.project.planit.notification.entity.Notification;
 import com.project.planit.util.BaseEntity;
 import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * packageName    : com.project.planit.users.entity
@@ -31,10 +27,10 @@ public class Member {
   private Long id;
 
   @Column(name ="member_app_id", nullable = false) //아이디
-  private String app_id;
+  private String appId;
 
   @Column(name ="member_app_pwd", nullable = false) //비밀번호
-  private String app_pwd;
+  private String appPwd;
 
   @Column(name ="member_name", nullable = false) //닉네임
   private String name;

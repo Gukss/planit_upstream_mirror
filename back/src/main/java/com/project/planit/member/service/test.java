@@ -1,4 +1,4 @@
-package com.project.planit.members.service;
+package com.project.planit.member.service;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

@@ -1,5 +1,7 @@
-package com.project.planit.storages.entity;/**
- *packageName    : com.project.planit.storages.entity
+package com.project.planit.storages.entity;
+
+/**
+ * packageName    : com.project.planit.storages.entity
  * fileName       : Category
  * author         : dongk
  * date           : 2023-01-23
@@ -8,5 +10,7 @@ package com.project.planit.storages.entity;/**
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 2023-01-23        dongk       최초 생성
- */public enum Category {
+ */
+public enum Category {
+    RESTAURANT, HOTEL, CAFE, PLACE
 }
