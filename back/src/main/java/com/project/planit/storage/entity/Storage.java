@@ -1,4 +1,4 @@
-package com.project.planit.storages.entity;
+package com.project.planit.storage.entity;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.entity.Room;

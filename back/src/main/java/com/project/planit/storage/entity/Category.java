@@ -1,4 +1,4 @@
-package com.project.planit.storages.entity;
+package com.project.planit.storage.entity;
 
 /**
  * packageName    : com.project.planit.storages.entity

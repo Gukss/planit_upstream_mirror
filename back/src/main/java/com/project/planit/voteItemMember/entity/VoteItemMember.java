@@ -1,4 +1,4 @@
-package com.project.planit.VoteItemMember.entity;
+package com.project.planit.voteItemMember.entity;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.util.BaseEntity;

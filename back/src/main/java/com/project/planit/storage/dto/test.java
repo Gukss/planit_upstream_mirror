@@ -1,4 +1,4 @@
-package com.project.planit.VoteItemMember.service;
+package com.project.planit.storage.dto;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

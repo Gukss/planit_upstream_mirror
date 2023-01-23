@@ -1,4 +1,4 @@
-package com.project.planit.storages.repository;
+package com.project.planit.storage.repository;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

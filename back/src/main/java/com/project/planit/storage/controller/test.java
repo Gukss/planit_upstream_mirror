@@ -1,4 +1,4 @@
-package com.project.planit.storages.dto;
+package com.project.planit.storage.controller;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY
