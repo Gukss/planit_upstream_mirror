@@ -6,7 +6,7 @@ import CTBLayout from './camtoolbox/CTBLayout';
 function CamList() {
   const camItems = [
     {
-      user: 'user1',
+      user: 'user 1',
       id: 'cam1',
     },
     {
