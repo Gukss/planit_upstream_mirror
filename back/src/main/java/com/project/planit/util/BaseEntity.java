@@ -3,7 +3,6 @@ package com.project.planit.util;
 import lombok.Getter;
 
 import javax.persistence.Embeddable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
