@@ -1,0 +1,34 @@
+hr {
+  margin: 0px;
+}
+
+.bbar {
+  position: fixed;
+  top: 0;
+  left: 72px;
+  height: 100vh;
+  width: 352px;
+  background-color: #e6e9ef;
+  padding: 0px 24px;
+
+  &__header {
+    margin: 12px 0px;
+
+    &__title {
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      // align-items: center;
+      // margin: 8px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    &__date {
+      font-weight: normal;
+    }
+  }
+
+  &__menu {
+    margin-top: 24px;
+  }
+}

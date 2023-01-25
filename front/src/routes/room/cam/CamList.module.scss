@@ -1,0 +1,19 @@
+.camlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 472px;
+  height: 20vh;
+  width: 70%;
+  border-style: solid;
+
+  .ctb {
+    display: flex;
+    justify-content: center;
+    right: 0;
+    background-color: #2b3f6b;
+    width: 64px;
+  }
+}
