@@ -1,0 +1,87 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    height: 60vh;
+    border-radius: 1.5rem;
+    background-color: #2b3f6b;
+  }
+  &__main {
+    display: flex;
+    width: 70vw;
+    height: 50vh;
+    background-color: white;
+
+    &__logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40vw;
+      background-color: #f5f5f5;
+      i {
+        font-size: 10rem;
+      }
+    }
+
+    &__signin {
+      display: flex;
+      flex-direction: column;
+      width: 60vw;
+      justify-content: center;
+      padding-left: 8rem;
+      h1 {
+        font-size: 2rem;
+      }
+      &__position {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        &__in {
+          width: 19vw;
+
+          p {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+          }
+
+          input {
+            border: 0;
+            // width: 19vw;
+            height: 3rem;
+            padding: 1rem;
+            font-size: 1rem;
+            &::placeholder {
+              color: #a4a4a4;
+            }
+          }
+        }
+
+        button {
+          margin-top: 3rem;
+          width: 10rem;
+          height: 10rem;
+          background-color: #ffd56b;
+          border: 0;
+          color: white;
+          border-radius: 0.5rem;
+          font-size: 2.5rem;
+          font-weight: bold;
+        }
+      }
+      .id_save {
+        width: 2rem;
+        font-size: 2rem;
+      }
+      label {
+      }
+    }
+  }
+}
