@@ -26,5 +26,9 @@ module.exports = {
     'no-console': 0, // console 오류 제거
     'react/self-closing-comp': ['error', { component: false, html: false }], // <div></div> or <div />인지 체크 false하면 둘다 사용가능
     'react/destructuring-assignment': [0, 'always'], // props 규정 무시하고 가능.
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      { labelAttributes: ['htmlFor'] },
+    ], // <label 에러 해결>
   },
 };

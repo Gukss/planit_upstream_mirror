@@ -32,12 +32,55 @@
 
     &__signin {
       display: flex;
+      flex-direction: column;
       width: 60vw;
-      align-items: center;
-
+      justify-content: center;
+      padding-left: 8rem;
       h1 {
-        font-size: 2.5rem;
-        padding-left: 10rem;
+        font-size: 2rem;
+      }
+      &__position {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        &__in {
+          width: 19vw;
+
+          p {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+          }
+
+          input {
+            border: 0;
+            // width: 19vw;
+            height: 3rem;
+            padding: 1rem;
+            font-size: 1rem;
+            &::placeholder {
+              color: #a4a4a4;
+            }
+          }
+        }
+
+        button {
+          margin-top: 3rem;
+          width: 10rem;
+          height: 10rem;
+          background-color: #ffd56b;
+          border: 0;
+          color: white;
+          border-radius: 0.5rem;
+          font-size: 2.5rem;
+          font-weight: bold;
+        }
+      }
+      .id_save {
+        width: 2rem;
+        font-size: 2rem;
+      }
+      label {
       }
     }
   }

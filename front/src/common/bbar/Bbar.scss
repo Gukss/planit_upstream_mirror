@@ -5,14 +5,14 @@ hr {
 .bbar {
   position: fixed;
   top: 0;
-  left: 72px;
+  left: 4.5rem;
   height: 100vh;
-  width: 352px;
+  width: 25rem;
   background-color: #e6e9ef;
   padding: 0px 24px;
 
   &__header {
-    margin: 12px 0px;
+    margin: 0.75rem 0rem;
 
     &__title {
       // display: flex;
