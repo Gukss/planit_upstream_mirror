@@ -1,0 +1,28 @@
+.resultitem {
+  //   display: flex;
+  //   flex-direction: column;
+
+  &__title {
+    font-size: 24px;
+    font-style: bold;
+  }
+
+  &__content {
+    display: flex;
+    * {
+      margin: 4px;
+    }
+  }
+  &__photo {
+    display: flex;
+    margin: 16px 0px;
+
+    &__item {
+      background-color: grey;
+      border-radius: 8px;
+      margin: 8px;
+      height: 96px;
+      width: 96px;
+    }
+  }
+}
