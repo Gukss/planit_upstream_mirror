@@ -32,5 +32,6 @@ public class Vote {
     private BaseEntity baseEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
     private Room room;
 }

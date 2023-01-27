@@ -3,7 +3,11 @@ package com.project.planit.member.entity;
 import javax.persistence.*;
 
 import com.project.planit.util.BaseEntity;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * packageName    : com.project.planit.users.entity
@@ -18,6 +22,9 @@ import lombok.Getter;
  */
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Table(name="member")
 public class Member {
 

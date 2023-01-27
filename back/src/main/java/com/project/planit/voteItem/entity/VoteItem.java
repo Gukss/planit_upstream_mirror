@@ -1,7 +1,7 @@
 package com.project.planit.voteItem.entity;
 
 import com.project.planit.util.BaseEntity;
-import com.project.planit.vote.controller.votes.entity.Vote;
+import com.project.planit.vote.entity.Vote;
 import lombok.Getter;
 
 import javax.persistence.*;
