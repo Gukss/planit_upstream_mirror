@@ -1,10 +1,14 @@
 package com.project.planit.room.entity;
 
 import com.project.planit.util.BaseEntity;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import lombok.NoArgsConstructor;
 
 /**
  * packageName    : com.project.planit.rooms.entity
@@ -20,6 +24,9 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Table(name="room")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Room {
     @Id
     @GeneratedValue

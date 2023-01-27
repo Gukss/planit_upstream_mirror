@@ -2,6 +2,8 @@ package com.project.planit.vote.entity;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +11,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import lombok.NoArgsConstructor;
+
 
 /**
  * packageName    : com.project.planit.vote.entity
@@ -31,14 +34,18 @@ public class Vote {
 
     @Id @GeneratedValue
     @Column(name="vote_id")
+    @NotNull
     private Long id;
 
+    @NotNull
     private String title;
 
     @Embedded
+    @NotNull
     private BaseEntity baseEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
     private Room room;
 
     //==생성 메서드==/

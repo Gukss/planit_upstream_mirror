@@ -26,9 +26,10 @@ public class VoteService {
   //방에 해당하는 투표 생성
   @Transactional
   public Long createVote(CreateVoteRequest request){
-    Vote vote = new Vote().builder()
-            .room()
-            .build();
+    Vote vote = Vote.builder()
+        .room(request.getRoom())
+        .baseEntity(request.getBaseEntity())
+        .build();
     voteRepository.save(vote);
     return vote.getId();
   }

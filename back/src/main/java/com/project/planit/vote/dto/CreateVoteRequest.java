@@ -1,5 +1,7 @@
 package com.project.planit.vote.dto;
 
+import com.project.planit.room.entity.Room;
+import com.project.planit.util.BaseEntity;
 import lombok.Data;
 
 /**
@@ -12,4 +14,6 @@ import lombok.Data;
 @Data
 public class CreateVoteRequest {
   private String title;
+  private Room room;
+  private BaseEntity baseEntity;
 }

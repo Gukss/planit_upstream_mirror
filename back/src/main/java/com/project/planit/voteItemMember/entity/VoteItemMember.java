@@ -10,13 +10,21 @@ import javax.persistence.*;
 /**
  * packageName    : com.project.planit.VoteItemMember.entity
  * fileName       : VoteItemMember
+<<<<<<< HEAD
  * author         : Gukss
+=======
+ * author         : dongk
+>>>>>>> 237e86f6acefaf78e84fbb87d0918dfa1458639d
  * date           : 2023-01-23
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
+<<<<<<< HEAD
  * 2023-01-23        Gukss       최초 생성
+=======
+ * 2023-01-23        dongk       최초 생성
+>>>>>>> 237e86f6acefaf78e84fbb87d0918dfa1458639d
  */
 @Entity
 @Getter
@@ -40,4 +48,5 @@ public class VoteItemMember {
 //
 //    //==생성 메서드==
 //    public static void
+
 }
