@@ -48,11 +48,6 @@ public class Vote extends BaseEntity{
     @NotNull
     private BaseRequest baseRequest;
 
-    //==생성 메서드==/
-//    public static void createVote(String title, Room room){
-//
-//    }
-
     /**
      * Change title.
      * methodName : changeTitle

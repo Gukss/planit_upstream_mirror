@@ -1,45 +1,51 @@
 package com.project.planit.voteItem.entity;
 
 import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
 import com.project.planit.vote.entity.Vote;
 import javax.validation.constraints.NotBlank;
-import lombok.Getter;
+
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * packageName    : com.project.planit.voteItem.entity
  * fileName       : VoteItem
- * author         : dongk
+ * author         : Gukss
  * date           : 2023-01-23
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023-01-23        dongk       최초 생성
+ * 2023-01-23        Gukss       최초 생성
  */
 
 @Entity
 @Getter
 @Table(name="vote_item")
-public class VoteItem {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class VoteItem extends BaseEntity{
 
     @Id
     @Column(name="vote_item_id")
     @GeneratedValue
-    @NotBlank
+//    @NotNull
     private Long id;
 
     @Column(name="vote_item_name")
-    @NotBlank
+    @NotNull
     private  String voteItemName;
 
     @Embedded
-    @NotBlank
-    private BaseEntity baseEntity;
+    @NotNull
+    private BaseRequest baseRequest;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="vote_id")
-    @NotBlank
+    @NotNull
     private Vote vote;
 }

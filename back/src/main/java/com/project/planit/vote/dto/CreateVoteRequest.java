@@ -9,9 +9,9 @@ import javax.persistence.Embedded;
 
 /**
  * packageName    : com.project.planit.vote.dto fileName       : CreateVoteRequest author         :
- * SSAFY date           : 2023-01-26 description    :
+ * Gukss date           : 2023-01-26 description    :
  * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-26        SSAFY       최초
+ * NOTE ----------------------------------------------------------- 2023-01-26        Gukss       최초
  * 생성
  */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,6 +19,7 @@ import javax.persistence.Embedded;
 @Builder
 @Getter
 public class CreateVoteRequest extends BaseEntity{
+
   private String title;
   private Room room;
 

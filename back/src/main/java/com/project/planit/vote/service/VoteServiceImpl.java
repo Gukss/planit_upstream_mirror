@@ -28,6 +28,7 @@ public class VoteServiceImpl implements VoteService{
   private final VoteRepository voteRepository;
 
   //방에 해당하는 투표 생성
+  @Override
   @Transactional
   public Vote createVote(@RequestBody CreateVoteRequest request){
     Vote vote = Vote.builder()
@@ -51,6 +52,11 @@ public class VoteServiceImpl implements VoteService{
     Vote targetVote = voteRepository.findById(request.getVoteId()).get();
     targetVote.changeTitle(request.getNewTitle()); //jpa는 영속성 컨텍스트의 값을 바꾸기만 해도 update 쿼리 날려준다.
     return Optional.of(targetVote);
+  }
+
+  @Override
+  public Optional<Vote> findById(Long id) {
+    return voteRepository.findById(id);
   }
 
   //방에 해당하는 투표 갱신

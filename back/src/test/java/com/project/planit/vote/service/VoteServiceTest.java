@@ -4,7 +4,6 @@ import com.project.planit.room.dto.CreateRoomRequest;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.room.service.RoomServiceImpl;
-import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
@@ -131,7 +130,22 @@ class VoteServiceTest {
     assertEquals(updatedVote.getTitle(), newVote.getTitle());
   }
 
-  Vote makeVote(){
+  @Test
+  @DisplayName("아이디로투표조회")
+  //@Rollback(false)
+  void 아이디로투표조회() throws Exception {
+      //given
+      //when
+      Vote newVote = makeVote();
+
+      //then
+      em.flush();
+      assertEquals(newVote.getId(), voteRepository.findById(newVote.getId()));
+  }
+
+  //====== method =======
+
+  private Vote makeVote(){
     CreateVoteRequest request = CreateVoteRequest.builder()
             .room(
                     Room.builder()
@@ -147,7 +161,7 @@ class VoteServiceTest {
     return voteService.createVote(request);
   }
 
-  BaseRequest makeBaseRequest(){
+  private BaseRequest makeBaseRequest(){
     return BaseRequest.builder()
             .constructor("Gukss")
             .updater("Gukss")

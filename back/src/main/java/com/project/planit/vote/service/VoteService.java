@@ -12,21 +12,50 @@ import java.util.Optional;
 /**
  * packageName    : com.project.planit.vote.service
  * fileName       : VoteService
- * author         : dongk
+ * author         : Gukss
  * date           : 2023-01-29
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023-01-29        dongk       최초 생성
+ * 2023-01-29        Gukss       최초 생성
  */
 public interface VoteService {
-    //방에 해당하는 투표 생성
+
+    /**
+     * methodName : createVote
+     * author : Gukss
+     * description : 방에 해당하는 투표 생성
+     * Create vote vote.
+     *
+     * @param request the CreateVoteRequest
+     * @return the vote; 생성된 투표
+     */
     public Vote createVote(@RequestBody CreateVoteRequest request);
 
-    //방에 해당하는 투표 조회
+
+    /**
+     * methodName : findByRoom
+     * author : Gukss
+     * description : 방에 해당하는 투표 조회
+     * Find by room optional.
+     *
+     * @param room the room
+     * @return the Optional<List<Vote>>; 방에 있는 투표 리스트
+     */
     public Optional<List<Vote>> findByRoom(Room room);
 
-    //해당하는 투표 제목 갱신
+
+    /**
+     * methodName : updateVote
+     * author : Gukss
+     * description : 해당하는 투표 제목 갱신
+     * Update vote optional.
+     *
+     * @param request the UpdateVoteRequest
+     * @return the Optional<vote>; 갱신한 투표
+     */
     public Optional<Vote> updateVote(UpdateVoteRequest request);
+
+    public Optional<Vote> findById(Long id);
 }
