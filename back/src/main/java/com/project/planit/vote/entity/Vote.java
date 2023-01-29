@@ -3,6 +3,8 @@ package com.project.planit.vote.entity;
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
 import javax.validation.constraints.NotNull;
+
+import com.project.planit.util.BaseRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,13 +40,13 @@ public class Vote extends BaseEntity{
     @NotNull
     private String title;
 
-//    @Embedded
-//    @NotNull
-//    private BaseEntity baseEntity;
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull
     private Room room;
+
+    @Embedded
+    @NotNull
+    private BaseRequest baseRequest;
 
     //==생성 메서드==/
 //    public static void createVote(String title, Room room){

@@ -2,7 +2,10 @@ package com.project.planit.vote.dto;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
 import lombok.*;
+
+import javax.persistence.Embedded;
 
 /**
  * packageName    : com.project.planit.vote.dto fileName       : CreateVoteRequest author         :
@@ -18,4 +21,7 @@ import lombok.*;
 public class CreateVoteRequest extends BaseEntity{
   private String title;
   private Room room;
+
+  @Embedded
+  private BaseRequest baseRequest;
 }

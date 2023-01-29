@@ -1,6 +1,7 @@
 package com.project.planit.room.entity;
 
 import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +47,7 @@ public class Room extends BaseEntity{
     @NotNull
     private LocalDate endDate;
 
-//    @Embedded
-////    @NotNull
-//    private BaseEntity baseEntity;
+    @Embedded
+    @NotNull
+    private BaseRequest baseRequest;
 }

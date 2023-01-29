@@ -1,6 +1,7 @@
 package com.project.planit.vote.service;
 
 import com.project.planit.room.entity.Room;
+import com.project.planit.vote.dto.ChangeTitleRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.repository.VoteRepository;
@@ -34,6 +35,7 @@ public class VoteServiceImpl implements VoteService{
     Vote vote = Vote.builder()
             .room(request.getRoom())
             .title(request.getTitle())
+            .baseRequest(request.getBaseRequest())
             .build();
     Vote newVote = voteRepository.save(vote);
     return newVote;
@@ -45,11 +47,15 @@ public class VoteServiceImpl implements VoteService{
     return voteRepository.findByRoom(room);
   }
 
+  //해당하는 투표 제목 갱신
+  @Override
+  @Transactional
+  public Optional<Vote> changeTitle(ChangeTitleRequest request) {
+    Vote targetVote = voteRepository.findById(request.getVoteId()).get();
+    targetVote.changeTitle(request.getNewTitle()); //jpa는 영속성 컨텍스트의 값을 바꾸기만 해도 update 쿼리 날려준다.
+    return Optional.of(targetVote);
+  }
+
   //방에 해당하는 투표 갱신
 
-
-  //투표 단건 조회
-  public Optional<Vote> findOne(Long id){
-    return voteRepository.findById(id);
-  }
 }

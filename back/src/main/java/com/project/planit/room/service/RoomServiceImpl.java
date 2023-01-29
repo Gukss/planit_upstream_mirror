@@ -38,6 +38,7 @@ public class RoomServiceImpl implements RoomService{
                 .roomName("새로 생성한 방")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now())
+                .baseRequest(request.getBaseRequest())
                 .build();
         return roomRepository.save(newRoom);
     }

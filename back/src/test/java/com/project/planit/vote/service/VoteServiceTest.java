@@ -6,6 +6,8 @@ import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.room.service.RoomService;
 import com.project.planit.room.service.RoomServiceImpl;
 import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
+import com.project.planit.vote.dto.ChangeTitleRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.repository.VoteRepository;
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -51,9 +54,14 @@ class VoteServiceTest {
 //  @Rollback(false)
   void 투표생성() throws Exception {
     //given
+
     CreateVoteRequest request = CreateVoteRequest.builder()
             .room(Room.builder().roomName("방이름").startDate(LocalDate.now()).endDate(LocalDate.now()).build())
             .title("투표이름")
+            .baseRequest(BaseRequest.builder()
+                    .constructor("Gukss")
+                    .updater("Gukss")
+                    .build())
             .build();
     //when
     Vote newVote = voteService.createVote(request);
@@ -68,24 +76,81 @@ class VoteServiceTest {
 //  @Rollback(false)
   void 투표조회() throws Exception {
     //given
-//    Long roomId = 1L;
+    //request 만들기
     CreateRoomRequest roomRequest = CreateRoomRequest.builder()
             .startDate(LocalDate.now())
             .endDate(LocalDate.now())
             .roomName("새로운 방 이름")
+            .baseRequest(BaseRequest.builder()
+                    .constructor("Gukss")
+                    .updater("Gukss")
+                    .build())
             .build();
+    //만든 request로 방 만들기
     Room newRoom = roomService.createRoom(roomRequest);
 
+    //만든 방에 투표 만들기
     CreateVoteRequest voteRequest = CreateVoteRequest.builder()
             .room(newRoom)
             .title("새로운 투표 제목")
+            .baseRequest(BaseRequest.builder()
+                    .constructor("Gukss")
+                    .updater("Gukss")
+                    .build())
             .build();
     Vote newVote = voteService.createVote(voteRequest);
+
     //when
+    //방에 있는 투표를 모두 조회
     List<Vote> foundVotes = voteService.findByRoom(newRoom).get();
 
     //then
     em.flush();
+    //만든 투표와 조회한 투표가 같아야한다.
     assertEquals(newVote, foundVotes.get(0));
+  }
+
+  @Test
+  @DisplayName("투표제목변경")
+  //@Rollback(false)
+  void 투표제목변경() throws Exception {
+    //given
+    //방 생성을 위한 request 만들기
+    CreateRoomRequest roomRequest = CreateRoomRequest.builder()
+            .startDate(LocalDate.now())
+            .endDate(LocalDate.now())
+            .roomName("새로운 방 이름")
+            .baseRequest(BaseRequest.builder()
+                    .constructor("Gukss")
+                    .updater("Gukss")
+                    .build())
+            .build();
+    //만든 request로 방 만들기
+    Room newRoom = roomService.createRoom(roomRequest);
+
+    //만든 방에 투표 만들기
+    CreateVoteRequest voteRequest = CreateVoteRequest.builder()
+            .room(newRoom)
+            .title("새로운 투표 제목")
+            .baseRequest(BaseRequest.builder()
+                    .constructor("Gukss")
+                    .updater("Gukss")
+                    .build())
+            .build();
+    Vote newVote = voteService.createVote(voteRequest);
+
+    //투표 제목 변경을 위한 updateRequest 만들기
+    ChangeTitleRequest updateRequest = ChangeTitleRequest.builder()
+            .voteId(newVote.getId())
+            .newTitle("변경된 투표 제목")
+            .build();
+
+    //when
+    Vote updatedVote = voteService.changeTitle(updateRequest).get();
+
+    //then
+    em.flush();
+    //업데이트된 투표의 제목과 request로 들어온 제목이 같아야한다.
+    assertEquals(updatedVote.getTitle(), newVote.getTitle());
   }
 }

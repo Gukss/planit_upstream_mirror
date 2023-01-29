@@ -1,15 +1,13 @@
-package com.project.planit.room.dto;
+package com.project.planit.vote.dto;
 
-import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import lombok.*;
 
 import javax.persistence.Embedded;
-import java.time.LocalDate;
 
 /**
- * packageName    : com.project.planit.room.dto
- * fileName       : CreateRoomRequest
+ * packageName    : com.project.planit.vote.dto
+ * fileName       : ChangeTitleRequest
  * author         : Gukss
  * date           : 2023-01-29
  * description    :
@@ -22,10 +20,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Getter
-public class CreateRoomRequest extends BaseEntity {
-    LocalDate startDate;
-    LocalDate endDate;
-    String roomName;
+public class ChangeTitleRequest {
+    private Long voteId;
+    private Long roomId;
+    private String newTitle;
 
     @Embedded
     private BaseRequest baseRequest;
