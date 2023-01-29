@@ -18,9 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-  @Override
-  <S extends Vote> S save(S entity);
-
   Optional<List<Vote>> findByRoom(Room room);
 
   //  @PersistenceContext

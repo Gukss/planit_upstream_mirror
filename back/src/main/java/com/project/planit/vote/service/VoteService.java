@@ -1,7 +1,7 @@
 package com.project.planit.vote.service;
 
 import com.project.planit.room.entity.Room;
-import com.project.planit.vote.dto.ChangeTitleRequest;
+import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.entity.Vote;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +28,5 @@ public interface VoteService {
     public Optional<List<Vote>> findByRoom(Room room);
 
     //해당하는 투표 제목 갱신
-    public Optional<Vote> changeTitle(ChangeTitleRequest request);
+    public Optional<Vote> updateVote(UpdateVoteRequest request);
 }

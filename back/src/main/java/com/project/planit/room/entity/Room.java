@@ -50,4 +50,17 @@ public class Room extends BaseEntity{
     @Embedded
     @NotNull
     private BaseRequest baseRequest;
+
+    public void changeName(String newName){
+        //바꾼 이름이 비어있을 때 untitle로 변경
+        if(newName.equals("")){
+            newName = "untitle";
+        }
+        this.roomName = newName;
+    }
+
+    public void changeDate(LocalDate startDate, LocalDate endDate){
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }

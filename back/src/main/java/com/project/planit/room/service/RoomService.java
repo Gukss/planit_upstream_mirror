@@ -1,7 +1,11 @@
 package com.project.planit.room.service;
 
 import com.project.planit.room.dto.CreateRoomRequest;
+import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.room.entity.Room;
+import com.project.planit.vote.dto.UpdateVoteRequest;
+
+import java.util.Optional;
 
 /**
  * packageName    : com.project.planit.room.service
@@ -17,5 +21,6 @@ import com.project.planit.room.entity.Room;
 public interface RoomService {
     public Room findById(Long id);
     public Room createRoom(CreateRoomRequest request);
+    public Optional<Room> updateRoom(UpdateRoomRequest request);
 
 }
