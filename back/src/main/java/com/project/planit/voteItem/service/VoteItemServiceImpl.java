@@ -1,5 +1,6 @@
 package com.project.planit.voteItem.service;
 
+import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteService;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
 import com.project.planit.voteItem.entity.VoteItem;
@@ -8,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName    : com.project.planit.voteItem.service
@@ -36,5 +40,10 @@ public class VoteItemServiceImpl implements VoteItemService {
                 .baseRequest(request.getBaseRequest())
                 .build();
         return voteItemRepository.save(voteItem);
+    }
+
+    @Override
+    public Optional<List<VoteItem>> findByVote(Vote vote) {
+        return voteItemRepository.findByVote(vote);
     }
 }

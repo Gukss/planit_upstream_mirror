@@ -5,6 +5,9 @@ import com.project.planit.voteItem.entity.VoteItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * packageName    : com.project.planit.voteItem.repository
  * fileName       : VoteItemRepository
@@ -18,4 +21,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface VoteItemRepository extends JpaRepository<VoteItem, Long> {
+    Optional<List<VoteItem>> findByVote(Vote vote);
 }

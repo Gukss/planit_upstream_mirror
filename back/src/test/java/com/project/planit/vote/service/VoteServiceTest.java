@@ -62,9 +62,9 @@ class VoteServiceTest {
     }
 
     @Test
-    @DisplayName("투표조회")
+    @DisplayName("방으로투표들조회")
 //  @Rollback(false)
-    void 투표조회() throws Exception {
+    void 방으로투표들조회() throws Exception {
         //given
         //request 만들기
         CreateRoomRequest roomRequest = CreateRoomRequest.builder()

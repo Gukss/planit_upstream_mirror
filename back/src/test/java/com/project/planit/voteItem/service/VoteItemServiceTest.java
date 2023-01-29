@@ -20,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @SpringBootTest
 @Transactional
-class VoteItemServiceImplTest {
+class VoteItemServiceTest {
     @Autowired
     VoteItemServiceImpl voteItemService;
 
@@ -63,18 +64,36 @@ class VoteItemServiceImplTest {
     void 투표항목생성() throws Exception {
         //given
         //when
-        VoteItem newVoteItem = makeVoteItem();
+        VoteItem newVoteItem = makeVoteItem(makeVote());
 
         //then
         em.flush();
         assertEquals(newVoteItem, voteItemRepository.findById(newVoteItem.getId()).get());
     }
 
-    private VoteItem makeVoteItem() {
+
+
+    @Test
+    @DisplayName("투표로투표항목들조회")
+    //@Rollback(false)
+    void 투표로투표항목들조회() throws Exception {
+        //given
+        Vote newVote = makeVote();
+        VoteItem newVoteItem = makeVoteItem(newVote);
+        //when
+        List<VoteItem> foundVoteItemList = voteItemService.findByVote(newVote).get();
+        //then
+        em.flush();
+        assertEquals(newVoteItem.getId(), foundVoteItemList.get(0).getId());
+    }
+
+    //========= method ========
+
+    private VoteItem makeVoteItem(Vote vote) {
         CreateVoteItemRequest request = CreateVoteItemRequest.builder()
                 .voteItemName("새로운 투표 항목")
                 .baseRequest(makeBaseRequest())
-                .vote(makeVote())
+                .vote(vote)
                 .build();
         return voteItemService.createVoteItem(request);
     }

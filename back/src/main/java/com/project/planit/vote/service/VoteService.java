@@ -31,7 +31,7 @@ public interface VoteService {
      * @param request the CreateVoteRequest
      * @return the vote; 생성된 투표
      */
-    public Vote createVote(@RequestBody CreateVoteRequest request);
+    public Vote createVote(CreateVoteRequest request);
 
 
     /**
