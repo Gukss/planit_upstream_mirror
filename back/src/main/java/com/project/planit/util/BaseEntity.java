@@ -1,14 +1,16 @@
 package com.project.planit.util;
 
-import javax.validation.constraints.NotBlank;
-import lombok.Getter;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
 
-import javax.persistence.Embeddable;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import org.springframework.data.annotation.CreatedBy;
+
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * packageName    : com.project.planit.util fileName       : BaseEntity author         : Gukss date
@@ -17,15 +19,19 @@ import org.springframework.data.annotation.LastModifiedDate;
  * NOTE ----------------------------------------------------------- 2023-01-20        Gukss       최초
  * 생성
  */
-@Embeddable
+
 @Getter
-public class BaseEntity {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseEntity {
 
   @CreatedDate
-  @NotBlank
+  @NotNull
   private LocalDateTime created_at; //생성일자
 
   @LastModifiedDate
-  @NotBlank
+  @NotNull
   private LocalDateTime updated_date; //수정일자
 }

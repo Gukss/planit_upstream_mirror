@@ -2,7 +2,7 @@ package com.project.planit.vote.dto;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
-import lombok.Data;
+import lombok.*;
 
 /**
  * packageName    : com.project.planit.vote.dto fileName       : CreateVoteRequest author         :
@@ -11,9 +11,11 @@ import lombok.Data;
  * NOTE ----------------------------------------------------------- 2023-01-26        SSAFY       최초
  * 생성
  */
-@Data
-public class CreateVoteRequest {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+@Getter
+public class CreateVoteRequest extends BaseEntity{
   private String title;
   private Room room;
-  private BaseEntity baseEntity;
 }

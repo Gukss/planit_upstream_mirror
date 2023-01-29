@@ -21,7 +21,7 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
   @Override
   <S extends Vote> S save(S entity);
 
-  Optional<Vote> findByRoom(Room room);
+  Optional<List<Vote>> findByRoom(Room room);
 
   //  @PersistenceContext
 //  private EntityManager em;
@@ -47,13 +47,6 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 //
 //  public List<Vote> findAll(){
 //    return em.createQuery("select v from Vote v", Vote.class)
-//        .getResultList();
-//  }
-//
-//  //todo: room_id로 조회인데 parameter가 Long id가 맞는지, Room room이 맞는지 확인하기
-//  public List<Vote> findByRoomId(Long id){
-//    return em.createQuery("select v from Vote v where v.room = :id", Vote.class)
-//        .setParameter("id", id)
 //        .getResultList();
 //  }
 }

@@ -1,14 +1,18 @@
 package com.project.planit.vote.controller;
 
+import com.project.planit.room.entity.Room;
+import com.project.planit.room.repository.RoomRepository;
+import com.project.planit.room.service.RoomServiceImpl;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteResponse;
-import com.project.planit.vote.service.VoteService;
+import com.project.planit.vote.dto.FindVoteByRoomIdResponse;
+import com.project.planit.vote.entity.Vote;
+import com.project.planit.vote.service.VoteServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * packageName    : com.project.planit.vote.controller fileName       : VoteController author
@@ -22,12 +26,21 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping(value="/votes")
 public class VoteController {
-  private final VoteService voteService;
+  private final RoomRepository roomRepository;
+  private final VoteServiceImpl voteService;
+  private final RoomServiceImpl roomService;
 
   @PostMapping
-  public CreateVoteResponse getMapping(@RequestBody CreateVoteRequest request){
+  public CreateVoteResponse createVote(@RequestBody CreateVoteRequest request){
 //    log.info("vote controller");
-    Long id = voteService.createVote(request);
-    return new CreateVoteResponse(id);
+    Vote createdVote = voteService.createVote(request);
+    return new CreateVoteResponse(createdVote);
+  }
+
+  @GetMapping
+  public FindVoteByRoomIdResponse findVoteByRoomId(@PathVariable Long roomId){
+    Room room = roomRepository.findById(roomId).get();
+    List<Vote> foundVotes = voteService.findByRoom(room).get();
+    return new FindVoteByRoomIdResponse(foundVotes);
   }
 }

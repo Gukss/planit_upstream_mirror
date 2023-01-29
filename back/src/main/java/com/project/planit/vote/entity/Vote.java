@@ -2,7 +2,6 @@ package com.project.planit.vote.entity;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,21 +29,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Vote {
+public class Vote extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name="vote_id")
-    @NotNull
     private Long id;
 
     @NotNull
     private String title;
 
-    @Embedded
-    @NotNull
-    private BaseEntity baseEntity;
+//    @Embedded
+//    @NotNull
+//    private BaseEntity baseEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull
     private Room room;
 
