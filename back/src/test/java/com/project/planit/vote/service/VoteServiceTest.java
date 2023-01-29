@@ -9,8 +9,10 @@ import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.repository.VoteRepository;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,139 +34,139 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 class VoteServiceTest {
 
-  @Autowired
-  VoteServiceImpl voteService;
+    @Autowired
+    VoteServiceImpl voteService;
 
-  @Autowired
-  VoteRepository voteRepository;
-  @Autowired
-  RoomServiceImpl roomService;
+    @Autowired
+    VoteRepository voteRepository;
+    @Autowired
+    RoomServiceImpl roomService;
 
-  @Autowired
-  RoomRepository roomRepository;
+    @Autowired
+    RoomRepository roomRepository;
 
-  @Autowired
-  EntityManager em;
+    @Autowired
+    EntityManager em;
 
-  @Test
-  @DisplayName("투표생성")
+    @Test
+    @DisplayName("투표생성")
 //  @Rollback(false)
-  void 투표생성() throws Exception {
-    //given
-    //when
-    Vote newVote = makeVote();
+    void 투표생성() throws Exception {
+        //given
+        //when
+        Vote newVote = makeVote();
 
-    //then
-    em.flush();
-    assertEquals(newVote, voteRepository.findById(newVote.getId()).get());
-  }
+        //then
+        em.flush();
+        assertEquals(newVote, voteRepository.findById(newVote.getId()).get());
+    }
 
-  @Test
-  @DisplayName("투표조회")
+    @Test
+    @DisplayName("투표조회")
 //  @Rollback(false)
-  void 투표조회() throws Exception {
-    //given
-    //request 만들기
-    CreateRoomRequest roomRequest = CreateRoomRequest.builder()
-            .startDate(LocalDate.now())
-            .endDate(LocalDate.now())
-            .roomName("새로운 방 이름")
-            .baseRequest(makeBaseRequest())
-            .build();
-    //만든 request로 방 만들기
-    Room newRoom = roomService.createRoom(roomRequest);
+    void 투표조회() throws Exception {
+        //given
+        //request 만들기
+        CreateRoomRequest roomRequest = CreateRoomRequest.builder()
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now())
+                .roomName("새로운 방 이름")
+                .baseRequest(makeBaseRequest())
+                .build();
+        //만든 request로 방 만들기
+        Room newRoom = roomService.createRoom(roomRequest);
 
-    //만든 방에 투표 만들기
-    CreateVoteRequest voteRequest = CreateVoteRequest.builder()
-            .room(newRoom)
-            .title("새로운 투표 제목")
-            .baseRequest(makeBaseRequest())
-            .build();
-    Vote newVote = voteService.createVote(voteRequest);
+        //만든 방에 투표 만들기
+        CreateVoteRequest voteRequest = CreateVoteRequest.builder()
+                .room(newRoom)
+                .title("새로운 투표 제목")
+                .baseRequest(makeBaseRequest())
+                .build();
+        Vote newVote = voteService.createVote(voteRequest);
 
-    //when
-    //방에 있는 투표를 모두 조회
-    List<Vote> foundVotes = voteService.findByRoom(newRoom).get();
+        //when
+        //방에 있는 투표를 모두 조회
+        List<Vote> foundVotes = voteService.findByRoom(newRoom).get();
 
-    //then
-    em.flush();
-    //만든 투표와 조회한 투표가 같아야한다.
-    assertEquals(newVote, foundVotes.get(0));
-  }
+        //then
+        em.flush();
+        //만든 투표와 조회한 투표가 같아야한다.
+        assertEquals(newVote, foundVotes.get(0));
+    }
 
-  @Test
-  @DisplayName("투표제목변경")
-  //@Rollback(false)
-  void 투표제목변경() throws Exception {
-    //given
-    //방 생성을 위한 request 만들기
-    CreateRoomRequest roomRequest = CreateRoomRequest.builder()
-            .startDate(LocalDate.now())
-            .endDate(LocalDate.now())
-            .roomName("새로운 방 이름")
-            .baseRequest(makeBaseRequest())
-            .build();
-    //만든 request로 방 만들기
-    Room newRoom = roomService.createRoom(roomRequest);
+    @Test
+    @DisplayName("투표제목변경")
+        //@Rollback(false)
+    void 투표제목변경() throws Exception {
+        //given
+        //방 생성을 위한 request 만들기
+        CreateRoomRequest roomRequest = CreateRoomRequest.builder()
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now())
+                .roomName("새로운 방 이름")
+                .baseRequest(makeBaseRequest())
+                .build();
+        //만든 request로 방 만들기
+        Room newRoom = roomService.createRoom(roomRequest);
 
-    //만든 방에 투표 만들기
-    CreateVoteRequest voteRequest = CreateVoteRequest.builder()
-            .room(newRoom)
-            .title("새로운 투표 제목")
-            .baseRequest(makeBaseRequest())
-            .build();
-    Vote newVote = voteService.createVote(voteRequest);
+        //만든 방에 투표 만들기
+        CreateVoteRequest voteRequest = CreateVoteRequest.builder()
+                .room(newRoom)
+                .title("새로운 투표 제목")
+                .baseRequest(makeBaseRequest())
+                .build();
+        Vote newVote = voteService.createVote(voteRequest);
 
-    //투표 제목 변경을 위한 updateRequest 만들기
-    UpdateVoteRequest updateRequest = UpdateVoteRequest.builder()
-            .voteId(newVote.getId())
-            .newTitle("변경된 투표 제목")
-            .build();
+        //투표 제목 변경을 위한 updateRequest 만들기
+        UpdateVoteRequest updateRequest = UpdateVoteRequest.builder()
+                .voteId(newVote.getId())
+                .newTitle("변경된 투표 제목")
+                .build();
 
-    //when
-    Vote updatedVote = voteService.updateVote(updateRequest).get();
+        //when
+        Vote updatedVote = voteService.updateVote(updateRequest).get();
 
-    //then
-    em.flush();
-    //업데이트된 투표의 제목과 request로 들어온 제목이 같아야한다.
-    assertEquals(updatedVote.getTitle(), newVote.getTitle());
-  }
+        //then
+        em.flush();
+        //업데이트된 투표의 제목과 request로 들어온 제목이 같아야한다.
+        assertEquals(updatedVote.getTitle(), newVote.getTitle());
+    }
 
-  @Test
-  @DisplayName("아이디로투표조회")
-  //@Rollback(false)
-  void 아이디로투표조회() throws Exception {
-      //given
-      //when
-      Vote newVote = makeVote();
+    @Test
+    @DisplayName("아이디로투표조회")
+        //@Rollback(false)
+    void 아이디로투표조회() throws Exception {
+        //given
+        //when
+        Vote newVote = makeVote();
 
-      //then
-      em.flush();
-      assertEquals(newVote.getId(), voteRepository.findById(newVote.getId()));
-  }
+        //then
+        em.flush();
+        assertEquals(newVote.getId(), voteRepository.findById(newVote.getId()).get().getId());
+    }
 
-  //====== method =======
+    //====== method =======
 
-  private Vote makeVote(){
-    CreateVoteRequest request = CreateVoteRequest.builder()
-            .room(
-                    Room.builder()
-                            .roomName("방이름")
-                            .startDate(LocalDate.now())
-                            .endDate(LocalDate.now())
-                            .baseRequest(makeBaseRequest())
-                            .build())
-            .title("투표이름")
-            .baseRequest(makeBaseRequest())
-            .build();
-    //when
-    return voteService.createVote(request);
-  }
+    private Vote makeVote() {
+        CreateVoteRequest request = CreateVoteRequest.builder()
+                .room(
+                        Room.builder()
+                                .roomName("방이름")
+                                .startDate(LocalDate.now())
+                                .endDate(LocalDate.now())
+                                .baseRequest(makeBaseRequest())
+                                .build())
+                .title("투표이름")
+                .baseRequest(makeBaseRequest())
+                .build();
+        //when
+        return voteService.createVote(request);
+    }
 
-  private BaseRequest makeBaseRequest(){
-    return BaseRequest.builder()
-            .constructor("Gukss")
-            .updater("Gukss")
-            .build();
-  }
+    private BaseRequest makeBaseRequest() {
+        return BaseRequest.builder()
+                .constructor("Gukss")
+                .updater("Gukss")
+                .build();
+    }
 }
