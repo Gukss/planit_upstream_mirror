@@ -1,8 +1,5 @@
 package com.project.planit.member.dto;
 
-import com.project.planit.member.entity.Role;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
 import com.project.planit.util.BaseRequest;
@@ -12,32 +9,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * packageName    : com.project.planit.member.dto fileName       : MemberInfo author         : SSAFY
- * date           : 2023-01-26 description    :
+ * packageName    : com.project.planit.member.dto fileName       : updateMemberRequest author
+ *  : SSAFY date           : 2023-01-28 description    :
  * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-26        SSAFY       최초
+ * NOTE ----------------------------------------------------------- 2023-01-28        SSAFY       최초
  * 생성
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class createMemberRequest {
+public class updateMemberRequest {
   @NotNull
   private String memberAppId;
-
   @NotNull
   private String memberAppPwd;
-
   @NotNull
   private String memberName;
-
   @NotNull
   private String memberEmail;
-
-  @Enumerated(EnumType.STRING)
-  @NotNull
-  private Role role;
 
   @NotNull
   private BaseRequest baseRequest;
