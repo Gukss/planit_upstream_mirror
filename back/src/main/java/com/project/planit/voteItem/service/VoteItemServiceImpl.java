@@ -1,5 +1,6 @@
 package com.project.planit.voteItem.service;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteService;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
@@ -46,14 +47,17 @@ public class VoteItemServiceImpl implements VoteItemService {
     }
 
     @Override
-    public Optional<List<VoteItem>> findByVote(Vote vote) {
-        return voteItemRepository.findByVote(vote);
+    public List<VoteItem> findAllByVote(Vote vote) {
+        return voteItemRepository.findByVote(vote).orElseThrow(
+                ()->new NotFoundException(NotFoundException.VOTE_ITEM_LIST_NOT_FOUND));
     }
 
     @Override
-    public Optional<VoteItem> updateVoteItem(UpdateVoteItemRequest request) {
+    @Transactional
+    //todo: service에 모두 transactional 달려있는지 확인하기
+    public VoteItem updateVoteItem(UpdateVoteItemRequest request) {
         VoteItem targetVoteItem = voteItemRepository.findById(request.getVoteItemId()).get();
         targetVoteItem.changeVoteItemName(request.getNewVoteItemName());
-        return Optional.of(targetVoteItem);
+        return targetVoteItem;
     }
 }

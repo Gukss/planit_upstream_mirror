@@ -22,6 +22,6 @@ import java.util.Optional;
  */
 public interface VoteItemService {
     public VoteItem createVoteItem(CreateVoteItemRequest request);
-    public Optional<List<VoteItem>> findByVote(Vote vote);
-    public Optional<VoteItem> updateVoteItem(UpdateVoteItemRequest request);
+    public List<VoteItem> findAllByVote(Vote vote);
+    public VoteItem updateVoteItem(UpdateVoteItemRequest request);
 }

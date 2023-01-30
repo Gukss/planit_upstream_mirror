@@ -83,7 +83,7 @@ class VoteItemServiceTest {
         Vote newVote = makeVote();
         VoteItem newVoteItem = makeVoteItem(newVote);
         //when
-        List<VoteItem> foundVoteItemList = voteItemService.findByVote(newVote).get();
+        List<VoteItem> foundVoteItemList = voteItemService.findAllByVote(newVote);
         //then
         em.flush();
         assertEquals(newVoteItem.getId(), foundVoteItemList.get(0).getId());
@@ -103,7 +103,7 @@ class VoteItemServiceTest {
             .baseRequest(makeBaseRequest())
             .build();
         //when
-        VoteItem updatedVoteItem = voteItemService.updateVoteItem(updateRequest).get();
+        VoteItem updatedVoteItem = voteItemService.updateVoteItem(updateRequest);
         System.out.println(updatedVoteItem);
         //then
         em.flush();

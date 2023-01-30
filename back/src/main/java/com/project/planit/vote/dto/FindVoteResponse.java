@@ -24,11 +24,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class FindVoteByRoomIdResponse {
+public class FindVoteResponse {
     List<Vote> foundVotes;
 
-    public static FindVoteByRoomIdResponse create(List<Vote> foundVotes) {
-        return FindVoteByRoomIdResponse.builder()
+    public static FindVoteResponse create(List<Vote> foundVotes) {
+        return FindVoteResponse.builder()
                 .foundVotes(foundVotes)
                 .build();
     }
