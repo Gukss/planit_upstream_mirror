@@ -55,17 +55,11 @@ public class VoteController {
   }
 
   @PatchMapping
-  public ResponseEntity<UpdatevoteResponse> updateVote(@RequestBody UpdateVoteRequest request){
+  public ResponseEntity<UpdatevoteResponse> updateVote(@RequestBody UpdateVoteRequest request) {
     Vote updatedVote = voteService.updateVote(request);
     return ResponseEntity.ok()
-        .body(UpdatevoteResponse.create(updatedVote.getId(),
-        updatedVote.getTitle())
-        );
-
-  @GetMapping
-  public FindVoteByRoomIdResponse findVoteByRoomId(@PathVariable Long roomId){
-    Room room = roomRepository.findById(roomId).get();
-    List<Vote> foundVotes = voteService.findByRoom(room).get();
-    return new FindVoteByRoomIdResponse(foundVotes);
+            .body(UpdatevoteResponse.create(updatedVote.getId(),
+                    updatedVote.getTitle())
+            );
   }
 }

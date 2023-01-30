@@ -27,21 +27,9 @@ import java.util.List;
 public class FindVoteByRoomIdResponse {
     List<Vote> foundVotes;
 
-    public static FindVoteByRoomIdResponse create(List<Vote> foundVotes){
+    public static FindVoteByRoomIdResponse create(List<Vote> foundVotes) {
         return FindVoteByRoomIdResponse.builder()
-            .foundVotes(foundVotes)
-            .build();
-    }
-@Data
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
-public class FindVoteByRoomIdResponse {
-    List<Vote> foundVotes;
-
-    public static FindVoteByRoomIdResponse create(List<Vote> foundVotes){
-        return FindVoteByRoomIdResponse.builder()
-            .foundVotes(foundVotes)
-            .build();
+                .foundVotes(foundVotes)
+                .build();
     }
 }

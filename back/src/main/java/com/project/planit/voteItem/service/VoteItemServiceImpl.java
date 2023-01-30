@@ -40,7 +40,6 @@ public class VoteItemServiceImpl implements VoteItemService {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())
                 .vote(voteService.findById(request.getVoteId()))
-                .vote(request.getVote())
                 .baseRequest(request.getBaseRequest())
                 .build();
         return voteItemRepository.save(voteItem);
