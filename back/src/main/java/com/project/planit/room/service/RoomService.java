@@ -21,6 +21,6 @@ import java.util.Optional;
 public interface RoomService {
     public Room findById(Long id);
     public Room createRoom(CreateRoomRequest request);
-    public Optional<Room> updateRoom(UpdateRoomRequest request);
+    public Room updateRoom(UpdateRoomRequest request);
 
 }

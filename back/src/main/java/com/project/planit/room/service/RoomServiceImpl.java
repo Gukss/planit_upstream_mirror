@@ -1,5 +1,6 @@
 package com.project.planit.room.service;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.room.dto.CreateRoomRequest;
 import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.room.entity.Room;
@@ -48,10 +49,13 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    public Optional<Room> updateRoom(UpdateRoomRequest request) {
-        Room targetRoom = roomRepository.findById(request.getRoomId()).get();
+    public Room updateRoom(UpdateRoomRequest request) {
+        Room targetRoom = roomRepository.findById(request.getRoomId())
+            .orElseThrow(
+                ()-> new NotFoundException(NotFoundException.ROOM_NOT_FOUND)
+            );
         targetRoom.changeName(request.getRoomName());
         targetRoom.changeDate(request.getStartDate(), request.getEndDate());
-        return Optional.of(targetRoom);
+        return targetRoom;
     }
 }
