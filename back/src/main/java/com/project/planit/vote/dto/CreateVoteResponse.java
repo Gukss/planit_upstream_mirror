@@ -16,11 +16,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @AllArgsConstructor
-<<<<<<< HEAD
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-=======
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
->>>>>>> upstream/BE_feature
 @Builder
 public class CreateVoteResponse {
   private Vote vote;

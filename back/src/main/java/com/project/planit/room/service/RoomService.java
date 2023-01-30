@@ -21,10 +21,6 @@ import java.util.Optional;
 public interface RoomService {
     public Room findById(Long id);
     public Room createRoom(CreateRoomRequest request);
-<<<<<<< HEAD
     public Room updateRoom(UpdateRoomRequest request);
-=======
-    public Optional<Room> updateRoom(UpdateRoomRequest request);
->>>>>>> upstream/BE_feature
 
 }
