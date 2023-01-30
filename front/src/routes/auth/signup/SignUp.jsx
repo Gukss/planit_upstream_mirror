@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import classes from './SignUp.module.scss';
 
 function SignUp() {
+  // autofocus
+  const inputFocus = useRef(null);
+  useEffect(() => {
+    inputFocus.current.focus();
+  }, []);
+
   return (
     <div className={classes.signup}>
       {/* 로고자리 or 제목 */}
       <header>PLAN!T</header>
       <div className={classes.signup__id}>
         <p>아이디</p>
-        <input className={classes.input_id} type='text' />
+        <input className={classes.input_id} ref={inputFocus} type='text' />
         <p>비밀번호</p>
         <input className={classes.input_pw} type='text' />
         <p>비밀번호 확인</p>
