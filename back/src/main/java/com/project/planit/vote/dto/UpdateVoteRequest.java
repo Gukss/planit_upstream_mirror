@@ -22,7 +22,10 @@ import javax.persistence.Embedded;
 @Getter
 public class UpdateVoteRequest {
     private Long voteId;
+<<<<<<< HEAD
+=======
     private Long roomId;
+>>>>>>> upstream/BE_feature
     private String newTitle;
 
     @Embedded

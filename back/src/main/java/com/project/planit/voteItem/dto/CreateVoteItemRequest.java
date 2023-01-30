@@ -27,5 +27,9 @@ public class CreateVoteItemRequest {
     private BaseRequest baseRequest;
 
     private String voteItemName;
+<<<<<<< HEAD
+    private Long voteId;
+=======
     private Vote vote;
+>>>>>>> upstream/BE_feature
 }

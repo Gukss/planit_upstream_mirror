@@ -39,7 +39,7 @@ public class MemberController {
   // 회원 정보 수정
   @PatchMapping()
   public ResponseEntity<?> updateMember(@RequestBody updateMemberRequest request){
-    Long id=1L; // 나중에 토큰에 있는 값으로 대체
+    Long id=1L; // TODO : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함
     Member updateMember=memberService.updateMember(id,request);
     return new ResponseEntity<>(HttpStatus.OK);
   }
@@ -47,11 +47,11 @@ public class MemberController {
   // 회원 정보 조회 (토큰에 있는 아이디로 받아올거임)
   @GetMapping()
   public ResponseEntity<?> readMember(){
-    Long id =1L;
+    Long id =1L; // TODO : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함
     return ResponseEntity.ok(memberService.readMember(id));
   }
 
-  // 회원 목록 조회 ( 반환 어떻게 할지 다시보기!!!)
+  // 회원 목록 조회 // TODO : ( 반환 어떻게 할지 다시보기!!!)
   @GetMapping(path = "/{memberAppId}")
   public ResponseEntity<?> readMemberList(@PathVariable String memberAppId){
     return ResponseEntity.ok(memberService.readMemberListByMemberId(memberAppId));

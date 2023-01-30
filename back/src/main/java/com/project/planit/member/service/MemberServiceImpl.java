@@ -44,7 +44,6 @@ public class MemberServiceImpl implements MemberService {
     return member;
   }
 
-  @Transactional
   @Override
   public boolean existMemberId(String memberAppId) {
     if(memberRepository.findByAppId(memberAppId).isPresent()){
@@ -53,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
     }
     return false;
   }
-  @Transactional
+
   @Override
   public Member readMember(Long memberAppId) {
     Member member=memberRepository.findById(memberAppId)
@@ -61,14 +60,12 @@ public class MemberServiceImpl implements MemberService {
     return member;
   }
 
-  @Transactional
   @Override
   public List<Member> readMemberListByMemberId(String memberAppId) {
     List<Member> memberList=memberRepository.findAllByAppId(memberAppId);
     return memberList;
   }
 
-  @Transactional
   @Override
   public String findMemberIdByMemberEmail(String email) {
     Member member=memberRepository.findByEmail(email)
@@ -76,7 +73,6 @@ public class MemberServiceImpl implements MemberService {
     return member.getAppId();
   }
 
-  @Transactional
   @Override
   public String findMemberPwdByMemberIdAndMemberEmail(String memberAppId,String email) {
     Member member= memberRepository.findByAppIdAndEmail(memberAppId,email)

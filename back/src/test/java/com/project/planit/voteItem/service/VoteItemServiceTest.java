@@ -116,7 +116,11 @@ class VoteItemServiceTest {
         CreateVoteItemRequest request = CreateVoteItemRequest.builder()
                 .voteItemName("새로운 투표 항목")
                 .baseRequest(makeBaseRequest())
+<<<<<<< HEAD
+                .voteId(vote.getId())
+=======
                 .vote(vote)
+>>>>>>> upstream/BE_feature
                 .build();
         return voteItemService.createVoteItem(request);
     }

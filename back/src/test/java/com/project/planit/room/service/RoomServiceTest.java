@@ -87,7 +87,11 @@ class RoomServiceTest {
                 .endDate(LocalDate.now())
                 .roomName("수정된 방 이름")
                 .build();
+<<<<<<< HEAD
+        Room updatedRoom = roomService.updateRoom(updateRequest);
+=======
         Room updatedRoom = roomService.updateRoom(updateRequest).get();
+>>>>>>> upstream/BE_feature
         //then
         em.flush();
         assertEquals(updatedRoom.getRoomName(), newRoom.getRoomName());
