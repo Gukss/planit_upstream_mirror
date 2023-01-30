@@ -2,18 +2,25 @@ package com.project.planit.room.controller;
 
 import com.project.planit.room.dto.CreateRoomRequest;
 import com.project.planit.room.dto.CreateRoomResponse;
+<<<<<<< HEAD
 import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.room.dto.UpdateRoomResponse;
+=======
+>>>>>>> upstream/BE_feature
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.service.RoomService;
 import com.project.planit.vote.dto.CreateVoteResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+=======
+import org.springframework.http.ResponseEntity;
+>>>>>>> upstream/BE_feature
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +46,7 @@ public class RoomController {
     return ResponseEntity.ok()
         .body(createRoomResponse);
   }
+<<<<<<< HEAD
 
   @PatchMapping
   public ResponseEntity<UpdateRoomResponse> updateRoom(@RequestBody UpdateRoomRequest request){
@@ -55,4 +63,6 @@ public class RoomController {
     //todo: 프론트랑 반환값 상의해서 넣어주기
     return ResponseEntity.ok(HttpStatus.OK);
   }
+=======
+>>>>>>> upstream/BE_feature
 }

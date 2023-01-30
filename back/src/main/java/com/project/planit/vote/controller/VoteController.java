@@ -1,14 +1,20 @@
 package com.project.planit.vote.controller;
 
+<<<<<<< HEAD
 import com.project.planit.common.exception.NotFoundException;
+=======
+>>>>>>> upstream/BE_feature
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.room.service.RoomServiceImpl;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteResponse;
 import com.project.planit.vote.dto.FindVoteByRoomIdResponse;
+<<<<<<< HEAD
 import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.UpdatevoteResponse;
+=======
+>>>>>>> upstream/BE_feature
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +36,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping(value="/votes")
 public class VoteController {
+<<<<<<< HEAD
+=======
+  private final RoomRepository roomRepository;
+>>>>>>> upstream/BE_feature
   private final VoteServiceImpl voteService;
   private final RoomServiceImpl roomService;
 
@@ -43,6 +53,7 @@ public class VoteController {
         .body(createVoteResponse);
   }
 
+<<<<<<< HEAD
   @GetMapping(path = "{roomId}")
   public ResponseEntity<FindVoteByRoomIdResponse> findVoteByRoomId(@PathVariable Long roomId){
     //fetch.lazy 때문에 room이 바로 초기화되지 않고 정보가 채워지는 프록시 객체로 채워진다.
@@ -61,5 +72,12 @@ public class VoteController {
         .body(UpdatevoteResponse.create(updatedVote.getId(),
         updatedVote.getTitle())
         );
+=======
+  @GetMapping
+  public FindVoteByRoomIdResponse findVoteByRoomId(@PathVariable Long roomId){
+    Room room = roomRepository.findById(roomId).get();
+    List<Vote> foundVotes = voteService.findByRoom(room).get();
+    return new FindVoteByRoomIdResponse(foundVotes);
+>>>>>>> upstream/BE_feature
   }
 }

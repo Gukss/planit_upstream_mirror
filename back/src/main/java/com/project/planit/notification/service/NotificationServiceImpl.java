@@ -4,9 +4,13 @@ import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.notification.dto.createNotificationRequest;
+import com.project.planit.notification.dto.findNotificationResponse;
 import com.project.planit.notification.dto.updateNotificationRequest;
 import com.project.planit.notification.entity.Notification;
 import com.project.planit.notification.repository.NotificationRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +22,27 @@ public class NotificationServiceImpl implements NotificationService{
     private final NotificationRepository notificationRepository;
     private final MemberRepository memberRepository;
     @Override
-    public boolean findNotification(String memberAppId) {
+    public HashMap<Long,findNotificationResponse> findNotification(String memberAppId) {
+        Member member = memberRepository.findByAppId(memberAppId)
+            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
 
-        return false;
+        List<Notification> notifications =notificationRepository.findAllBySendMemberId(member);
+
+        HashMap<Long,findNotificationResponse> notificationResponseHashMap=new HashMap<>();
+
+        for (Notification notification:notifications) {
+            notificationResponseHashMap.put(
+                notification.getId(),
+                findNotificationResponse.builder()
+                    .receivedMemberId(notification.getReceivedMemberId().getAppId())
+                    .sendMemberId(notification.getSendMemberId().getAppId())
+                    .createdAt(notification.getCreated_at())
+                    .readOrNot(notification.isReadOrNot())
+                    .build()
+            );
+        }
+
+        return notificationResponseHashMap;
     }
 
 
@@ -40,7 +62,12 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
+    @Transactional
     public boolean updateNotification(updateNotificationRequest request) {
+        Notification notification = notificationRepository.findById(request.getNotificationId())
+            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+
+        notification.update(request);
         return false;
     }
 }

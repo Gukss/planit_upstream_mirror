@@ -40,7 +40,11 @@ public class Vote extends BaseEntity{
     @NotNull
     private String title;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+=======
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+>>>>>>> upstream/BE_feature
     @NotNull
     private Room room;
 

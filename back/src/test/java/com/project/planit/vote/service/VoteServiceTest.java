@@ -78,7 +78,11 @@ class VoteServiceTest {
 
         //만든 방에 투표 만들기
         CreateVoteRequest voteRequest = CreateVoteRequest.builder()
+<<<<<<< HEAD
                 .roomId(newRoom.getId())
+=======
+                .room(newRoom)
+>>>>>>> upstream/BE_feature
                 .title("새로운 투표 제목")
                 .baseRequest(makeBaseRequest())
                 .build();
@@ -86,7 +90,11 @@ class VoteServiceTest {
 
         //when
         //방에 있는 투표를 모두 조회
+<<<<<<< HEAD
         List<Vote> foundVotes = voteService.findByRoom(newRoom);
+=======
+        List<Vote> foundVotes = voteService.findByRoom(newRoom).get();
+>>>>>>> upstream/BE_feature
 
         //then
         em.flush();
@@ -111,7 +119,11 @@ class VoteServiceTest {
 
         //만든 방에 투표 만들기
         CreateVoteRequest voteRequest = CreateVoteRequest.builder()
+<<<<<<< HEAD
             .roomId(newRoom.getId())
+=======
+                .room(newRoom)
+>>>>>>> upstream/BE_feature
                 .title("새로운 투표 제목")
                 .baseRequest(makeBaseRequest())
                 .build();
@@ -124,7 +136,11 @@ class VoteServiceTest {
                 .build();
 
         //when
+<<<<<<< HEAD
         Vote updatedVote = voteService.updateVote(updateRequest);
+=======
+        Vote updatedVote = voteService.updateVote(updateRequest).get();
+>>>>>>> upstream/BE_feature
 
         //then
         em.flush();
@@ -149,7 +165,17 @@ class VoteServiceTest {
 
     private Vote makeVote() {
         CreateVoteRequest request = CreateVoteRequest.builder()
+<<<<<<< HEAD
                 .roomId(1L)
+=======
+                .room(
+                        Room.builder()
+                                .roomName("방이름")
+                                .startDate(LocalDate.now())
+                                .endDate(LocalDate.now())
+                                .baseRequest(makeBaseRequest())
+                                .build())
+>>>>>>> upstream/BE_feature
                 .title("투표이름")
                 .baseRequest(makeBaseRequest())
                 .build();
