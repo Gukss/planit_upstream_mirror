@@ -61,5 +61,11 @@ public class VoteController {
         .body(UpdatevoteResponse.create(updatedVote.getId(),
         updatedVote.getTitle())
         );
+
+  @GetMapping
+  public FindVoteByRoomIdResponse findVoteByRoomId(@PathVariable Long roomId){
+    Room room = roomRepository.findById(roomId).get();
+    List<Vote> foundVotes = voteService.findByRoom(room).get();
+    return new FindVoteByRoomIdResponse(foundVotes);
   }
 }

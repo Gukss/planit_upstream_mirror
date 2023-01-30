@@ -62,6 +62,7 @@ public class VoteServiceImpl implements VoteService{
     return targetVote;
   }
 
+
   @Override
   public Vote findById(Long id) {
     return voteRepository.findById(id).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));

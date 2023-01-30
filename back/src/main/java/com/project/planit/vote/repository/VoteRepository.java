@@ -21,6 +21,7 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
   Optional<List<Vote>> findAllByRoom(Room room);
 
+
   //  @PersistenceContext
 //  private EntityManager em;
 //
