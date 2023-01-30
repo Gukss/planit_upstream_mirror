@@ -2,10 +2,12 @@ package com.project.planit.chatting.entity;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.entity.Room;
-import com.project.planit.util.BaseEntity;
+
+import com.project.planit.util.BaseRequest;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * packageName    : com.project.planit.chatting.entity
@@ -30,7 +32,8 @@ public class ChattingMessage {
     private String message;
 
     @Embedded
-    private BaseEntity baseEntity;
+    @NotNull
+    private BaseRequest baseRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")

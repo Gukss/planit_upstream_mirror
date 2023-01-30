@@ -2,10 +2,11 @@ package com.project.planit.storage.entity;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.entity.Room;
-import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * packageName    : com.project.planit.storages.entity
@@ -44,7 +45,8 @@ public class Storage {
     private Category categoryName;
 
     @Embedded
-    private BaseEntity baseEntity;
+    @NotNull
+    private BaseRequest baseRequest;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="member_id")

@@ -1,9 +1,10 @@
 package com.project.planit.room.entity;
 
-import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -35,5 +36,7 @@ public class Room {
     @Column(name="end_date")
     private LocalDate endDate;
 
-    private BaseEntity baseEntity;
+    @Embedded
+    @NotNull
+    private BaseRequest baseRequest;
 }

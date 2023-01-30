@@ -1,6 +1,8 @@
 package com.project.planit.member.repository;
 
 import com.project.planit.member.entity.Member;
+import com.project.planit.notification.entity.Notification;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,6 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 생성
  */
 public interface MemberRepository extends JpaRepository<Member,Long> {
-  @Override
-  <S extends Member> S save(S entity);
+  Optional<Member> findByAppId(String memberAppId);
+  Optional<Member> findByEmail(String memberEmail);
+  Optional<Member> findByAppIdAndEmail(String memberAppId,String memberEmail);
+  List<Member> findAllByAppId(String memberAppId);
+
 }

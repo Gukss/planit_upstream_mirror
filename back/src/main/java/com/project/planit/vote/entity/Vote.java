@@ -1,10 +1,11 @@
 package com.project.planit.vote.entity;
 
 import com.project.planit.room.entity.Room;
-import com.project.planit.util.BaseEntity;
+import com.project.planit.util.BaseRequest;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * packageName    : com.project.planit.vote.entity
@@ -29,7 +30,8 @@ public class Vote {
     private String title;
 
     @Embedded
-    private BaseEntity baseEntity;
+    @NotNull
+    private BaseRequest baseRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
