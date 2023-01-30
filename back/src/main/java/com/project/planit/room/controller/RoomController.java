@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * packageName    : com.project.planit.room.controller fileName       : RoomController author
- *  : SSAFY date           : 2023-01-30 description    :
+ *  : Gukss date           : 2023-01-30 description    :
  * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-30        SSAFY       최초
+ * NOTE ----------------------------------------------------------- 2023-01-30        Gukss       최초
  * 생성
  */
 @RestController

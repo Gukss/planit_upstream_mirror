@@ -25,9 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * packageName    : com.project.planit.vote.service fileName       : VoteServiceTest author
- * : SSAFY date           : 2023-01-26 description    :
+ * : Gukss date           : 2023-01-26 description    :
  * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-26        SSAFY       최초
+ * NOTE ----------------------------------------------------------- 2023-01-26        Gukss       최초
  * 생성
  */
 @SpringBootTest
