@@ -10,6 +10,7 @@ import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,10 +32,13 @@ public class VoteController {
   private final RoomServiceImpl roomService;
 
   @PostMapping
-  public CreateVoteResponse createVote(@RequestBody CreateVoteRequest request){
+  public ResponseEntity<CreateVoteResponse> createVote(@RequestBody CreateVoteRequest request){
 //    log.info("vote controller");
     Vote createdVote = voteService.createVote(request);
-    return new CreateVoteResponse(createdVote);
+    CreateVoteResponse createVoteResponse = CreateVoteResponse.create(createdVote);
+    return ResponseEntity.ok()
+//        .header()
+        .body(createVoteResponse);
   }
 
   @GetMapping

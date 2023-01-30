@@ -1,6 +1,7 @@
 package com.project.planit.vote.service;
 
 import com.project.planit.room.entity.Room;
+import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.entity.Vote;
@@ -25,14 +26,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 public class VoteServiceImpl implements VoteService{
 
+  private final RoomRepository roomRepository;
+
   private final VoteRepository voteRepository;
 
   //방에 해당하는 투표 생성
   @Override
   @Transactional
   public Vote createVote(@RequestBody CreateVoteRequest request){
+    //room id를 받아와서 방을 조회
+    Long roomId = request.getRoomId();
+    Room currentRoom = roomRepository.findById(roomId).get();
     Vote vote = Vote.builder()
-            .room(request.getRoom())
+            .room(currentRoom)
             .title(request.getTitle())
             .baseRequest(request.getBaseRequest())
             .build();

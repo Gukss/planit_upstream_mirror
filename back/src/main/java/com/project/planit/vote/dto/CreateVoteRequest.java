@@ -21,7 +21,7 @@ import javax.persistence.Embedded;
 public class CreateVoteRequest extends BaseEntity{
 
   private String title;
-  private Room room;
+  private Long roomId;
 
   @Embedded
   private BaseRequest baseRequest;

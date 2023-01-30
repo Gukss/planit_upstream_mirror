@@ -130,14 +130,7 @@ class VoteItemServiceTest {
 
     private Vote makeVote(){
         CreateVoteRequest request = CreateVoteRequest.builder()
-                .room(
-                        Room.builder()
-                                .roomName("방이름")
-                                .startDate(LocalDate.now())
-                                .endDate(LocalDate.now())
-                                .baseRequest(makeBaseRequest())
-                                .build())
-                .title("투표이름")
+            .roomId(1L)
                 .baseRequest(makeBaseRequest())
                 .build();
         //when

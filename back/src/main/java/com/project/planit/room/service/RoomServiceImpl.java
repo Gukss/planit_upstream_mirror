@@ -35,17 +35,19 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Room createRoom(@RequestBody CreateRoomRequest request) {
+    @Transactional
+    public Room createRoom(CreateRoomRequest request) {
         Room newRoom = Room.builder()
                 .roomName(request.getRoomName())
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now())
+                .startDate(request.getStartDate())
+                .endDate(request.getEndDate())
                 .baseRequest(request.getBaseRequest())
                 .build();
         return roomRepository.save(newRoom);
     }
 
     @Override
+    @Transactional
     public Optional<Room> updateRoom(UpdateRoomRequest request) {
         Room targetRoom = roomRepository.findById(request.getRoomId()).get();
         targetRoom.changeName(request.getRoomName());
