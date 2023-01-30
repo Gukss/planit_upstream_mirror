@@ -1,7 +1,7 @@
 package com.project.planit.notification.entity;
 
 import com.project.planit.member.entity.Member;
-import com.project.planit.notification.dto.createNotificationRequest;
+import com.project.planit.notification.dto.updateNotificationRequest;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import lombok.*;
@@ -60,5 +60,10 @@ public class Notification extends BaseEntity {
                 .build())
             .build();
         return notification;
+    }
+
+    public void update(updateNotificationRequest request){
+        this.readOrNot=request.isReadOrNot();
+
     }
 }
