@@ -1,5 +1,6 @@
 package com.project.planit.voteItem.service;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteService;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
@@ -31,11 +32,12 @@ import java.util.Optional;
 public class VoteItemServiceImpl implements VoteItemService {
 
     private final VoteItemRepository voteItemRepository;
-
+    //todo: service에서는 service를 불러서 사용하는게 맞나? 여기서는 repo를 불러도 되는건가?
     private final VoteService voteService;
 
     @Override
     @Transactional
+    //todo: 엔티티에 create 메소드 만들어주고 builder사용하지 않기
     public VoteItem createVoteItem(@RequestBody CreateVoteItemRequest request) {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())
@@ -46,14 +48,17 @@ public class VoteItemServiceImpl implements VoteItemService {
     }
 
     @Override
-    public Optional<List<VoteItem>> findByVote(Vote vote) {
-        return voteItemRepository.findByVote(vote);
+    public List<VoteItem> findAllByVote(Vote vote) {
+        return voteItemRepository.findByVote(vote).orElseThrow(
+                ()->new NotFoundException(NotFoundException.VOTE_ITEM_LIST_NOT_FOUND));
     }
 
     @Override
-    public Optional<VoteItem> updateVoteItem(UpdateVoteItemRequest request) {
+    @Transactional
+    //todo: service에 모두 transactional 달려있는지 확인하기
+    public VoteItem updateVoteItem(UpdateVoteItemRequest request) {
         VoteItem targetVoteItem = voteItemRepository.findById(request.getVoteItemId()).get();
         targetVoteItem.changeVoteItemName(request.getNewVoteItemName());
-        return Optional.of(targetVoteItem);
+        return targetVoteItem;
     }
 }

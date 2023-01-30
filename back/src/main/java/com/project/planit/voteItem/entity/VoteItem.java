@@ -44,7 +44,7 @@ public class VoteItem extends BaseEntity{
     @NotNull
     private BaseRequest baseRequest;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="vote_id")
     @NotNull
     private Vote vote;
