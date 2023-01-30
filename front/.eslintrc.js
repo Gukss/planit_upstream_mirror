@@ -30,5 +30,6 @@ module.exports = {
       2,
       { labelAttributes: ['htmlFor'] },
     ], // <label 에러 해결>
+    'import/prefer-default-export': ['off', { target: 'any' }], // recoil에서 atom default쓰기 위함
   },
 };
