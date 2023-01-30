@@ -1,8 +1,14 @@
 package com.project.planit.member.entity;
 
+import com.project.planit.member.dto.createMemberRequest;
+import com.project.planit.member.dto.updateMemberRequest;
+import com.project.planit.notification.entity.Notification;
 import javax.persistence.*;
 
 import com.project.planit.util.BaseEntity;
+import javax.validation.constraints.NotNull;
+
+import com.project.planit.util.BaseRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,14 +32,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name="member")
-public class Member {
+public class Member extends BaseEntity{
 
   @Id
   @GeneratedValue
   @Column(name = "member_id", nullable = false) //회원번호
   private Long id;
 
-  @Column(name ="member_app_id", nullable = false) //아이디
+  @Column(name ="member_app_id", nullable = false,unique = true) //아이디
   private String appId;
 
   @Column(name ="member_app_pwd", nullable = false) //비밀번호
@@ -43,10 +49,38 @@ public class Member {
   private String name;
 
   @Enumerated(EnumType.STRING) //이넘 타입은 문자열로
+  @NotNull
   private Role role; //역할
 
+  @NotNull
   private String email; //이메일
 
   @Embedded
-  private BaseEntity baseEntity;
+  @NotNull
+  private BaseRequest baseRequest;
+
+  public static Member create(createMemberRequest request){
+    Member member=Member.builder()
+        .appId(request.getMemberAppId())
+        .appPwd(request.getMemberAppPwd())
+        .name(request.getMemberName())
+        .email(request.getMemberEmail())
+        .role(Role.MEMBER)
+        .baseRequest(BaseRequest.builder()
+            .constructor(request.getMemberAppId())
+            .updater(request.getMemberAppId())
+            .build())
+        .build();
+    return member;
+  }
+
+  public void update(updateMemberRequest request){
+    this.appPwd=request.getMemberAppPwd();
+    this.name=request.getMemberName();
+    this.email=request.getMemberEmail();
+    this.baseRequest=BaseRequest.builder()
+            .constructor(this.appId)
+            .updater(request.getMemberAppId())
+            .build();
+  }
 }

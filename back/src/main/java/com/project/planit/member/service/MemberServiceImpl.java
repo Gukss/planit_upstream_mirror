@@ -1,9 +1,14 @@
 package com.project.planit.member.service;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.member.dto.createMemberRequest;
+import com.project.planit.member.dto.updateMemberRequest;
+
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.entity.Role;
 import com.project.planit.member.repository.MemberRepository;
+import com.project.planit.util.BaseRequest;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,39 +24,65 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
-
   private final MemberRepository memberRepository;
 
   @Transactional
   @Override
-
-  public Long createMember(
-      createMemberRequest request) {
-
-    Member member=Member.builder()
-        .appId(request.getMemberAppId())
-        .appPwd(request.getMemberAppPwd())
-        .name(request.getMemberName())
-        .email(request.getMemberEmail())
-        .role(Role.MEMBER)
-        .build();
-
+  public Long createMember(createMemberRequest request) {
+    Member member=Member.create(request);
     Member newMember=memberRepository.save(member);
     return newMember.getId();
   }
 
+  @Transactional
   @Override
-  public boolean checkMemberId(String userAppId) {
-    return false;
+  public Member updateMember(Long id,updateMemberRequest request) {
+    Member member= memberRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+
+    member.update(request);
+    return member;
   }
 
+  @Transactional
   @Override
-  public boolean findMemberIdByMemberEmail(String email) {
+  public boolean existMemberId(String memberAppId) {
+    if(memberRepository.findByAppId(memberAppId).isPresent()){
+      return true;
+      // 멤버 아이디가 중복이면 true반환
+    }
     return false;
+  }
+  @Transactional
+  @Override
+  public Member readMember(Long memberAppId) {
+    Member member=memberRepository.findById(memberAppId)
+        .orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+    return member;
   }
 
+  @Transactional
   @Override
-  public boolean updateMemberId(String userAppId) {
-    return false;
+  public List<Member> readMemberListByMemberId(String memberAppId) {
+    List<Member> memberList=memberRepository.findAllByAppId(memberAppId);
+    return memberList;
   }
+
+  @Transactional
+  @Override
+  public String findMemberIdByMemberEmail(String email) {
+    Member member=memberRepository.findByEmail(email)
+        .orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+    return member.getAppId();
+  }
+
+  @Transactional
+  @Override
+  public String findMemberPwdByMemberIdAndMemberEmail(String memberAppId,String email) {
+    Member member= memberRepository.findByAppIdAndEmail(memberAppId,email)
+        .orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+    return member.getAppPwd();
+  }
+
+
 }
