@@ -1,5 +1,6 @@
 package com.project.planit.vote.controller;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.service.RoomServiceImpl;
 import com.project.planit.vote.dto.CreateVoteRequest;
