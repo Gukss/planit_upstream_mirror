@@ -44,7 +44,7 @@ public class Notification extends BaseEntity {
     private Member receivedMemberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id")
+    @JoinColumn(name="member_id" ,referencedColumnName = "member_id",insertable = false, updatable = false)
     private Member sendMemberId;
 
 

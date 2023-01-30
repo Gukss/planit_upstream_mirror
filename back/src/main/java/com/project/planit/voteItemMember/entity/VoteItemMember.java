@@ -11,13 +11,13 @@ import javax.validation.constraints.NotNull;
 /**
  * packageName    : com.project.planit.VoteItemMember.entity
  * fileName       : VoteItemMember
- * author         : dongk
+ * author         : Gukss
  * date           : 2023-01-23
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023-01-23        dongk       최초 생성
+ * 2023-01-23        Gukss       최초 생성
  */
 @Entity
 @Getter
@@ -39,4 +39,8 @@ public class VoteItemMember {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="vote_item_id")
     private VoteItem voteItem;
+//
+//    //==생성 메서드==
+//    public static void
+
 }
