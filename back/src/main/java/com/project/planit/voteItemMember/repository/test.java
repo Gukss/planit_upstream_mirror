@@ -1,10 +1,10 @@
 package com.project.planit.voteItemMember.repository;
 
 /**
- * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY
+ * packageName    : com.project.planit.chatting.entity fileName       : test author         : Gukss
  * date           : 2023-01-20 description    :
  * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-20        SSAFY       최초
+ * NOTE ----------------------------------------------------------- 2023-01-20        Gukss       최초
  * 생성
  */
 public class test {

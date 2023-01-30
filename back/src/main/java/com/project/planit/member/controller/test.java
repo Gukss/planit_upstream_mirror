@@ -1,4 +1,4 @@
-package com.project.planit.room.repository;
+package com.project.planit.member.controller;
 
 /**
  * packageName    : com.project.planit.chatting.entity fileName       : test author         : SSAFY

@@ -8,9 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Embeddable;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,11 +33,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
-  @NotNull
+public abstract class BaseEntity {
+
   @CreatedDate
-  private LocalDateTime created_at; //생성일자
   @NotNull
+  private LocalDateTime created_at; //생성일자
+
   @LastModifiedDate
+  @NotNull
   private LocalDateTime updated_date; //수정일자
 }
