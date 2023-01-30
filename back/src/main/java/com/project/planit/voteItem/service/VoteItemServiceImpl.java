@@ -32,11 +32,12 @@ import java.util.Optional;
 public class VoteItemServiceImpl implements VoteItemService {
 
     private final VoteItemRepository voteItemRepository;
-
+    //todo: service에서는 service를 불러서 사용하는게 맞나? 여기서는 repo를 불러도 되는건가?
     private final VoteService voteService;
 
     @Override
     @Transactional
+    //todo: 엔티티에 create 메소드 만들어주고 builder사용하지 않기
     public VoteItem createVoteItem(@RequestBody CreateVoteItemRequest request) {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())

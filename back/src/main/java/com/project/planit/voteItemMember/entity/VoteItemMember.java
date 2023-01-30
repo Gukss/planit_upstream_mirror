@@ -3,7 +3,7 @@ package com.project.planit.voteItemMember.entity;
 import com.project.planit.member.entity.Member;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.voteItem.entity.VoteItem;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +22,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Table(name="vote_item_member")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class VoteItemMember {
 
     @Id @GeneratedValue
@@ -41,6 +44,13 @@ public class VoteItemMember {
     private VoteItem voteItem;
 //
 //    //==생성 메서드==
-//    public static void
+    public static VoteItemMember create(Long id, BaseRequest baseRequest, Member member, VoteItem voteItem){
+        return VoteItemMember.builder()
+                .id(id)
+                .member(member)
+                .voteItem(voteItem)
+                .baseRequest(baseRequest)
+                .build();
+    }
 
 }
