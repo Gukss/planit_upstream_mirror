@@ -48,4 +48,12 @@ public class VoteItem extends BaseEntity{
     @JoinColumn(name="vote_id")
     @NotNull
     private Vote vote;
+
+    public void changeVoteItemName(String newName){
+        //바꾼 이름이 비어있을 때 untitle로 변경
+        if(newName.equals("")){
+            newName = "untitle";
+        }
+        this.voteItemName = newName;
+    }
 }

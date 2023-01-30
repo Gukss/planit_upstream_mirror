@@ -2,6 +2,7 @@ package com.project.planit.voteItem.service;
 
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
+import com.project.planit.voteItem.dto.UpdateVoteItemRequest;
 import com.project.planit.voteItem.entity.VoteItem;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,4 +23,5 @@ import java.util.Optional;
 public interface VoteItemService {
     public VoteItem createVoteItem(CreateVoteItemRequest request);
     public Optional<List<VoteItem>> findByVote(Vote vote);
+    public Optional<VoteItem> updateVoteItem(UpdateVoteItemRequest request);
 }

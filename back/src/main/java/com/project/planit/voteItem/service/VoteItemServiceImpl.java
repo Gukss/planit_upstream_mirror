@@ -3,6 +3,7 @@ package com.project.planit.voteItem.service;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteService;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
+import com.project.planit.voteItem.dto.UpdateVoteItemRequest;
 import com.project.planit.voteItem.entity.VoteItem;
 import com.project.planit.voteItem.repository.VoteItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,12 @@ public class VoteItemServiceImpl implements VoteItemService {
     @Override
     public Optional<List<VoteItem>> findByVote(Vote vote) {
         return voteItemRepository.findByVote(vote);
+    }
+
+    @Override
+    public Optional<VoteItem> updateVoteItem(UpdateVoteItemRequest request) {
+        VoteItem targetVoteItem = voteItemRepository.findById(request.getVoteItemId()).get();
+        targetVoteItem.changeVoteItemName(request.getNewVoteItemName());
+        return Optional.of(targetVoteItem);
     }
 }
