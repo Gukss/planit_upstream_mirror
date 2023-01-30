@@ -27,5 +27,5 @@ public class CreateVoteItemRequest {
     private BaseRequest baseRequest;
 
     private String voteItemName;
-    private Vote vote;
+    private Long voteId;
 }

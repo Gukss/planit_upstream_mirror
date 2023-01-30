@@ -1,6 +1,7 @@
 package com.project.planit.voteItem.service;
 
 import com.project.planit.vote.entity.Vote;
+import com.project.planit.vote.repository.VoteRepository;
 import com.project.planit.vote.service.VoteService;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
 import com.project.planit.voteItem.dto.UpdateVoteItemRequest;
@@ -32,12 +33,13 @@ public class VoteItemServiceImpl implements VoteItemService {
 
     private final VoteItemRepository voteItemRepository;
 
+    private final VoteService voteService;
     @Override
     @Transactional
     public VoteItem createVoteItem(@RequestBody CreateVoteItemRequest request) {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())
-                .vote(request.getVote())
+                .vote(voteService.findById(request.getVoteId()))
                 .baseRequest(request.getBaseRequest())
                 .build();
         return voteItemRepository.save(voteItem);
