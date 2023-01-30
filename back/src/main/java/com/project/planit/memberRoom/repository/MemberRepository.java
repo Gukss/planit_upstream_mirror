@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * NOTE ----------------------------------------------------------- 2023-01-30        SSAFY       최초
  * 생성
  */
-public interface MemberRepository extends JpaRepository<MemberRoom,Long> {
-
-}
+//public interface MemberRepository extends JpaRepository<MemberRoom,Long> {
+//
+//}

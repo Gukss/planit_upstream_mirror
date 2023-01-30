@@ -43,7 +43,7 @@ public interface VoteService {
      * @param room the room
      * @return the Optional<List<Vote>>; 방에 있는 투표 리스트
      */
-    public Optional<List<Vote>> findByRoom(Room room);
+    public List<Vote> findByRoom(Room room);
 
 
     /**
@@ -55,7 +55,7 @@ public interface VoteService {
      * @param request the UpdateVoteRequest
      * @return the Optional<vote>; 갱신한 투표
      */
-    public Optional<Vote> updateVote(UpdateVoteRequest request);
+    public Vote updateVote(UpdateVoteRequest request);
 
-    public Optional<Vote> findById(Long id);
+    public Vote findById(Long id);
 }
