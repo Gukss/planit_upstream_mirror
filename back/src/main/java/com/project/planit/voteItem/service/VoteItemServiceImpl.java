@@ -32,12 +32,14 @@ public class VoteItemServiceImpl implements VoteItemService {
 
     private final VoteItemRepository voteItemRepository;
 
+    private final VoteService voteService;
+
     @Override
     @Transactional
     public VoteItem createVoteItem(@RequestBody CreateVoteItemRequest request) {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())
-                .vote(request.getVote())
+                .vote(voteService.findById(request.getVoteId()))
                 .baseRequest(request.getBaseRequest())
                 .build();
         return voteItemRepository.save(voteItem);
