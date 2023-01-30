@@ -14,9 +14,6 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class updateNotificationRequest {
     @NotNull
-    private String sendMemberId;
-
-    @NotNull
     private boolean readOrNot;
 
     @NotNull
