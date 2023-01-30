@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface VoteRepository extends JpaRepository<Vote, Long> {
   //Todo: 이름 바꾸기; 리스트를 받아오려면 findAll해야한다.
 
-  Optional<List<Vote>> findByRoom(Room room);
+  Optional<List<Vote>> findAllByRoom(Room room);
 
   //  @PersistenceContext
 //  private EntityManager em;

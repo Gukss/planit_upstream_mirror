@@ -1,5 +1,6 @@
 package com.project.planit.vote.controller;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.room.service.RoomServiceImpl;
@@ -41,10 +42,15 @@ public class VoteController {
         .body(createVoteResponse);
   }
 
-  @GetMapping
-  public FindVoteByRoomIdResponse findVoteByRoomId(@PathVariable Long roomId){
-    Room room = roomRepository.findById(roomId).get();
-    List<Vote> foundVotes = voteService.findByRoom(room).get();
-    return new FindVoteByRoomIdResponse(foundVotes);
+  @GetMapping(path = "{roomId}")
+  public ResponseEntity<FindVoteByRoomIdResponse> findVoteByRoomId(@PathVariable Long roomId){
+    //fetch.lazy 때문에 room이 바로 초기화되지 않고 정보가 채워지는 프록시 객체로 채워진다.
+    //room의 초기화가 안되어있기 때문에 room으로 voteList를 찾아올 수 없다.
+    Room room = roomRepository.findById(roomId).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));
+    List<Vote> foundVotes = voteService.findByRoom(room);
+
+
+    return ResponseEntity.ok()
+        .body(FindVoteByRoomIdResponse.create(foundVotes));
   }
 }

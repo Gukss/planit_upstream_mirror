@@ -1,5 +1,6 @@
 package com.project.planit.vote.service;
 
+import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.vote.dto.UpdateVoteRequest;
@@ -47,22 +48,23 @@ public class VoteServiceImpl implements VoteService{
 
   //방에 해당하는 투표 조회
   @Override
-  public Optional<List<Vote>> findByRoom(Room room) {
-    return voteRepository.findByRoom(room);
+  public List<Vote> findByRoom(Room room) {
+    return voteRepository.findAllByRoom(room).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));
   }
 
   //해당하는 투표 제목 갱신
   @Override
   @Transactional
-  public Optional<Vote> updateVote(UpdateVoteRequest request) {
-    Vote targetVote = voteRepository.findById(request.getVoteId()).get();
+  public Vote updateVote(UpdateVoteRequest request) {
+    Vote targetVote = voteRepository.findById(request.getVoteId()).orElseThrow(
+        ()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));
     targetVote.changeTitle(request.getNewTitle()); //jpa는 영속성 컨텍스트의 값을 바꾸기만 해도 update 쿼리 날려준다.
-    return Optional.of(targetVote);
+    return targetVote;
   }
 
   @Override
-  public Optional<Vote> findById(Long id) {
-    return voteRepository.findById(id);
+  public Vote findById(Long id) {
+    return voteRepository.findById(id).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));
   }
 
   //방에 해당하는 투표 갱신
