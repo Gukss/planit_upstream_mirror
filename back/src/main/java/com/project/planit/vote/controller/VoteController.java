@@ -7,6 +7,8 @@ import com.project.planit.room.service.RoomServiceImpl;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteResponse;
 import com.project.planit.vote.dto.FindVoteByRoomIdResponse;
+import com.project.planit.vote.dto.UpdateVoteRequest;
+import com.project.planit.vote.dto.UpdatevoteResponse;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -49,8 +51,16 @@ public class VoteController {
     Room room = roomRepository.findById(roomId).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));
     List<Vote> foundVotes = voteService.findByRoom(room);
 
-
     return ResponseEntity.ok()
         .body(FindVoteByRoomIdResponse.create(foundVotes));
+  }
+
+  @PatchMapping
+  public ResponseEntity<UpdatevoteResponse> updateVote(@RequestBody UpdateVoteRequest request){
+    Vote updatedVote = voteService.updateVote(request);
+    return ResponseEntity.ok()
+        .body(UpdatevoteResponse.create(updatedVote.getId(),
+        updatedVote.getTitle())
+        );
   }
 }

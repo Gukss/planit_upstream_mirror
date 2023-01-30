@@ -22,7 +22,6 @@ import javax.persistence.Embedded;
 @Getter
 public class UpdateVoteRequest {
     private Long voteId;
-    private Long roomId;
     private String newTitle;
 
     @Embedded
