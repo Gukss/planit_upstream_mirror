@@ -20,9 +20,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class updateMemberRoomRequest {
   @NotNull
-  private String roomId;
+  private Long roomId;
   @NotNull
-  private boolean inAndOut;
+  private Boolean inAndOut;
   @NotNull
   private BaseRequest baseRequest;
 }

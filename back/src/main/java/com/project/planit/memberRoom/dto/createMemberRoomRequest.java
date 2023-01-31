@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 public class createMemberRoomRequest {
+
     @NotNull
     private Long roomId;
     @NotNull
