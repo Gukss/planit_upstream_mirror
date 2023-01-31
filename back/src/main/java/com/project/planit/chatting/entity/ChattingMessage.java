@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="chatting_message")
 public class ChattingMessage {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="chatting_id")
     private Long id;
 
