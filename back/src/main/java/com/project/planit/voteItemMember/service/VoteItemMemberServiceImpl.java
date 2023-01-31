@@ -63,7 +63,7 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
                 NotFoundException.VOTE_ITEM_NOT_FOUND));
 
         Member foundMember = memberRepository.findById(MemberId).orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
-        
+
         return voteItemMemberRepository.findAllByVoteItemAndMember(foundVoteItem, foundMember)
             .orElseThrow(()->new NotFoundException(NotFoundException.VOTE_ITEM_MEMBER_LIST_NOT_FOUND));
     }

@@ -1,6 +1,7 @@
 package com.project.planit.voteItemMember.entity;
 
 import com.project.planit.member.entity.Member;
+import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.voteItem.entity.VoteItem;
 import lombok.*;
@@ -25,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class VoteItemMember {
+public class VoteItemMember extends BaseEntity {
 
     //todo: auto_increment 안되고 전체에서 auto_increment되는것 확인하기
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
