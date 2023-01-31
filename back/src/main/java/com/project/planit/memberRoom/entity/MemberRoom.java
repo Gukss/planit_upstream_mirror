@@ -1,9 +1,8 @@
 package com.project.planit.memberRoom.entity;
 
-import com.project.planit.member.dto.updateMemberRequest;
 import com.project.planit.member.entity.Member;
-import com.project.planit.memberRoom.dto.createMemberRoomRequest;
-import com.project.planit.memberRoom.dto.updateMemberRoomRequest;
+import com.project.planit.memberRoom.dto.CreateMemberRoomRequest;
+import com.project.planit.memberRoom.dto.UpdateMemberRoomRequest;
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
@@ -51,7 +50,7 @@ public class MemberRoom extends BaseEntity {
     @JoinColumn(name="user_id")
     private Member member;
 
-    public static MemberRoom create(createMemberRoomRequest request,Room room,Member member) {
+    public static MemberRoom create(CreateMemberRoomRequest request,Room room,Member member) {
         MemberRoom memberRoom = MemberRoom.builder()
                 .participation(true)
                 .room(room)
@@ -65,7 +64,7 @@ public class MemberRoom extends BaseEntity {
         return memberRoom;
     }
 
-    public void update(String memberAppId,updateMemberRoomRequest request){
+    public void update(String memberAppId, UpdateMemberRoomRequest request){
         this.participation=request.getInAndOut();
         this.baseRequest=BaseRequest.builder()
             .constructor(this.baseRequest.getConstructor())
