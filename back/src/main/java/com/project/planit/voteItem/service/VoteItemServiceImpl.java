@@ -38,7 +38,7 @@ public class VoteItemServiceImpl implements VoteItemService {
     @Override
     @Transactional
     //todo: 엔티티에 create 메소드 만들어주고 builder사용하지 않기
-    public VoteItem createVoteItem(@RequestBody CreateVoteItemRequest request) {
+    public VoteItem createVoteItem(CreateVoteItemRequest request) {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())
                 .vote(voteService.findById(request.getVoteId()))
@@ -47,9 +47,10 @@ public class VoteItemServiceImpl implements VoteItemService {
         return voteItemRepository.save(voteItem);
     }
 
+    //todo: 매개변수를 voteId 로 변경해야하는거 아닌가?
     @Override
     public List<VoteItem> findAllByVote(Vote vote) {
-        return voteItemRepository.findByVote(vote).orElseThrow(
+        return voteItemRepository.findAllByVote(vote).orElseThrow(
                 ()->new NotFoundException(NotFoundException.VOTE_ITEM_LIST_NOT_FOUND));
     }
 
