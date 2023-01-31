@@ -12,6 +12,7 @@ import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
 import com.project.planit.voteItemMember.repository.VoteItemMemberRepository;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.Id;
 import javax.validation.constraints.Future;
 import lombok.RequiredArgsConstructor;
@@ -56,11 +57,14 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
     }
 
     @Override
-    public List<VoteItemMember> findAllByVoteItemId(Long voteItemId) {
+    public List<VoteItemMember> findAllByVoteItemIdAndMemberId(Long voteItemId, Long MemberId) {
         VoteItem foundVoteItem = voteItemRepository.findById(voteItemId)
             .orElseThrow(() -> new NotFoundException(
                 NotFoundException.VOTE_ITEM_NOT_FOUND));
-        Long foundVoteItemId = foundVoteItem.getId();
-        return voteItemMemberRepository.findAllByVoteItemId(foundVoteItemId).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_ITEM_MEMBER_LIST_NOT_FOUND));
+
+        Member foundMember = memberRepository.findById(MemberId).orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+        
+        return voteItemMemberRepository.findAllByVoteItemAndMember(foundVoteItem, foundMember)
+            .orElseThrow(()->new NotFoundException(NotFoundException.VOTE_ITEM_MEMBER_LIST_NOT_FOUND));
     }
 }

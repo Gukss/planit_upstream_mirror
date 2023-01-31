@@ -37,7 +37,7 @@ public class VoteItemMember {
     private BaseRequest baseRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)

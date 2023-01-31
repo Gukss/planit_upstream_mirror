@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface VoteItemMemberService {
     public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request);
-    public List<VoteItemMember> findAllByVoteItemId(Long voteItemId);
+    public List<VoteItemMember> findAllByVoteItemIdAndMemberId(Long voteItemId, Long MemberId);
 }
