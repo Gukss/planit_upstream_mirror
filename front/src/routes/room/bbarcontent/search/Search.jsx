@@ -6,14 +6,12 @@ import classes from './Search.module.scss';
 
 function Search() {
   return (
-    <div>
-      <Bbar>
-        <input type='text' placeholder='검색어를 입력하세요' />
-        <div className={classes.search}>
-          <ResultList />
-        </div>
-      </Bbar>
-    </div>
+    <Bbar>
+      <input type='text' placeholder='검색어를 입력하세요' />
+      <div className={classes.search}>
+        <ResultList />
+      </div>
+    </Bbar>
   );
 }
 
