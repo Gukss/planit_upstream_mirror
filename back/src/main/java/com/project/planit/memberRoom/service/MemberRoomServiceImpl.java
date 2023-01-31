@@ -4,6 +4,7 @@ import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.memberRoom.dto.createMemberRoomRequest;
+import com.project.planit.memberRoom.dto.updateMemberRoomRequest;
 import com.project.planit.memberRoom.entity.MemberRoom;
 import com.project.planit.memberRoom.repository.MemberRoomRepository;
 import com.project.planit.room.entity.Room;
@@ -35,12 +36,19 @@ public class MemberRoomServiceImpl implements MemberRoomService{
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
 
-        return memberRoomRepository.findAllByMember(member);
+        Room room=roomRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+
+        return memberRoomRepository.findAllByMemberAndRoom(member,room);
     }
 
     @Override
-    public void updateMemberRoom() {
+    @Transactional
+    public void updateMemberRoom(updateMemberRoomRequest request) {
+        MemberRoom memberRoom=memberRoomRepository.findById(request.getRoomId())
+            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
 
+        memberRoom.update(memberRoom.getMember().getAppId(),request);
     }
 
     @Override

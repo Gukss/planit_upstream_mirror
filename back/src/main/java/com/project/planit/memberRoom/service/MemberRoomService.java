@@ -1,6 +1,7 @@
 package com.project.planit.memberRoom.service;
 
 import com.project.planit.memberRoom.dto.createMemberRoomRequest;
+import com.project.planit.memberRoom.dto.updateMemberRoomRequest;
 import com.project.planit.memberRoom.entity.MemberRoom;
 
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public interface MemberRoomService {
   List<MemberRoom> findMemberRoom(Long id);
-  void updateMemberRoom();
+  void updateMemberRoom(updateMemberRoomRequest request);
 
   void createMemberRoom(createMemberRoomRequest request);
 
