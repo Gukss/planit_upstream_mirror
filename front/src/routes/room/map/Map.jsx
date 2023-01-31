@@ -2,35 +2,20 @@ import React, { useEffect, useRef } from 'react';
 import classes from './Map.module.scss';
 
 function Map() {
-  const mapElement = useRef(null);
+  const mapContainer = useRef(null);
+  const { kakao } = window;
+  const position = new kakao.maps.LatLng(33.450701, 126.570667);
+  const mapOptions = {
+    center: position, // 지도의 중심좌표
+    level: 4, // 지도의 확대 레벨
+  };
 
   useEffect(() => {
-    const { naver } = window;
-    if (!mapElement.current || !naver) return;
-
-    const location = new naver.maps.LatLng(37.5656, 126.9769);
-    const mapOptionsContent = {
-      center: location,
-      zoom: 17,
-      zoomControl: true,
-      zoomControlOptions: {
-        position: naver.maps.Position.TOP_RIGHT,
-      },
-    };
-    naver.maps.MapOptions = { mapOptionsContent };
-    const mapOptionsCreated = naver.maps.MapOptions;
-    const mapOptions = mapOptionsCreated;
-
-    const map = new naver.maps.Map(mapElement.current, mapOptions);
-    const newOne = new naver.maps.Marker({
-      position: location,
-      map,
-    });
-  }, []);
-
+    const map = new kakao.maps.Map(mapContainer.current, mapOptions);
+  });
   return (
-    <div className={classes.map}>
-      <div ref={mapElement} className='Map' style={{ minHeight: '1080px' }} />
+    <div className={classes.map} ref={mapContainer}>
+      <div></div>
     </div>
   );
 }
