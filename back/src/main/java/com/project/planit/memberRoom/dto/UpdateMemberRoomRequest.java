@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class updateMemberRoomRequest {
+public class UpdateMemberRoomRequest {
   @NotNull
   private Long roomId;
   @NotNull
