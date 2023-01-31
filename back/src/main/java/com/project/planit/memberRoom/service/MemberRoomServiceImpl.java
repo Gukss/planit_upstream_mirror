@@ -60,7 +60,6 @@ public class MemberRoomServiceImpl implements MemberRoomService{
         // @TODO : 토큰에 어떤 값을 넣을지에 따라 바뀜
         Member member=memberRepository.findById(1L)
                 .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
-
         memberRoomRepository.save(MemberRoom.create(request,room,member));
 
     }
