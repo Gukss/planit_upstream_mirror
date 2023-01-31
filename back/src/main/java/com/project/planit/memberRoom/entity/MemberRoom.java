@@ -1,5 +1,6 @@
 package com.project.planit.memberRoom.entity;
 
+import com.project.planit.member.dto.UpdateMemberRequest;
 import com.project.planit.member.entity.Member;
 import com.project.planit.memberRoom.dto.CreateMemberRoomRequest;
 import com.project.planit.memberRoom.dto.UpdateMemberRoomRequest;
