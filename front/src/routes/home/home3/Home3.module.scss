@@ -1,5 +1,5 @@
-.home2 {
-    background-color: #FFFFFF;
+.home3 {
+    background-color: #fff5db;
     height: 100vh;
     display: flex;
     flex-direction: row;
@@ -10,10 +10,12 @@
   .text_section {
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin: 1rem;
     width: 25%;
     height: 50%;
+    // height: 30rem;
   
     button {
       color: white;
@@ -26,6 +28,7 @@
       margin-top: 7rem;
     }
     .title_wrap {
+      margin-left: 2rem;
       .title {
         font-size: 3rem;
         margin: 1rem 0rem;
@@ -35,24 +38,18 @@
           color: #2b3f6b;
         }
       }
-    }
-    .content_wrap {
-      margin-top : 3rem;
       .content {
-        font-size: 1.25rem;
-        margin: 1rem 0rem;
+        font-size: 1.5rem;
       }
     }
-    
   }
   
   .gif_section {
     margin: 1rem;
     width: 48rem;
-    height: 50%;
+    height: auto;
     img {
       width: 48rem;
       height: 30rem;
     }
   }
-  

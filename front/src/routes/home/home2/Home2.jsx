@@ -4,7 +4,7 @@ import classes from './Home2.module.scss';
 
 function Home2() {
   return (
-    <section className={classes.home1}>
+    <section className={classes.home2}>
       <div className={classes.gif_section}>
         <img src={homeGIF} alt='' />
       </div>

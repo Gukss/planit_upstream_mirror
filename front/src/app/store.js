@@ -6,3 +6,8 @@ export const isLogin = atom({
   // default: false,
   default: true,
 });
+
+export const dateRangeState = atom({
+  key: 'dateRangeState',
+  default: { startDate: new Date(), endDate: new Date() },
+});
