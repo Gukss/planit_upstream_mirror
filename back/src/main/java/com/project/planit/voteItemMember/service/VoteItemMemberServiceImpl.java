@@ -11,7 +11,9 @@ import com.project.planit.voteItem.repository.VoteItemRepository;
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
 import com.project.planit.voteItemMember.repository.VoteItemMemberRepository;
+import java.util.List;
 import javax.persistence.Id;
+import javax.validation.constraints.Future;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +53,14 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
 
         VoteItemMember newVoteItemMember = VoteItemMember.create(baseRequest, member, voteItem);
         return voteItemMemberRepository.save(newVoteItemMember);
+    }
+
+    @Override
+    public List<VoteItemMember> findAllByVoteItemId(Long voteItemId) {
+        VoteItem foundVoteItem = voteItemRepository.findById(voteItemId)
+            .orElseThrow(() -> new NotFoundException(
+                NotFoundException.VOTE_ITEM_NOT_FOUND));
+        Long foundVoteItemId = foundVoteItem.getId();
+        return voteItemMemberRepository.findAllByVoteItemId(foundVoteItemId).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_ITEM_MEMBER_LIST_NOT_FOUND));
     }
 }

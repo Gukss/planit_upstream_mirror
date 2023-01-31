@@ -9,10 +9,12 @@ import com.project.planit.member.service.MemberService;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
 import com.project.planit.voteItem.entity.VoteItem;
+import com.project.planit.voteItem.repository.VoteItemRepository;
 import com.project.planit.voteItem.service.VoteItemService;
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
 import com.project.planit.voteItemMember.repository.VoteItemMemberRepository;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import org.springframework.test.annotation.Rollback;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,17 +57,34 @@ class VoteItemMemberServiceTest {
     EntityManager em;
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private VoteItemRepository voteItemRepository;
 
     @Test
     @DisplayName("투표항목_회원_생성")
-    //@Rollback(false)
+    @Rollback(false)
     void 투표항목_회원_생성() throws Exception {
         //given
-        VoteItemMember voteItemMember = makeVoteItemMember(makeBaseRequest(), returnNewMemberId(), makeVoteItem().getId());
+        VoteItemMember voteItemMember = makeVoteItemMember(makeBaseRequest(), returnMemberId(), makeVoteItem().getId());
         //when
         //then
         em.flush();
         assertEquals(voteItemMember, voteItemMemberRepository.findById(voteItemMember.getId()).get());
+    }
+
+    @Test
+    @DisplayName("투표항목으로조회")
+    //@Rollback(false)
+    void 투표항목으로조회() throws Exception {
+        //given
+        VoteItem voteItem = makeVoteItem();
+        VoteItemMember voteItemMember = makeVoteItemMember(makeBaseRequest(), returnMemberId(), makeVoteItem().getId());
+
+        //when
+        List<VoteItemMember> voteItemMemberList = voteItemMemberService.findAllByVoteItemId(voteItem.getId());
+
+        //then
+        assertEquals(voteItemMemberList.get(0), voteItemMemberRepository.findAllByVoteItemId(voteItem.getId()).get().get(0));
     }
 
     //======= method =======
@@ -73,25 +93,12 @@ class VoteItemMemberServiceTest {
         return voteItemMemberService.createVoteItemMember(makeRequest(memberId, voteItemId, baseRequest));
     }
 
-    private Long returnNewMemberId(){
-        CreateMemberRequest request = CreateMemberRequest.builder()
-            .memberAppId("Gukss")
-            .memberName("Gukss_name")
-            .memberEmail("Gukss@gmail.com")
-            .memberAppPwd("Gukss")
-            .baseRequest(makeBaseRequest())
-            .role(Role.MEMBER)
-            .build();
-        return memberService.createMember(request);
+    private Long returnMemberId(){
+        return memberRepository.findById(2L).get().getId();
     }
 
     private VoteItem makeVoteItem(){
-      CreateVoteItemRequest request = CreateVoteItemRequest.builder()
-          .voteItemName("성심당")
-          .voteId(1L)
-          .baseRequest(makeBaseRequest())
-          .build();
-      return voteItemService.createVoteItem(request);
+      return voteItemRepository.findById(1L).get();
     }
 
     private CreateVoteItemMemberRequest makeRequest(Long memberId, Long voteItemId, BaseRequest baseRequest){

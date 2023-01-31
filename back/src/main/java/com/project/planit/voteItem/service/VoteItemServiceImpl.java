@@ -47,9 +47,10 @@ public class VoteItemServiceImpl implements VoteItemService {
         return voteItemRepository.save(voteItem);
     }
 
+    //todo: 매개변수를 voteId 로 변경해야하는거 아닌가?
     @Override
     public List<VoteItem> findAllByVote(Vote vote) {
-        return voteItemRepository.findByVote(vote).orElseThrow(
+        return voteItemRepository.findAllByVote(vote).orElseThrow(
                 ()->new NotFoundException(NotFoundException.VOTE_ITEM_LIST_NOT_FOUND));
     }
 
