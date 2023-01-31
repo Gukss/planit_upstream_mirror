@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import classes from './Abar.module.scss';
 
 const abarNavItems = [
@@ -12,28 +12,28 @@ const abarNavItems = [
   },
   {
     title: '장소',
-    icon: <i className='bx bx-star'></i>,
+    icon: <i className='bx bx-star' />,
     to: 'place',
     section: 'place',
     id: 2,
   },
   {
     title: '일정',
-    icon: <i className='bx bx-calendar'></i>,
+    icon: <i className='bx bx-calendar' />,
     to: 'schedule',
     section: 'schedule',
     id: 3,
   },
   {
     title: '투표',
-    icon: <i className='bx bx-box'></i>,
+    icon: <i className='bx bx-box' />,
     to: 'vote',
     section: 'vote',
     id: 4,
   },
   {
     title: '채팅',
-    icon: <i className='bx bx-message'></i>,
+    icon: <i className='bx bx-message' />,
     to: 'chat',
     section: 'chat',
     id: 5,
@@ -42,17 +42,27 @@ const abarNavItems = [
 
 function Abar() {
   return (
-    <div className={classes.abar}>
-      <div className={classes.abar__logo}>PLAN!T</div>
-      <div className={classes.abar__menu}>
-        {abarNavItems.map(item => (
-          <Link to={item.to} key={item.id}>
-            <div className={classes.abar__menu__item}>
-              <div className={classes.abar__menu__item__icon}>{item.icon}</div>
-              <div className={classes.abar__menu__item__text}>{item.title}</div>
-            </div>
-          </Link>
-        ))}
+    <div className={classes.sidebar}>
+      <div className={classes.abar}>
+        <div className={classes.abar__logo}>PLAN!T</div>
+        <div className={classes.abar__menu}>
+          {abarNavItems.map(item => (
+            <NavLink
+              to={item.to}
+              key={item.id}
+              className={navData => (navData.isActive ? classes.active : '')}
+            >
+              <div className={classes.abar__menu__item}>
+                <div className={classes.abar__menu__item__icon}>
+                  {item.icon}
+                </div>
+                <div className={classes.abar__menu__item__text}>
+                  {item.title}
+                </div>
+              </div>
+            </NavLink>
+          ))}
+        </div>
       </div>
       <Outlet />
     </div>

@@ -4,6 +4,7 @@ import HomeLayout from '../routes/home/HomeLayout';
 import Room from '../routes/room/Room';
 import Login from '../routes/auth/login/Login';
 import SignUp from '../routes/auth/signup/SignUp';
+import MyPage from '../routes/auth/mypage/MyPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path='/room/*' element={<Room />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
+      <Route path='/mypage' element={<MyPage />} />
     </Routes>
   );
 }
