@@ -38,7 +38,7 @@ public class VoteItemServiceImpl implements VoteItemService {
     @Override
     @Transactional
     //todo: 엔티티에 create 메소드 만들어주고 builder사용하지 않기
-    public VoteItem createVoteItem(@RequestBody CreateVoteItemRequest request) {
+    public VoteItem createVoteItem(CreateVoteItemRequest request) {
         VoteItem voteItem= VoteItem.builder()
                 .voteItemName(request.getVoteItemName())
                 .vote(voteService.findById(request.getVoteId()))

@@ -1,7 +1,7 @@
 package com.project.planit.notification.controller;
 
-import com.project.planit.notification.dto.createNotificationRequest;
-import com.project.planit.notification.dto.updateNotificationRequest;
+import com.project.planit.notification.dto.CreateNotificationRequest;
+import com.project.planit.notification.dto.UpdateNotificationRequest;
 import com.project.planit.notification.service.NotificationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,13 +28,13 @@ public class NotificationController {
     // 알림 생성
     // TODO : 헤더 토큰에 sendMemberId가져와서 사용
     @PostMapping
-    public ResponseEntity<?> createNotification(@RequestBody createNotificationRequest request){
+    public ResponseEntity<?> createNotification(@RequestBody CreateNotificationRequest request){
         notificationService.createNotification(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping
-    public ResponseEntity<?> updateNotification(@RequestBody updateNotificationRequest request){
+    public ResponseEntity<?> updateNotification(@RequestBody UpdateNotificationRequest request){
         notificationService.updateNotification(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }

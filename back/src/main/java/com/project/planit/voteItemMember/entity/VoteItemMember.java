@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class VoteItemMember {
-
+    //todo: auto_increment 안되고 전체에서 auto_increment되는것 확인하기
     @Id @GeneratedValue
     @Column(name="vote_item_member_id")
     private Long id;
@@ -42,11 +42,10 @@ public class VoteItemMember {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="vote_item_id")
     private VoteItem voteItem;
-//
+
 //    //==생성 메서드==
-    public static VoteItemMember create(Long id, BaseRequest baseRequest, Member member, VoteItem voteItem){
+    public static VoteItemMember create(BaseRequest baseRequest, Member member, VoteItem voteItem){
         return VoteItemMember.builder()
-                .id(id)
                 .member(member)
                 .voteItem(voteItem)
                 .baseRequest(baseRequest)

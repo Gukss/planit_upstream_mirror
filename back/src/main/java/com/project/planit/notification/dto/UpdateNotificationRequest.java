@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class updateNotificationRequest {
+public class UpdateNotificationRequest {
     @NotNull
     private boolean readOrNot;
 
