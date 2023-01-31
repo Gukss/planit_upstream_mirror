@@ -1,9 +1,11 @@
 package com.project.planit.memberRoom.entity;
 
 import com.project.planit.member.entity.Member;
+import com.project.planit.memberRoom.dto.createMemberRoomRequest;
 import com.project.planit.room.entity.Room;
+import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,15 +23,19 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Table(name = "member_room")
-public class MemberRoom {
+public class MemberRoom extends BaseEntity {
 
     @Id
     @Column(name="member_room_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean participation;
+    @NotNull
+    private Boolean participation;
 
     @Embedded
     @NotNull
@@ -42,4 +48,18 @@ public class MemberRoom {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
     private Member member;
+
+    public static MemberRoom create(createMemberRoomRequest request,Room room,Member member) {
+        MemberRoom memberRoom = MemberRoom.builder()
+                .participation(true)
+                .room(room)
+                .member(member)
+                .baseRequest(BaseRequest.builder()
+                        .constructor(request.getInvitedName())
+                        .updater(request.getInvitedName())
+                        .build())
+                .build();
+
+        return memberRoom;
+    }
 }

@@ -32,7 +32,7 @@ public class VoteItem extends BaseEntity{
 
     @Id
     @Column(name="vote_item_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @NotNull
     private Long id;
 

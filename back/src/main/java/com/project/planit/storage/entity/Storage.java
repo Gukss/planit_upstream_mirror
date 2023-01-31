@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="storage")
 public class Storage {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="storage_id")
     private Long id;
 
