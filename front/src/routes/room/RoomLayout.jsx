@@ -9,8 +9,10 @@ function RoomLayout() {
   return (
     <div className='roomlayout'>
       <Abar />
-      <Map />
-      <CamList />
+      <div className='map_camlist'>
+        <Map />
+        <CamList />
+      </div>
     </div>
   );
 }

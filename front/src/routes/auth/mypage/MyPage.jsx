@@ -1,7 +1,7 @@
 import Header from '../../../common/header/Header';
 import classes from './MyPage.module.scss';
 import ProfileBar from './ProfileBar';
-import Schedule from './Schedules';
+import RoomMange from './RoomManage';
 
 function MyPage() {
   return (
@@ -10,7 +10,7 @@ function MyPage() {
       <div>빈공간</div>
       <section className={classes.content_section}>
         <ProfileBar />
-        <Schedule />
+        <RoomMange />
       </section>
     </div>
   );

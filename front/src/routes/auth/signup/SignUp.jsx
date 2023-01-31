@@ -8,24 +8,28 @@ function SignUp() {
     inputFocus.current.focus();
   }, []);
 
+  const sumbmitHandler = e => {
+    e.preventDefault();
+  };
+
   return (
-    <div className={classes.signup}>
+    <form className={classes.signup} onSubmit={sumbmitHandler}>
       {/* 로고자리 or 제목 */}
-      <header>PLAN!T</header>
+      <div className={classes.signup__title}>PLAN!T</div>
       <div className={classes.signup__id}>
         <p>아이디</p>
         <input className={classes.input_id} ref={inputFocus} type='text' />
         <p>비밀번호</p>
-        <input className={classes.input_pw} type='text' />
+        <input className={classes.input_pw} type='password' />
         <p>비밀번호 확인</p>
-        <input className={classes.input_pw_check} type='text' />
+        <input className={classes.input_pw_check} type='password' />
         <p>닉네임</p>
         <input className={classes.input_nickname} type='text' />
         <p>이메일</p>
         <input className={classes.input_email} type='text' />
       </div>
-      <button>가입하기</button>
-    </div>
+      <button type='submit'>가입하기</button>
+    </form>
   );
 }
 
