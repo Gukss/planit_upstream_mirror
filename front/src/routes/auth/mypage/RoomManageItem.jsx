@@ -1,8 +1,8 @@
-import classes from './ScheduleItem.module.scss';
+import classes from './RoomManageItem.module.scss';
 
-function ScheduleItem() {
+function RoomManageItem() {
   return (
-    <div className={classes.scheduleitem}>
+    <div className={classes.room_manageitem}>
       <section className={classes.title_section}>
         <p className={classes.title}>서울 여행</p>
         <p className={classes.date}>2023.01.15~2023.02.06</p>
@@ -23,4 +23,4 @@ function ScheduleItem() {
   );
 }
 
-export default ScheduleItem;
+export default RoomManageItem;

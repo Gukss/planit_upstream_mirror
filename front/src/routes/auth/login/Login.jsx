@@ -13,14 +13,15 @@ function Login() {
           </div>
           <div className={classes.login__main__signin}>
             <h1>PLAN!T</h1>
-            <div className={classes.login__main__signin__position}>
+            <div className={classes.login_box}>
               {/* ID, PW 입력 */}
-              <div className={classes.login__main__signin__position__in}>
+              <div className={classes.login_inputbox}>
                 <p>ID</p>
                 <input type='text' placeholder='아이디를 입력해주세요.' />
                 <p>PASSWORD</p>
                 <input type='text' placeholder='비밀번호를 입력해주세요.' />
               </div>
+              {/* Login 버튼 */}
               <button>Login</button>
             </div>
 

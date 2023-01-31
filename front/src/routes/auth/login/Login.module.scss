@@ -9,8 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70vw;
-    height: 60vh;
+    width: 84rem;
+    height: 41rem;
     border-radius: 1.5rem;
     background-color: #2b3f6b;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08), 0 4px 4px rgba(0, 0, 0, 0.12),
@@ -18,8 +18,8 @@
   }
   &__main {
     display: flex;
-    width: 70vw;
-    height: 50vh;
+    width: 84rem;
+    height: 34rem;
     background-color: white;
 
     &__logo {
@@ -42,13 +42,13 @@
       h1 {
         font-size: 2rem;
       }
-      &__position {
+      .login_box {
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
 
-        &__in {
-          width: 19vw;
+        .login_inputbox {
+          width: 22rem;
 
           p {
             font-size: 1.2rem;
@@ -68,9 +68,9 @@
         }
 
         button {
-          margin-top: 3rem;
-          width: 10rem;
-          height: 10rem;
+          margin-top: 3.2rem;
+          width: 9.2rem;
+          height: 9.2rem;
           background-color: #ffd56b;
           border: 0;
           color: white;
@@ -86,8 +86,9 @@
       }
       label {
         display: flex;
+        // justify-content: space-between;
         align-items: center;
-        width: 19vw;
+        width: 22rem;
         margin-bottom: 3rem;
         // .id_pw_find
         a {

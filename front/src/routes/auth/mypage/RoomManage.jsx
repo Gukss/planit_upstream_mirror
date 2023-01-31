@@ -1,19 +1,19 @@
-import classes from './Schedule.module.scss';
-import ScheduleItem from './ScheduleItem';
+import classes from './RoomManage.module.scss';
+import RoomManageItem from './RoomManageItem';
 
-function Schedule() {
+function RoomManage() {
   return (
-    <div className={classes.schedule}>
+    <div className={classes.room_manage}>
       <section className={classes.schedule_ing}>
         <p className={classes.title}>진행 중인 여행 일정</p>
         <div className={classes.schedulebox}>
-          <ScheduleItem />
-          <ScheduleItem />
-          <ScheduleItem />
-          <ScheduleItem />
-          <ScheduleItem />
-          <ScheduleItem />
-          <ScheduleItem />
+          <RoomManageItem />
+          <RoomManageItem />
+          <RoomManageItem />
+          <RoomManageItem />
+          <RoomManageItem />
+          <RoomManageItem />
+          <RoomManageItem />
         </div>
       </section>
       <section className={classes.schedule_done}>
@@ -26,4 +26,4 @@ function Schedule() {
   );
 }
 
-export default Schedule;
+export default RoomManage;
