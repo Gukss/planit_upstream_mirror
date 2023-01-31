@@ -43,10 +43,12 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
         Long memberId = request.getMemberId();
         BaseRequest baseRequest = request.getBaseRequest();
         Long voteItemId = request.getVoteItemId();
+
         Member member = memberRepository.findById(memberId)
             .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
         VoteItem voteItem = voteItemRepository.findById(voteItemId)
             .orElseThrow(() -> new NotFoundException(NotFoundException.VOTE_ITEM_LIST_NOT_FOUND));
+
         VoteItemMember newVoteItemMember = VoteItemMember.create(baseRequest, member, voteItem);
         return voteItemMemberRepository.save(newVoteItemMember);
     }

@@ -3,6 +3,7 @@ package com.project.planit.voteItemMember.service;
 import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.member.dto.CreateMemberRequest;
 import com.project.planit.member.entity.Member;
+import com.project.planit.member.entity.Role;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.member.service.MemberService;
 import com.project.planit.util.BaseRequest;
@@ -59,39 +60,46 @@ class VoteItemMemberServiceTest {
     //@Rollback(false)
     void 투표항목_회원_생성() throws Exception {
         //given
-        VoteItemMember voteItemMember = makeVoteItemMember(makeBaseRequest(), makeMember(), makeVoteItem());
+        VoteItemMember voteItemMember = makeVoteItemMember(makeBaseRequest(), returnNewMemberId(), makeVoteItem().getId());
         //when
-
         //then
         em.flush();
-        assertEquals(voteItemMember, voteItemMemberRepository.findById(voteItemMember.getId()).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_ITEM_MEMBER_NOT_FOUND)));
+        assertEquals(voteItemMember, voteItemMemberRepository.findById(voteItemMember.getId()).get());
     }
 
     //======= method =======
 
-    private VoteItemMember makeVoteItemMember(BaseRequest baseRequest, Member member, VoteItem voteItem) {
-        return VoteItemMember.create(baseRequest, member, voteItem);
+    private VoteItemMember makeVoteItemMember(BaseRequest baseRequest, Long memberId, Long voteItemId) {
+        return voteItemMemberService.createVoteItemMember(makeRequest(memberId, voteItemId, baseRequest));
     }
 
-    private Member makeMember(){
+    private Long returnNewMemberId(){
         CreateMemberRequest request = CreateMemberRequest.builder()
+            .memberAppId("Gukss")
+            .memberName("Gukss_name")
+            .memberEmail("Gukss@gmail.com")
+            .memberAppPwd("Gukss")
             .baseRequest(makeBaseRequest())
-            .memberName("Gukss")
-            .memberAppId("gukss")
-            .memberAppPwd("gukss")
-            .memberEmail("gukss@gmail.com")
+            .role(Role.MEMBER)
             .build();
-        Long memberId = memberService.createMember(request);
-        return memberRepository.findById(memberId).orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+        return memberService.createMember(request);
     }
 
     private VoteItem makeVoteItem(){
       CreateVoteItemRequest request = CreateVoteItemRequest.builder()
           .voteItemName("성심당")
-          .voteId(2L)
+          .voteId(1L)
           .baseRequest(makeBaseRequest())
           .build();
       return voteItemService.createVoteItem(request);
+    }
+
+    private CreateVoteItemMemberRequest makeRequest(Long memberId, Long voteItemId, BaseRequest baseRequest){
+        return CreateVoteItemMemberRequest.builder()
+            .voteItemId(voteItemId)
+            .memberId(memberId)
+            .baseRequest(baseRequest)
+            .build();
     }
 
     private BaseRequest makeBaseRequest(){
