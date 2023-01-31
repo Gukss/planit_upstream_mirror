@@ -1,6 +1,7 @@
 package com.project.planit.memberRoom.controller;
 
 import com.project.planit.memberRoom.dto.createMemberRoomRequest;
+import com.project.planit.memberRoom.dto.updateMemberRoomRequest;
 import com.project.planit.memberRoom.service.MemberRoomServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,11 @@ public class MemberRoomController {
     public ResponseEntity<?> createMemberRoom(@RequestBody createMemberRoomRequest request){
         memberRoomService.createMemberRoom(request);
          return ResponseEntity.ok("ok");
+    }
+
+    @PatchMapping
+    public ResponseEntity<?> updateMemberRoom(@RequestBody updateMemberRoomRequest request){
+        memberRoomService.updateMemberRoom(request);
+        return ResponseEntity.ok("ok");
     }
 }
