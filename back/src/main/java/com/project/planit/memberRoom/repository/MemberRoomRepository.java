@@ -1,7 +1,10 @@
 package com.project.planit.memberRoom.repository;
 
+import com.project.planit.member.entity.Member;
 import com.project.planit.memberRoom.entity.MemberRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * packageName    : com.project.planit.memberRoom.repository fileName       : MemberRepository
@@ -10,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * NOTE ----------------------------------------------------------- 2023-01-30        SSAFY       최초
  * 생성
  */
-//public interface MemberRepository extends JpaRepository<MemberRoom,Long> {
-//
-//}
+public interface MemberRoomRepository extends JpaRepository<MemberRoom,Long> {
+    List<MemberRoom> findAllByMember(Member member);
+}

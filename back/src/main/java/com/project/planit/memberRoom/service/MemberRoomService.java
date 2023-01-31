@@ -1,5 +1,11 @@
 package com.project.planit.memberRoom.service;
 
+import com.project.planit.memberRoom.dto.createMemberRoomRequest;
+import com.project.planit.memberRoom.entity.MemberRoom;
+
+
+import java.util.List;
+
 /**
  * packageName    : com.project.planit.memberRoom.service fileName       : MemberRoomService author
  *        : SSAFY date           : 2023-01-30 description    :
@@ -8,6 +14,9 @@ package com.project.planit.memberRoom.service;
  * 생성
  */
 public interface MemberRoomService {
-  void findMemberRoom();
+  List<MemberRoom> findMemberRoom(Long id);
   void updateMemberRoom();
+
+  void createMemberRoom(createMemberRoomRequest request);
+
 }

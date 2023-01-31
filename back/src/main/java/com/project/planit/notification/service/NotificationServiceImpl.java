@@ -36,7 +36,7 @@ public class NotificationServiceImpl implements NotificationService{
                     .receivedMemberId(notification.getReceivedMemberId().getAppId())
                     .sendMemberId(notification.getSendMemberId().getAppId())
                     .createdAt(notification.getCreated_at())
-                    .readOrNot(notification.isReadOrNot())
+                    .readOrNot(notification.getReadOrNot())
                     .build()
             );
         }
@@ -52,10 +52,10 @@ public class NotificationServiceImpl implements NotificationService{
             .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
 
         // 토큰에서 sendMemberId값을 받아오는데 이때 이 id로 find해서 Member객체를 가져와야함!!
-//        Member snedMember=memberRepository.findByAppId(request.getReceiverMemberId())
-//            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+        Member snedMember=memberRepository.findById(1L)
+            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
 
-        Notification notification=Notification.create(false, recevierMember);
+        Notification notification=Notification.create(false, recevierMember,snedMember);
         notificationRepository.save(notification);
         return false;
     }
