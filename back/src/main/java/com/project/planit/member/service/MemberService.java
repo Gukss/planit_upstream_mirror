@@ -1,7 +1,7 @@
 package com.project.planit.member.service;
 
-import com.project.planit.member.dto.createMemberRequest;
-import com.project.planit.member.dto.updateMemberRequest;
+import com.project.planit.member.dto.CreateMemberRequest;
+import com.project.planit.member.dto.UpdateMemberRequest;
 import com.project.planit.member.entity.Member;
 import java.util.List;
 
@@ -18,8 +18,8 @@ import java.util.List;
  * 생성
  */
 public interface MemberService {
-  Long createMember(createMemberRequest request);
-  Member updateMember(Long id,updateMemberRequest request);
+  Long createMember(CreateMemberRequest request);
+  Member updateMember(Long id, UpdateMemberRequest request);
   boolean existMemberId(String memberAppId);
   Member readMember(Long memberAppId);
   List<Member> readMemberListByMemberId(String memberAppId);

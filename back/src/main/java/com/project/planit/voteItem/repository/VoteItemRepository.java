@@ -21,5 +21,5 @@ import java.util.Optional;
  */
 @Repository
 public interface VoteItemRepository extends JpaRepository<VoteItem, Long> {
-    Optional<List<VoteItem>> findByVote(Vote vote);
+    Optional<List<VoteItem>> findAllByVote(Vote vote);
 }

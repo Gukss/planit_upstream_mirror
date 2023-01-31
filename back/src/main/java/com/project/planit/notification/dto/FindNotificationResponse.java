@@ -1,6 +1,5 @@
 package com.project.planit.notification.dto;
 
-import com.project.planit.util.BaseRequest;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class findNotificationResponse {
+public class FindNotificationResponse {
   @NotNull
   private String sendMemberId;
   @NotNull

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class createNotificationRequest {
+public class CreateNotificationRequest {
     @NotNull
     private String receiverMemberId;
     @NotNull

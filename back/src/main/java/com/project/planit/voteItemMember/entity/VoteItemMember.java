@@ -1,6 +1,7 @@
 package com.project.planit.voteItemMember.entity;
 
 import com.project.planit.member.entity.Member;
+import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.voteItem.entity.VoteItem;
 import lombok.*;
@@ -25,8 +26,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class VoteItemMember {
+public class VoteItemMember extends BaseEntity {
 
+    //todo: auto_increment 안되고 전체에서 auto_increment되는것 확인하기
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vote_item_member_id")
     private Long id;
@@ -36,17 +38,16 @@ public class VoteItemMember {
     private BaseRequest baseRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="vote_item_id")
     private VoteItem voteItem;
-//
+
 //    //==생성 메서드==
-    public static VoteItemMember create(Long id, BaseRequest baseRequest, Member member, VoteItem voteItem){
+    public static VoteItemMember create(BaseRequest baseRequest, Member member, VoteItem voteItem){
         return VoteItemMember.builder()
-                .id(id)
                 .member(member)
                 .voteItem(voteItem)
                 .baseRequest(baseRequest)

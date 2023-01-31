@@ -1,13 +1,11 @@
 package com.project.planit.member.service;
 
 import com.project.planit.common.exception.NotFoundException;
-import com.project.planit.member.dto.createMemberRequest;
-import com.project.planit.member.dto.updateMemberRequest;
+import com.project.planit.member.dto.CreateMemberRequest;
+import com.project.planit.member.dto.UpdateMemberRequest;
 
 import com.project.planit.member.entity.Member;
-import com.project.planit.member.entity.Role;
 import com.project.planit.member.repository.MemberRepository;
-import com.project.planit.util.BaseRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
 
   @Transactional
   @Override
-  public Long createMember(createMemberRequest request) {
+  public Long createMember(CreateMemberRequest request) {
     Member member=Member.create(request);
     Member newMember=memberRepository.save(member);
     return newMember.getId();
@@ -36,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
   @Transactional
   @Override
-  public Member updateMember(Long id,updateMemberRequest request) {
+  public Member updateMember(Long id, UpdateMemberRequest request) {
     Member member= memberRepository.findById(id)
             .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
 

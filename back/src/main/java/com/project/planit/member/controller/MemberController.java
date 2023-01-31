@@ -1,7 +1,7 @@
 package com.project.planit.member.controller;
 
-import com.project.planit.member.dto.createMemberRequest;
-import com.project.planit.member.dto.updateMemberRequest;
+import com.project.planit.member.dto.CreateMemberRequest;
+import com.project.planit.member.dto.UpdateMemberRequest;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.service.MemberServiceImpl;
 import java.util.HashMap;
@@ -31,14 +31,14 @@ public class MemberController {
 
   // 회원가입
   @PostMapping()
-  public ResponseEntity<?> createMember(@RequestBody createMemberRequest request){
+  public ResponseEntity<?> createMember(@RequestBody CreateMemberRequest request){
     Long id=memberService.createMember(request);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
   // 회원 정보 수정
   @PatchMapping()
-  public ResponseEntity<?> updateMember(@RequestBody updateMemberRequest request){
+  public ResponseEntity<?> updateMember(@RequestBody UpdateMemberRequest request){
     Long id=1L; // TODO : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함
     Member updateMember=memberService.updateMember(id,request);
     return new ResponseEntity<>(HttpStatus.OK);

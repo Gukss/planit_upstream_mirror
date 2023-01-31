@@ -1,8 +1,7 @@
 package com.project.planit.member.entity;
 
-import com.project.planit.member.dto.createMemberRequest;
-import com.project.planit.member.dto.updateMemberRequest;
-import com.project.planit.notification.entity.Notification;
+import com.project.planit.member.dto.CreateMemberRequest;
+import com.project.planit.member.dto.UpdateMemberRequest;
 import javax.persistence.*;
 
 import com.project.planit.util.BaseEntity;
@@ -59,7 +58,7 @@ public class Member extends BaseEntity{
   @NotNull
   private BaseRequest baseRequest;
 
-  public static Member create(createMemberRequest request){
+  public static Member create(CreateMemberRequest request){
     Member member=Member.builder()
         .appId(request.getMemberAppId())
         .appPwd(request.getMemberAppPwd())
@@ -74,7 +73,7 @@ public class Member extends BaseEntity{
     return member;
   }
 
-  public void update(updateMemberRequest request){
+  public void update(UpdateMemberRequest request){
     this.appPwd=request.getMemberAppPwd();
     this.name=request.getMemberName();
     this.email=request.getMemberEmail();
