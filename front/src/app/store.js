@@ -11,3 +11,8 @@ export const dateRangeState = atom({
   key: 'dateRangeState',
   default: { startDate: new Date(), endDate: new Date() },
 });
+
+export const searchedPlaces = atom({
+  key: 'searchedPlaces',
+  default: [],
+});
