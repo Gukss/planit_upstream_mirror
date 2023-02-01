@@ -36,10 +36,21 @@ public class VoteController {
   public ResponseEntity<CreateVoteResponse> createVote(@RequestBody CreateVoteRequest request){
 //    log.info("vote controller");
     Vote createdVote = voteService.createVote(request);
-    CreateVoteResponse createVoteResponse = CreateVoteResponse.create(createdVote);
-    return ResponseEntity.ok()
-//        .header()
-        .body(createVoteResponse);
+    Long voteId = createdVote.getId();
+
+    //service에서 받아온 vote의 roomId 조회해서 request로 받아온 roomId와 동일한지 검사해주기
+    Long targetRoomId = createdVote.getRoom().getId();
+    Long confirmRoomId = request.getRoomId();
+    CreateVoteResponse createVoteResponse = CreateVoteResponse.create(voteId);
+
+    ResponseEntity res = null;
+    if(targetRoomId.equals(confirmRoomId)){ //같으면
+      res = ResponseEntity.ok().body(createVoteResponse);
+    }else{ //다르면
+      res = ResponseEntity.badRequest().body(createVoteResponse);
+    }
+
+    return res;
   }
 
   @GetMapping(path = "{roomId}")

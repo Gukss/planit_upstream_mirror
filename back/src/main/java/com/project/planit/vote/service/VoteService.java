@@ -19,6 +19,8 @@ import java.util.Optional;
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 2023-01-29        Gukss       최초 생성
+ * 2023-02-01        Gukss       REST API 문서에 맞게 수정
+ *
  */
 public interface VoteService {
 

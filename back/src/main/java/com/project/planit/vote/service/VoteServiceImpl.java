@@ -3,6 +3,7 @@ package com.project.planit.vote.service;
 import com.project.planit.common.exception.NotFoundException;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
+import com.project.planit.util.BaseRequest;
 import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.CreateVoteRequest;
 import com.project.planit.vote.entity.Vote;
@@ -35,13 +36,18 @@ public class VoteServiceImpl implements VoteService{
   @Override
   @Transactional
   public Vote createVote(@RequestBody CreateVoteRequest request){
-    //room id를 받아와서 방을 조회
     Long roomId = request.getRoomId();
     Room currentRoom = roomRepository.findById(roomId).get();
+    //todo: 토큰에서 constructor, updater 값(memberAppId)을 받아와서 변경해주기
+    String constructor = "Gukss";
+    String updater = "Gukss";
     Vote vote = Vote.builder()
             .room(currentRoom)
             .title(request.getTitle())
-            .baseRequest(request.getBaseRequest())
+            .baseRequest(BaseRequest.builder()
+                .constructor(constructor)
+                .updater(updater)
+                .build())
             .build();
     return voteRepository.save(vote);
   }
