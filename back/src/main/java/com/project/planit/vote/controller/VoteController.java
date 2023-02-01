@@ -10,6 +10,7 @@ import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.UpdatevoteResponse;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteServiceImpl;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -58,10 +59,16 @@ public class VoteController {
     //fetch.lazy 때문에 room이 바로 초기화되지 않고 정보가 채워지는 프록시 객체로 채워진다.
     //room의 초기화가 안되어있기 때문에 room으로 voteList를 찾아올 수 없다.
     Room room = roomService.findById(roomId);
-    List<Vote> foundVotes = voteService.findByRoom(room);
+    List<Vote> foundVotes = voteService.findAllByRoom(room);
 
-    return ResponseEntity.ok()
-        .body(FindVoteResponse.create(foundVotes));
+    //todo: 반환값 생각해서 넣어주기
+    List<FindVoteResponse> list = new ArrayList<>();
+    for(Vote vote: foundVotes){
+      list.add(vote.createFindVoteResponse());
+    }
+
+//    return ResponseEntity.ok()
+//        .body(FindVoteResponse.create(foundVotes));
   }
 
   @PatchMapping

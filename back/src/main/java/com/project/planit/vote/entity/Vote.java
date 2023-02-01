@@ -2,6 +2,7 @@ package com.project.planit.vote.entity;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
+import com.project.planit.vote.dto.FindVoteResponse;
 import javax.validation.constraints.NotNull;
 
 import com.project.planit.util.BaseRequest;
@@ -63,5 +64,12 @@ public class Vote extends BaseEntity{
             newTitle = "untitle";
         }
         this.title = newTitle;
+    }
+
+    public FindVoteResponse createFindVoteResponse(){
+        return FindVoteResponse.builder()
+            .voteId(this.id)
+            .title(this.title)
+            .build();
     }
 }

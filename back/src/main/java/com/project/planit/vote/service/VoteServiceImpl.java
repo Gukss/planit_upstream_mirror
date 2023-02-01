@@ -17,11 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * packageName    : com.project.planit.vote.service fileName       : VoteService author         :
- * Gukss date           : 2023-01-25 description    :
- * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-25        Gukss       최초
- * 생성
+ * packageName    : com.project.planit.vote.service
+ * fileName       : VoteService
+ * author         : Gukss
+ * date           : 2023-01-25
+ * description    :
+ * ===========================================================
+ * DATE              AUTHOR   NOTE
+ * -----------------------------------------------------------
+ * 2023-01-25        Gukss       최초생성
+ * 2023-02-01        Gukss       REST API 문서에 맞게 수정
  */
 @Service
 @Transactional(readOnly=true)
@@ -54,7 +59,7 @@ public class VoteServiceImpl implements VoteService{
 
   //방에 해당하는 투표 조회
   @Override
-  public List<Vote> findByRoom(Room room) {
+  public List<Vote> findAllByRoom(Room room) {
     return voteRepository.findAllByRoom(room).orElseThrow(()->new NotFoundException(NotFoundException.VOTE_NOT_FOUND));
   }
 

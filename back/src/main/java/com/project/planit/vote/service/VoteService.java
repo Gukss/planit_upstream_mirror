@@ -45,7 +45,7 @@ public interface VoteService {
      * @param room the room
      * @return the Optional<List<Vote>>; 방에 있는 투표 리스트
      */
-    public List<Vote> findByRoom(Room room);
+    public List<Vote> findAllByRoom(Room room);
 
 
     /**
