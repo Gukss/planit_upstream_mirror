@@ -1,8 +1,10 @@
+import { useSetRecoilState } from 'recoil';
 import React, { useState, useEffect } from 'react';
 import Bbar from '../../../../common/bbar/Bbar';
 import ResultList from './ResultList';
 
 import classes from './Search.module.scss';
+import { searchedPlaces } from '../../../../app/store';
 
 function Search() {
   // input에 들어가는 값 변수 value
@@ -11,8 +13,10 @@ function Search() {
   // 제출한 검색어 담는 변수 keyword
   const [keyword, setKeyword] = useState('');
 
-  // 검색 결과값
-  const [resultPlaces, setResultPlaces] = useState([]);
+  // // 검색 결과값
+  // const [resultPlaces, setResultPlaces] = useState([]);
+
+  const setSearchedPlaces = useSetRecoilState(searchedPlaces);
 
   // 인풋에 담긴 값을 state에 담는 함수
   const presentValue = e => {
@@ -63,7 +67,11 @@ function Search() {
       if (status === kakao.maps.services.Status.OK) {
         console.log('data');
         console.log(data);
-        setResultPlaces(data);
+        // 검색 결과를 searchedPlaces에 반영
+        // setResultPlaces(data);
+        setSearchedPlaces(data);
+        console.log('전역 state 반영됐나 확인용');
+        console.log(searchedPlaces);
         //   // 정상적으로 검색 완료됐으면
         //   // 검색 목록과 마커를 표출
         //   displayPlaces(data);
@@ -162,7 +170,7 @@ function Search() {
         <div id='pagination'></div>
       </div>
       <div className={classes.search}>
-        <ResultList resultPlaces={resultPlaces} />
+        <ResultList />
       </div>
     </Bbar>
   );

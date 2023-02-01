@@ -1,19 +1,15 @@
+import { useRecoilValue } from 'recoil';
 import React from 'react';
 import ResultListItem from './ResultListItem';
 import classes from './ResultList.module.scss';
+import { searchedPlaces } from '../../../../app/store';
 
-function ResultList(props) {
+function ResultList() {
+  const resultPlaces = useRecoilValue(searchedPlaces);
+
   return (
     <div className={classes.result}>
-      {/* {props.resultPlaces.map(place => (
-        <div key={place.address_name}>
-          <p>{place.place_name}</p>
-          <p>{place.x}</p>
-          <p>{place.y}</p>
-          <hr />
-        </div>
-      ))} */}
-      {props.resultPlaces.map(place => {
+      {resultPlaces.map(place => {
         return <ResultListItem place={place} />;
       })}
     </div>
