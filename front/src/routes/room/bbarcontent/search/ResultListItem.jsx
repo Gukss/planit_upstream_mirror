@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { useRecoilState } from 'recoil';
+import { searchedPlace } from '../../../../app/store';
 import classes from './ResultListItem.module.scss';
 
 const items = [1, 2, 3];
@@ -11,9 +12,25 @@ function ResultListItem(props) {
   const categoryKeyword = fullCategoryList[fullCategoryList.length - 1];
   // console.log(categoryKeyword);
   const detailUrl = props.place.place_url;
+  // 클릭시 좌표값 저장;
+  const [tmp, setTmp] = useRecoilState(searchedPlace);
+
+  const onClickHandler = e => {
+    setTmp({
+      x: props.place.x,
+      y: props.place.y,
+    });
+  };
 
   return (
-    <div className={classes.resultitem}>
+    <div
+      className={classes.resultitem}
+      onClick={onClickHandler}
+      onKeyDown={onClickHandler}
+      role='button'
+      tabIndex={0}
+    >
+      {/* <div className={classes.resultitem}> */}
       <div className={classes.resultitem__title}>
         <div className={classes.title_namecategory}>
           <div className={classes.title_name}>{props.place.place_name}</div>

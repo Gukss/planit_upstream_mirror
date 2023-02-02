@@ -16,3 +16,9 @@ export const searchedPlaces = atom({
   key: 'searchedPlaces',
   default: [],
 });
+
+export const searchedPlace = atom({
+  key: 'searchedPlace',
+  default: {},
+  // default: { x: 33.450701, y: 126.570667 },
+});
