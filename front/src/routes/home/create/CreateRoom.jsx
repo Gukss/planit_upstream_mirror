@@ -26,40 +26,96 @@ function CreateRoom() {
   return (
     <div>
       <Header />
-      <div className={classes.create}>
-        <div className={classes.create__title}>
-          <div className={classes.create_title_text}>
-            <div>PLAN</div>
-            <div>!T</div>
-          </div>
-          <div className={classes.create_title_img}>
-            <img src={logoImg} alt='' />
+      <div className={classes.background_img}>
+        <div className={classes.create}>
+          <div className={classes.create__title}>
+            <div className={classes.create_title_text}>
+              <div>PLAN</div>
+              <div>!T</div>
+            </div>
+            <div className={classes.create_title_img}>
+              <img src={logoImg} alt='' />
+            </div>
           </div>
         </div>
-        <form>
-          <div className={classes.create__main}>
-            <p>여행일자</p>
-            <div className={classes.create_date_wrap}>
-              <DatePicker
-                selected={startD}
-                onChange={handleChange}
-                selectsStart
-                startDate={startD}
-                endDate={endD}
-                dateFormat='yyyy. MM. dd'
-                selectsRange
-                className={classes.datepicker}
-              />
+        <div className={classes.main}>
+          <div className={classes.main_section}>
+            <div className={classes.main_container}>
+              <div className={classes.row}>
+                <div className={classes.col}>
+                  <div className={classes.col_section}>
+                    <p>
+                      <span>여행 정보 </span>
+                      <span>친구 초대</span>
+                    </p>
+                    <input
+                      className={classes.checkbox}
+                      type='checkbox'
+                      id='reg-log'
+                      name='reg-log'
+                    />
+                    <label htmlFor='reg-log'></label>
+                    <div className={classes.card3d_wrap}>
+                      <div className={classes.card3d_wrapper}>
+                        <div className={classes.card_front}>
+                          <div className={classes.center_wrap}>
+                            <div className={classes.center_section}>
+                              <span>여행일자</span>
+                              <div className={classes.date_wrap}>
+                                <DatePicker
+                                  selected={startD}
+                                  onChange={handleChange}
+                                  selectsStart
+                                  startDate={startD}
+                                  endDate={endD}
+                                  dateFormat='yyyy. MM. dd'
+                                  selectsRange
+                                  className={classes.datepicker}
+                                />
+                              </div>
+                              <span>여행일정제목</span>
+                              <div className={classes.form_group}>
+                                <input
+                                  className={classes.form_style}
+                                  placeholder='이번 여행을 한마디로 표현하자면?'
+                                />
+                              </div>
+                              <button
+                                className={classes.main__button}
+                                type='submit'
+                              >
+                                방 생성하기
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={classes.card_back}>
+                          <div className={classes.center_wrap}>
+                            <div className={classes.center_section}>
+                              <span>친구초대</span>
+                              <div className={classes.form_group}>
+                                <input
+                                  className={classes.form_style}
+                                  placeholder='아이디를 입력해주세요'
+                                />
+                              </div>
+                              <button
+                                className={classes.main__button}
+                                type='submit'
+                              >
+                                방 생성하기
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p>여행 일정 제목</p>
-            <div className={classes.create_main_id}>
-              <input className={classes.input} type='text' />
-            </div>
-            <button className={classes.create_main_button} type='submit'>
-              가입하기
-            </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
