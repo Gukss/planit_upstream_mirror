@@ -23,7 +23,7 @@ pipeline{
         stage('Build') {
             steps {
                 script{
-                    sh "docker build -t ${BACK_NAME} ./backend/."
+                    sh "docker build -t ${BACK_NAME} ./back/."
 
                 }
             }
@@ -33,7 +33,7 @@ pipeline{
                 sh "docker run -d --name=${BACK_CONTAINER_NAME} -p 8080:8080 ${BACK_NAME}"
   
 
-                sh "docker image prune --force" #기존 도커 이미지 삭제
+                sh "docker image prune --force"
             }
         }
     }
