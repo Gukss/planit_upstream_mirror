@@ -1,0 +1,22 @@
+.item_body {
+  display: flex;
+  width: 9.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  :hover {
+    background-color: red;
+  }
+
+  .item_tag {
+    width: 2rem;
+    background-color: crimson;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+  }
+
+  .item_title {
+    text-align: center;
+    background-color: white;
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+    width: 100%;
+  }
+}
