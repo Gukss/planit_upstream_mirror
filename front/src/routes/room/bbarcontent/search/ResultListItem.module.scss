@@ -44,6 +44,10 @@
       display: flex;
       align-items: center;
     }
+    a {
+      // display: inline-block;
+      background-color: #ffd56b;
+    }
   }
   &__photo {
     display: flex;
