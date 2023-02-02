@@ -21,10 +21,10 @@ pipeline{
         stage('Build') {
             steps {
                 script{
-                       """sed -i "s/\${DB_USERNAME}/${DB_USERNAME}/" "${WORKSPACE}/src/main/resources/application.yml"
-                       sed -i "s/\${DB_PASSWORD}/${DB_PASSWORD}/" "${WORKSPACE}/src/main/resources/application.yml"
-                       sed -i "s/\${DB_PORT}/${DB_PORT}/" "${WORKSPACE}/src/main/resources/application.yml"
-                       sed -i "s/\${DB_DOMAIN}/${DB_DOMAIN}/" "${WORKSPACE}/src/main/resources/application.yml"
+                       """sed -i "s/\${DB_USERNAME}/${params.DB_USERNAME}/" "${WORKSPACE}/src/main/resources/application.yml"
+                       sed -i "s/\${DB_PASSWORD}/${params.DB_PASSWORD}/" "${WORKSPACE}/src/main/resources/application.yml"
+                       sed -i "s/\${DB_PORT}/${params.DB_PORT}/" "${WORKSPACE}/src/main/resources/application.yml"
+                       sed -i "s/\${DB_DOMAIN}/${params.DB_DOMAIN}/" "${WORKSPACE}/src/main/resources/application.yml"
                        """
                     sh  "docker build -t ${BACK_NAME} ./back/."
                 }
