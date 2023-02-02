@@ -9,7 +9,7 @@ function SignUp() {
   }, []);
 
   const sumbmitHandler = e => {
-    e.preventDefault();
+    // e.preventDefault();
   };
 
   return (
