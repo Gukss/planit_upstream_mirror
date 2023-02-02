@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * packageName    : com.project.planit.vote.controller fileName       : VoteController author
- *  : Gukss date           : 2023-01-25 description    :
- * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-01-25        Gukss       최초
- * 생성
+ * packageName    : com.project.planit.vote.controller
+ * fileName       : VoteController
+ * author         : Gukss
+ * date           : 2023-01-25
+ * description    :
+ * ===========================================================
+ * DATE              AUTHOR   NOTE
+ * -----------------------------------------------------------
+ * 2023-01-25        Gukss       최초생성
+ * 2023-01-31        Gukss       REST API 문서에 맞게 수정
  */
 @RestController
 @RequiredArgsConstructor

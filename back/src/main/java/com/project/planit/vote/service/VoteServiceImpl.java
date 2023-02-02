@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * DATE              AUTHOR   NOTE
  * -----------------------------------------------------------
  * 2023-01-25        Gukss       최초생성
- * 2023-02-01        Gukss       REST API 문서에 맞게 수정
+ * 2023-02-01        Gukss       REST API 문서에 맞게 수정: baseRequest 생성 값 변경
  */
 @Service
 @Transactional(readOnly=true)
@@ -43,16 +43,19 @@ public class VoteServiceImpl implements VoteService{
   public Vote createVote(@RequestBody CreateVoteRequest request){
     Long roomId = request.getRoomId();
     Room currentRoom = roomRepository.findById(roomId).get();
-    //todo: 토큰에서 constructor, updater 값(memberAppId)을 받아와서 변경해주기
-    String constructor = "Gukss";
+    //todo: tocken에서 memberAppId 가져다 사용하기
     String updater = "Gukss";
+    String constructor = "Gukss";
+
+    BaseRequest baseRequest = BaseRequest.builder()
+        .updater(updater)
+        .constructor(constructor)
+        .build();
+
     Vote vote = Vote.builder()
             .room(currentRoom)
             .title(request.getTitle())
-            .baseRequest(BaseRequest.builder()
-                .constructor(constructor)
-                .updater(updater)
-                .build())
+            .baseRequest(baseRequest)
             .build();
     return voteRepository.save(vote);
   }
