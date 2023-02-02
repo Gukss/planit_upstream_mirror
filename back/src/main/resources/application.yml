@@ -18,7 +18,8 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: create
+#      ddl-auto: create
+      ddl-auto: none
 
 logging:
   level:
@@ -29,5 +30,6 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
-
-
+      springframework:
+        boot:
+          autoconfigure: info
