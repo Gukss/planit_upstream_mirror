@@ -10,10 +10,8 @@ pipeline{
                 script {
                     try{
                         sh "docker stop ${BACK_CONTAINER_NAME}"
-
                         sleep 1
                         sh "docker rm ${BACK_CONTAINER_NAME}"
-
                     }catch(e){
                         sh 'exit 0'
                     }
@@ -23,22 +21,17 @@ pipeline{
         stage('Build') {
             steps {
                 script{
-
                     sed -i "s/\${DB_USERNAME}/${DB_USERNAME}/" "${WORKSPACE}/src/main/resources/application.yml"
                     sed -i "s/\${DB_PASSWORD}/${DB_PASSWORD}/" "${WORKSPACE}/src/main/resources/application.yml"
                     sed -i "s/\${DB_PORT}/${DB_PORT}/" "${WORKSPACE}/src/main/resources/application.yml"
                     sed -i "s/\${DB_DOMAIN}/${DB_DOMAIN}/" "${WORKSPACE}/src/main/resources/application.yml"
-
                     sh "docker build -t ${BACK_NAME} ./back/."
-
                 }
             }
         }
         stage('Deploy'){
             steps {
                 sh "docker run -d --name=${BACK_CONTAINER_NAME} -p 8080:8080 ${BACK_NAME}"
-  
-
                 sh "docker image prune --force"
             }
         }
