@@ -24,7 +24,7 @@ pipeline{
                     sh "docker build -t ${BACK_NAME} ./back/."
                        sh "sed -i 's/\\${DB_USERNAME}/${DB_USERNAME}/' '${WORKSPACE}/back/src/main/resources/application.yml'"
                        sh "sed -i 's/\\${DB_PASSWORD}/${DB_PASSWORD}/' '${WORKSPACE}/back/src/main/resources/application.yml'"
-                       sh "sed -i 's/\\${DB_PORT}/${DB_PORT}/' '${WORKSPACE}/back/src/main/resources/application.yml'"
+                       sh "sed -i 's/\${DB_PORT}/${DB_PORT}/' '${WORKSPACE}/back/src/main/resources/application.yml'"
                        sh "sed -i 's/\\${DB_DOMAIN}/${DB_DOMAIN}/' '${WORKSPACE}/back/src/main/resources/application.yml'"
                 }
             }
