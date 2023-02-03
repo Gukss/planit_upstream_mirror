@@ -1,6 +1,6 @@
 package com.project.planit.member.service;
 
-import com.project.planit.common.exception.NotFoundException;
+import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.member.dto.CreateMemberRequest;
 import com.project.planit.member.dto.UpdateMemberRequest;
 
@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Member updateMember(Long id, UpdateMemberRequest request) {
     Member member= memberRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
     member.update(request);
     return member;
@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Member readMember(Long memberAppId) {
     Member member=memberRepository.findById(memberAppId)
-        .orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
     return member;
   }
 
@@ -67,14 +67,14 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public String findMemberIdByMemberEmail(String email) {
     Member member=memberRepository.findByEmail(email)
-        .orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
     return member.getAppId();
   }
 
   @Override
   public String findMemberPwdByMemberIdAndMemberEmail(String memberAppId,String email) {
     Member member= memberRepository.findByAppIdAndEmail(memberAppId,email)
-        .orElseThrow(()->new NotFoundException(NotFoundException.USER_NOT_FOUND));
+        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
     return member.getAppPwd();
   }
 
