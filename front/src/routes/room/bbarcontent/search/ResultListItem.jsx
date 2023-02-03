@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { searchedPlace } from '../../../../app/store';
 import classes from './ResultListItem.module.scss';
@@ -15,15 +15,12 @@ function ResultListItem(props) {
   // 클릭시 좌표값 저장;
   const [tmp, setTmp] = useRecoilState(searchedPlace);
 
-  const onClickHandler = useCallback(
-    e => {
-      setTmp({
-        x: props.place.x,
-        y: props.place.y,
-      });
-    },
-    [tmp]
-  );
+  const onClickHandler = e => {
+    setTmp({
+      x: props.place.x,
+      y: props.place.y,
+    });
+  };
 
   return (
     <div
