@@ -1,13 +1,15 @@
 .ctblist {
   display: flex;
   align-items: center;
-  margin: 8px 0;
+  // height: 100%;
+  margin: 0.5rem 0;
 
   &__item * {
-    font-size: 32px;
-    // justify-content: center;
-    // text-align: center;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     color: #f3f3f3;
-    margin: 4px;
+    margin: 0.25rem;
   }
 }
