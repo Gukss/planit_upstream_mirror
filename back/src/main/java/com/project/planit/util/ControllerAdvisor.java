@@ -23,18 +23,6 @@ public class ControllerAdvisor {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ResponseBody
   public ExceptionResponse NotFoundExceptionHandler(Exception e, ServerHttpRequest request){
-    return ExceptionResponse.createExceptionResponse(HttpStatus.BAD_REQUEST, request, e.getMessage());
-  }
-
-  private static ExceptionResponse createExceptionResponse(Exception e, ServerHttpRequest request){
-    final String message = e.getMessage();
-    final String path = request.getPath().pathWithinApplication().value();
-//    LOG.debug("Returning HTTP status: {} for path: {}, message: {}", httpStatus, path, message);
-    return ExceptionResponse.builder()
-        .httpStatus(HttpStatus.BAD_REQUEST)
-        .path(path)
-        .timestamp(LocalDateTime.now())
-        .message(message)
-        .build();
+    return ExceptionResponse.createExceptionResponse(e, HttpStatus.BAD_REQUEST, request);
   }
 }
