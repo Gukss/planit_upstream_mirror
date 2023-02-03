@@ -79,7 +79,7 @@ public class VoteServiceImpl implements VoteService{
 
   @Override
   public Vote findById(Long id) {
-    return voteRepository.findById(id).orElseThrow(()->new NotFoundVoteException());
+    return voteRepository.findById(id).orElseThrow(()->new NotFoundVoteException(NotFoundExceptionMessage.VOTE_NOT_FOUND));
   }
 
   //방에 해당하는 투표 갱신
