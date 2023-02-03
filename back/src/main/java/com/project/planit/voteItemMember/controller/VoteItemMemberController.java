@@ -2,11 +2,10 @@ package com.project.planit.voteItemMember.controller;
 
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberResponse;
-import com.project.planit.voteItemMember.dto.FindVoteItemMemberListResponse;
+import com.project.planit.voteItemMember.dto.FindVoteItemMemberResponse;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
-import com.project.planit.voteItemMember.repository.VoteItemMemberRepository;
-import com.project.planit.voteItemMember.service.VoteItemMemberService;
 import com.project.planit.voteItemMember.service.VoteItemMemberServiceImpl;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +40,15 @@ public class VoteItemMemberController {
   }
 
   @GetMapping(path = "{voteItemId}")
-  public ResponseEntity<FindVoteItemMemberListResponse> findVoteItemMemberListByVoteItemId(@PathVariable Long voteItemId){
+  public ResponseEntity<List<FindVoteItemMemberResponse>> findVoteItemMemberListByVoteItemId(@PathVariable Long voteItemId){
     //todo: token값으로 바꾸기
     List<VoteItemMember> foundVoteItemMemberList = voteItemMemberService.findAllByVoteItemIdAndMemberId(voteItemId, 1L);
 
-    return ResponseEntity.ok().body(FindVoteItemMemberListResponse.create(foundVoteItemMemberList));
+    List<FindVoteItemMemberResponse> resList = new ArrayList<>();
+    for(VoteItemMember voteItemMember: foundVoteItemMemberList){
+      resList.add(voteItemMember.createFindVoteItemMemberResponse());
+    }
+
+    return ResponseEntity.ok().body(resList);
   }
 }
