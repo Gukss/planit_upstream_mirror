@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
        FRONT_CONTAINER_NAME="planit_front_container"
-       FRONT_NAME = "lanit_front"
+       FRONT_NAME = "planit_front"
     }
     stages {
         stage('Clean'){
