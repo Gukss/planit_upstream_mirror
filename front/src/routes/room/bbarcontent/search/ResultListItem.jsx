@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { searchedPlace } from '../../../../app/store';
 import classes from './ResultListItem.module.scss';
