@@ -54,11 +54,9 @@ public class VoteServiceImpl implements VoteService{
         .constructor(constructor)
         .build();
 
-    Vote vote = Vote.builder()
-            .room(currentRoom)
-            .title(request.getTitle())
-            .baseRequest(baseRequest)
-            .build();
+    String title = request.getTitle();
+
+    Vote vote = Vote.create(title, currentRoom, baseRequest);
     return voteRepository.save(vote);
   }
 

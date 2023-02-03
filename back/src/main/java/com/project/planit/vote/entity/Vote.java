@@ -51,6 +51,15 @@ public class Vote extends BaseEntity{
     @NotNull
     private BaseRequest baseRequest;
 
+    //==== 생성 메서드 ====
+    public static Vote create(String title, Room room, BaseRequest baseRequest){
+        return Vote.builder()
+            .title(title)
+            .room(room)
+            .baseRequest(baseRequest)
+            .build();
+    }
+
     /**
      * Change title.
      * methodName : changeTitle
