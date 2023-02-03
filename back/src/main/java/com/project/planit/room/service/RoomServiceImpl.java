@@ -1,6 +1,6 @@
 package com.project.planit.room.service;
 
-import com.project.planit.common.exception.NotFoundException;
+import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.room.dto.CreateRoomRequest;
 import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.room.entity.Room;
@@ -9,10 +9,6 @@ import com.project.planit.util.BaseRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 /**
  * packageName    : com.project.planit.room.service
@@ -63,7 +59,7 @@ public class RoomServiceImpl implements RoomService{
     public Room updateRoom(UpdateRoomRequest request) {
         Room targetRoom = roomRepository.findById(request.getRoomId())
             .orElseThrow(
-                ()-> new NotFoundException(NotFoundException.ROOM_NOT_FOUND)
+                ()-> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND)
             );
         targetRoom.changeName(request.getRoomName());
         targetRoom.changeDate(request.getStartDate(), request.getEndDate());

@@ -1,6 +1,6 @@
 package com.project.planit.memberRoom.service;
 
-import com.project.planit.common.exception.NotFoundException;
+import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.memberRoom.dto.CreateMemberRoomRequest;
@@ -34,10 +34,10 @@ public class MemberRoomServiceImpl implements MemberRoomService{
     @Override
     public List<MemberRoom> findMemberRoom(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         Room room=roomRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         return memberRoomRepository.findAllByMemberAndRoom(member,room);
     }
@@ -46,7 +46,7 @@ public class MemberRoomServiceImpl implements MemberRoomService{
     @Transactional
     public void updateMemberRoom(UpdateMemberRoomRequest request) {
         MemberRoom memberRoom=memberRoomRepository.findById(request.getRoomId())
-            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         memberRoom.update(memberRoom.getMember().getAppId(),request);
     }
@@ -55,11 +55,11 @@ public class MemberRoomServiceImpl implements MemberRoomService{
     @Transactional
     public void createMemberRoom(CreateMemberRoomRequest request) {
         Room room=roomRepository.findById(request.getRoomId())
-                .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         // @TODO : 토큰에 어떤 값을 넣을지에 따라 바뀜
         Member member=memberRepository.findById(1L)
-                .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
         memberRoomRepository.save(MemberRoom.create(request,room,member));
 
     }

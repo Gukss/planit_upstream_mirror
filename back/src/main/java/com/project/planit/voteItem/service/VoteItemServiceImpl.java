@@ -1,6 +1,6 @@
 package com.project.planit.voteItem.service;
 
-import com.project.planit.common.exception.NotFoundException;
+import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteService;
 import com.project.planit.voteItem.dto.CreateVoteItemRequest;
@@ -10,10 +10,8 @@ import com.project.planit.voteItem.repository.VoteItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * packageName    : com.project.planit.voteItem.service
@@ -51,7 +49,7 @@ public class VoteItemServiceImpl implements VoteItemService {
     @Override
     public List<VoteItem> findAllByVote(Vote vote) {
         return voteItemRepository.findAllByVote(vote).orElseThrow(
-                ()->new NotFoundException(NotFoundException.VOTE_ITEM_LIST_NOT_FOUND));
+                ()->new NotFoundExceptionMessage(NotFoundExceptionMessage.VOTE_ITEM_LIST_NOT_FOUND));
     }
 
     @Override

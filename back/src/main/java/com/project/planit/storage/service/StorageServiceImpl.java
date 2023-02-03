@@ -1,6 +1,6 @@
 package com.project.planit.storage.service;
 
-import com.project.planit.common.exception.NotFoundException;
+import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.room.entity.Room;
@@ -32,10 +32,10 @@ public class StorageServiceImpl implements StorageService{
   @Transactional
   public void createStorage(CreateStorageRequest request,Long id) {
     Member member=memberRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
     Room room=roomRepository.findById(request.getRoomId())
-        .orElseThrow(() -> new NotFoundException(NotFoundException.ROOM_NOT_FOUND));
+        .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
     storageRepository.save(Storage.create(request,member,room));
   }
@@ -44,10 +44,10 @@ public class StorageServiceImpl implements StorageService{
   @Transactional
   public void updateStorage(UpdateStorageRequest request,Long memberId) {
       Member member=memberRepository.findById(memberId)
-          .orElseThrow(() -> new NotFoundException(NotFoundException.ROOM_NOT_FOUND));
+          .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
       Storage storage=storageRepository.findById(request.getRoomId())
-          .orElseThrow(() -> new NotFoundException(NotFoundException.ROOM_NOT_FOUND));
+          .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
       storage.update(request,member);
   }
@@ -56,10 +56,10 @@ public class StorageServiceImpl implements StorageService{
   public List<Storage> findStorageList(Long roomId) {
       // @TODO : 아이디 토큰 값으로 변경
       Member member=memberRepository.findById(1L)
-          .orElseThrow(() -> new NotFoundException(NotFoundException.USER_NOT_FOUND));
+          .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
       Room room=roomRepository.findById(roomId)
-          .orElseThrow(() -> new NotFoundException(NotFoundException.ROOM_NOT_FOUND));
+          .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
       return storageRepository.findAllByMemberAndRoom(member,room);
   }

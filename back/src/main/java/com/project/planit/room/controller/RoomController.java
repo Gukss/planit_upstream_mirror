@@ -78,7 +78,6 @@ public class RoomController {
 
   @GetMapping(path = "{roomId}")
   public ResponseEntity<?> readRoom(@PathVariable Long roomId){
-    System.out.println(roomId);
     Room room = roomService.findById(roomId);
     //todo: 프론트랑 반환값 상의해서 넣어주기
     return ResponseEntity.ok(HttpStatus.OK);
