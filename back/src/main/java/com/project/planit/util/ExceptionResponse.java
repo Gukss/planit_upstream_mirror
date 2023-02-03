@@ -8,9 +8,9 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 
 /**
  * packageName    : com.project.planit.util fileName       : ExceptionResponse author         :
- * SSAFY date           : 2023-02-03 description    :
+ * Gukss date           : 2023-02-03 description    :
  * =========================================================== DATE              AUTHOR
- * NOTE ----------------------------------------------------------- 2023-02-03        SSAFY       최초
+ * NOTE ----------------------------------------------------------- 2023-02-03        Gukss       최초
  * 생성
  */
 @Getter
@@ -22,10 +22,13 @@ public class ExceptionResponse {
   private final HttpStatus httpStatus;
   private final String message;
 
-  public static ExceptionResponse createExceptionResponse(HttpStatus httpStatus, ServerHttpRequest request, String message){
+  public static ExceptionResponse createExceptionResponse(Exception e, HttpStatus httpStatus, ServerHttpRequest request){
+//    LOG.debug("Returning HTTP status: {} for path: {}, message: {}", httpStatus, path, message);
+    final String message = e.getMessage();
+    final String path = request.getPath().pathWithinApplication().value();
     return ExceptionResponse.builder()
         .timestamp(LocalDateTime.now())
-        .path(request.getPath().pathWithinApplication().value())
+        .path(path)
         .httpStatus(httpStatus)
         .message(message)
         .build();
