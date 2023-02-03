@@ -1,7 +1,7 @@
 import React from 'react';
 import CamListItem from './CamListItem';
-import classes from './CamList.module.scss';
 import CTBLayout from './camtoolbox/CTBLayout';
+import classes from './CamList.module.scss';
 
 function CamList() {
   const camItems = [
