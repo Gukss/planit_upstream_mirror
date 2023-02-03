@@ -1,6 +1,7 @@
 package com.project.planit.vote.dto;
 
 import com.project.planit.vote.entity.Vote;
+import java.util.ArrayList;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,11 +26,6 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class FindVoteResponse {
-    List<Vote> foundVotes;
-
-    public static FindVoteResponse create(List<Vote> foundVotes) {
-        return FindVoteResponse.builder()
-                .foundVotes(foundVotes)
-                .build();
-    }
+        private Long voteId;
+        private String title;
 }

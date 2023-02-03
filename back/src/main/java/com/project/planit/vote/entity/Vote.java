@@ -2,6 +2,7 @@ package com.project.planit.vote.entity;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
+import com.project.planit.vote.dto.FindVoteResponse;
 import javax.validation.constraints.NotNull;
 
 import com.project.planit.util.BaseRequest;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
  * DATE              AUTHOR       NOTE
  * -----------------------------------------------------------
  * 2023-01-23        dongk       최초생성
+ * 2023-02-01        Gukss       REST API 문서에 맞게 수정, List로 반환위한 dto관련 설정
  */
 @Entity
 @Getter
@@ -63,5 +65,12 @@ public class Vote extends BaseEntity{
             newTitle = "untitle";
         }
         this.title = newTitle;
+    }
+
+    public FindVoteResponse createFindVoteResponse(){
+        return FindVoteResponse.builder()
+            .voteId(this.id)
+            .title(this.title)
+            .build();
     }
 }
