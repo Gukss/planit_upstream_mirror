@@ -23,10 +23,19 @@ import java.time.LocalDate;
 @Builder
 @Getter
 public class CreateRoomRequest extends BaseEntity {
-    LocalDate startDate;
-    LocalDate endDate;
-    String roomName;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String roomName;
 
     @Embedded
     private BaseRequest baseRequest;
+
+    public static CreateRoomRequest create(LocalDate startDate, LocalDate endDate, String roomName, BaseRequest baseRequest) {
+        return CreateRoomRequest.builder()
+                .roomName(roomName)
+                .startDate(startDate)
+                .endDate(endDate)
+                .baseRequest(baseRequest)
+                .build();
+    }
 }

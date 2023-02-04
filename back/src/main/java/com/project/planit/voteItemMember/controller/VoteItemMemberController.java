@@ -5,6 +5,8 @@ import com.project.planit.voteItemMember.dto.CreateVoteItemMemberResponse;
 import com.project.planit.voteItemMember.dto.FindVoteItemMemberResponse;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
 import com.project.planit.voteItemMember.service.VoteItemMemberServiceImpl;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +38,8 @@ public class VoteItemMemberController {
     VoteItemMember newVoteItemMember = voteItemMemberService.createVoteItemMember(request);
     CreateVoteItemMemberResponse createVoteItemMemberResponse = CreateVoteItemMemberResponse.create(
         newVoteItemMember.getMember().getId(), newVoteItemMember.getVoteItem().getId());
-    return ResponseEntity.ok().body(createVoteItemMemberResponse);
+    URI uri = URI.create(""+newVoteItemMember.getId());
+    return ResponseEntity.created(uri).body(createVoteItemMemberResponse);
   }
 
   @GetMapping(path = "{voteItemId}")

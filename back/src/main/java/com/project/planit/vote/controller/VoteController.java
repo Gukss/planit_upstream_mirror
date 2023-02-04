@@ -9,6 +9,8 @@ import com.project.planit.vote.dto.UpdateVoteRequest;
 import com.project.planit.vote.dto.UpdatevoteResponse;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.service.VoteServiceImpl;
+
+import java.net.URI;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +45,8 @@ public class VoteController {
     Vote createdVote = voteService.createVote(request);
     Long voteId = createdVote.getId();
     CreateVoteResponse createVoteResponse = CreateVoteResponse.create(voteId);
-
-    ResponseEntity res = ResponseEntity.ok().body(createVoteResponse);
+    URI uri = URI.create(""+createdVote.getId());
+    ResponseEntity res = ResponseEntity.created(uri).body(createVoteResponse);
     return res;
   }
 
