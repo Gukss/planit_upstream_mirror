@@ -16,8 +16,8 @@ import java.util.List;
  */
 public interface MemberRoomService {
   List<MemberRoom> findMemberRoom(Long id);
-  void updateMemberRoom(UpdateMemberRoomRequest request);
+  MemberRoom updateMemberRoom(UpdateMemberRoomRequest request);
 
-  void createMemberRoom(CreateMemberRoomRequest request);
+  MemberRoom createMemberRoom(CreateMemberRoomRequest request);
 
 }

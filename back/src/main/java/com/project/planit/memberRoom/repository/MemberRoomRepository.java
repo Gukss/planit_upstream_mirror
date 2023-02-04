@@ -6,6 +6,7 @@ import com.project.planit.room.entity.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName    : com.project.planit.memberRoom.repository fileName       : MemberRepository
@@ -15,5 +16,5 @@ import java.util.List;
  * 생성
  */
 public interface MemberRoomRepository extends JpaRepository<MemberRoom,Long> {
-    List<MemberRoom> findAllByMemberAndRoom(Member member, Room room);
+    Optional<List<MemberRoom>> findAllByMemberAndRoom(Member member, Room room);
 }
