@@ -45,12 +45,7 @@ public class RoomServiceImpl implements RoomService{
             .constructor(constructor)
             .build();
 
-        Room newRoom = Room.builder()
-                .roomName(request.getRoomName())
-                .startDate(request.getStartDate())
-                .endDate(request.getEndDate())
-                .baseRequest(baseRequest)
-                .build();
+        Room newRoom = Room.create(request.getRoomName(), request.getStartDate(), request.getEndDate(), baseRequest);
         return roomRepository.save(newRoom);
     }
 

@@ -43,7 +43,13 @@ public class VoteItemServiceImpl implements VoteItemService {
 
         String voteItemName = request.getVoteItemName();
         Vote vote = voteRepository.findById(voteId).orElseThrow(()->new NotFoundVoteException(NotFoundExceptionMessage.VOTE_NOT_FOUND));
-        BaseRequest baseRequest = request.getBaseRequest();
+        //todo: constructor, updator 토큰에서 가지고 오기
+        String constructor = "Gukss";
+        String updator = "Gukss";
+        BaseRequest baseRequest = BaseRequest.builder()
+                .updater(updator)
+                .constructor(constructor)
+                .build();
 
         VoteItem voteItem= VoteItem.create(voteItemName, baseRequest, vote);
         return voteItemRepository.save(voteItem);
