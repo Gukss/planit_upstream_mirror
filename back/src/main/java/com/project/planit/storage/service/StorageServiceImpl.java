@@ -30,19 +30,19 @@ public class StorageServiceImpl implements StorageService{
   private final RoomRepository roomRepository;
   @Override
   @Transactional
-  public void createStorage(CreateStorageRequest request,Long id) {
+  public Storage createStorage(CreateStorageRequest request, Long id) {
     Member member=memberRepository.findById(id)
             .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
     Room room=roomRepository.findById(request.getRoomId())
         .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
-    storageRepository.save(Storage.create(request,member,room));
+    return storageRepository.save(Storage.create(request,member,room));
   }
 
   @Override
   @Transactional
-  public void updateStorage(UpdateStorageRequest request,Long memberId) {
+  public Storage updateStorage(UpdateStorageRequest request,Long memberId) {
       Member member=memberRepository.findById(memberId)
           .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
@@ -50,6 +50,8 @@ public class StorageServiceImpl implements StorageService{
           .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
       storage.update(request,member);
+
+      return storage;
   }
 
   @Override

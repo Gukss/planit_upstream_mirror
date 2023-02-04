@@ -24,9 +24,9 @@ public class CreateStorageRequest {
       @NotNull
       private Long storagesId;
       @NotNull
-      private String StorageName;
+      private String storageName;
       @NotNull
-      private  Boolean confirmed;
+      private Boolean confirmed;
       @NotNull
       private Double lat;
       @NotNull

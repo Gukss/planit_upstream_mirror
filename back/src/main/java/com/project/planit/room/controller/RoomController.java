@@ -54,9 +54,6 @@ public class RoomController {
     UpdateRoomResponse updateRoomResponse = UpdateRoomResponse.create(updatedRoom.getId(),
         updatedRoom.getRoomName(), request.getStartDate(), request.getEndDate());
 
-    Long updatedRoomId = updatedRoom.getId();
-    Long reqestRoomId = request.getRoomId();
-
     ResponseEntity res = ResponseEntity.ok().body(updateRoomResponse);
     return res;
   }

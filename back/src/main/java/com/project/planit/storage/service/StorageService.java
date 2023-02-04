@@ -13,7 +13,7 @@ import java.util.List;
  * 생성
  */
 public interface StorageService {
-  void createStorage(CreateStorageRequest request,Long id);
-  void updateStorage(UpdateStorageRequest request,Long memberId);
+  Storage createStorage(CreateStorageRequest request, Long id);
+  Storage updateStorage(UpdateStorageRequest request,Long memberId);
   List<Storage> findStorageList(Long storageId);
 }
