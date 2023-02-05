@@ -21,6 +21,15 @@ spring:
 #      ddl-auto: create
       ddl-auto: none
 
+  #socket test
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+  freemarker:
+    cache: false
+
 logging:
   level:
     org:
