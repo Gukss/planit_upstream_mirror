@@ -26,9 +26,9 @@ import java.util.UUID;
 public class ChatRoom implements Serializable {
     private static final long serialVersionUID = 6494678977089006639L;
 
-    private Long roomId;
+    private String roomId;
     private String name;
-    public static ChatRoom create(Long roomId, String name){
+    public static ChatRoom create(String roomId, String name){
         return ChatRoom.builder()
                 .name(name)
                 .roomId(roomId)

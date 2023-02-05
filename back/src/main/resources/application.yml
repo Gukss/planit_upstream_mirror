@@ -36,6 +36,9 @@ spring:
   freemarker:
     cache: false
 
+jwt:
+  secret: planitplanitplanitplanitplanitplanitplanit
+
 logging:
   level:
     org:

@@ -43,7 +43,7 @@ public class ChatRoomController {
     // 채팅방 생성
     @PostMapping("/chatroom")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam Long roomId, String roomName) {
+    public ChatRoom createRoom(@RequestParam String roomId, String roomName) {
         return chatRoomRepository.createChatRoom(roomId, roomName);
     }
     // 채팅방 입장 화면
@@ -55,7 +55,7 @@ public class ChatRoomController {
     // 특정 채팅방 조회
     @GetMapping("/chatroom/{roomId}")
     @ResponseBody
-    public ChatRoom roomInfo(@PathVariable Long roomId) {
+    public ChatRoom roomInfo(@PathVariable String roomId) {
         return chatRoomRepository.findRoomById(roomId);
     }
 }
