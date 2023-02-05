@@ -23,9 +23,9 @@ spring:
 
   profiles:
     active: local
-#  redis:
-#    host: localhost
-#    port: 6379
+  redis:
+    host: #redis 설치된 서버 호스트
+    port: #redis 설치된 서버 포트
 
   #socket test
   devtools:
