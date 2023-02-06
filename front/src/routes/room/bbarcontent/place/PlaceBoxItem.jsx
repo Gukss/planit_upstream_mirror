@@ -5,13 +5,23 @@ import { userMarkers } from '../../../../app/store';
 
 function PlaceBoxItem(props) {
   const [markers, setMarkers] = useRecoilState(userMarkers);
+  const [isClick, setIsClick] = useState(props.item.isConfirmed);
+  console.log(props.item.isConfirmed);
 
   const onConfirmPlace = e => {
-    console.log('확정 버튼 누름', e.target.innerText);
-    const targetMarker = markers.filter(
-      marker => marker.title === e.target.innerText
+    console.log('확정 버튼 누름', e.target);
+
+    setMarkers(
+      markers.map(it =>
+        it.title === e.target.innerText
+          ? { ...it, isConfirmed: !it.isConfirmed }
+          : it
+      )
     );
-    console.log('마커', targetMarker);
+
+    console.log('선택', props.isConfirmed);
+    setIsClick(props.isConfirmed);
+    console.log('컨펌 후 마커', markers);
   };
   return (
     <div
@@ -21,8 +31,15 @@ function PlaceBoxItem(props) {
       role='button'
       tabIndex={0}
     >
-      <div className={classes.item_tag}></div>
-      <div className={classes.item_title}>
+      <div
+        className={classes.item_tag}
+        style={{ backgroundColor: `${props.item.userColor}` }}
+      ></div>
+      <div
+        className={
+          props.item.isConfirmed ? classes.item_title_click : classes.item_title
+        }
+      >
         <p>{props.item.title}</p>
       </div>
     </div>

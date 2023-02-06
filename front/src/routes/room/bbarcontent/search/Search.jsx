@@ -1,4 +1,4 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import React, { useState, useEffect } from 'react';
 import Bbar from '../../../../common/bbar/Bbar';
 import ResultList from './ResultList';

@@ -39,9 +39,9 @@ export const userMarkers = atom({
   default: [
     {
       category: 'AD5',
-      userColor: 'grey',
+      userColor: '#EB5252',
       dayColor: '',
-      isConfirmed: 'false',
+      isConfirmed: true,
       title: '숙소1',
       x: 126.44,
       y: 32.44,
@@ -49,9 +49,9 @@ export const userMarkers = atom({
 
     {
       category: 'AD5',
-      userColor: 'red',
+      userColor: '#EB5252',
       dayColor: '',
-      isConfirmed: 'false',
+      isConfirmed: true,
       title: '숙소2',
       x: 126.44,
       y: 32.44,
@@ -59,30 +59,35 @@ export const userMarkers = atom({
 
     {
       category: 'FD6',
-      userColor: 'grey',
+      userColor: '#90CE0A',
       dayColor: '',
-      isConfirmed: 'false',
+      isConfirmed: false,
       title: '식당1',
       x: 126.44,
       y: 32.44,
     },
     {
       category: 'AT4',
-      userColor: 'grey',
+      userColor: '#7997FE',
       dayColor: '',
-      isConfirmed: 'false',
+      isConfirmed: false,
       title: '관광명소 성심당',
       x: 126.44,
       y: 32.44,
     },
     {
       category: 'CE7',
-      userColor: 'grey',
+      userColor: '#FAE635',
       dayColor: '',
-      isConfirmed: 'false',
+      isConfirmed: true,
       title: '카페 아자카파',
       x: 126.44,
       y: 32.44,
     },
   ],
+});
+
+export const chatMessages = atom({
+  key: 'chatMessages',
+  default: [],
 });
