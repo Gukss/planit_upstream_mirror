@@ -3,10 +3,12 @@ package com.project.planit.notification.service;
 import com.project.planit.notification.dto.CreateNotificationRequest;
 import com.project.planit.notification.dto.FindNotificationResponse;
 import com.project.planit.notification.dto.UpdateNotificationRequest;
-import java.util.HashMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface NotificationService {
-    HashMap<Long, FindNotificationResponse> findNotification(String memberAppId);
-    boolean createNotification(CreateNotificationRequest request);
-    boolean updateNotification(UpdateNotificationRequest request);
+    List<FindNotificationResponse> findNotification(String memberAppId, Long id);
+    void createNotification(List<CreateNotificationRequest> request);
+    void updateNotification(UpdateNotificationRequest request);
 }
