@@ -7,7 +7,8 @@ import { userMarkers } from '../../../../app/store';
 import ScheduleBox from './ScheduleBox';
 
 function Schedule() {
-  const items = useRecoilValue(userMarkers);
+  const itemsRaw = useRecoilValue(userMarkers);
+  const items = itemsRaw.filter(item => item.isConfirmed === true);
 
   return (
     <Bbar>
@@ -23,18 +24,10 @@ function Schedule() {
       <hr />
       <div className={classes.schedulebox_section}>
         <br />
-        {/* {boxTitles.map(boxTitle => {
-          return <PlaceBox boxTitle={boxTitle} />;
-        })} */}
-        {/* {items.map(item => {
-          if (item.category === 'AD5') {
-            return <PlaceBox boxTitle='숙소' item={item} />;
-          }
-        })} */}
-
-        <ScheduleBox boxDate='2023.01.11' items={items} />
+        <ScheduleBox boxDate='2023.날짜데이터넣어야' items={items} />
         <ScheduleBox boxDate='2023.01.12' items={items} />
         <ScheduleBox boxDate='2023.01.13' items={items} />
+        {/* 근데 ScheduleBox는 정해진 개수가 아니라서 반복문으로 해야 한다 */}
       </div>
     </Bbar>
   );

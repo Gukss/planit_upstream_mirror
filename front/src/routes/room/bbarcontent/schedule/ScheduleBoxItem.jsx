@@ -3,7 +3,7 @@ import classes from './ScheduleBoxItem.module.scss';
 
 function ScheduleBoxItem(props) {
   return (
-    <div className={classes.item_body}>
+    <div draggable className={classes.item_body}>
       <div className={classes.item_tag}></div>
       <div className={classes.item_title}>
         <h3>{props.item.title}</h3>

@@ -10,7 +10,10 @@ function Vote() {
     <Bbar>
       <div className={classes.vote_title}>
         <div className={classes.title_title}>투표</div>
-        <p>투표를 생성하여 원하는 대로 투표 진행해보세요.</p>
+        <p>
+          여행 일정을 짜는 중 의견이 정해지지 않을 땐 투표를 만들어
+          진행해보세요.
+        </p>
       </div>
       <div className={classes.vote_section}>
         {/* {boxTitles.map(boxTitle => {
