@@ -2,6 +2,7 @@
 
 FROM node:16.19.0 as builder
 # root 에 app 폴더를 생성
+RUN mkdir /app
 
 WORKDIR /app
 
