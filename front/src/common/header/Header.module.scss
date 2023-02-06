@@ -1,0 +1,78 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 4rem;
+  padding: 0 6rem;
+  background-color: white;
+
+  .logoBtn {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .logoText {
+      margin-left: 0.5rem;
+      font-size: 2rem;
+      font-style: 'bold';
+    }
+  }
+
+  .right_menu {
+    display: flex;
+    align-items: center;
+    button {
+      padding: 0 1rem;
+      border-radius: 1rem;
+      border-width: 0.1rem;
+      height: 2rem;
+      margin-left: 1rem;
+    }
+    .login {
+      background-color: #2b3f6b;
+      color: white;
+      border: 0;
+    }
+    .is_login {
+      display: flex;
+      align-items: center;
+      .nickname {
+        font-weight: bold;
+      }
+      .alarm {
+        i {
+          font-size: 2rem;
+          color: #2b3f6b;
+        }
+      }
+      .profile {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+        &:hover {
+          cursor: pointer;
+        }
+        i {
+          margin-left: 1rem;
+          font-size: 3rem;
+          color: #2b3f6b;
+        }
+      }
+    }
+
+    .room_create {
+      background-color: white;
+      border-color: #2b3f6b;
+      color: #2b3f6b;
+    }
+  }
+}

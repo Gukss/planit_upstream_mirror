@@ -1,0 +1,39 @@
+.room_manage {
+  padding-top: 11.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  width: 79.5rem;
+
+  .schedule_ing {
+    margin-bottom: 2rem;
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .schedulebox {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background-color: #e6e9ef;
+      padding: 0 1.5rem 2.5rem 1.5rem;
+      // justify-content: center;
+
+      border-radius: 1rem;
+      width: 100%;
+    }
+  }
+
+  .schedule_done {
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .schedulebox {
+      background-color: #e6e9ef;
+      padding: 2.5rem;
+      border-radius: 1rem;
+    }
+  }
+}
