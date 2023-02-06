@@ -35,7 +35,7 @@ public class ChattingServiceImpl implements ChattingService {
 
     @Override
     @Transactional
-    public void createChattingMessage(CreateChattingRequest request,Long memberId) {
+    public ChattingMessage createChattingMessage(CreateChattingRequest request,Long memberId) {
         Room room=roomRepository.findById(request.getRoomId())
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
@@ -44,6 +44,6 @@ public class ChattingServiceImpl implements ChattingService {
 
         ChattingMessage chattingMessage=ChattingMessage.create(request,room,member);
 
-        chattingRepository.save(chattingMessage);
+        return chattingRepository.save(chattingMessage);
     }
 }

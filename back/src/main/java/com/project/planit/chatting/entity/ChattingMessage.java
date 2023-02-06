@@ -1,6 +1,7 @@
 package com.project.planit.chatting.entity;
 
 import com.project.planit.chatting.dto.CreateChattingRequest;
+import com.project.planit.chatting.dto.FindChattingMessageResponse;
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.entity.Room;
 
@@ -61,5 +62,13 @@ public class ChattingMessage extends BaseEntity {
                 .build();
 
         return chattingMessage;
+    }
+
+    public FindChattingMessageResponse createFindChattingMessageResponse(){
+        return FindChattingMessageResponse.builder()
+                .message(this.message)
+                .constructor(this.member.getAppId())
+                .createdAt(this.getCreated_at())
+                .build();
     }
 }

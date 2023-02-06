@@ -3,7 +3,7 @@ package com.project.planit.voteItem.entity;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.vote.entity.Vote;
-import javax.validation.constraints.NotBlank;
+import com.project.planit.voteItem.dto.FindVoteItemResponse;
 
 import lombok.*;
 
@@ -55,5 +55,21 @@ public class VoteItem extends BaseEntity{
             newName = "untitle";
         }
         this.voteItemName = newName;
+    }
+
+    public static VoteItem create(String voteItemName, BaseRequest baseRequest, Vote vote){
+        return VoteItem.builder()
+            .voteItemName(voteItemName)
+            .baseRequest(baseRequest)
+            .vote(vote)
+            .build();
+    }
+
+    public FindVoteItemResponse createFindVoteItemResponse(){
+        return FindVoteItemResponse.builder()
+            .voteItemId(this.id)
+            .voteId(this.vote.getId())
+            .voteItemName(this.voteItemName)
+            .build();
     }
 }

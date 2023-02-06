@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ChattingService {
     List<ChattingMessage> findChattingMessage(Long memberId,Long roomId);
-    void createChattingMessage(CreateChattingRequest request,Long memberId);
+    ChattingMessage createChattingMessage(CreateChattingRequest request,Long memberId);
 }

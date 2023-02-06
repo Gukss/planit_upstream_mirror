@@ -1,10 +1,6 @@
 package com.project.planit.voteItem.dto;
 
-import com.project.planit.vote.entity.Vote;
-import com.project.planit.voteItem.entity.VoteItem;
 import lombok.*;
-
-import java.util.List;
 
 /**
  * packageName    : com.project.planit.voteItem.dto
@@ -21,12 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class FindVoteItemListResponse {
-    List<VoteItem> foundVoteItems;
-
-    public static FindVoteItemListResponse create(List<VoteItem> foundVoteItems){
-        return FindVoteItemListResponse.builder()
-                .foundVoteItems(foundVoteItems)
-                .build();
-    }
+public class FindVoteItemResponse {
+    private Long voteId;
+    private Long voteItemId;
+    private String voteItemName;
 }

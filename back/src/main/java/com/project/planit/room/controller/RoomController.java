@@ -1,9 +1,6 @@
 package com.project.planit.room.controller;
 
-import com.project.planit.room.dto.CreateRoomRequest;
-import com.project.planit.room.dto.CreateRoomResponse;
-import com.project.planit.room.dto.UpdateRoomRequest;
-import com.project.planit.room.dto.UpdateRoomResponse;
+import com.project.planit.room.dto.*;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.service.RoomService;
 import com.project.planit.vote.dto.CreateVoteResponse;
@@ -46,15 +43,8 @@ public class RoomController {
     String requestRoomName = request.getRoomName();
     CreateRoomResponse createRoomResponse = CreateRoomResponse.create(newRoom.getId());
 
-    ResponseEntity res = null;
-    if(newRoomName.equals(requestRoomName)){ //정상
-      URI uri = URI.create(""+newRoom.getId());
-      //생성한 방 번호를 String으로 URI에 담아 반환
-      res = ResponseEntity.created(uri).body(createRoomResponse);
-    }else{ //오류
-      res = ResponseEntity.badRequest().body(createRoomResponse);
-    }
-
+    URI uri = URI.create(""+newRoom.getId());
+    ResponseEntity res = ResponseEntity.created(uri).body(createRoomResponse);
     return res;
   }
 
@@ -64,22 +54,15 @@ public class RoomController {
     UpdateRoomResponse updateRoomResponse = UpdateRoomResponse.create(updatedRoom.getId(),
         updatedRoom.getRoomName(), request.getStartDate(), request.getEndDate());
 
-    ResponseEntity res = null;
-    Long updatedRoomId = updatedRoom.getId();
-    Long reqestRoomId = request.getRoomId();
-
-    if(updatedRoomId.equals(reqestRoomId)){ //성공
-      res = ResponseEntity.ok().body(updateRoomResponse);
-    }else{ //오류
-      res = ResponseEntity.badRequest().body(updateRoomResponse);
-    }
+    ResponseEntity res = ResponseEntity.ok().body(updateRoomResponse);
     return res;
   }
 
   @GetMapping(path = "{roomId}")
-  public ResponseEntity<?> readRoom(@PathVariable Long roomId){
-    Room room = roomService.findById(roomId);
+  public ResponseEntity<ReadRoomResponse> readRoom(@PathVariable Long roomId){
+    Room foundRoom = roomService.findById(roomId);
     //todo: 프론트랑 반환값 상의해서 넣어주기
-    return ResponseEntity.ok(HttpStatus.OK);
+    ReadRoomResponse readRoomResponse = ReadRoomResponse.create(foundRoom.getId(), foundRoom.getRoomName(), foundRoom.getStartDate(), foundRoom.getEndDate());
+    return ResponseEntity.ok().body(readRoomResponse);
   }
 }

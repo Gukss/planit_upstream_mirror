@@ -27,4 +27,7 @@ public class CreateVoteRequest extends BaseEntity{
 
   private String title;
   private Long roomId;
+
+  @Embedded
+  private BaseRequest baseRequest;
 }

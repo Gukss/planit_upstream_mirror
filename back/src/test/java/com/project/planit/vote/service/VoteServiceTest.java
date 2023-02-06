@@ -86,7 +86,7 @@ class VoteServiceTest {
 
         //when
         //방에 있는 투표를 모두 조회
-        List<Vote> foundVotes = voteService.findByRoom(newRoom);
+        List<Vote> foundVotes = voteService.findAllByRoom(newRoom);
 
         //then
         em.flush();
