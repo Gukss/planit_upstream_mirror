@@ -99,6 +99,7 @@ function Map() {
           // 문제점 : 이제 이미 있는 거라면 추가 안시켜야함.... 어캐함?
           // 있 없 = t/ 없 있 =t / 없 없=t / 있 있 = f
           const id = Math.random();
+          // const id = `marker_${idNum}`;
           // 현재 클릭한 값 찾기.
           addSetMarker({
             id,

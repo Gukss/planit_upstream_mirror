@@ -5,6 +5,7 @@ import Search from './bbarcontent/search/Search';
 import Tmp from '../Tmp';
 import Place from './bbarcontent/place/Place';
 import Schedule from './bbarcontent/schedule/Schedule';
+import Vote from './bbarcontent/vote/Vote';
 
 function Room() {
   return (
@@ -15,7 +16,7 @@ function Room() {
           <Route path='search' element={<Search />} />
           <Route path='place' element={<Place />} />
           <Route path='schedule' element={<Schedule />} />
-          <Route path='vote' element={<Tmp />} />
+          <Route path='vote' element={<Vote />} />
           <Route path='chat' element={<Tmp />} />
         </Route>
       </Routes>
