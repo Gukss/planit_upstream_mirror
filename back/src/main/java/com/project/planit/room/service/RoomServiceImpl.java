@@ -6,6 +6,9 @@ import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.util.BaseRequest;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +47,11 @@ public class RoomServiceImpl implements RoomService{
             .updater(updater)
             .constructor(constructor)
             .build();
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        String stringStartDate = request.getStartDate();
+//        String stringEndDate = request.getEndDate();
+//        LocalDate startDate = LocalDate.parse(stringStartDate, dateTimeFormatter);
+//        LocalDate endDate = LocalDate.parse(stringEndDate, dateTimeFormatter);
 
         Room newRoom = Room.create(request.getRoomName(), request.getStartDate(), request.getEndDate(), baseRequest);
         return roomRepository.save(newRoom);
