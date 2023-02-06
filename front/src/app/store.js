@@ -23,6 +23,16 @@ export const searchedPlace = atom({
   // default: { x: 33.450701, y: 126.570667 },
 });
 
+export const currentMarker = atom({
+  key: 'currentMarker',
+  default: {},
+});
+
+// export const userMarkers = atom({
+//   key: 'userMarkers',
+//   default: [],
+// });
+
 // 커스텀할 유저마커
 export const userMarkers = atom({
   key: 'userMarkers',

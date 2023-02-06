@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import { searchedPlace, userMarkers } from '../../../../app/store';
+
 import classes from './ResultListItem.module.scss';
 
 const items = [1, 2, 3];
