@@ -6,6 +6,7 @@ import Tmp from '../Tmp';
 import Place from './bbarcontent/place/Place';
 import Schedule from './bbarcontent/schedule/Schedule';
 import Vote from './bbarcontent/vote/Vote';
+import Chat from './bbarcontent/chat/Chat';
 
 function Room() {
   return (
@@ -17,7 +18,7 @@ function Room() {
           <Route path='place' element={<Place />} />
           <Route path='schedule' element={<Schedule />} />
           <Route path='vote' element={<Vote />} />
-          <Route path='chat' element={<Tmp />} />
+          <Route path='chat' element={<Chat />} />
         </Route>
       </Routes>
       <Outlet />
