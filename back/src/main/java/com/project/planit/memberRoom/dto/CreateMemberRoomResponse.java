@@ -4,7 +4,7 @@ import lombok.*;
 
 /**
  * packageName    : com.project.planit.memberRoom.dto
- * fileName       : FindMemberRoomResponse
+ * fileName       : CreateMemberRoomResponse
  * author         : dongk
  * date           : 2023-02-04
  * description    :
@@ -17,9 +17,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
-public class FindMemberRoomResponse {
-//    private String colorCode;
-    private Boolean participation;
-    private Long memberId;
+public class CreateMemberRoomResponse {
     private Long roomId;
 }

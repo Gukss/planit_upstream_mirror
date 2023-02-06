@@ -18,9 +18,17 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-#      ddl-auto: create
+      #      ddl-auto: create
       ddl-auto: none
 
+  #socket test
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+  freemarker:
+    cache: false
 
 logging:
   level:

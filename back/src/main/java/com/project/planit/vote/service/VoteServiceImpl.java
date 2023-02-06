@@ -54,18 +54,16 @@ public class VoteServiceImpl implements VoteService{
         .constructor(constructor)
         .build();
 
-    Vote vote = Vote.builder()
-            .room(currentRoom)
-            .title(request.getTitle())
-            .baseRequest(baseRequest)
-            .build();
+    String title = request.getTitle();
+
+    Vote vote = Vote.create(title, currentRoom, baseRequest);
     return voteRepository.save(vote);
   }
 
   //방에 해당하는 투표 조회
   @Override
   public List<Vote> findAllByRoom(Room room) {
-    return voteRepository.findAllByRoom(room).orElseThrow(()->new NotFoundVoteException());
+    return voteRepository.findAllByRoom(room).orElseThrow(()->new NotFoundVoteException(NotFoundExceptionMessage.ROOM_NOT_FOUND));
   }
 
   //해당하는 투표 제목 갱신
@@ -73,7 +71,7 @@ public class VoteServiceImpl implements VoteService{
   @Transactional
   public Vote updateVote(UpdateVoteRequest request) {
     Vote targetVote = voteRepository.findById(request.getVoteId()).orElseThrow(
-        ()->new NotFoundVoteException());
+        ()->new NotFoundVoteException(NotFoundExceptionMessage.VOTE_NOT_FOUND));
     targetVote.changeTitle(request.getNewTitle()); //jpa는 영속성 컨텍스트의 값을 바꾸기만 해도 update 쿼리 날려준다.
     return targetVote;
   }
@@ -81,7 +79,7 @@ public class VoteServiceImpl implements VoteService{
 
   @Override
   public Vote findById(Long id) {
-    return voteRepository.findById(id).orElseThrow(()->new NotFoundVoteException());
+    return voteRepository.findById(id).orElseThrow(()->new NotFoundVoteException(NotFoundExceptionMessage.VOTE_NOT_FOUND));
   }
 
   //방에 해당하는 투표 갱신

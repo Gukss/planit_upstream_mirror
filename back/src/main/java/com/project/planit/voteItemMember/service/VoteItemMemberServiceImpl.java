@@ -17,13 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * packageName    : com.project.planit.voteItemMember.service
  * fileName       : CreateVoteItemMemberRequestImpl
- * author         : dongk
+ * author         : Gukss
  * date           : 2023-01-30
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023-01-30        dongk       최초 생성
+ * 2023-01-30        Gukss       최초 생성
+ * 2023-01-30        Gukss       예외처리, 반환값 수정
+ *
  */
 @Service
 @Transactional(readOnly=true)
@@ -36,10 +38,16 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
 
     @Override
     @Transactional
-    //todo: memberId는 토큰에서 받아온다. 변경하기
     public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request) {
+        //todo: memberId는 토큰에서 받아온다. 변경하기
         Long memberId = request.getMemberId();
-        BaseRequest baseRequest = request.getBaseRequest();
+        //todo: BaseRequest 내용도 토큰에서 appId 받아오기
+        String constructor = "Gukss";
+        String updater = "Gukss";
+        BaseRequest baseRequest = BaseRequest.builder()
+            .constructor(constructor)
+            .updater(updater)
+            .build();
         Long voteItemId = request.getVoteItemId();
 
         Member member = memberRepository.findById(memberId)

@@ -1,6 +1,7 @@
 package com.project.planit.memberRoom.service;
 
 import com.project.planit.common.exception.NotFoundExceptionMessage;
+import com.project.planit.common.exception.NotFoundMemberRoomException;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.memberRoom.dto.CreateMemberRoomRequest;
@@ -40,31 +41,30 @@ public class MemberRoomServiceImpl implements MemberRoomService{
         Room room=roomRepository.findById(id)
             .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
-        List<MemberRoom> list=memberRoomRepository.findAllByMemberAndRoom(member,room);
-
-
-        return list;
+        return memberRoomRepository.findAllByMemberAndRoom(member,room).orElseThrow(()->new NotFoundMemberRoomException());
     }
 
     @Override
     @Transactional
-    public void updateMemberRoom(UpdateMemberRoomRequest request) {
+    public MemberRoom updateMemberRoom(UpdateMemberRoomRequest request) {
         MemberRoom memberRoom=memberRoomRepository.findById(request.getRoomId())
             .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         memberRoom.update(memberRoom.getMember().getAppId(),request);
+        return memberRoom;
     }
 
     @Override
     @Transactional
-    public void createMemberRoom(CreateMemberRoomRequest request) {
+    public MemberRoom createMemberRoom(CreateMemberRoomRequest request) {
         Room room=roomRepository.findById(request.getRoomId())
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         // @TODO : 토큰에 어떤 값을 넣을지에 따라 바뀜
-        Member member=memberRepository.findById(1L)
+        Long memberId = 1L;
+        Member member=memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
-        memberRoomRepository.save(MemberRoom.create(request,room,member));
-
+        MemberRoom savedMemberRoom = memberRoomRepository.save(MemberRoom.create(request, room, member));
+        return savedMemberRoom;
     }
 }

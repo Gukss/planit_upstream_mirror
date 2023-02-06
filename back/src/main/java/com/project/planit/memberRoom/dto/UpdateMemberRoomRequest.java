@@ -22,7 +22,7 @@ public class UpdateMemberRoomRequest {
   @NotNull
   private Long roomId;
   @NotNull
-  private Boolean inAndOut;
+  private Boolean participation;
   @NotNull
   private BaseRequest baseRequest;
 }

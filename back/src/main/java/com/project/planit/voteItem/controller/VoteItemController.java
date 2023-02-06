@@ -1,11 +1,12 @@
 package com.project.planit.voteItem.controller;
 
 import com.project.planit.vote.entity.Vote;
-import com.project.planit.vote.service.VoteService;
 import com.project.planit.vote.service.VoteServiceImpl;
 import com.project.planit.voteItem.dto.*;
 import com.project.planit.voteItem.entity.VoteItem;
 import com.project.planit.voteItem.service.VoteItemServiceImpl;
+import java.net.URI;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -33,17 +34,23 @@ public class VoteItemController {
     VoteItem newVoteItem = voteItemService.createVoteItem(request);
     CreateVoteItemResponse createVoteItemResponse = CreateVoteItemResponse.create(
         newVoteItem.getId(), newVoteItem.getVoteItemName());
-    return ResponseEntity.ok()
+    URI uri = URI.create(""+newVoteItem.getId());
+    return ResponseEntity.created(uri)
         .body(createVoteItemResponse);
   }
 
   @GetMapping(path = "{voteId}")
-  public ResponseEntity<FindVoteItemListResponse> findVoteItemByVote(@PathVariable Long voteId){
+  public ResponseEntity<List<FindVoteItemResponse>> findVoteItemByVote(@PathVariable Long voteId){
     Vote foundVote = voteService.findById(voteId);
     List<VoteItem> foundVoteItems = voteItemService.findAllByVote(foundVote);
 
-    return ResponseEntity.ok()
-            .body(FindVoteItemListResponse.create(foundVoteItems));
+    List<FindVoteItemResponse> resList = new ArrayList<>();
+
+    for(VoteItem voteItem: foundVoteItems){
+      resList.add(voteItem.createFindVoteItemResponse());
+    }
+
+    return ResponseEntity.ok().body(resList);
   }
 
   @PatchMapping
