@@ -1,0 +1,49 @@
+.home1 {
+  background-color: #e9eef9;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.text_section {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  margin: 1rem;
+  width: 25%;
+  height: 50%;
+
+  button {
+    color: white;
+    background-color: #2b3f6b;
+    border-radius: 1rem;
+    border: 0;
+    width: 25rem;
+    height: 4.5rem;
+    font-size: 2rem;
+    margin-top: 7rem;
+  }
+  .title_wrap {
+    .title {
+      font-size: 3rem;
+      margin: 1rem 0rem;
+      &_logo {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #2b3f6b;
+      }
+    }
+  }
+}
+
+.gif_section {
+  margin: 1rem;
+  width: 48rem;
+  height: 50%;
+  img {
+    width: 48rem;
+    height: 30rem;
+  }
+}

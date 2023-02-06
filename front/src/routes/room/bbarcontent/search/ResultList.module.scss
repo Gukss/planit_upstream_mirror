@@ -1,0 +1,35 @@
+.result {
+  // background-color: #e6e9ef;
+  background-color: crimson;
+  border-radius: 8px;
+  // padding: 16px 16px 0px 16px;
+  overflow: auto;
+  // height: 30rem;
+  height: 81vh;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem; /* 스크롤바의 너비 */
+    background-color: #e3e3e3;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+  }
+}
+
+.result_first {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    margin-top: 90%;
+    height: 7.5rem;
+    width: 7.5rem;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 1rem;
+    color: rgb(101, 100, 100);
+    font-weight: bold;
+  }
+}
