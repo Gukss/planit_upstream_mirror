@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                    sh "sed -i 's/\${REACT_APP_KAKAO_API_KEY}/${REACT_APP_KAKAO_API_KEY}' '${WORKSPACE}/front/public/index.html'"
+                    sh "sed -i 's/\${REACT_APP_KAKAO_API_KEY}/${REACT_APP_KAKAO_API_KEY}/' '${WORKSPACE}/front/public/index.html'"
 
                     sh "docker build -t ${FRONT_NAME} ./front/."
                 }
