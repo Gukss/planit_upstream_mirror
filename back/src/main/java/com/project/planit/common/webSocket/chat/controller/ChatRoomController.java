@@ -43,8 +43,8 @@ public class ChatRoomController {
     // 채팅방 생성
     @PostMapping("/chatroom")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam Long roomId, String roomName) {
-        return chatRoomRepository.createChatRoom(roomId, roomName);
+    public ChatRoom createRoom(@RequestParam Long roomId) {
+        return chatRoomRepository.createChatRoom(roomId);
     }
     // 채팅방 입장 화면
 //    @GetMapping("/room/enter/{roomId}")

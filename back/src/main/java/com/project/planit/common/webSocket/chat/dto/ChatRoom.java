@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 /**
  * packageName    : com.project.planit.common.webSocket.chat.dto
  * fileName       : ChatRoom
@@ -23,14 +20,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ChatRoom implements Serializable {
-    private static final long serialVersionUID = 6494678977089006639L;
-
+public class ChatRoom {
     private Long roomId;
-    private String name;
-    public static ChatRoom create(Long roomId, String name){
+
+    public static ChatRoom create(Long roomId){
         return ChatRoom.builder()
-                .name(name)
                 .roomId(roomId)
                 .build();
     }
