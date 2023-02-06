@@ -1,5 +1,6 @@
 package com.project.planit.member.repository;
 
+import com.project.planit.member.dto.ReadMemberResponse;
 import com.project.planit.member.entity.Member;
 import com.project.planit.notification.entity.Notification;
 import java.util.List;
@@ -17,6 +18,6 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
   Optional<Member> findByAppId(String memberAppId);
   Optional<Member> findByEmail(String memberEmail);
   Optional<Member> findByAppIdAndEmail(String memberAppId,String memberEmail);
-  List<Member> findAllByAppId(String memberAppId);
+  Optional<List<Member>> findAllByAppId(String memberAppId);
 
 }

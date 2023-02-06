@@ -21,6 +21,7 @@ spring:
 #      ddl-auto: create
       ddl-auto: none
 
+
 logging:
   level:
     org:

@@ -14,11 +14,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class UpdateNotificationRequest {
     @NotNull
-    private boolean readOrNot;
+    private Boolean read;
 
     @NotNull
     private Long notificationId;
 
-    @NotNull
-    private BaseRequest baseRequest;
 }

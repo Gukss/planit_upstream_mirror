@@ -29,6 +29,4 @@ public class UpdateMemberRequest {
   @NotNull
   private String memberEmail;
 
-  @NotNull
-  private BaseRequest baseRequest;
 }

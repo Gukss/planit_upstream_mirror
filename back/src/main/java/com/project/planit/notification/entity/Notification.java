@@ -2,6 +2,7 @@ package com.project.planit.notification.entity;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.notification.dto.UpdateNotificationRequest;
+import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import lombok.*;
@@ -47,23 +48,21 @@ public class Notification extends BaseEntity {
     @JoinColumn(name = "send_member_id",referencedColumnName = "member_id")
     private Member sendMemberId;
 
-
     // sendMemberId를 토큰에서 받아와서 생성
-    public static Notification create(boolean readOrNot,Member recevierMember,Member sendMemberId){
+    public static Notification create(boolean read,Member receiverMember,Member sendMemberId){
         Notification notification=Notification.builder()
-            .readOrNot(readOrNot)
-            .receivedMemberId(recevierMember)
+            .readOrNot(read)
+            .receivedMemberId(receiverMember)
             .sendMemberId(sendMemberId) // 나중에 sendMember로 변경
             .baseRequest(BaseRequest.builder()
-                .constructor(recevierMember.getAppId())
-                .updater(recevierMember.getAppId())
+                .constructor(receiverMember.getAppId())
+                .updater(receiverMember.getAppId())
                 .build())
             .build();
         return notification;
     }
 
     public void update(UpdateNotificationRequest request){
-        this.readOrNot=request.isReadOrNot();
-
+        this.readOrNot=request.getRead();
     }
 }
