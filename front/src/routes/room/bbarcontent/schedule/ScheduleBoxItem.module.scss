@@ -1,12 +1,12 @@
 .item_body {
   display: flex;
-  width: 9.5rem;
-  height: 2.5rem;
+  width: auto;
+  height: 3.5rem;
   margin-bottom: 1rem;
 
   .item_tag {
-    width: 2rem;
-    background-color: crimson;
+    width: 4rem;
+    background-color: crimson; // dayColor에 따라 달라져야 함
     border-radius: 0.5rem 0rem 0rem 0.5rem;
   }
 
@@ -17,6 +17,11 @@
     background-color: white;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
     width: 100%;
+    h3 {
+      font-size: 1rem;
+      font-weight: lighter;
+      text-align: center;
+    }
   }
 }
 
