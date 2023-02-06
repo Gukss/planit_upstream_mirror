@@ -22,3 +22,28 @@ export const searchedPlace = atom({
   default: {},
   // default: { x: 33.450701, y: 126.570667 },
 });
+
+export const currentMarker = atom({
+  key: 'currentMarker',
+  default: {},
+});
+
+export const userMarkers = atom({
+  key: 'userMarkers',
+  default: [],
+});
+
+// export const userMarkers = atom({
+//   key: 'userMarkers',
+//   default: [
+//     {
+//       category: 'AD5',
+//       userColor: 'grey',
+//       dayColor: '',
+//       isConfirmed: 'false',
+//       title: '성심당',
+//       x: 126.44,
+//       y: 32.44,
+//     },
+//   ],
+// });
