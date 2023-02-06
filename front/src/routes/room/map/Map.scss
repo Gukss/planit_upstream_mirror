@@ -3,8 +3,25 @@
   // left: 29.5rem;
   height: 100vh;
   width: 100%;
+  position: relative;
 }
 
-.marker {
+.overlay {
+  position: relative;
   background-color: white;
+  width: 20rem;
+  height: 13rem;
+  border-radius: 1rem;
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    margin: 0rem 1.5rem 0rem 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  &__close {
+    border: none;
+    background-color: white;
+    font-size: 1.75rem;
+  }
 }
