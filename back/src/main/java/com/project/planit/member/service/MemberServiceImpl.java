@@ -1,11 +1,14 @@
 package com.project.planit.member.service;
 
 import com.project.planit.common.exception.NotFoundExceptionMessage;
+import com.project.planit.common.exception.NotFoundMemberException;
 import com.project.planit.member.dto.CreateMemberRequest;
+import com.project.planit.member.dto.ReadMemberResponse;
 import com.project.planit.member.dto.UpdateMemberRequest;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
   @Transactional
   @Override
   public Long createMember(CreateMemberRequest request) {
+    // @TODO : 토큰으로 던져줘야함
     Member member=Member.create(request);
     Member newMember=memberRepository.save(member);
     return newMember.getId();
@@ -34,49 +38,68 @@ public class MemberServiceImpl implements MemberService {
 
   @Transactional
   @Override
-  public Member updateMember(Long id, UpdateMemberRequest request) {
+  public void updateMember(Long id, UpdateMemberRequest request) {
     Member member= memberRepository.findById(id)
-            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+        .orElseThrow(() -> new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
 
     member.update(request);
-    return member;
   }
 
   @Override
   public boolean existMemberId(String memberAppId) {
     if(memberRepository.findByAppId(memberAppId).isPresent()){
-      return true;
-      // 멤버 아이디가 중복이면 true반환
+      // 멤버 아이디가 중복이면 false반환
+      return false;
     }
-    return false;
+    return true;
   }
 
   @Override
-  public Member readMember(Long memberAppId) {
+  public ReadMemberResponse readMember(Long memberAppId) {
     Member member=memberRepository.findById(memberAppId)
-        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
-    return member;
+        .orElseThrow(() -> new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
+
+    ReadMemberResponse response=ReadMemberResponse.builder()
+        .appId(member.getAppId())
+        .name(member.getName())
+        .email(member.getEmail())
+        .build();
+
+    return response;
   }
 
   @Override
-  public List<Member> readMemberListByMemberId(String memberAppId) {
-    List<Member> memberList=memberRepository.findAllByAppId(memberAppId);
-    return memberList;
+  public List<ReadMemberResponse> readMemberListByMemberId(String memberAppId) {
+    List<Member> memberList=memberRepository.findAllByAppId(memberAppId)
+        .orElseThrow(() -> new NotFoundMemberException(NotFoundExceptionMessage.USER_LIST_NOT_FOUND));
+
+    List<ReadMemberResponse> response=new ArrayList<>();
+
+    for(Member member:memberList){
+      ReadMemberResponse readMemberResponse=ReadMemberResponse.builder()
+          .appId(member.getAppId())
+          .name(member.getName())
+          .email(member.getEmail())
+          .build();
+
+      response.add(readMemberResponse);
+    }
+
+    return response;
   }
 
   @Override
   public String findMemberIdByMemberEmail(String email) {
     Member member=memberRepository.findByEmail(email)
-        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+        .orElseThrow(()->new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
     return member.getAppId();
   }
 
   @Override
   public String findMemberPwdByMemberIdAndMemberEmail(String memberAppId,String email) {
     Member member= memberRepository.findByAppIdAndEmail(memberAppId,email)
-        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+        .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_EMAIL_FIND_NOT_FOUND));
     return member.getAppPwd();
   }
-
 
 }

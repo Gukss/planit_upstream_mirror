@@ -39,6 +39,4 @@ public class CreateMemberRequest {
   @NotNull
   private Role role;
 
-  @NotNull
-  private BaseRequest baseRequest;
 }
