@@ -39,6 +39,9 @@ public class RoomServiceImpl implements RoomService{
     @Override
     @Transactional
     public Room createRoom(CreateRoomRequest request) {
+        System.out.println(request.getStartDate()+" "+request.getStartDate().getClass().getName());
+        System.out.println(request.getEndDate()+" "+request.getEndDate().getClass().getName());
+        System.out.println("여기!!");
         //todo: tocken에서 memberAppId 가져다 사용하기
         String updater = "Gukss";
         String constructor = "Gukss";
