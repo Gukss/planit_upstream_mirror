@@ -6,8 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 /**
  * packageName    : com.project.planit.room.dto fileName       : ReadRoomResponse author         :
  * SSAFY date           : 2023-01-30 description    :
@@ -17,6 +20,7 @@ import java.time.LocalDate;
  */
 @Data
 @AllArgsConstructor
+<<<<<<< HEAD
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class ReadRoomResponse {
@@ -33,4 +37,10 @@ public class ReadRoomResponse {
                 .endDate(endDate)
                 .build();
     }
+=======
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+public class ReadRoomResponse {
+
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }

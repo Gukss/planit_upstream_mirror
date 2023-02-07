@@ -1,6 +1,7 @@
 package com.project.planit.storage.controller;
 
 
+<<<<<<< HEAD
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.dto.UpdateRoomResponse;
 import com.project.planit.room.entity.Room;
@@ -10,6 +11,10 @@ import com.project.planit.storage.dto.UpdateStorageRequest;
 import com.project.planit.storage.dto.UpdateStorageResponse;
 import com.project.planit.storage.entity.Category;
 import com.project.planit.storage.entity.Storage;
+=======
+import com.project.planit.storage.dto.CreateStorageRequest;
+import com.project.planit.storage.dto.UpdateStorageRequest;
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import com.project.planit.storage.service.StorageServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +37,7 @@ public class StorageController {
     }
 
     @PostMapping
+<<<<<<< HEAD
     public ResponseEntity<CreateStorageResponse> createStorage(@RequestBody CreateStorageRequest request){
         // @TODO : 토큰 아이디로 변환
         Long reqestMemberId=1L;
@@ -61,5 +67,20 @@ public class StorageController {
         UpdateStorageResponse updateStorageResponse = UpdateStorageResponse.create(member.getId(), updatedStorage.getId(), updatedStorage.getStorageName(), updatedStorage.getConfirmed(), updatedStorage.getLat(), updatedStorage.getLng(), updatedStorage.getDayOrder(), updatedStorage.getCategoryName(), room.getId());
         ResponseEntity res = ResponseEntity.ok().body(updateStorageResponse);
         return res;
+=======
+    public ResponseEntity<?> createStorage(@RequestBody CreateStorageRequest request){
+        // @TODO : 토큰 아이디로 변환
+        Long id=1L;
+        storageService.createStorage(request,id);
+        return ResponseEntity.ok("ok");
+    }
+
+    @PatchMapping
+    public ResponseEntity<?> updateStorage(@RequestBody UpdateStorageRequest request){
+        // @TODO : 토큰 아이디로 변환
+        Long id=1L;
+        storageService.updateStorage(request,id);
+        return ResponseEntity.ok("");
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
     }
 }

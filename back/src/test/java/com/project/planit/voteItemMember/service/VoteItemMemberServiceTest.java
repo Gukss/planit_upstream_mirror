@@ -1,9 +1,20 @@
 package com.project.planit.voteItemMember.service;
 
+<<<<<<< HEAD
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.member.service.MemberService;
 import com.project.planit.util.BaseRequest;
+=======
+import com.project.planit.common.exception.NotFoundException;
+import com.project.planit.member.dto.CreateMemberRequest;
+import com.project.planit.member.entity.Member;
+import com.project.planit.member.entity.Role;
+import com.project.planit.member.repository.MemberRepository;
+import com.project.planit.member.service.MemberService;
+import com.project.planit.util.BaseRequest;
+import com.project.planit.voteItem.dto.CreateVoteItemRequest;
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import com.project.planit.voteItem.entity.VoteItem;
 import com.project.planit.voteItem.repository.VoteItemRepository;
 import com.project.planit.voteItem.service.VoteItemService;
@@ -11,6 +22,10 @@ import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
 import com.project.planit.voteItemMember.repository.VoteItemMemberRepository;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Optional;
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

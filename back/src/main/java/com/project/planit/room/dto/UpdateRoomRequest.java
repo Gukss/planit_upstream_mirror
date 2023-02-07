@@ -29,6 +29,7 @@ public class UpdateRoomRequest {
 
     @Embedded
     private BaseRequest baseRequest;
+<<<<<<< HEAD
 
     public static UpdateRoomRequest create(Long roomId, LocalDate startDate, LocalDate endDate, String roomName){
         return UpdateRoomRequest.builder()
@@ -38,4 +39,6 @@ public class UpdateRoomRequest {
                 .roomName(roomName)
                 .build();
     }
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }

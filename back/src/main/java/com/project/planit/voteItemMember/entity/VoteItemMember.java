@@ -4,7 +4,10 @@ import com.project.planit.member.entity.Member;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.voteItem.entity.VoteItem;
+<<<<<<< HEAD
 import com.project.planit.voteItemMember.dto.FindVoteItemMemberResponse;
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import lombok.*;
 
 import javax.persistence.*;
@@ -55,6 +58,7 @@ public class VoteItemMember extends BaseEntity {
                 .build();
     }
 
+<<<<<<< HEAD
     public FindVoteItemMemberResponse createFindVoteItemMemberResponse(){
         return FindVoteItemMemberResponse.builder()
             .voteItemId(this.voteItem.getId())
@@ -62,4 +66,6 @@ public class VoteItemMember extends BaseEntity {
             .build();
     }
 
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }

@@ -104,6 +104,10 @@ class VoteItemServiceTest {
             .build();
         //when
         VoteItem updatedVoteItem = voteItemService.updateVoteItem(updateRequest);
+<<<<<<< HEAD
+=======
+        System.out.println(updatedVoteItem);
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
         //then
         em.flush();
         assertEquals(updatedVoteItem.getVoteItemName(), newVoteItem.getVoteItemName());
@@ -130,7 +134,11 @@ class VoteItemServiceTest {
     private Vote makeVote(){
         CreateVoteRequest request = CreateVoteRequest.builder()
             .roomId(1L)
+<<<<<<< HEAD
 //                .baseRequest(makeBaseRequest())
+=======
+                .baseRequest(makeBaseRequest())
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
                 .build();
         //when
         return voteService.createVote(request);

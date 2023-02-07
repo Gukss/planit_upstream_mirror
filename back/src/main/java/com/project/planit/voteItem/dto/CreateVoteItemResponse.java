@@ -19,8 +19,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class CreateVoteItemResponse {
+<<<<<<< HEAD
   private Long voteItemId;
   private String voteItemName;
+=======
+  Long voteItemId;
+  String voteItemName;
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 
   public static CreateVoteItemResponse create(Long voteItemId, String voteItemName){
     return CreateVoteItemResponse.builder()

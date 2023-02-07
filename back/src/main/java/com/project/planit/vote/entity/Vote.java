@@ -2,7 +2,10 @@ package com.project.planit.vote.entity;
 
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
+<<<<<<< HEAD
 import com.project.planit.vote.dto.FindVoteResponse;
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import javax.validation.constraints.NotNull;
 
 import com.project.planit.util.BaseRequest;
@@ -25,7 +28,10 @@ import lombok.NoArgsConstructor;
  * DATE              AUTHOR       NOTE
  * -----------------------------------------------------------
  * 2023-01-23        dongk       최초생성
+<<<<<<< HEAD
  * 2023-02-01        Gukss       REST API 문서에 맞게 수정, List로 반환위한 dto관련 설정
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
  */
 @Entity
 @Getter
@@ -51,6 +57,7 @@ public class Vote extends BaseEntity{
     @NotNull
     private BaseRequest baseRequest;
 
+<<<<<<< HEAD
     //==== 생성 메서드 ====
     public static Vote create(String title, Room room, BaseRequest baseRequest){
         return Vote.builder()
@@ -60,6 +67,8 @@ public class Vote extends BaseEntity{
             .build();
     }
 
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
     /**
      * Change title.
      * methodName : changeTitle
@@ -75,6 +84,7 @@ public class Vote extends BaseEntity{
         }
         this.title = newTitle;
     }
+<<<<<<< HEAD
 
     public FindVoteResponse createFindVoteResponse(){
         return FindVoteResponse.builder()
@@ -82,4 +92,6 @@ public class Vote extends BaseEntity{
             .title(this.title)
             .build();
     }
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }

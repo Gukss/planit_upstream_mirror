@@ -1,5 +1,6 @@
 package com.project.planit.chatting.controller;
 
+<<<<<<< HEAD
 import com.project.planit.chatting.dto.CreateChattingMessageRequest;
 import com.project.planit.chatting.dto.CreateChattingRequest;
 import com.project.planit.chatting.dto.FindChattingMessageResponse;
@@ -15,11 +16,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+import com.project.planit.chatting.dto.CreateChattingRequest;
+import com.project.planit.chatting.service.ChattingServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/chatting")
 public class ChattingController {
     private final ChattingServiceImpl chattingService;
+<<<<<<< HEAD
     private final SimpMessageSendingOperations messagingTemplate;
 
     // pub, sub관리 컨트롤러 RequestMapping 무시..
@@ -34,10 +44,17 @@ public class ChattingController {
         //todo: memberId 토큰값으로 바꿔주기
         Long memberId = 1L;
         chattingService.createChattingMessage(request,memberId);
+=======
+
+    @PostMapping
+    public ResponseEntity<?> createChattingMessage(@RequestBody CreateChattingRequest request){
+        chattingService.createChattingMessage(request,1L);
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
         return ResponseEntity.ok("ok");
     }
 
     @GetMapping(path = "/{roomId}")
+<<<<<<< HEAD
     public ResponseEntity<List<FindChattingMessageResponse>> findChattingMessage(@PathVariable Long roomId){
         //todo: memberId 토큰 값으로 변경하기
         Long memberId = 1L;
@@ -49,6 +66,10 @@ public class ChattingController {
         }
 
         return ResponseEntity.ok().body(resList);
+=======
+    public ResponseEntity<?> findChattingMessage(@PathVariable Long roomId){
+        return ResponseEntity.ok(chattingService.findChattingMessage(1L,roomId));
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
     }
 
 }

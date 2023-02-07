@@ -30,8 +30,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Room extends BaseEntity{
+<<<<<<< HEAD
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+=======
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
     @Column(name="room_id")
     private Long id;
 
@@ -63,6 +68,7 @@ public class Room extends BaseEntity{
         this.startDate = startDate;
         this.endDate = endDate;
     }
+<<<<<<< HEAD
 
     public static Room create(String roomName, LocalDate startDate, LocalDate endDate, BaseRequest baseRequest){
         return Room.builder()
@@ -72,4 +78,6 @@ public class Room extends BaseEntity{
                 .endDate(endDate)
                 .build();
     }
+=======
+>>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }
