@@ -1,5 +1,6 @@
 package com.project.planit.memberRoom.dto;
 
+
 import lombok.*;
 
 /**
@@ -22,4 +23,5 @@ public class FindMemberRoomResponse {
     private Boolean participation;
     private Long memberId;
     private Long roomId;
+
 }

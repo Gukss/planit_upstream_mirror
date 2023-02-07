@@ -3,6 +3,7 @@ package com.project.planit.room.controller;
 import com.project.planit.room.dto.*;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.service.RoomService;
+import com.project.planit.room.service.RoomServiceImpl;
 import com.project.planit.vote.dto.CreateVoteResponse;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping(value="/rooms")
 public class RoomController {
-  private final RoomService roomService;
+  private final RoomServiceImpl roomService;
   @PostMapping
   public ResponseEntity<CreateRoomResponse> createRoom(@RequestBody CreateRoomRequest request){
+
     Room newRoom = roomService.createRoom(request);
 
     String newRoomName = newRoom.getRoomName();
