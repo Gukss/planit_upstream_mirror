@@ -6,7 +6,6 @@ import Login from '../routes/auth/login/Login';
 import SignUp from '../routes/auth/signup/SignUp';
 import CreateRoom from '../routes/home/create/CreateRoom';
 import MyPage from '../routes/auth/mypage/MyPage';
-import Video from '../routes/room/stream/VideoRoomComponent';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/createroom' element={<CreateRoom />} />
       <Route path='/mypage' element={<MyPage />} />
-      <Route path='/test' element={<Video />} />
     </Routes>
   );
 }
