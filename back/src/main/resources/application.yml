@@ -18,10 +18,8 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-<<<<<<< HEAD
       #      ddl-auto: create
       ddl-auto: none
-
 
   #socket test
   devtools:
@@ -31,11 +29,6 @@ spring:
       enabled: false
   freemarker:
     cache: false
-
-=======
-      ddl-auto: create
-      # ddl-auto: none
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 
 logging:
   level:

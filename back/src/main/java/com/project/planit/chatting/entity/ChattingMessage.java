@@ -1,10 +1,7 @@
 package com.project.planit.chatting.entity;
 
 import com.project.planit.chatting.dto.CreateChattingRequest;
-<<<<<<< HEAD
 import com.project.planit.chatting.dto.FindChattingMessageResponse;
-=======
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.entity.Room;
 
@@ -66,7 +63,6 @@ public class ChattingMessage extends BaseEntity {
 
         return chattingMessage;
     }
-<<<<<<< HEAD
 
     public FindChattingMessageResponse createFindChattingMessageResponse(){
         return FindChattingMessageResponse.builder()
@@ -75,6 +71,4 @@ public class ChattingMessage extends BaseEntity {
                 .createdAt(this.getCreated_at())
                 .build();
     }
-=======
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }

@@ -41,11 +41,7 @@ public class Storage extends BaseEntity {
     @Column(name="storage_name")
     private String storageName;
 
-<<<<<<< HEAD
     private Boolean confirmed;
-=======
-    private boolean confirmed;
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 
     @Column(name="day_order")
     private int dayOrder;

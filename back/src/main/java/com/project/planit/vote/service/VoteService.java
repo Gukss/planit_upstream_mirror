@@ -19,11 +19,8 @@ import java.util.Optional;
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 2023-01-29        Gukss       최초 생성
-<<<<<<< HEAD
  * 2023-02-01        Gukss       REST API 문서에 맞게 수정
  *
-=======
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
  */
 public interface VoteService {
 
@@ -48,11 +45,7 @@ public interface VoteService {
      * @param room the room
      * @return the Optional<List<Vote>>; 방에 있는 투표 리스트
      */
-<<<<<<< HEAD
     public List<Vote> findAllByRoom(Room room);
-=======
-    public List<Vote> findByRoom(Room room);
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 
 
     /**

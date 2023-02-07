@@ -2,10 +2,7 @@ package com.project.planit.notification.entity;
 
 import com.project.planit.member.entity.Member;
 import com.project.planit.notification.dto.UpdateNotificationRequest;
-<<<<<<< HEAD
 import com.project.planit.room.entity.Room;
-=======
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import lombok.*;
@@ -51,7 +48,6 @@ public class Notification extends BaseEntity {
     @JoinColumn(name = "send_member_id",referencedColumnName = "member_id")
     private Member sendMemberId;
 
-<<<<<<< HEAD
     // sendMemberId를 토큰에서 받아와서 생성
     public static Notification create(boolean read,Member receiverMember,Member sendMemberId){
         Notification notification=Notification.builder()
@@ -61,29 +57,12 @@ public class Notification extends BaseEntity {
             .baseRequest(BaseRequest.builder()
                 .constructor(receiverMember.getAppId())
                 .updater(receiverMember.getAppId())
-=======
-
-    // sendMemberId를 토큰에서 받아와서 생성
-    public static Notification create(boolean readOrNot,Member recevierMember,Member sendMemberId){
-        Notification notification=Notification.builder()
-            .readOrNot(readOrNot)
-            .receivedMemberId(recevierMember)
-            .sendMemberId(sendMemberId) // 나중에 sendMember로 변경
-            .baseRequest(BaseRequest.builder()
-                .constructor(recevierMember.getAppId())
-                .updater(recevierMember.getAppId())
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
                 .build())
             .build();
         return notification;
     }
 
     public void update(UpdateNotificationRequest request){
-<<<<<<< HEAD
         this.readOrNot=request.getRead();
-=======
-        this.readOrNot=request.isReadOrNot();
-
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
     }
 }

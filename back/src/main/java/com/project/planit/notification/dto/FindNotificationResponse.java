@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FindNotificationResponse {
   @NotNull
-<<<<<<< HEAD
   private String sendMemberName;
   @NotNull
   private String roomName;
@@ -28,13 +27,4 @@ public class FindNotificationResponse {
   private LocalDateTime createdAt;
   @NotNull
   private Boolean read;
-=======
-  private String sendMemberId;
-  @NotNull
-  private String receivedMemberId;
-  @NotNull
-  private LocalDateTime createdAt;
-  @NotNull
-  private boolean readOrNot;
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }

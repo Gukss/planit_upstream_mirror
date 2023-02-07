@@ -2,20 +2,12 @@ package com.project.planit.voteItemMember.controller;
 
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberResponse;
-<<<<<<< HEAD
 import com.project.planit.voteItemMember.dto.FindVoteItemMemberResponse;
 import com.project.planit.voteItemMember.entity.VoteItemMember;
 import com.project.planit.voteItemMember.service.VoteItemMemberServiceImpl;
 
 import java.net.URI;
 import java.util.ArrayList;
-=======
-import com.project.planit.voteItemMember.dto.FindVoteItemMemberListResponse;
-import com.project.planit.voteItemMember.entity.VoteItemMember;
-import com.project.planit.voteItemMember.repository.VoteItemMemberRepository;
-import com.project.planit.voteItemMember.service.VoteItemMemberService;
-import com.project.planit.voteItemMember.service.VoteItemMemberServiceImpl;
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +38,6 @@ public class VoteItemMemberController {
     VoteItemMember newVoteItemMember = voteItemMemberService.createVoteItemMember(request);
     CreateVoteItemMemberResponse createVoteItemMemberResponse = CreateVoteItemMemberResponse.create(
         newVoteItemMember.getMember().getId(), newVoteItemMember.getVoteItem().getId());
-<<<<<<< HEAD
     URI uri = URI.create(""+newVoteItemMember.getId());
     return ResponseEntity.created(uri).body(createVoteItemMemberResponse);
   }
@@ -62,16 +53,5 @@ public class VoteItemMemberController {
     }
 
     return ResponseEntity.ok().body(resList);
-=======
-    return ResponseEntity.ok().body(createVoteItemMemberResponse);
-  }
-
-  @GetMapping(path = "{voteItemId}")
-  public ResponseEntity<FindVoteItemMemberListResponse> findVoteItemMemberListByVoteItemId(@PathVariable Long voteItemId){
-    //todo: token값으로 바꾸기
-    List<VoteItemMember> foundVoteItemMemberList = voteItemMemberService.findAllByVoteItemIdAndMemberId(voteItemId, 1L);
-
-    return ResponseEntity.ok().body(FindVoteItemMemberListResponse.create(foundVoteItemMemberList));
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
   }
 }

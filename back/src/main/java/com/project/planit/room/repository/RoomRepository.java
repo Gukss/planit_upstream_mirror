@@ -5,10 +5,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 import java.util.Optional;
 
 /**
@@ -24,8 +21,4 @@ import java.util.Optional;
  */
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
-<<<<<<< HEAD
-
-=======
->>>>>>> 238216d15b44b9c3433b2f1723ab4d2689c983b1
 }
