@@ -1,5 +1,6 @@
 package com.project.planit.room.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import lombok.*;
@@ -23,7 +24,9 @@ import java.time.LocalDate;
 @Builder
 @Getter
 public class CreateRoomRequest extends BaseEntity {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate endDate;
     private String roomName;
 
