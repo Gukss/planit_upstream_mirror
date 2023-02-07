@@ -6,7 +6,7 @@ import Login from '../routes/auth/login/Login';
 import SignUp from '../routes/auth/signup/SignUp';
 import CreateRoom from '../routes/home/create/CreateRoom';
 import MyPage from '../routes/auth/mypage/MyPage';
-import Video from '../routes/stream/VideoRoomComponent';
+import Video from '../routes/room/stream/VideoRoomComponent';
 
 function App() {
   return (
