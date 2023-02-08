@@ -1,25 +1,27 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { searchedPlace, userMarkers } from '../../../../app/store';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import {
+  searchedPlace,
+  userMarkers,
+  currentMarker,
+} from '../../../../app/store';
 
 import classes from './ResultListItem.module.scss';
-
-const items = [1, 2, 3];
 
 function ResultListItem(props) {
   const fullCategory = props.place.category_name;
   const fullCategoryList = fullCategory.split('>');
   console.log('ResultItem 생성마다 호출');
   const categoryKeyword = fullCategoryList[fullCategoryList.length - 1];
-  // console.log(categoryKeyword);
   const detailUrl = props.place.place_url;
-  // 클릭시 좌표값 저장;
-  const [tmp, setTmp] = useRecoilState(searchedPlace);
 
+  const setAddMarker = useSetRecoilState(currentMarker);
+  const setSelectMarker = useSetRecoilState(searchedPlace);
   const [markers, setMarkers] = useRecoilState(userMarkers);
 
+  // 클릭시 좌표값 저장후 이동.
   const onClickHandler = e => {
-    setTmp({
+    setSelectMarker({
       x: props.place.x,
       y: props.place.y,
     });
@@ -29,24 +31,26 @@ function ResultListItem(props) {
     console.log('장소 추가 버튼 누름');
     // 장소 추가하면 해줄 작업
     // 전역 state인 searchedPlaces를 업데이트할 함수 setSearchedPlaces
-    // const [markers, setMarkers] = useRecoilState(userMarkers);
     // 전역 state에서 가져온 markers에 추가하려는 장소가 이미 있다면?
 
     console.log(markers);
-    console.log(props.place);
+
     const newMarker = {
+      id: props.place.id,
       category: props.place.category_group_code,
       userColor: 'red', // 동적으로 전달해야 함
       dayColor: '',
-      isConfirmed: 'false',
+      isConfirmed: false,
       title: props.place.place_name,
       x: props.place.x,
       y: props.place.y,
     };
-    console.log(newMarker);
 
-    setMarkers([...markers, newMarker]);
-    console.log('markers에 추가됐는지 확인', markers);
+    const check = markers.findIndex(marker => marker.id === props.place.id);
+    if (check === -1) {
+      setAddMarker(newMarker);
+      setMarkers([...markers, newMarker]);
+    }
   };
 
   return (
@@ -60,7 +64,9 @@ function ResultListItem(props) {
       {/* <div className={classes.resultitem}> */}
       <div className={classes.resultitem__title}>
         <div className={classes.title_namecategory}>
-          <div className={classes.title_name}>{props.place.place_name}</div>
+          <div className={classes.title_name}>
+            {props.index + 1}. {props.place.place_name}
+          </div>
           <div className={classes.title_category}>{categoryKeyword}</div>
         </div>
         <div
@@ -70,7 +76,8 @@ function ResultListItem(props) {
           role='button'
           tabIndex={0}
         >
-          <i className='bx bx-plus'></i>
+          <button>+</button>
+          {/* <i className='bx bx-plus'></i> */}
         </div>
       </div>
       <div className={classes.resultitem__content}>
@@ -90,11 +97,6 @@ function ResultListItem(props) {
           </a>
         </div>
       </div>
-      {/* <div className={classes.resultitem__photo}>
-        {items.map(item => (
-          <div className={classes.resultitem__photo__item} />
-        ))}
-      </div> */}
     </div>
   );
 }

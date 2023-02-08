@@ -83,11 +83,15 @@ function Search() {
   return (
     <Bbar>
       {/* <form className='search-form' onSubmit={(submitKeyword, checkKeyword)}> */}
-      <input
-        type='text'
-        placeholder='검색어를 입력하세요'
-        onKeyDown={submitKeyword}
-      />
+      <label>
+        <i className='bx bx-search' />
+        <input
+          type='text'
+          placeholder='검색어를 입력하세요'
+          onKeyDown={submitKeyword}
+        />
+      </label>
+
       {/* </form> onChange={presentValue} */}
       <div className='search-result'>
         <div className='scroll-wrapper'>
