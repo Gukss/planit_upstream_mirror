@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 import React, { useState } from 'react';
 import Bbar from '../../../../common/bbar/Bbar';
 import classes from './Vote.module.scss';
-// import PlaceBox from './PlaceBox';
+import VoteList from './VoteList';
 import { userMarkers } from '../../../../app/store';
 
 function Vote() {
@@ -15,19 +15,13 @@ function Vote() {
           진행해보세요.
         </p>
       </div>
-      <div className={classes.vote_section}>
-        {/* {boxTitles.map(boxTitle => {
-          return <PlaceBox boxTitle={boxTitle} />;
-        })} */}
-        {/* {items.map(item => {
-          if (item.category === 'AD5') {
-            return <PlaceBox boxTitle='숙소' item={item} />;
-          }
-        })} */}
-        {/* <PlaceBox boxTitle='숙소' items={itemHotels} />
-        <PlaceBox boxTitle='음식점' items={itemRestaurants} />
-        <PlaceBox boxTitle='관광지' items={itemSpots} />
-        <PlaceBox boxTitle='카페' items={itemCafes} /> */}
+      <div className={classes.vote_body}>
+        <div className={classes.vote_body_head}>
+          <p>투표 내역</p>
+          <i className='bx bx-plus'></i>
+        </div>
+        <hr />
+        <VoteList />
       </div>
     </Bbar>
   );

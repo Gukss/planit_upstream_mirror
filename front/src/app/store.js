@@ -104,3 +104,8 @@ export const chatMessages = atom({
   key: 'chatMessages',
   default: [],
 });
+
+export const roomDateInfo = atom({
+  key: 'roomDateInfo',
+  default: ['2023-02-07', '2023-02-09'],
+});
