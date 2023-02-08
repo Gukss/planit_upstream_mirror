@@ -1,0 +1,10 @@
+.item_box {
+  height: auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-bottom: 20px;
+
+  .item_box_title {
+    display: flex;
+  }
+}

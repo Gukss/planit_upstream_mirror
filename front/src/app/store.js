@@ -38,6 +38,7 @@ export const userMarkers = atom({
   key: 'userMarkers',
   default: [
     {
+      id: 1,
       category: 'AD5',
       userColor: '#EB5252',
       dayColor: '',
@@ -48,6 +49,7 @@ export const userMarkers = atom({
     },
 
     {
+      id: 2,
       category: 'AD5',
       userColor: '#EB5252',
       dayColor: '',
@@ -58,6 +60,7 @@ export const userMarkers = atom({
     },
 
     {
+      id: 3,
       category: 'FD6',
       userColor: '#90CE0A',
       dayColor: '',
@@ -67,6 +70,7 @@ export const userMarkers = atom({
       y: 32.44,
     },
     {
+      id: 4,
       category: 'AT4',
       userColor: '#7997FE',
       dayColor: '',
@@ -76,6 +80,7 @@ export const userMarkers = atom({
       y: 32.44,
     },
     {
+      id: 5,
       category: 'CE7',
       userColor: '#FAE635',
       dayColor: '',
@@ -90,4 +95,9 @@ export const userMarkers = atom({
 export const chatMessages = atom({
   key: 'chatMessages',
   default: [],
+});
+
+export const roomDateInfo = atom({
+  key: 'roomDateInfo',
+  default: ['2023-02-07', '2023-02-09'],
 });

@@ -4,13 +4,16 @@ import { chatMessages } from '../../../../app/store';
 
 function ChatSection() {
   const messageList = useRecoilValue(chatMessages);
-  return (
-    <div className={classes.chat_section}>
-      {messageList.map(messageListItem => {
-        return <div>{messageListItem.message}</div>;
-      })}
-    </div>
-  );
+  // console.log(messageList);
+  if (messageList.length >= 1) {
+    return (
+      <div className={classes.chat_section}>
+        {messageList.map(messageListItem => {
+          return <div>{messageListItem.message}</div>;
+        })}
+      </div>
+    );
+  }
 }
 
 export default ChatSection;
