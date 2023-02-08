@@ -55,8 +55,8 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public ReadMemberResponse readMember(Long memberAppId) {
-    Member member=memberRepository.findById(memberAppId)
+  public ReadMemberResponse readMember(Long memberId) {
+    Member member=memberRepository.findById(memberId)
         .orElseThrow(() -> new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
 
     ReadMemberResponse response=ReadMemberResponse.builder()
@@ -100,6 +100,11 @@ public class MemberServiceImpl implements MemberService {
     Member member= memberRepository.findByAppIdAndEmail(memberAppId,email)
         .orElseThrow(()->new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_EMAIL_FIND_NOT_FOUND));
     return member.getAppPwd();
+  }
+
+  public Member findMemberByMemberAppId(String memberAppId){
+    Member member = memberRepository.findByAppId(memberAppId).orElseThrow(()->new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
+    return member;
   }
 
 }
