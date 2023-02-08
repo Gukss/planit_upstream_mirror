@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
 /**
  * packageName    : com.project.planit.common.config fileName       : WebConfig author         :
  * SSAFY date           : 2023-02-06 description    :
