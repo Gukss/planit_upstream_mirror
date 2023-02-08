@@ -3,16 +3,14 @@ server:
   error:
     whitelabel:
       enabled: false
-  servlet:
-    context-path: /api
 
 spring:
   # TODO : PUSH 하기 전에 다시 한번 확인할 것.
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_DOMAIN}:${DB_PORT}/planit?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/planit?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -20,8 +18,9 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-#      ddl-auto: create
+      #      ddl-auto: create
       ddl-auto: none
+
 
   #socket test
   devtools:
@@ -31,6 +30,7 @@ spring:
       enabled: false
   freemarker:
     cache: false
+
 
 logging:
   level:
