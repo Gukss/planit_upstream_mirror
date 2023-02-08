@@ -7,10 +7,11 @@ import {
   currentMarker,
 } from '../../../app/store';
 import Marker from './marker/Marker';
+// import ControlBox from './ControlBox';
 import './Map.scss';
 
 const { kakao } = window;
-let searchMarkers = []; // 마커정보 저장
+let searchMarkers = []; // 검색한 마커정보 저장
 
 // 커스텀오버레이 열기
 const openOverlay = (map, overlay) => {
@@ -21,7 +22,7 @@ const openOverlay = (map, overlay) => {
 
 // 검색된 마커 지우기
 const removeMarker = () => {
-  for (let i = 0; i < searchMarkers.length; i += 1) {
+  for (let i = 0; i < searchMarkers.length - 1; i += 1) {
     searchMarkers[i].setMap(null);
   }
   searchMarkers = [];
@@ -30,8 +31,8 @@ const removeMarker = () => {
 function Map() {
   const mapContainer = useRef(null);
   const [map, setNewMap] = useState(null);
-  const searchData = useRecoilValue(searchedPlaces);
   const clickData = useRecoilValue(searchedPlace);
+  const searchData = useRecoilValue(searchedPlaces);
   const [addMarker, addSetMarker] = useRecoilState(currentMarker); // 지금 선택한 마커 정보
   const [selectMarkers, setSelectMarkers] = useRecoilState(userMarkers); // 유저가 선택한 마커 모음
 
@@ -51,18 +52,36 @@ function Map() {
   // 검색 시 바로 여러 마커 표시되게 하는법
   useEffect(() => {
     console.log('너는 Map');
-    console.log(selectMarkers);
+    console.log('유저가 선택한 마커들', selectMarkers);
     if (searchData.length >= 1) {
       removeMarker();
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가합니다
       const bounds = new kakao.maps.LatLngBounds();
       for (let i = 0; i < searchData.length; i += 1) {
-        bounds.extend(new kakao.maps.LatLng(searchData[i].y, searchData[i].x));
-        // displayMarker(searchData[i], map);
+        const imageSrc =
+          'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png'; // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        const imageSize = new kakao.maps.Size(36, 37); // 마커 이미지의 크기
+        const imgOptions = {
+          spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+          spriteOrigin: new kakao.maps.Point(0, i * 46 + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+          offset: new kakao.maps.Point(13, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        };
+
+        const markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imgOptions
+        );
+
         const marker = new kakao.maps.Marker({
           map,
           position: new kakao.maps.LatLng(searchData[i].y, searchData[i].x),
+          image: markerImage,
         });
+
+        searchMarkers.push(marker); // 검색한 데이터 마커 정보 배열저장
+
+        bounds.extend(new kakao.maps.LatLng(searchData[i].y, searchData[i].x));
 
         const overlay = new kakao.maps.CustomOverlay({
           map,
@@ -98,12 +117,10 @@ function Map() {
           console.log('usermarker');
           // 문제점 : 이제 이미 있는 거라면 추가 안시켜야함.... 어캐함?
           // 있 없 = t/ 없 있 =t / 없 없=t / 있 있 = f
-          const id = Math.random();
-          // const id = `marker_${idNum}`;
           // 현재 클릭한 값 찾기.
           addSetMarker({
-            id,
-            place_name: searchData[i].place_name,
+            id: searchData[i].id,
+            title: searchData[i].place_name,
             x: searchData[i].x,
             y: searchData[i].y,
           });
@@ -111,17 +128,20 @@ function Map() {
           setSelectMarkers(selectMarkers => [
             ...selectMarkers,
             {
-              id,
-              place_name: searchData[i].place_name,
+              id: searchData[i].id,
+              category: searchData[i].category_group_code,
+              userColor: 'red',
+              dayColor: '',
+              isConfirmed: false,
+              title: searchData[i].place_name,
               x: searchData[i].x,
               y: searchData[i].y,
             },
           ]);
+          overlay.setMap(null);
         };
         content.appendChild(markerAdd);
         overlay.setContent(content);
-
-        searchMarkers.push(marker);
 
         // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
         kakao.maps.event.addListener(
@@ -151,14 +171,19 @@ function Map() {
     }
   }, [clickData]);
 
-  if (selectMarkers.length > 0) {
+  if (searchMarkers.length > 0) {
     return (
       <div className='map' ref={mapContainer}>
         <Marker map={map} />
+        {/* <ControlBox map={map} /> */}
       </div>
     );
   }
-  return <div className='map' ref={mapContainer}></div>;
+  return (
+    <div className='map' ref={mapContainer}>
+      {/* <ControlBox map={map} /> */}
+    </div>
+  );
 }
 
 export default Map;
