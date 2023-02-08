@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useRecoilState } from 'recoil';
+import { useState } from 'react';
+import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate } from 'react-router-dom';
 import { dateRangeState } from '../../../app/store';
-
 import logoImg from '../../../app/assets/images/naver_login.png';
 
 import Header from '../../../common/header/Header';
@@ -14,6 +15,31 @@ function CreateRoom() {
   const [dateRange, setDateRange] = useRecoilState(dateRangeState);
   const [startD, setStartDate] = useState(dateRange.startDate);
   const [endD, setEndDate] = useState(dateRange.endDate);
+  const [roomName, setRoomName] = useState('');
+  const navigate = useNavigate();
+
+  const changeRoomName = e => {
+    setRoomName(e.target.value);
+  };
+
+  const dateToString = date => {
+    return `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  };
+
+  const createRoom = async e => {
+    const subUrl = `/rooms`;
+    const requestData = {
+      startDate: dateToString(startD),
+      endDate: dateToString(endD),
+      roomName: `${roomName}`,
+    };
+    console.log(dateToString(endD));
+    await axios.post(`http://localhost:8080${subUrl}`, requestData);
+
+    navigate('/room');
+  };
 
   const handleChange = dates => {
     const [start, end] = dates;
@@ -68,7 +94,7 @@ function CreateRoom() {
                                   selectsStart
                                   startDate={startD}
                                   endDate={endD}
-                                  dateFormat='yyyy. MM. dd'
+                                  dateFormat='yyyy-MM-dd'
                                   selectsRange
                                   className={classes.datepicker}
                                 />
@@ -78,11 +104,13 @@ function CreateRoom() {
                                 <input
                                   className={classes.form_style}
                                   placeholder='이번 여행을 한마디로 표현하자면?'
+                                  onChange={changeRoomName}
                                 />
                               </div>
                               <button
                                 className={classes.main__button}
                                 type='submit'
+                                onClick={createRoom}
                               >
                                 방 생성하기
                               </button>

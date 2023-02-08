@@ -1,35 +1,78 @@
 import { useRecoilState } from 'recoil';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import * as StompJs from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+
 // import Bbar from '../../../../common/bbar/Bbar';
 import classes from './ChatControl.module.scss';
 // import PlaceBox from './PlaceBox';
 import { chatMessages } from '../../../../app/store';
 
 function ChatControl() {
-  // // 메시지의 내용에 들어가는 값 변수 value
-  // const [messageValue, setMessageValue] = useState('');
-
-  // // 제출한 메세지 전체를 담는 변수 message
-  // const [message, setMessage] = useState('');
-
-  // 전역 state인 chatMessages를 업데이트
   const [messages, setMessages] = useRecoilState(chatMessages);
+  const client = useRef({});
+
+  const subscribe = () => {
+    client.current.subscribe('/sub/room/1', ({ body }) => {
+      setMessages(messages => [...messages, JSON.parse(body)]);
+    });
+  };
+
+  const publish = message => {
+    if (!client.current.connected) {
+      return;
+    }
+
+    client.current.publish({
+      destination: '/pub/message',
+      body: JSON.stringify({ roomId: 1, message }),
+    });
+  };
 
   // 제출한 메세지를 state에 담는 함수
   const submitMessage = e => {
     if (e.keyCode === 13) {
       e.preventDefault();
 
-      const newMessage = {
-        message: e.target.value,
-        constructor: '회원 정보',
-      };
-      console.log('지금 전역에 붙이려는 새 메시지', newMessage);
-      setMessages([...messages, newMessage]);
+      publish(e.target.value);
+
       e.target.value = '';
-      // console.log('전역 메세지 배열에 추가됐는지 확인', messages);
     }
   };
+
+  const connect = () => {
+    client.current = new StompJs.Client({
+      // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
+      webSocketFactory: () => new SockJS('http://localhost:8080/ws-stomp'), // proxy를 통한 접속
+      connectHeaders: {},
+      debug: str => {
+        console.log(str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        console.log('커넥트 되는 시점');
+        subscribe();
+      },
+      onStompError: frame => {
+        console.error(frame);
+      },
+    });
+
+    client.current.activate();
+  };
+
+  const disconnect = () => {
+    client.current.deactivate();
+  };
+
+  useEffect(() => {
+    connect();
+    return () => disconnect();
+  }, []);
+  console.log(messages);
 
   return (
     <div className={classes.chat_input_button}>

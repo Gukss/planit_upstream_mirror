@@ -31,6 +31,7 @@ module.exports = {
       { labelAttributes: ['htmlFor'] },
     ], // <label 에러 해결>
     'import/prefer-default-export': ['off', { target: 'any' }], // recoil에서 atom default쓰기 위함
+    'react/jsx-props-no-spreading': ['warn'], // props로 받은 것 바로 props로 넘기기 허용
     'import/no-extraneous-dependencies': [
       'error',
       {

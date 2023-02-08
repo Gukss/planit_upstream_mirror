@@ -1,0 +1,15 @@
+.vote_list_section {
+  background-color: aqua;
+  margin: 1rem;
+  height: 74vh;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem; /* 스크롤바의 너비 */
+    background-color: #e3e3e3;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+  }
+}

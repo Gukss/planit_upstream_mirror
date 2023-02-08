@@ -1,12 +1,12 @@
 import { useRecoilValue } from 'recoil';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Bbar from '../../../../common/bbar/Bbar';
 import classes from './Place.module.scss';
 import PlaceBox from './PlaceBox';
 import { userMarkers } from '../../../../app/store';
 
 function Place() {
-  const boxTitles = ['숙소', '식당', '관광지', '카페', '기타'];
+  // const boxTitles = ['숙소', '식당', '관광지', '카페', '기타'];
   const items = useRecoilValue(userMarkers);
 
   // const [itemHotel, setItemHotel] = useState([]);
@@ -23,19 +23,23 @@ function Place() {
   const itemCafes = items.filter(item => item.category === 'CE7');
   // const itemElses = items.filter(item => item.category === 'AD5');
 
-  // const  = items.map(item => {
-  //   if (item.category === 'AD5') {
-  //     setItemHotel([...itemHotel, item]);
-  //   } else if (item.category === 'FD6') {
-  //     setItemRestaurant([...itemRestaurant, item]);
-  //   } else if (item.category === 'AT4') {
-  //     setItemSpot([...itemSpot, item]);
-  //   } else if (item.category === 'CE7') {
-  //     setItemCafe([...itemCafe, item]);
-  //   } else {
-  //     setItemElse([...itemElse, item]);
-  //   }
-  // });
+  // useEffect(() => {
+  //   items.map(item => {
+  //     console.log(item);
+  //     if (item.category === 'AD5') {
+  //       setItemHotel([...itemHotel, item]);
+  //     } else if (item.category === 'FD6') {
+  //       setItemRestaurant([...itemRestaurant, item]);
+  //     } else if (item.category === 'AT4') {
+  //       setItemSpot([...itemSpot, item]);
+  //     } else if (item.category === 'CE7') {
+  //       setItemCafe([...itemCafe, item]);
+  //     } else {
+  //       setItemElse([...itemElse, item]);
+  //     }
+  //     return 0;
+  //   });
+  // }, [items]);
 
   return (
     <Bbar>
@@ -50,11 +54,13 @@ function Place() {
         {/* {boxTitles.map(boxTitle => {
           return <PlaceBox boxTitle={boxTitle} />;
         })} */}
-        {/* {items.map(item => {
-          if (item.category === 'AD5') {
-            return <PlaceBox boxTitle='숙소' item={item} />;
-          }
-        })} */}
+        {/* {items.map((item, index) => (
+          // if (item.category === 'AD5') {
+          <PlaceBox key={item} boxTitle='숙소' item={item} />
+          // } else if (item.category === 'FD6') {
+          //   return <PlaceBox boxTtile='음식점' item={item} />;
+          // }
+        ))} */}
         <PlaceBox boxTitle='숙소' items={itemHotels} />
         <PlaceBox boxTitle='음식점' items={itemRestaurants} />
         <PlaceBox boxTitle='관광지' items={itemSpots} />
