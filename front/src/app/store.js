@@ -17,47 +17,55 @@ export const searchedPlaces = atom({
   default: [],
 });
 
+// 지도 이동을 위한 위치 좌표.
 export const searchedPlace = atom({
   key: 'searchedPlace',
   default: {},
   // default: { x: 33.450701, y: 126.570667 },
 });
 
+// 해당 좌표에 마커, 커스텀오버레이 표시 위한 정보
 export const currentMarker = atom({
   key: 'currentMarker',
   default: {},
 });
 
-// export const userMarkers = atom({
-//   key: 'userMarkers',
-//   default: [],
-// });
+// 선택한 정보 마커, 커스텀오버레이 둘다 제거
+export const removeInformation = atom({
+  key: 'removeInformation',
+  default: {},
+});
 
 // 커스텀할 유저마커
 export const userMarkers = atom({
   key: 'userMarkers',
   default: [
     {
+      id: 'dummy_1',
       category: 'AD5',
       userColor: '#EB5252',
       dayColor: '',
-      isConfirmed: true,
+      isConfirmed: false,
       title: '숙소1',
       x: 126.44,
       y: 32.44,
+      marker: {},
     },
 
     {
+      id: 'dummy_2',
       category: 'AD5',
       userColor: '#EB5252',
       dayColor: '',
-      isConfirmed: true,
+      isConfirmed: false,
       title: '숙소2',
       x: 126.44,
       y: 32.44,
+      marker: {},
     },
 
     {
+      id: 'dummy_3',
       category: 'FD6',
       userColor: '#90CE0A',
       dayColor: '',
@@ -65,8 +73,10 @@ export const userMarkers = atom({
       title: '식당1',
       x: 126.44,
       y: 32.44,
+      marker: {},
     },
     {
+      id: 'dummy_4',
       category: 'AT4',
       userColor: '#7997FE',
       dayColor: '',
@@ -74,15 +84,18 @@ export const userMarkers = atom({
       title: '관광명소 성심당',
       x: 126.44,
       y: 32.44,
+      marker: {},
     },
     {
+      id: 'dummy_5',
       category: 'CE7',
       userColor: '#FAE635',
       dayColor: '',
-      isConfirmed: true,
+      isConfirmed: false,
       title: '카페 아자카파',
       x: 126.44,
       y: 32.44,
+      isMarker: {},
     },
   ],
 });

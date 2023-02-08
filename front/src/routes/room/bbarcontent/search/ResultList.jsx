@@ -11,8 +11,8 @@ function ResultList() {
   if (resultPlaces.length >= 1) {
     return (
       <div className={classes.result}>
-        {resultPlaces.map(place => {
-          return <ResultListItem place={place} />;
+        {resultPlaces.map((place, index) => {
+          return <ResultListItem place={place} index={index} />;
         })}
       </div>
     );

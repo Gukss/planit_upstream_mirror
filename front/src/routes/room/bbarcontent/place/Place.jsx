@@ -59,6 +59,7 @@ function Place() {
         <PlaceBox boxTitle='음식점' items={itemRestaurants} />
         <PlaceBox boxTitle='관광지' items={itemSpots} />
         <PlaceBox boxTitle='카페' items={itemCafes} />
+        <PlaceBox boxTitle='기타' items={itemCafes} />
       </div>
     </Bbar>
   );
