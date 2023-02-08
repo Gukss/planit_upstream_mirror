@@ -32,45 +32,45 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 @RequestMapping("/rooms/users")
 public class MemberRoomController {
-    private final MemberRoomServiceImpl memberRoomService;
+  private final MemberRoomServiceImpl memberRoomService;
 
-    @GetMapping
-    public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(){
-        Long id=1L; // @TODO : 나중에 토큰 아이디로 변환
-        List<MemberRoom> foundMemberRoom = memberRoomService.findMemberRoom(id);
+  @GetMapping
+  public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(){
+    Long id=1L; // @TODO : 나중에 토큰 아이디로 변환
+    List<MemberRoom> foundMemberRoom = memberRoomService.findMemberRoom(id);
 
-        List<FindMemberRoomResponse> resList = new ArrayList<>();
+    List<FindMemberRoomResponse> resList = new ArrayList<>();
 
-        for(MemberRoom memberRoom : foundMemberRoom){
-            resList.add(memberRoom.createFindMemberRoomResponse());
-        }
-        ResponseEntity<List<FindMemberRoomResponse>> res = ResponseEntity.ok().body(resList);
-        return res;
+    for(MemberRoom memberRoom : foundMemberRoom){
+      resList.add(memberRoom.createFindMemberRoomResponse());
     }
+    ResponseEntity<List<FindMemberRoomResponse>> res = ResponseEntity.ok().body(resList);
+    return res;
+  }
 
-    @PostMapping
-    public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request){
-        MemberRoom memberRoom = memberRoomService.createMemberRoom(request);
-        Long roomId = memberRoom.getRoom().getId();
-        CreateMemberRoomResponse createMemberRoomResponse = CreateMemberRoomResponse.builder()
-                .roomId(roomId)
-                .build();
-        ResponseEntity<CreateMemberRoomResponse> res = ResponseEntity.ok().body(createMemberRoomResponse);
-        return res;
-    }
+  @PostMapping
+  public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request){
+    MemberRoom memberRoom = memberRoomService.createMemberRoom(request);
+    Long roomId = memberRoom.getRoom().getId();
+    CreateMemberRoomResponse createMemberRoomResponse = CreateMemberRoomResponse.builder()
+        .roomId(roomId)
+        .build();
+    ResponseEntity<CreateMemberRoomResponse> res = ResponseEntity.ok().body(createMemberRoomResponse);
+    return res;
+  }
 
-    @PatchMapping
-    public ResponseEntity<UpdateMemberRoomResponse> updateMemberRoom(@RequestBody UpdateMemberRoomRequest request){
-        MemberRoom memberRoom = memberRoomService.updateMemberRoom(request);
+  @PatchMapping
+  public ResponseEntity<UpdateMemberRoomResponse> updateMemberRoom(@RequestBody UpdateMemberRoomRequest request){
+    MemberRoom memberRoom = memberRoomService.updateMemberRoom(request);
 
-        Room room = memberRoom.getRoom();
-        Member member = memberRoom.getMember();
+    Room room = memberRoom.getRoom();
+    Member member = memberRoom.getMember();
 
-        UpdateMemberRoomResponse updateMemberRoomResponse = UpdateMemberRoomResponse.builder()
-                .roomId(room.getId())
-                .participation(memberRoom.getParticipation())
-                .memberId(member.getId())
-                .build();
-        return ResponseEntity.ok().body(updateMemberRoomResponse);
-    }
+    UpdateMemberRoomResponse updateMemberRoomResponse = UpdateMemberRoomResponse.builder()
+        .roomId(room.getId())
+        .participation(memberRoom.getParticipation())
+        .memberId(member.getId())
+        .build();
+    return ResponseEntity.ok().body(updateMemberRoomResponse);
+  }
 }
