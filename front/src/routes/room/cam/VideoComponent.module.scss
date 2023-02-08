@@ -1,0 +1,50 @@
+.camlist {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  height: 20%;
+  width: 100%;
+  border-style: solid;
+  z-index: 1;
+
+  .ctb {
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #2b3f6b;
+    width: 4rem;
+    height: 100%;
+    .ctblist {
+      display: flex;
+      align-items: center;
+      // height: 100%;
+      margin: 0.5rem 0;
+
+      &__item * {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        color: #f3f3f3;
+        margin: 0.25rem;
+      }
+    }
+  }
+
+  .camListItem {
+    display: block;
+    margin: 16px;
+    width: 14vw;
+    height: 16vh;
+    border-radius: 8px;
+    background-color: black;
+
+    &__text {
+      color: white;
+    }
+  }
+}
