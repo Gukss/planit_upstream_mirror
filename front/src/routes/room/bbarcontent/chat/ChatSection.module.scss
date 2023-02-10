@@ -1,19 +1,26 @@
 .chat_section {
-  background-color: rgb(254, 186, 76);
+  background-color: rgb(239, 246, 247);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   border-radius: 8px;
-  // padding: 16px 16px 0px 16px;
   overflow: auto;
-  // height: 30rem;
-  height: 93%;
+  height: 85%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  margin-bottom: 10px;
+  padding: 10px;
 
-  &::-webkit-scrollbar {
-    width: 0.5rem; /* 스크롤바의 너비 */
-    background-color: #e3e3e3;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 1rem;
+  .chat_message_section {
+    background-color: #312070;
+    color: white;
+    width: 50%;
+    height: 42px;
+    font-size: 18px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   }
 }

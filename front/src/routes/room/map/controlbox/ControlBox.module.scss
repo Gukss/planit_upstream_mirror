@@ -1,0 +1,29 @@
+.control_box {
+  display: flex;
+  position: absolute;
+  width: 16rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  top: 3%;
+  right: 4%;
+  z-index: 3;
+
+  &_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+
+    :hover {
+      cursor: pointer;
+      color: #2b3f6b;
+      // background-color: #2b3f6b;
+    }
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}

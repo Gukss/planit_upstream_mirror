@@ -4,11 +4,11 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = app => {
   app.use(
     createProxyMiddleware(['/api', '/ws-stomp'], {
-      target: 'http://localhost:8080',
+      target: 'https://i8b202.p.ssafy.io',
       changeOrigin: true,
       ws: true,
       router: {
-        '/ws-stomp': 'ws://localhost:8080',
+        '/ws-stomp': 'ws://i8b202.p.ssafy.io',
       },
     })
   );

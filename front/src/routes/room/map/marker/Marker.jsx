@@ -4,6 +4,7 @@ import {
   userMarkers,
   currentMarker,
   removeInformation,
+  categoryCheck,
 } from '../../../../app/store';
 import './Marker.scss';
 
@@ -11,6 +12,7 @@ const { kakao } = window;
 
 function Marker(props) {
   const existMap = props.map;
+  const category = useRecoilValue[categoryCheck];
   const selectMarker = useRecoilValue(currentMarker);
   const [roomMarkers, setRoomMarkers] = useState([]);
   const [removeMarker, setRemoveMarker] = useRecoilState(removeInformation);
@@ -54,13 +56,17 @@ function Marker(props) {
     // 최상단 div 커스텀 오버레이
     const content = document.createElement('div');
     content.classList.add('overlay');
-    // 커스텀 오버레이 제목
+    // 커스텀 오버레이 제목 박스
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('title_container');
+    content.appendChild(titleContainer);
+    // 커스텀 오버레이 제목 글자
     const markerTitle = document.createElement('div');
     markerTitle.classList.add('overlay__title');
     markerTitle.appendChild(
       document.createTextNode(userSelectMarkers[pos].title)
     );
-    content.appendChild(markerTitle);
+    titleContainer.appendChild(markerTitle);
     // 커스텀 오버레이 닫기
     const closeBtn = document.createElement('button');
     closeBtn.classList.add('overlay__close');
@@ -68,7 +74,14 @@ function Marker(props) {
     closeBtn.onclick = function () {
       overlay.setMap(null);
     };
-    markerTitle.appendChild(closeBtn);
+    titleContainer.appendChild(closeBtn);
+    // 커스텀 오버레이 카테고리
+    const CategoryName = document.createElement('div');
+    CategoryName.classList.add('category_name');
+    CategoryName.appendChild(
+      document.createTextNode([userSelectMarkers[pos].category_name])
+    );
+    content.appendChild(CategoryName);
     // 이용자 마커 제거
     const markerRemove = document.createElement('button');
     markerRemove.classList.add('marker_remove');
@@ -93,7 +106,7 @@ function Marker(props) {
       'click',
       openOverlay(existMap, overlay)
     );
-  }, [selectMarker]);
+  }, [selectMarker, category]);
 
   useEffect(() => {
     // 처음에 생성했을때 룸마커가 비어있기에 필터링이안됨

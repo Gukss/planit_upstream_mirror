@@ -1,7 +1,9 @@
 import React from 'react';
 import Abar from './abar/Abar';
 import Map from './map/Map';
+import ControlBox from './map/controlbox/ControlBox';
 import VideoComponent from './cam/VideoComponent';
+import SaveIcon from '../../api/SaveIcon';
 
 import './RoomLayout.scss';
 
@@ -11,7 +13,9 @@ function RoomLayout() {
       <Abar />
       <div className='map_camlist'>
         <Map />
+        <ControlBox />
         <VideoComponent />
+        <SaveIcon />
       </div>
     </div>
   );

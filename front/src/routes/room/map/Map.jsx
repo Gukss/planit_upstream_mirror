@@ -5,9 +5,11 @@ import {
   searchedPlace,
   userMarkers,
   currentMarker,
+  categoryCheck,
+  // removeCategory,
 } from '../../../app/store';
 import Marker from './marker/Marker';
-// import ControlBox from './ControlBox';
+import CategoryMarker from './marker/CategoryMarker';
 import './Map.scss';
 
 const { kakao } = window;
@@ -22,7 +24,7 @@ const openOverlay = (map, overlay) => {
 
 // 검색된 마커 지우기
 const removeMarker = () => {
-  for (let i = 0; i < searchMarkers.length - 1; i += 1) {
+  for (let i = 0; i < searchMarkers.length; i += 1) {
     searchMarkers[i].setMap(null);
   }
   searchMarkers = [];
@@ -33,14 +35,16 @@ function Map() {
   const [map, setNewMap] = useState(null);
   const clickData = useRecoilValue(searchedPlace);
   const searchData = useRecoilValue(searchedPlaces);
+  // const [resetCategory, setResetCategory] = useRecoilState(removeCategory);
   const [addMarker, addSetMarker] = useRecoilState(currentMarker); // 지금 선택한 마커 정보
+  const [isCategory, setIsCategory] = useRecoilState(categoryCheck);
   const [selectMarkers, setSelectMarkers] = useRecoilState(userMarkers); // 유저가 선택한 마커 모음
 
   // 초기 맵 셋팅
-  const position = new kakao.maps.LatLng(33.450701, 126.570667);
+  const position = new kakao.maps.LatLng(36.466911994323, 127.5130882732);
   const mapOptions = {
     center: position, // 지도의 중심좌표
-    level: 4, // 지도의 확대 레벨
+    level: 12, // 지도의 확대 레벨
   };
 
   // map은 계속 호출이 되면 안되기 때문에 저장 x
@@ -54,7 +58,9 @@ function Map() {
     console.log('너는 Map');
     console.log('유저가 선택한 마커들', selectMarkers);
     if (searchData.length >= 1) {
+      setIsCategory({ code: '', imageUrl: '' });
       removeMarker();
+      // removeCategoryMarker();
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가합니다
       const bounds = new kakao.maps.LatLngBounds();
       for (let i = 0; i < searchData.length; i += 1) {
@@ -93,13 +99,17 @@ function Map() {
         // 최상단 div 커스텀 오버레이
         const content = document.createElement('div');
         content.classList.add('overlay');
-        // 커스텀 오버레이 제목
+        // 커스텀 오버레이 제목 박스
+        const titleContainer = document.createElement('div');
+        titleContainer.classList.add('title_container');
+        content.appendChild(titleContainer);
+        // 커스텀 오버레이 제목 글자
         const markerTitle = document.createElement('div');
         markerTitle.classList.add('overlay__title');
         markerTitle.appendChild(
           document.createTextNode(searchData[i].place_name)
         );
-        content.appendChild(markerTitle);
+        titleContainer.appendChild(markerTitle);
         // 커스텀 오버레이 닫기
         const closeBtn = document.createElement('button');
         closeBtn.classList.add('overlay__close');
@@ -107,7 +117,14 @@ function Map() {
         closeBtn.onclick = function () {
           overlay.setMap(null);
         };
-        markerTitle.appendChild(closeBtn);
+        titleContainer.appendChild(closeBtn);
+        // 커스텀 오버레이 카테고리
+        const CategoryName = document.createElement('div');
+        CategoryName.classList.add('category_name');
+        CategoryName.appendChild(
+          document.createTextNode([searchData[i].category_group_name])
+        );
+        content.appendChild(CategoryName);
         // 커스텀 오버레이로 이용자 마커 등록
         const markerAdd = document.createElement('button');
         markerAdd.classList.add('marker_add');
@@ -130,6 +147,7 @@ function Map() {
             {
               id: searchData[i].id,
               category: searchData[i].category_group_code,
+              category_name: searchData[i].category_group_name,
               userColor: 'red',
               dayColor: '',
               isConfirmed: false,
@@ -171,17 +189,18 @@ function Map() {
     }
   }, [clickData]);
 
-  if (searchMarkers.length > 0) {
+  if (searchMarkers.length > 0 || isCategory.code.length > 0) {
     return (
       <div className='map' ref={mapContainer}>
         <Marker map={map} />
-        {/* <ControlBox map={map} /> */}
+        <CategoryMarker map={map} />
       </div>
     );
   }
   return (
     <div className='map' ref={mapContainer}>
-      {/* <ControlBox map={map} /> */}
+      {/* <Marker map={map} /> */}
+      <CategoryMarker map={map} />
     </div>
   );
 }

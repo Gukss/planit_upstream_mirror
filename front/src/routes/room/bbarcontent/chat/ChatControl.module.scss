@@ -1,7 +1,25 @@
 .chat_input_button {
   display: flex;
   margin-top: 1rem;
+  width: 100%;
+
+  input {
+    width: 80%;
+    border: none;
+  }
+
   button {
     margin-left: 1rem;
+    background-color: #2b3f6b;
+    border: none;
+    width: 56px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: all ease-in 0.4s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
   }
 }
