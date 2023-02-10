@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
+import FriendListItem from './friendbox/friendListItem';
 import { dateRangeState } from '../../../app/store';
 import logoImg from '../../../app/assets/images/naver_login.png';
 
@@ -18,16 +19,19 @@ function CreateRoom() {
   const [roomName, setRoomName] = useState('');
   const navigate = useNavigate();
 
+  // 룸 이름 실시간 확인
   const changeRoomName = e => {
     setRoomName(e.target.value);
   };
 
+  // date 타입 변경
   const dateToString = date => {
     return `${date.getFullYear()}-${(date.getMonth() + 1)
       .toString()
       .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
   };
 
+  // 방 만들기 axios
   const createRoom = async e => {
     const subUrl = `/rooms`;
     const requestData = {
@@ -36,11 +40,15 @@ function CreateRoom() {
       roomName: `${roomName}`,
     };
     console.log(dateToString(endD));
-    await axios.post(`http://localhost:8080${subUrl}`, requestData);
-
-    navigate('/room');
+    const response = await axios.post(
+      `https://i8b202.p.ssafy.io/api/${subUrl}`,
+      requestData
+    );
+    console.log(response);
+    navigate('/room/search');
   };
 
+  // startDate, endDate 변경
   const handleChange = dates => {
     const [start, end] = dates;
     setStartDate(start);
@@ -49,6 +57,51 @@ function CreateRoom() {
     console.log(end);
     setDateRange({ startDate: start, endDate: end });
   };
+
+  // 친구 검색을 위한 dropdown 작업
+  const [inputValue, setInputValue] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropDownFriends, setDropDownFriends] = useState([]);
+  const [selectFriends, setSelectFriends] = useState([]);
+
+  // 친구 검색 axios
+  const checkFriend = async event => {
+    const InputValue = inputValue;
+    if (event !== '') {
+      try {
+        const response = await axios.get(
+          `https://i8b202.p.ssafy.io/api/members/${event}`
+        );
+        setDropDownFriends(response.data);
+        setShowDropdown(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  // 친구검색 input
+  const handleInputChange = event => {
+    setInputValue(event.target.value);
+    checkFriend(event.target.value);
+  };
+
+  // 보낼 친구 저장
+  const handleFriendClick = friend => {
+    setInputValue('');
+    setSelectFriends([...selectFriends, friend]);
+    setShowDropdown(false);
+    console.log(2);
+  };
+
+  // 보낼 리스트에서 삭제
+  const handleRemoveClick = noF => {
+    console.log(3);
+    setSelectFriends(
+      selectFriends.filter(selectFriend => selectFriend !== noF)
+    );
+  };
+
   return (
     <div>
       <Header />
@@ -120,12 +173,44 @@ function CreateRoom() {
                         <div className={classes.card_back}>
                           <div className={classes.center_wrap}>
                             <div className={classes.center_section}>
+                              <div>
+                                {selectFriends.map((friend, i) => (
+                                  <div>
+                                    <FriendListItem user={friend.name} />
+                                    <button
+                                      onClick={() => handleRemoveClick(friend)}
+                                    >
+                                      X
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
                               <span>친구초대</span>
                               <div className={classes.form_group}>
                                 <input
                                   className={classes.form_style}
                                   placeholder='아이디를 입력해주세요'
+                                  type='text'
+                                  value={inputValue}
+                                  onChange={handleInputChange}
+                                  onBlur={() => setShowDropdown(false)}
                                 />
+                                {showDropdown && (
+                                  <ul>
+                                    {dropDownFriends.map((friend, i) => (
+                                      <li key={friend.appId}>
+                                        {friend.name}
+                                        <button
+                                          onMouseDown={() =>
+                                            handleFriendClick(friend)
+                                          }
+                                        >
+                                          +
+                                        </button>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
                               </div>
                               <button
                                 className={classes.main__button}

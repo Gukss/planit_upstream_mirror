@@ -13,6 +13,7 @@ function RoomLayout() {
       <Abar />
       <div className='map_camlist'>
         <Map />
+        <VideoComponent />
         <ControlBox />
         <VideoComponent />
         <SaveIcon />

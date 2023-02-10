@@ -3,8 +3,8 @@ import { atom } from 'recoil';
 // 로그인 체크
 export const isLogin = atom({
   key: 'isLogin',
-  // default: false,
-  default: true,
+  default: false,
+  // default: true,
 });
 
 export const dateRangeState = atom({
@@ -100,6 +100,12 @@ export const chatMessages = atom({
   default: [],
 });
 
+export const userInfoState = atom({
+  key: 'userInfo',
+  default: { memberId: -1, memberAppId: '', memberAppName: '' },
+});
+
+//
 export const roomDateInfo = atom({
   key: 'roomDateInfo',
   default: ['2023-02-07', '2023-02-09'],
