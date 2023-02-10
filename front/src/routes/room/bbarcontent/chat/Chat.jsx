@@ -1,5 +1,4 @@
-import { useRecoilValue } from 'recoil';
-import React, { useState } from 'react';
+import React from 'react';
 import Bbar from '../../../../common/bbar/Bbar';
 import classes from './Chat.module.scss';
 import ChatControl from './ChatControl';

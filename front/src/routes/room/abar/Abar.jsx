@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import classes from './Abar.module.scss';
 
 const abarNavItems = [
@@ -44,7 +44,9 @@ function Abar() {
   return (
     <div className={classes.sidebar}>
       <div className={classes.abar}>
-        <div className={classes.abar__logo}>PLAN!T</div>
+        <div className={classes.abar__logo}>
+          <Link to='/'>PLAN!T</Link>
+        </div>
         <div className={classes.abar__menu}>
           {abarNavItems.map(item => (
             <NavLink

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { isLogin } from '../../app/store';
 import planitLogo from '../../app/assets/images/kakao_login.jpg';
@@ -11,7 +12,7 @@ function Header() {
 
   return (
     <header>
-      <a className={classes.logoBtn} href='#!'>
+      <a className={classes.logoBtn} href='http://localhost:3000/'>
         <img src={planitLogo} alt='' />
         <span className={classes.logoText}>PLAN!T</span>
       </a>
@@ -28,12 +29,16 @@ function Header() {
             {/* 프로필 */}
             <div className={classes.profile}>
               반갑습니다. <span className={classes.nickname}>언도</span>님!
-              <i className='bx bxs-user-circle' />
+              <Link to='/mypage'>
+                <i className='bx bxs-user-circle' />
+              </Link>
             </div>
           </div>
         )}
         {/* 방생성 */}
-        <button className={classes.room_create}>일정 만들기</button>
+        <button className={classes.room_create}>
+          <Link to='/createroom'>일정 만들기</Link>
+        </button>
       </div>
     </header>
   );

@@ -12,16 +12,18 @@ export const dateRangeState = atom({
   default: { startDate: new Date(), endDate: new Date() },
 });
 
+// --------------------------- 마커 ---------------------------------
+
+// 검색 결과 중 선택된 위치로 이동하기 위한 정보
 export const searchedPlaces = atom({
   key: 'searchedPlaces',
   default: [],
 });
 
-// 지도 이동을 위한 위치 좌표.
+// 지도 이동을 위한 위치 좌표.{ x: 33.450701, y: 126.570667 }
 export const searchedPlace = atom({
   key: 'searchedPlace',
   default: {},
-  // default: { x: 33.450701, y: 126.570667 },
 });
 
 // 해당 좌표에 마커, 커스텀오버레이 표시 위한 정보
@@ -51,19 +53,6 @@ export const userMarkers = atom({
       y: 32.44,
       marker: {},
     },
-
-    {
-      id: 'dummy_2',
-      category: 'AD5',
-      userColor: '#EB5252',
-      dayColor: '',
-      isConfirmed: false,
-      title: '숙소2',
-      x: 126.44,
-      y: 32.44,
-      marker: {},
-    },
-
     {
       id: 'dummy_3',
       category: 'FD6',
@@ -86,19 +75,25 @@ export const userMarkers = atom({
       y: 32.44,
       marker: {},
     },
-    {
-      id: 'dummy_5',
-      category: 'CE7',
-      userColor: '#FAE635',
-      dayColor: '',
-      isConfirmed: false,
-      title: '카페 아자카파',
-      x: 126.44,
-      y: 32.44,
-      isMarker: {},
-    },
   ],
 });
+
+// 카테고리 마커 이미지 타입 전송
+export const categoryCheck = atom({
+  key: 'categoryCheck',
+  default: {
+    code: '',
+    imageUrl: '',
+  },
+});
+
+// // 카테고리 마커 정보(검색 시 카테고리 마커 초기화용)
+// export const removeCategory = atom({
+//   key: '',
+//   default: [],
+// });
+
+// -----------------------------------------------------------
 
 export const chatMessages = atom({
   key: 'chatMessages',
@@ -108,4 +103,15 @@ export const chatMessages = atom({
 export const roomDateInfo = atom({
   key: 'roomDateInfo',
   default: ['2023-02-07', '2023-02-09'],
+});
+
+export const scheduleArray = atom({
+  key: 'scheduleArray',
+  default: [],
+});
+
+// 친구 초대 알림 체크
+export const eventSource = atom({
+  key: 'eventSource',
+  default: {},
 });

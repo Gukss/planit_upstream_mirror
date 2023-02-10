@@ -1,50 +1,40 @@
 import { useRecoilState } from 'recoil';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import * as StompJs from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
-// import Bbar from '../../../../common/bbar/Bbar';
 import classes from './ChatControl.module.scss';
-// import PlaceBox from './PlaceBox';
 import { chatMessages } from '../../../../app/store';
 
 function ChatControl() {
   const [messages, setMessages] = useRecoilState(chatMessages);
   const client = useRef({});
 
-  const subscribe = () => {
-    client.current.subscribe('/sub/room/1', ({ body }) => {
+  // 여기 1 나중에 룸번호로 변경해야함
+  const subscribe = async () => {
+    await client.current.subscribe('/sub/room/1', ({ body }) => {
       setMessages(messages => [...messages, JSON.parse(body)]);
     });
   };
 
-  const publish = message => {
+  const publish = async message => {
     if (!client.current.connected) {
       return;
     }
 
-    client.current.publish({
+    await client.current.publish({
       destination: '/pub/message',
+      // 여기 1 나중에 룸번호로 변경해야함
       body: JSON.stringify({ roomId: 1, message }),
     });
-  };
-
-  // 제출한 메세지를 state에 담는 함수
-  const submitMessage = e => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-
-      publish(e.target.value);
-
-      e.target.value = '';
-    }
   };
 
   const connect = () => {
     client.current = new StompJs.Client({
       // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
-      webSocketFactory: () => new SockJS('http://localhost:8080/ws-stomp'), // proxy를 통한 접속
+      webSocketFactory: () =>
+        new SockJS('https://i8b202.p.ssafy.io/api/ws-stomp'), // proxy를 통한 접속
       connectHeaders: {},
       debug: str => {
         console.log(str);
@@ -66,6 +56,17 @@ function ChatControl() {
 
   const disconnect = () => {
     client.current.deactivate();
+  };
+
+  // 제출한 메세지를 state에 담는 함수
+  const submitMessage = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+
+      publish(e.target.value);
+
+      e.target.value = '';
+    }
   };
 
   useEffect(() => {
