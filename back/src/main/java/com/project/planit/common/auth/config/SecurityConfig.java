@@ -84,7 +84,6 @@ public class SecurityConfig {
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
-
             .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)
@@ -112,6 +111,7 @@ public class SecurityConfig {
 //            .antMatchers(HttpMethod.POST, "/members").permitAll()
 //            .antMatchers(HttpMethod.POST, "/sign-in").permitAll()
         //서버용
+        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
         .antMatchers( "/api/stoarges").authenticated()
         .antMatchers( "/api/votes").authenticated()
         .antMatchers( "/api/rooms").authenticated()
@@ -129,6 +129,7 @@ public class SecurityConfig {
         return http.build();
 //    http.authorizeHttpRequests()
 //        // POST /users는 인증이 되어야 접근 가능
+//        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //        .antMatchers( "/api/stoarges").authenticated()
 //        .antMatchers( "/api/votes").authenticated()
 //        .antMatchers( "/api/rooms").authenticated()
