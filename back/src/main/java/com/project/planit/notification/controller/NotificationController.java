@@ -37,9 +37,9 @@ public class NotificationController {
 
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
-        Long id = Long.parseLong(claims.get("memberId").toString());
-
-        List<FindNotificationResponse> response=notificationService.findNotification("sksn12",id);
+        Long memberId = Long.parseLong(claims.get("memberId").toString());
+        String memberAppId = claims.get("memberAppId").toString();
+        List<FindNotificationResponse> response=notificationService.findNotification(memberAppId,memberId);
         return ResponseEntity.ok(response);
     }
 
@@ -50,7 +50,7 @@ public class NotificationController {
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
         Long id = Long.parseLong(claims.get("memberId").toString());
-
+        System.out.println(id);
         notificationService.createNotification(request, id);
         return ResponseEntity.ok("ok");
     }

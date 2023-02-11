@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReadMemberResponse {
   @NotNull
+  private Long memberId;
+  @NotNull
   private String memberAppId;
   @NotNull
   private String memberName;

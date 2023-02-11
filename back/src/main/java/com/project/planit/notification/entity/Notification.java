@@ -48,12 +48,17 @@ public class Notification extends BaseEntity {
     @JoinColumn(name = "send_member_id",referencedColumnName = "member_id")
     private Member sendMemberId;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
+    private Room room;
+
     // sendMemberId를 토큰에서 받아와서 생성
-    public static Notification create(boolean read,Member receiverMember,Member sendMemberId){
+    public static Notification create(boolean read,Member receiverMember,Member sendMemberId, Room room){
         Notification notification=Notification.builder()
             .readOrNot(read)
             .receivedMemberId(receiverMember)
             .sendMemberId(sendMemberId) // 나중에 sendMember로 변경
+            .room(room)
             .baseRequest(BaseRequest.builder()
                 .constructor(receiverMember.getAppId())
                 .updater(receiverMember.getAppId())
@@ -63,7 +68,7 @@ public class Notification extends BaseEntity {
     }
 
     public void update(UpdateNotificationRequest request, Member member){
-        this.readOrNot=request.getRead();
+        this.readOrNot=true;
         this.baseRequest = BaseRequest.builder()
                 .constructor(this.baseRequest.getConstructor())
                 .updater(member.getAppId())

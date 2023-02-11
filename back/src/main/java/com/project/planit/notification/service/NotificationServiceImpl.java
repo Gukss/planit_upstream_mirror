@@ -64,6 +64,7 @@ public class NotificationServiceImpl implements NotificationService{
                             .read(NotificationItem.getReadOrNot())
                             .sendMemberName(NotificationItem.getSendMemberId().getName())
                             .createdAt(NotificationItem.getCreated_at())
+                            .roomId(room.getId())
                             .build());
                 }
             }
@@ -87,7 +88,10 @@ public class NotificationServiceImpl implements NotificationService{
             Member snedMember=memberRepository.findById(sendMemberId)
                     .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
-            Notification notification=Notification.create(false, recevierMember,snedMember);
+            Room room = roomRepository.findById(requestItem.getRoomId())
+                    .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
+
+            Notification notification=Notification.create(false, recevierMember,snedMember, room);
 
             notificationRepository.save(notification);
         }

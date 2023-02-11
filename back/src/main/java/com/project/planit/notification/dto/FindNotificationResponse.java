@@ -27,4 +27,6 @@ public class FindNotificationResponse {
   private LocalDateTime createdAt;
   @NotNull
   private Boolean read;
+  @NotNull
+  private Long roomId;
 }
