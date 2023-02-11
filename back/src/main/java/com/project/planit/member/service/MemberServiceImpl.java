@@ -85,6 +85,7 @@ public class MemberServiceImpl implements MemberService {
 
     for(Member member:memberList){
       ReadMemberResponse readMemberResponse=ReadMemberResponse.builder()
+          .memberId(member.getId())
           .memberAppId(member.getAppId())
           .memberName(member.getName())
           .memberEmail(member.getEmail())
