@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -45,6 +46,15 @@ public class JwtFilter extends GenericFilterBean {
       throws IOException, ServletException {
     log.info("jwt filter");
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+
+    ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
+    ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, POST");
+    ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+    HttpServletResponse resp = (HttpServletResponse) servletResponse;
+    if (httpServletRequest.getMethod().equals("OPTIONS")) {
+      resp.setStatus(HttpServletResponse.SC_OK);
+      return;
+    }
 
     try{
       String jwt = parseBearerToken(httpServletRequest);
