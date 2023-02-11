@@ -65,6 +65,18 @@
         border-width: 0.15rem;
         border-color: red;
       }
+      .correct_input:focus {
+        outline-color: green;
+      }
+      .correct_message {
+        font-size: 0.75rem;
+        color: green;
+      }
+      .correct_input {
+        border: solid;
+        border-width: 0.15rem;
+        border-color: green;
+      }
     }
   }
 
