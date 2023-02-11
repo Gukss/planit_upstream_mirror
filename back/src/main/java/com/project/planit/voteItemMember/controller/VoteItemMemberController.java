@@ -1,5 +1,6 @@
 package com.project.planit.voteItemMember.controller;
 
+import com.project.planit.common.auth.jwt.JwtProvider;
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberRequest;
 import com.project.planit.voteItemMember.dto.CreateVoteItemMemberResponse;
 import com.project.planit.voteItemMember.dto.FindVoteItemMemberResponse;
@@ -9,15 +10,13 @@ import com.project.planit.voteItemMember.service.VoteItemMemberServiceImpl;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * packageName    : com.project.planit.voteItemMember.controller fileName       :
@@ -32,10 +31,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/votes/vote-item/user")
 public class VoteItemMemberController {
   private final VoteItemMemberServiceImpl voteItemMemberService;
+  private final JwtProvider jwtProvider;
 
   @PostMapping
-  public ResponseEntity<CreateVoteItemMemberResponse> createVoteItemMember(@RequestBody CreateVoteItemMemberRequest request){
-    VoteItemMember newVoteItemMember = voteItemMemberService.createVoteItemMember(request);
+  public ResponseEntity<CreateVoteItemMemberResponse> createVoteItemMember(@RequestBody CreateVoteItemMemberRequest request, @CookieValue String access) {
+    //todo: token에서 updator 가져오기
+    String parseToken = returnAccessToken(access);
+    Claims claims = jwtProvider.parseClaims(parseToken);
+    Long memberId = Long.parseLong(claims.get("memberId").toString());
+
+    VoteItemMember newVoteItemMember = voteItemMemberService.createVoteItemMember(request, memberId);
     CreateVoteItemMemberResponse createVoteItemMemberResponse = CreateVoteItemMemberResponse.create(
         newVoteItemMember.getMember().getId(), newVoteItemMember.getVoteItem().getId());
     URI uri = URI.create(""+newVoteItemMember.getId());
@@ -53,5 +58,13 @@ public class VoteItemMemberController {
     }
 
     return ResponseEntity.ok().body(resList);
+  }
+
+  private String returnAccessToken(String fullToken){
+    String parseToken = "";
+    if (StringUtils.hasText(fullToken) && fullToken.startsWith("Bearer")) {
+      parseToken = fullToken.substring(7);
+    }
+    return parseToken;
   }
 }

@@ -1,9 +1,12 @@
 package com.project.planit.member.service;
 
+import com.project.planit.common.auth.jwt.JwtProvider;
+import com.project.planit.common.auth.userDetails.PrincipalDetails;
 import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.common.exception.NotFoundMemberException;
 import com.project.planit.member.dto.CreateMemberRequest;
 import com.project.planit.member.dto.ReadMemberResponse;
+import com.project.planit.member.dto.SignInMemberResponse;
 import com.project.planit.member.dto.UpdateMemberRequest;
 
 import com.project.planit.member.entity.Member;
@@ -11,6 +14,10 @@ import com.project.planit.member.repository.MemberRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MemberServiceImpl implements MemberService {
   private final MemberRepository memberRepository;
+
 
   @Transactional
   @Override
@@ -60,9 +68,9 @@ public class MemberServiceImpl implements MemberService {
         .orElseThrow(() -> new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
 
     ReadMemberResponse response=ReadMemberResponse.builder()
-        .appId(member.getAppId())
-        .name(member.getName())
-        .email(member.getEmail())
+        .memberAppId(member.getAppId())
+        .memberName(member.getName())
+        .memberEmail(member.getEmail())
         .build();
 
     return response;
@@ -77,9 +85,9 @@ public class MemberServiceImpl implements MemberService {
 
     for(Member member:memberList){
       ReadMemberResponse readMemberResponse=ReadMemberResponse.builder()
-          .appId(member.getAppId())
-          .name(member.getName())
-          .email(member.getEmail())
+          .memberAppId(member.getAppId())
+          .memberName(member.getName())
+          .memberEmail(member.getEmail())
           .build();
 
       response.add(readMemberResponse);
@@ -106,5 +114,4 @@ public class MemberServiceImpl implements MemberService {
     Member member = memberRepository.findByAppId(memberAppId).orElseThrow(()->new NotFoundMemberException(NotFoundExceptionMessage.USER_NOT_FOUND));
     return member;
   }
-
 }

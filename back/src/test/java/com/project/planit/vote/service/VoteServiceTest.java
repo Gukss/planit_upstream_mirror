@@ -74,7 +74,7 @@ class VoteServiceTest {
                 .baseRequest(makeBaseRequest())
                 .build();
         //만든 request로 방 만들기
-        Room newRoom = roomService.createRoom(roomRequest);
+        Room newRoom = roomService.createRoom(roomRequest, 1L);
 
         //만든 방에 투표 만들기
         CreateVoteRequest voteRequest = CreateVoteRequest.builder()
@@ -82,7 +82,7 @@ class VoteServiceTest {
                 .title("새로운 투표 제목")
                 .baseRequest(makeBaseRequest())
                 .build();
-        Vote newVote = voteService.createVote(voteRequest);
+        Vote newVote = voteService.createVote(voteRequest, 1L);
 
         //when
         //방에 있는 투표를 모두 조회
@@ -107,7 +107,7 @@ class VoteServiceTest {
                 .baseRequest(makeBaseRequest())
                 .build();
         //만든 request로 방 만들기
-        Room newRoom = roomService.createRoom(roomRequest);
+        Room newRoom = roomService.createRoom(roomRequest, 1L);
 
         //만든 방에 투표 만들기
         CreateVoteRequest voteRequest = CreateVoteRequest.builder()
@@ -115,7 +115,7 @@ class VoteServiceTest {
                 .title("새로운 투표 제목")
                 .baseRequest(makeBaseRequest())
                 .build();
-        Vote newVote = voteService.createVote(voteRequest);
+        Vote newVote = voteService.createVote(voteRequest, 1L);
 
         //투표 제목 변경을 위한 updateRequest 만들기
         UpdateVoteRequest updateRequest = UpdateVoteRequest.builder()
@@ -124,7 +124,7 @@ class VoteServiceTest {
                 .build();
 
         //when
-        Vote updatedVote = voteService.updateVote(updateRequest);
+        Vote updatedVote = voteService.updateVote(updateRequest, 1L);
 
         //then
         em.flush();
@@ -154,7 +154,7 @@ class VoteServiceTest {
                 .baseRequest(makeBaseRequest())
                 .build();
         //when
-        return voteService.createVote(request);
+        return voteService.createVote(request, 1L);
     }
 
     private BaseRequest makeBaseRequest() {

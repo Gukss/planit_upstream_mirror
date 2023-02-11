@@ -46,22 +46,25 @@ public class MemberRoomServiceImpl implements MemberRoomService{
 
     @Override
     @Transactional
-    public MemberRoom updateMemberRoom(UpdateMemberRoomRequest request) {
+    public MemberRoom updateMemberRoom(UpdateMemberRoomRequest request, Long memberId) {
         MemberRoom memberRoom=memberRoomRepository.findById(request.getRoomId())
             .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
-        memberRoom.update(memberRoom.getMember().getAppId(),request);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+
+
+        memberRoom.update(request, member);
         return memberRoom;
     }
 
     @Override
     @Transactional
-    public MemberRoom createMemberRoom(CreateMemberRoomRequest request) {
+    public MemberRoom createMemberRoom(CreateMemberRoomRequest request, Long memberId) {
         Room room=roomRepository.findById(request.getRoomId())
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
         // @TODO : 토큰에 어떤 값을 넣을지에 따라 바뀜
-        Long memberId = 1L;
         Member member=memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
         MemberRoom savedMemberRoom = memberRoomRepository.save(MemberRoom.create(request, room, member));

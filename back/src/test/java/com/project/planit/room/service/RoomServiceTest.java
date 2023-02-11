@@ -87,7 +87,7 @@ class RoomServiceTest {
                 .endDate(LocalDate.now())
                 .roomName("수정된 방 이름")
                 .build();
-        Room updatedRoom = roomService.updateRoom(updateRequest);
+        Room updatedRoom = roomService.updateRoom(updateRequest, 1L);
         //then
         em.flush();
         assertEquals(updatedRoom.getRoomName(), newRoom.getRoomName());
@@ -105,6 +105,6 @@ class RoomServiceTest {
                         .build())
                 .build();
         //만든 request로 방 만들기
-        return roomService.createRoom(roomRequest);
+        return roomService.createRoom(roomRequest, 1L);
     }
 }

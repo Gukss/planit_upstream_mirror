@@ -2,6 +2,8 @@ package com.project.planit.vote.service;
 
 import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.common.exception.NotFoundVoteException;
+import com.project.planit.member.entity.Member;
+import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import com.project.planit.util.BaseRequest;
@@ -37,17 +39,23 @@ public class VoteServiceImpl implements VoteService{
   private final RoomRepository roomRepository;
 
   private final VoteRepository voteRepository;
+  private final MemberRepository memberRepository;
+
 
   //방에 해당하는 투표 생성
   @Override
   @Transactional
-  public Vote createVote(@RequestBody CreateVoteRequest request){
+  public Vote createVote(@RequestBody CreateVoteRequest request, Long memberId){
     Long roomId = request.getRoomId();
     Room currentRoom = roomRepository.findById(roomId).orElseThrow(()->new NotFoundVoteException(
         NotFoundExceptionMessage.ROOM_NOT_FOUND));
-    //todo: tocken에서 memberAppId 가져다 사용하기
-    String updater = "Gukss";
-    String constructor = "Gukss";
+    Member member = memberRepository.findById(memberId)
+            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+
+
+    //todo: tocken에서 memberAppId 가져다 사용하기 => O
+    String updater = member.getAppId();
+    String constructor = member.getAppId();
 
     BaseRequest baseRequest = BaseRequest.builder()
         .updater(updater)
@@ -69,10 +77,12 @@ public class VoteServiceImpl implements VoteService{
   //해당하는 투표 제목 갱신
   @Override
   @Transactional
-  public Vote updateVote(UpdateVoteRequest request) {
+  public Vote updateVote(UpdateVoteRequest request, Long memberId) {
     Vote targetVote = voteRepository.findById(request.getVoteId()).orElseThrow(
         ()->new NotFoundVoteException(NotFoundExceptionMessage.VOTE_NOT_FOUND));
-    targetVote.changeTitle(request.getNewTitle()); //jpa는 영속성 컨텍스트의 값을 바꾸기만 해도 update 쿼리 날려준다.
+    Member member=memberRepository.findById(memberId)
+            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
+    targetVote.update(request, member); //jpa는 영속성 컨텍스트의 값을 바꾸기만 해도 update 쿼리 날려준다.
     return targetVote;
   }
 

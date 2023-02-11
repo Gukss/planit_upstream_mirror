@@ -16,6 +16,6 @@ import java.util.List;
  * 2023-01-30        dongk       최초 생성
  */
 public interface VoteItemMemberService {
-    public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request);
+    public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request, Long memberId);
     public List<VoteItemMember> findAllByVoteItemIdAndMemberId(Long voteItemId, Long MemberId);
 }

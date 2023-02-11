@@ -1,6 +1,7 @@
 package com.project.planit.memberRoom.controller;
 
 
+import com.project.planit.common.auth.jwt.JwtProvider;
 import com.project.planit.memberRoom.dto.CreateMemberRoomRequest;
 import com.project.planit.memberRoom.dto.FindMemberRoomResponse;
 import com.project.planit.memberRoom.dto.UpdateMemberRoomRequest;
@@ -14,8 +15,10 @@ import com.project.planit.memberRoom.entity.MemberRoom;
 
 import com.project.planit.room.entity.Room;
 
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -33,10 +36,15 @@ import java.util.ArrayList;
 @RequestMapping("/rooms/users")
 public class MemberRoomController {
   private final MemberRoomServiceImpl memberRoomService;
+  private final JwtProvider jwtProvider;
 
   @GetMapping
-  public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(){
-    Long id=1L; // @TODO : 나중에 토큰 아이디로 변환
+  public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(@CookieValue String access) {
+//    Long id=1L; // @TODO : 나중에 토큰 아이디로 변환 => O
+    String parseToken = returnAccessToken(access);
+    Claims claims = jwtProvider.parseClaims(parseToken);
+    Long id = Long.parseLong(claims.get("memberId").toString());
+
     List<MemberRoom> foundMemberRoom = memberRoomService.findMemberRoom(id);
 
     List<FindMemberRoomResponse> resList = new ArrayList<>();
@@ -49,8 +57,12 @@ public class MemberRoomController {
   }
 
   @PostMapping
-  public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request){
-    MemberRoom memberRoom = memberRoomService.createMemberRoom(request);
+  public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request, @CookieValue String access) {
+    String parseToken = returnAccessToken(access);
+    Claims claims = jwtProvider.parseClaims(parseToken);
+    Long memberId = Long.parseLong(claims.get("memberId").toString());
+
+    MemberRoom memberRoom = memberRoomService.createMemberRoom(request, memberId);
     Long roomId = memberRoom.getRoom().getId();
     CreateMemberRoomResponse createMemberRoomResponse = CreateMemberRoomResponse.builder()
         .roomId(roomId)
@@ -60,8 +72,12 @@ public class MemberRoomController {
   }
 
   @PatchMapping
-  public ResponseEntity<UpdateMemberRoomResponse> updateMemberRoom(@RequestBody UpdateMemberRoomRequest request){
-    MemberRoom memberRoom = memberRoomService.updateMemberRoom(request);
+  public ResponseEntity<UpdateMemberRoomResponse> updateMemberRoom(@RequestBody UpdateMemberRoomRequest request, @CookieValue String access) {
+    String parseToken = returnAccessToken(access);
+    Claims claims = jwtProvider.parseClaims(parseToken);
+    Long memberId = Long.parseLong(claims.get("memberId").toString());
+
+    MemberRoom memberRoom = memberRoomService.updateMemberRoom(request, memberId);
 
     Room room = memberRoom.getRoom();
     Member member = memberRoom.getMember();
@@ -72,5 +88,13 @@ public class MemberRoomController {
         .memberId(member.getId())
         .build();
     return ResponseEntity.ok().body(updateMemberRoomResponse);
+  }
+
+  private String returnAccessToken(String fullToken){
+    String parseToken = "";
+    if (StringUtils.hasText(fullToken) && fullToken.startsWith("Bearer")) {
+      parseToken = fullToken.substring(7);
+    }
+    return parseToken;
   }
 }

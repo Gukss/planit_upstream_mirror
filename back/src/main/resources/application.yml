@@ -44,3 +44,10 @@ logging:
       springframework:
         boot:
           autoconfigure: info
+jwt:
+  header: Authorization
+  secret: PlanitplanitPlanitplanitPlanitplanitPlaintplanitPlanitplanitPlaint
+  #  30분 1000L * 30 * 60
+  access-token-validity-in-seconds: 1800000
+  #  일주일 1000L * 60 * 60 * 24 * 7
+  refresh-token-validity-in-seconds: 604800000

@@ -1,6 +1,7 @@
 package com.project.planit.storage.controller;
 
 
+import com.project.planit.common.auth.jwt.JwtProvider;
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.dto.UpdateRoomResponse;
 import com.project.planit.room.entity.Room;
@@ -11,30 +12,33 @@ import com.project.planit.storage.dto.UpdateStorageResponse;
 import com.project.planit.storage.entity.Category;
 import com.project.planit.storage.entity.Storage;
 import com.project.planit.storage.service.StorageServiceImpl;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/storages")
 public class StorageController {
     private final StorageServiceImpl storageService;
+    private final JwtProvider jwtProvider;
+
     @GetMapping(path="/rooms/{roomId}")
     public ResponseEntity<?> findStorageList(@PathVariable Long roomId){
      return ResponseEntity.ok(storageService.findStorageList(roomId));
     }
 
     @PostMapping
-    public ResponseEntity<CreateStorageResponse> createStorage(@RequestBody CreateStorageRequest request){
-        // @TODO : 토큰 아이디로 변환
-        Long reqestMemberId=1L;
+    public ResponseEntity<CreateStorageResponse> createStorage(@RequestBody CreateStorageRequest request, @CookieValue String access) {
+        // @TODO : 토큰 아이디로 변환 => O
+//        Long reqestMemberId=1L;
+
+        String parseToken = returnAccessToken(access);
+        Claims claims = jwtProvider.parseClaims(parseToken);
+        Long reqestMemberId = Long.parseLong(claims.get("memberId").toString());
+
         Storage newStorage = storageService.createStorage(request, reqestMemberId);
         String name = newStorage.getStorageName();
         Long storagesId = newStorage.getId();
@@ -52,14 +56,27 @@ public class StorageController {
     }
 
     @PatchMapping
-    public ResponseEntity<UpdateStorageResponse> updateStorage(@RequestBody UpdateStorageRequest request){
-        // @TODO : 토큰 아이디로 변환
-        Long memberId=1L;
+    public ResponseEntity<UpdateStorageResponse> updateStorage(@RequestBody UpdateStorageRequest request, @CookieValue String access) {
+        // @TODO : 토큰 아이디로 변환 => O
+//        Long memberId=1L;
+
+        String parseToken = returnAccessToken(access);
+        Claims claims = jwtProvider.parseClaims(parseToken);
+        Long memberId = Long.parseLong(claims.get("memberId").toString());
+
         Storage updatedStorage = storageService.updateStorage(request, memberId);
         Member member = updatedStorage.getMember();
         Room room = updatedStorage.getRoom();
         UpdateStorageResponse updateStorageResponse = UpdateStorageResponse.create(member.getId(), updatedStorage.getId(), updatedStorage.getStorageName(), updatedStorage.getConfirmed(), updatedStorage.getLat(), updatedStorage.getLng(), updatedStorage.getDayOrder(), updatedStorage.getCategoryName(), room.getId());
         ResponseEntity res = ResponseEntity.ok().body(updateStorageResponse);
         return res;
+    }
+
+    private String returnAccessToken(String fullToken){
+        String parseToken = "";
+        if (StringUtils.hasText(fullToken) && fullToken.startsWith("Bearer")) {
+            parseToken = fullToken.substring(7);
+        }
+        return parseToken;
     }
 }

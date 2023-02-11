@@ -66,12 +66,12 @@ public class MemberRoom extends BaseEntity {
         return memberRoom;
     }
 
-    public void update(String memberAppId, UpdateMemberRoomRequest request){
+    public void update(UpdateMemberRoomRequest request, Member member){
         this.participation=request.getParticipation();
-        this.baseRequest=BaseRequest.builder()
-            .constructor(this.baseRequest.getConstructor())
-            .updater(memberAppId)
-            .build();
+        this.baseRequest = BaseRequest.builder()
+                .constructor(this.baseRequest.getConstructor())
+                .updater(member.getAppId())
+                .build();
     }
 
     //todo: 일단 colorCode 없는 버전으로 만들었다.

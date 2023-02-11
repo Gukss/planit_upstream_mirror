@@ -94,4 +94,22 @@ public class JwtService {
       return false;
     }
   }
+
+  /**
+   * 토큰의 Claim 디코딩
+   */
+  private Claims getAllClaims(String token) {
+    return Jwts.parser()
+        .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+        .parseClaimsJws(token)
+        .getBody();
+  }
+
+  /**
+   * Claim 에서 username 가져오기
+   */
+  public Long getMemberIdFromToken(String token) {
+    Long memberId = Long.parseLong(String.valueOf(getAllClaims(token).get("memberId")));
+    return memberId;
+  }
 }

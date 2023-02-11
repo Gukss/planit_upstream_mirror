@@ -1,5 +1,6 @@
 package com.project.planit.member.entity;
 
+import com.project.planit.common.auth.userDetails.PrincipalDetails;
 import com.project.planit.member.dto.CreateMemberRequest;
 import com.project.planit.member.dto.UpdateMemberRequest;
 import javax.persistence.*;
@@ -58,6 +59,8 @@ public class Member extends BaseEntity{
   @NotNull
   private BaseRequest baseRequest;
 
+  private String refreshToken;
+
   public static Member create(CreateMemberRequest request){
     Member member=Member.builder()
         .appId(request.getMemberAppId())
@@ -81,5 +84,19 @@ public class Member extends BaseEntity{
             .constructor(this.appId)
             .updater(request.getMemberAppId())
             .build();
+  }
+
+  public static Member of(PrincipalDetails principalDetails) {
+    //todo: 여기도 조금 이상하다 한 번 더 보기
+    Member member = principalDetails.getMember();
+    return member;
+  }
+
+  public void updateRefreshToken(String refreshToken) {
+    this.refreshToken = refreshToken;
+  }
+
+  public void updatePwd(String newPwd){
+    this.appPwd = newPwd;
   }
 }

@@ -62,7 +62,11 @@ public class Notification extends BaseEntity {
         return notification;
     }
 
-    public void update(UpdateNotificationRequest request){
+    public void update(UpdateNotificationRequest request, Member member){
         this.readOrNot=request.getRead();
+        this.baseRequest = BaseRequest.builder()
+                .constructor(this.baseRequest.getConstructor())
+                .updater(member.getAppId())
+                .build();
     }
 }

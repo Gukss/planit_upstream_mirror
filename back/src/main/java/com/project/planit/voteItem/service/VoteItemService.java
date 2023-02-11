@@ -21,7 +21,7 @@ import java.util.Optional;
  * 2023-01-29        Gukss       최초 생성
  */
 public interface VoteItemService {
-    public VoteItem createVoteItem(CreateVoteItemRequest request);
+    public VoteItem createVoteItem(CreateVoteItemRequest request, Long memberId);
     public List<VoteItem> findAllByVote(Vote vote);
-    public VoteItem updateVoteItem(UpdateVoteItemRequest request);
+    public VoteItem updateVoteItem(UpdateVoteItemRequest request, Long memberId);
 }
