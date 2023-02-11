@@ -14,14 +14,17 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+  mvc:
+    dispatch-options-request: true
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: create
-#      ddl-auto: none
+#      ddl-auto: create
+      ddl-auto: none
 
   #socket test
   devtools:
