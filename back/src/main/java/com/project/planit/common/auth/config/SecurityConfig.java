@@ -32,7 +32,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 /**
  * packageName    : com.project.planit.common.auth.config fileName       : SecurityConfig author
@@ -54,7 +53,6 @@ public class SecurityConfig {
   private final MemberRepository memberRepository;
   private final JwtProvider jwtProvider;
   private final JwtRefreshProvider jwtRefreshProvider;
-  private final CorsFilter corsFilter;
 
 
   private final PrincipalDetailsService principalDetailsService;
@@ -88,7 +86,6 @@ public class SecurityConfig {
   @Order(SecurityProperties.BASIC_AUTH_ORDER)
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
-//            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
             .cors().configurationSource(corsConfigurationSource())
             .and()
             .exceptionHandling()
@@ -133,46 +130,21 @@ public class SecurityConfig {
         .and()
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
-//    http.authorizeHttpRequests()
-//        // POST /users는 인증이 되어야 접근 가능
-//        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//        .antMatchers( "/api/stoarges").authenticated()
-//        .antMatchers( "/api/votes").authenticated()
-//        .antMatchers( "/api/rooms").authenticated()
-//        .antMatchers( "/api/rooms").authenticated()
-//        .antMatchers( "/api/rooms/users").authenticated()
-//        .antMatchers( "/api/chatting").authenticated()
-//        .antMatchers( "/api/notification").authenticated()
-//        .antMatchers( "/api/votes/vote-item").authenticated()
-//        .antMatchers( "/api/votes/vote-item/user").authenticated()
-//        // 그외 모든 요청은 허용
-//        .anyRequest().permitAll()
-//        .and()
-//        .logout()
-//        .logoutSuccessUrl("/");
-////        .and()
-////        .oauth2Login()
-////        .successHandler(authenticationSuccessHandler())
-////        .userInfoEndpoint() // OAuth2 로그인 성공 이후 사용자 정보를 가져올 때 설정을 저장
-////        .userService(principalDetailsService); // OAuth2 로그인 성공 시, 후작업을 진행할 UserService 인터페이스 구현체 등록
-//
-//    // jwt 사용을 위해 session 해제
-//    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//        .and()
-////        .addFilter(corsFilter)
-//        .formLogin().disable() //form login 안함
-//        .httpBasic().disable();
-//
-//    // jwt 필터 추가
-//    //addFilterBefore(new JwtFilterConfig(jwtService), ...)
-//    http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//    // jwt 인증 실패시 exception handler 등록
-//    http.exceptionHandling()
-//        .accessDeniedHandler(jwtAccessDeniedHandler)
-//        .authenticationEntryPoint(jwtAuthenticationEntryPoint);
-//
-//    return http.build();
+  }
+
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+
+    configuration.addAllowedOriginPattern("*");
+    configuration.addAllowedHeader("*");
+    configuration.addAllowedMethod("*");
+    configuration.addExposedHeader(HttpHeaders.AUTHORIZATION);
+    configuration.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 
   @Bean
