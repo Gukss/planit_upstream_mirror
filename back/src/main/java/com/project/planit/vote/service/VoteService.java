@@ -33,7 +33,7 @@ public interface VoteService {
      * @param request the CreateVoteRequest
      * @return the vote; 생성된 투표
      */
-    public Vote createVote(CreateVoteRequest request);
+    public Vote createVote(CreateVoteRequest request, Long memberId);
 
 
     /**
@@ -57,7 +57,7 @@ public interface VoteService {
      * @param request the UpdateVoteRequest
      * @return the Optional<vote>; 갱신한 투표
      */
-    public Vote updateVote(UpdateVoteRequest request);
+    public Vote updateVote(UpdateVoteRequest request, Long memberId);
 
     public Vote findById(Long id);
 }

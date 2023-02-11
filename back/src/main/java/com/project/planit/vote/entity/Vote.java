@@ -1,11 +1,13 @@
 package com.project.planit.vote.entity;
 
+import com.project.planit.member.entity.Member;
 import com.project.planit.room.entity.Room;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.vote.dto.FindVoteResponse;
 import javax.validation.constraints.NotNull;
 
 import com.project.planit.util.BaseRequest;
+import com.project.planit.vote.dto.UpdateVoteRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -74,6 +76,14 @@ public class Vote extends BaseEntity{
             newTitle = "untitle";
         }
         this.title = newTitle;
+    }
+
+    public void update(UpdateVoteRequest request, Member member){
+        this.title = request.getNewTitle();
+        this.baseRequest = BaseRequest.builder()
+                .constructor(this.baseRequest.getConstructor())
+                .updater(member.getAppId())
+                .build();
     }
 
     public FindVoteResponse createFindVoteResponse(){

@@ -1,10 +1,12 @@
 package com.project.planit.voteItem.entity;
 
+import com.project.planit.member.entity.Member;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.voteItem.dto.FindVoteItemResponse;
 
+import com.project.planit.voteItem.dto.UpdateVoteItemRequest;
 import lombok.*;
 
 import javax.persistence.*;
@@ -55,6 +57,14 @@ public class VoteItem extends BaseEntity{
             newName = "untitle";
         }
         this.voteItemName = newName;
+    }
+
+    public void update(UpdateVoteItemRequest updateVoteItemRequest, Member member){
+        this.voteItemName = updateVoteItemRequest.getNewVoteItemName();
+        this.baseRequest = BaseRequest.builder()
+                .constructor(this.baseRequest.getConstructor())
+                .updater(member.getAppId())
+                .build();
     }
 
     public static VoteItem create(String voteItemName, BaseRequest baseRequest, Vote vote){

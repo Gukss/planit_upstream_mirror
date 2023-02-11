@@ -1,6 +1,7 @@
 package com.project.planit.voteItemMember.service;
 
 import com.project.planit.common.exception.NotFoundExceptionMessage;
+import com.project.planit.common.exception.NotFoundMemberRoomException;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.util.BaseRequest;
@@ -38,20 +39,19 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
 
     @Override
     @Transactional
-    public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request) {
-        //todo: memberId는 토큰에서 받아온다. 변경하기
-        Long memberId = request.getMemberId();
-        //todo: BaseRequest 내용도 토큰에서 appId 받아오기
-        String constructor = "Gukss";
-        String updater = "Gukss";
+    public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request, Long memberId) {
+        //todo: memberId는 토큰에서 받아온다. 변경하기 => O
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+        //todo: BaseRequest 내용도 토큰에서 appId 받아오기 => O
+        String constructor = member.getAppId();
+        String updater = member.getAppId();
         BaseRequest baseRequest = BaseRequest.builder()
             .constructor(constructor)
             .updater(updater)
             .build();
         Long voteItemId = request.getVoteItemId();
 
-        Member member = memberRepository.findById(memberId)
-            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
         VoteItem voteItem = voteItemRepository.findById(voteItemId)
             .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.VOTE_ITEM_LIST_NOT_FOUND));
 

@@ -32,6 +32,7 @@ public class ChattingController {
     @PostMapping
     public ResponseEntity<?> createChattingMessage(@RequestBody CreateChattingRequest request){
         //todo: memberId 토큰값으로 바꿔주기
+
         Long memberId = 1L;
         chattingService.createChattingMessage(request,memberId);
         return ResponseEntity.ok("ok");

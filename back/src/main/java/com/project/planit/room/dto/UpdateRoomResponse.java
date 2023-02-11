@@ -19,10 +19,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class UpdateRoomResponse {
-  Long roomId;
-  String roomName;
-  LocalDate startDate;
-  LocalDate endDate;
+  private Long roomId;
+  private String roomName;
+  private LocalDate startDate;
+  private LocalDate endDate;
 
   public static UpdateRoomResponse create(Long roomId, String roomName, LocalDate startDate, LocalDate endDate){
     return UpdateRoomResponse.builder()

@@ -1,5 +1,7 @@
 package com.project.planit.room.entity;
 
+import com.project.planit.member.entity.Member;
+import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.util.BaseEntity;
 import com.project.planit.util.BaseRequest;
 import lombok.AccessLevel;
@@ -62,6 +64,17 @@ public class Room extends BaseEntity{
     public void changeDate(LocalDate startDate, LocalDate endDate){
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public void update(UpdateRoomRequest request, Member member){
+        this.roomName = request.getRoomName();
+        this.endDate = request.getEndDate();
+        this.startDate = request.getStartDate();
+
+        this.baseRequest = BaseRequest.builder()
+                .constructor(this.baseRequest.getConstructor())
+                .updater(member.getAppId())
+                .build();
     }
 
     public static Room create(String roomName, LocalDate startDate, LocalDate endDate, BaseRequest baseRequest){

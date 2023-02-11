@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class CreateRoomResponse {
-  Long roomId;
+  private Long roomId;
 
   public static CreateRoomResponse create(Long roomId){
     CreateRoomResponse createRoomResponse = CreateRoomResponse.builder()

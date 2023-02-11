@@ -1,6 +1,8 @@
 package com.project.planit.room.service;
 
 import com.project.planit.common.exception.NotFoundExceptionMessage;
+import com.project.planit.member.entity.Member;
+import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.room.dto.CreateRoomRequest;
 import com.project.planit.room.dto.UpdateRoomRequest;
 import com.project.planit.room.entity.Room;
@@ -10,8 +12,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CookieValue;
 
 /**
  * packageName    : com.project.planit.room.service
@@ -28,8 +32,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly=true)
 @RequiredArgsConstructor
+@Slf4j
 public class RoomServiceImpl implements RoomService{
     private final RoomRepository roomRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public Room findById(Long id) {
@@ -38,13 +44,16 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    public Room createRoom(CreateRoomRequest request) {
-        System.out.println(request.getStartDate()+" "+request.getStartDate().getClass().getName());
-        System.out.println(request.getEndDate()+" "+request.getEndDate().getClass().getName());
-        System.out.println("여기!!");
+    public Room createRoom(CreateRoomRequest request, Long memberId) {
+//        System.out.println(request.getStartDate()+" "+request.getStartDate().getClass().getName());
+//        System.out.println(request.getEndDate()+" "+request.getEndDate().getClass().getName());
+//        System.out.println("여기!!");
         //todo: tocken에서 memberAppId 가져다 사용하기
-        String updater = "Gukss";
-        String constructor = "Gukss";
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+
+        String updater = member.getAppId();
+        String constructor = member.getAppId();
 
         BaseRequest baseRequest = BaseRequest.builder()
             .updater(updater)
@@ -62,13 +71,15 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    public Room updateRoom(UpdateRoomRequest request) {
+    public Room updateRoom(UpdateRoomRequest request, Long memberId) {
         Room targetRoom = roomRepository.findById(request.getRoomId())
             .orElseThrow(
                 ()-> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND)
             );
-        targetRoom.changeName(request.getRoomName());
-        targetRoom.changeDate(request.getStartDate(), request.getEndDate());
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+
+        targetRoom.update(request, member);
         return targetRoom;
     }
 }

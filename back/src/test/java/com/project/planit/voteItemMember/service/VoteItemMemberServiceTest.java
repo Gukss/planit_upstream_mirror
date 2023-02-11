@@ -87,7 +87,7 @@ class VoteItemMemberServiceTest {
     //======= method =======
 
     private VoteItemMember makeVoteItemMember(BaseRequest baseRequest, Long memberId, Long voteItemId) {
-        return voteItemMemberService.createVoteItemMember(makeRequest(memberId, voteItemId, baseRequest));
+        return voteItemMemberService.createVoteItemMember(makeRequest(memberId, voteItemId, baseRequest), 1L);
     }
 
     private Long returnMemberId(){

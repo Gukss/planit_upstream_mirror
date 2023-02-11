@@ -2,6 +2,8 @@ package com.project.planit.voteItem.service;
 
 import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.common.exception.NotFoundVoteException;
+import com.project.planit.member.entity.Member;
+import com.project.planit.member.repository.MemberRepository;
 import com.project.planit.util.BaseRequest;
 import com.project.planit.vote.entity.Vote;
 import com.project.planit.vote.repository.VoteRepository;
@@ -35,17 +37,22 @@ public class VoteItemServiceImpl implements VoteItemService {
 
     private final VoteItemRepository voteItemRepository;
     private final VoteRepository voteRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     @Transactional
-    public VoteItem createVoteItem(CreateVoteItemRequest request) {
+    public VoteItem createVoteItem(CreateVoteItemRequest request, Long memberId) {
         Long voteId = request.getVoteId();
 
         String voteItemName = request.getVoteItemName();
         Vote vote = voteRepository.findById(voteId).orElseThrow(()->new NotFoundVoteException(NotFoundExceptionMessage.VOTE_NOT_FOUND));
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+
         //todo: constructor, updator 토큰에서 가지고 오기
-        String constructor = "Gukss";
-        String updator = "Gukss";
+        String constructor = member.getAppId();
+        String updator = member.getAppId();
         BaseRequest baseRequest = BaseRequest.builder()
                 .updater(updator)
                 .constructor(constructor)
@@ -64,10 +71,14 @@ public class VoteItemServiceImpl implements VoteItemService {
     @Override
     @Transactional
     //todo: service에 모두 transactional 달려있는지 확인하기
-    public VoteItem updateVoteItem(UpdateVoteItemRequest request) {
+    public VoteItem updateVoteItem(UpdateVoteItemRequest request, Long memberId) {
         VoteItem targetVoteItem = voteItemRepository.findById(request.getVoteItemId()).orElseThrow(
             ()->new NotFoundExceptionMessage(NotFoundExceptionMessage.VOTE_ITEM_NOT_FOUND));
-        targetVoteItem.changeVoteItemName(request.getNewVoteItemName());
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
+
+        targetVoteItem.update(request, member);
+
         return targetVoteItem;
     }
 }
