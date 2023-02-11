@@ -11,16 +11,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notification")
 public class NotificationController {
     private final NotificationServiceImpl notificationService;
+
+
+    // SSE객체 생성을 위한 컨트롤러
+    @GetMapping(value = "/subscribe", produces = "text/event-stream")
+    public SseEmitter subscribe(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
+        Long memberId=1L;
+        return notificationService.subscribe(memberId,lastEventId);
+    }
 
     @GetMapping
     public ResponseEntity<List<FindNotificationResponse>> findNotification(){
@@ -35,6 +45,13 @@ public class NotificationController {
     @PostMapping
     public ResponseEntity<String> createNotification(@RequestBody List<CreateNotificationRequest> request){
         notificationService.createNotification(request);
+
+        for (CreateNotificationRequest notificationItem:request){
+            System.out.println("컨트롤러의 for문");
+            // value header에서 받아오는 id값으로 변경
+            notificationService.send(1L, "youngman님이 초대 하셨습니다","message");
+        }
+
         return ResponseEntity.ok("ok");
     }
 

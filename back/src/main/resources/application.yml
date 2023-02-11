@@ -21,7 +21,6 @@ spring:
 #      ddl-auto: create
       ddl-auto: none
 
-
   #socket test
   devtools:
     livereload:
@@ -30,7 +29,6 @@ spring:
       enabled: false
   freemarker:
     cache: false
-
 
 logging:
   level:

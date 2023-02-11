@@ -1,6 +1,5 @@
 package com.project.planit.notification.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +14,4 @@ import javax.validation.constraints.NotNull;
 public class CreateNotificationRequest {
     @NotNull
     private String receiverMemberId;
-
 }
