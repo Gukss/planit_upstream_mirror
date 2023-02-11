@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
  * NOTE ----------------------------------------------------------- 2023-02-01        SSAFY       최초
  * 생성
  */
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 @Builder
 public class ReadMemberResponse {

@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
  * NOTE ----------------------------------------------------------- 2023-01-28        SSAFY       최초
  * 생성
  */
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 @Builder
 public class UpdateMemberRequest {

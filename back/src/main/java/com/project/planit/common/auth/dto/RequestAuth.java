@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
  * 생성
  */
 @Builder
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 public class RequestAuth {
 

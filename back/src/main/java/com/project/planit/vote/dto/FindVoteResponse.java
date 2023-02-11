@@ -21,9 +21,9 @@ import java.util.List;
  * -----------------------------------------------------------
  * 2023-01-29        Gukss       최초 생성
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class FindVoteResponse {
         private Long voteId;

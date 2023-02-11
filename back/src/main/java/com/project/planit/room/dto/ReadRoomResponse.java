@@ -15,9 +15,9 @@ import java.time.LocalDate;
  * NOTE ----------------------------------------------------------- 2023-01-30        SSAFY       최초
  * 생성
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class ReadRoomResponse {
     private Long roomId;
