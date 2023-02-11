@@ -21,6 +21,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	implementation 'org.springframework.boot:spring-boot-starter-websocket:'
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -41,6 +42,12 @@ dependencies {
 	implementation 'org.webjars:sockjs-client:1.1.2'
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	implementation 'com.google.code.gson:gson:2.8.0'
+
+	///jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 }
 
