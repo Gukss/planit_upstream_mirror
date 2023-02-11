@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
  * NOTE ----------------------------------------------------------- 2023-01-31        Gukss       최초
  * 생성
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class FindVoteItemMemberListResponse {
   List<VoteItemMember> foundVoteItemMembers;

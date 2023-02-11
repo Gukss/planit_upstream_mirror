@@ -17,9 +17,9 @@ import java.util.List;
  * -----------------------------------------------------------
  * 2023-01-30        dongk       최초 생성
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class FindVoteItemListResponse {
     List<VoteItem> foundVoteItems;

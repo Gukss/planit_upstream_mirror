@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
  * -----------------------------------------------------------
  * 2023-02-04        dongk       최초 생성
  */
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 @Builder
 public class UpdateMemberRoomResponse {

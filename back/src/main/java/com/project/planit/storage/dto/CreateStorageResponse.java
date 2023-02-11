@@ -16,9 +16,9 @@ import javax.validation.constraints.NotNull;
  * -----------------------------------------------------------
  * 2023-02-04        dongk       최초 생성
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class CreateStorageResponse {
     @NotNull

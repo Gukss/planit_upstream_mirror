@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
  * NOTE ----------------------------------------------------------- 2023-01-30        SSAFY       최초
  * 생성
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class UpdateRoomResponse {
   private Long roomId;

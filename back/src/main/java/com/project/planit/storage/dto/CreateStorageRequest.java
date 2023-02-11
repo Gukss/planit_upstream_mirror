@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
  * NOTE ----------------------------------------------------------- 2023-01-31        SSAFY       최초
  * 생성
  */
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 @Builder
 public class CreateStorageRequest {

@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 @Builder
 public class CreateChattingMessageRequest {

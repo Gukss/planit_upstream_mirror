@@ -18,9 +18,9 @@ import lombok.NoArgsConstructor;
  * 2023-01-26        Gukss       최초생성
  * 2023-02-01        Gukss       REST API 문서에 맞게 수정
  */
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class CreateVoteResponse {
   private Long voteId;

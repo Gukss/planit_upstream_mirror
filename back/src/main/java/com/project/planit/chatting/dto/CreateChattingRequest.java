@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
-@Data
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
 @Builder
 public class CreateChattingRequest {
