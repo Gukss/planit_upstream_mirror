@@ -38,7 +38,7 @@ public class authController {
 
   @PostMapping("/sign-in") // Account 인증 API
   public ResponseEntity<SignInMemberResponse> authorize(@RequestBody SignInMemberRequest request, HttpServletResponse httpServletResponse){
-
+    //todo: 로그인하면 db에 refresh 저장하도록 변경 필요
     ResponseAuth responseAuth = authService.createAccessToken(request.getMemberAppId(),
         request.getMemberAppPwd());
     // response header 에도 넣고 응답 객체에도 넣는다.
@@ -55,7 +55,7 @@ public class authController {
         responseAuth.getAccessToken());
 
 
-    return ResponseEntity.ok().body(signInMemberResponse);
+    return ResponseEntity.ok(signInMemberResponse);
   }
 
   @PostMapping("/token/refresh") // 리프레시 토큰을 활용한 액세스 토큰 갱신
