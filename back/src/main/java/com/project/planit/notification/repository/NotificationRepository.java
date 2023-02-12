@@ -8,6 +8,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NotificationRepository extends JpaRepository<Notification,Long> {
-  List<Notification> findAllBySendMemberId (Member sendMemberId);
+  List<Notification> findAllByReceivedMemberId (Member receivedMemberId);
   Optional<Notification> findById(Long notificationId);
 }
