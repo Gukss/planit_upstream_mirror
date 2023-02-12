@@ -9,6 +9,7 @@ import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,19 +23,19 @@ public class NotificationController {
     private final NotificationServiceImpl notificationService;
     private final JwtProvider jwtProvider;
 
-
     // SSE객체 생성을 위한 컨트롤러
     @GetMapping(value = "/subscribe", produces = "text/event-stream")
-    public SseEmitter subscribe(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
-        Long memberId=1L;
-        return notificationService.subscribe(memberId,lastEventId);
+    public SseEmitter subscribe(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId, @CookieValue String access) {
+        String parseToken = returnAccessToken(access);
+        Claims claims = jwtProvider.parseClaims(parseToken);
+        Long id = Long.parseLong(claims.get("memberId").toString());
+        return notificationService.subscribe(id,lastEventId);
     }
+
 
     @GetMapping
     public ResponseEntity<List<FindNotificationResponse>> findNotification(@RequestHeader("Authorization") String access) {
         // todo : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함 => O
-//        Long id=1L;
-
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
         Long memberId = Long.parseLong(claims.get("memberId").toString());
@@ -44,14 +45,21 @@ public class NotificationController {
     }
 
     // 알림 생성
-    // TODO : 헤더 토큰에 sendMemberId가져와서 사용 => O
     @PostMapping
     public ResponseEntity<String> createNotification(@RequestBody List<CreateNotificationRequest> request, @RequestHeader("Authorization") String access) {
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
+        System.out.println("여까진 되자나!");
         Long id = Long.parseLong(claims.get("memberId").toString());
         System.out.println(id);
         notificationService.createNotification(request, id);
+
+        for (CreateNotificationRequest notificationItem:request){
+            String inviteMessage=notificationItem.getReceiverMemberId()+"님이 초대 하셨습니다";
+            // value header에서 받아오는 id값으로 변경
+            notificationService.send(id, inviteMessage,"message");
+        }
+
         return ResponseEntity.ok("ok");
     }
 

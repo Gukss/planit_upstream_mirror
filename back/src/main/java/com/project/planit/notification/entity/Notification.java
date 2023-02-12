@@ -60,8 +60,8 @@ public class Notification extends BaseEntity {
             .sendMemberId(sendMemberId) // 나중에 sendMember로 변경
             .room(room)
             .baseRequest(BaseRequest.builder()
-                .constructor(receiverMember.getAppId())
-                .updater(receiverMember.getAppId())
+                .constructor(sendMemberId.getAppId())
+                .updater(sendMemberId.getAppId())
                 .build())
             .build();
         return notification;

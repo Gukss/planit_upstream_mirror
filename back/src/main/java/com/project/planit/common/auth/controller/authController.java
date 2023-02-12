@@ -7,19 +7,14 @@ import com.project.planit.common.auth.service.AuthService;
 import com.project.planit.common.auth.util.CookieUtils;
 import com.project.planit.member.dto.SignInMemberRequest;
 import com.project.planit.member.dto.SignInMemberResponse;
-import com.project.planit.member.service.MemberService;
-import io.jsonwebtoken.Claims;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
