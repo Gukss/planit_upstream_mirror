@@ -44,7 +44,7 @@ export const userMarkers = atom({
       id: 'dummy_1',
       category: 'AD5',
       userColor: '#EB5252',
-      dayColor: '',
+      day: 0,
       isConfirmed: false,
       title: '숙소1',
       x: 126.44,
@@ -56,7 +56,7 @@ export const userMarkers = atom({
       id: 'dummy_2',
       category: 'AD5',
       userColor: '#EB5252',
-      dayColor: '',
+      day: 0,
       isConfirmed: false,
       title: '숙소2',
       x: 126.44,
@@ -68,7 +68,7 @@ export const userMarkers = atom({
       id: 'dummy_3',
       category: 'FD6',
       userColor: '#90CE0A',
-      dayColor: '',
+      day: 0,
       isConfirmed: false,
       title: '식당1',
       x: 126.44,
@@ -79,7 +79,7 @@ export const userMarkers = atom({
       id: 'dummy_4',
       category: 'AT4',
       userColor: '#7997FE',
-      dayColor: '',
+      day: 0,
       isConfirmed: false,
       title: '관광명소 성심당',
       x: 126.44,
@@ -90,7 +90,7 @@ export const userMarkers = atom({
       id: 'dummy_5',
       category: 'CE7',
       userColor: '#FAE635',
-      dayColor: '',
+      day: 0,
       isConfirmed: false,
       title: '카페 아자카파',
       x: 126.44,
@@ -108,4 +108,22 @@ export const chatMessages = atom({
 export const roomDateInfo = atom({
   key: 'roomDateInfo',
   default: ['2023-02-07', '2023-02-09'],
+});
+
+// 투표 관리
+export const voteInformation = atom({
+  key: 'voteInformation',
+  default: [],
+});
+
+// 일정 관리
+export const scheduleInfo = atom({
+  key: 'scheduleInfo',
+  default: {},
+});
+
+// 일정 변동 여부 - 재방문했을 때 기존 일정 유지하기 위한 변수
+export const isScheduleChanged = atom({
+  key: 'isScheduleChanged',
+  default: false,
 });

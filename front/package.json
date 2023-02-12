@@ -21,6 +21,7 @@
     "recoil": "^0.7.6",
     "sass": "^1.57.1",
     "sockjs-client": "^1.6.1",
+    "sweetalert2": "^11.7.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

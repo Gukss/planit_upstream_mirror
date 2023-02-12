@@ -21,7 +21,13 @@ function Place() {
   const itemRestaurants = items.filter(item => item.category === 'FD6');
   const itemSpots = items.filter(item => item.category === 'AT4');
   const itemCafes = items.filter(item => item.category === 'CE7');
-  // const itemElses = items.filter(item => item.category === 'AD5');
+  const itemElses = items.filter(
+    item =>
+      item.category !== 'AD5' &&
+      item.category !== 'FD6' &&
+      item.category !== 'AT4' &&
+      item.category !== 'CE7'
+  );
 
   // useEffect(() => {
   //   items.map(item => {
@@ -65,7 +71,7 @@ function Place() {
         <PlaceBox boxTitle='음식점' items={itemRestaurants} />
         <PlaceBox boxTitle='관광지' items={itemSpots} />
         <PlaceBox boxTitle='카페' items={itemCafes} />
-        <PlaceBox boxTitle='기타' items={itemCafes} />
+        <PlaceBox boxTitle='기타' items={itemElses} />
       </div>
     </Bbar>
   );
