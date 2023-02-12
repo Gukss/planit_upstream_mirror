@@ -41,8 +41,7 @@ function Login() {
         {
           memberAppId: AppId,
           memberAppPwd: AppPwd,
-        },
-        { withCredentials: true }
+        }
       );
       // const jwtToken = response.data.token;
       // const cookies = new Cookies();
@@ -51,13 +50,14 @@ function Login() {
       //   sameSite: 'none',
       //   secure: true,
       // });
-      await setIsLoginState(true);
-      await setUserInfo({
+      setIsLoginState(true);
+      setUserInfo({
         memberId: response.data.memberId,
         memberAppId: response.data.memberAppId,
         memberAppName: response.data.memberName,
         token: response.data.token,
       });
+      console.log(userInfo);
 
       navigate('/');
     } catch (error) {
