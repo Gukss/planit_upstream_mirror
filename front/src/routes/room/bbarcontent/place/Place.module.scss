@@ -14,12 +14,12 @@
 
 .placebox_section {
   // background-color: #e6e9ef;
-  background-color: rgb(224, 254, 76);
-  border-radius: 8px;
+  // background-color: rgb(224, 254, 76);
+  border-radius: 0.5rem;
   // padding: 16px 16px 0px 16px;
   overflow: auto;
   // height: 30rem;
-  height: 81vh;
+  height: 78vh;
 
   &::-webkit-scrollbar {
     width: 0.5rem; /* 스크롤바의 너비 */

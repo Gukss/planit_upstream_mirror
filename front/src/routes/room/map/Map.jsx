@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import {
   searchedPlaces,
   searchedPlace,
   userMarkers,
   currentMarker,
   categoryCheck,
-  // removeCategory,
 } from '../../../app/store';
 import Marker from './marker/Marker';
 import CategoryMarker from './marker/CategoryMarker';
@@ -35,10 +34,12 @@ function Map() {
   const [map, setNewMap] = useState(null);
   const clickData = useRecoilValue(searchedPlace);
   const searchData = useRecoilValue(searchedPlaces);
-  // const [resetCategory, setResetCategory] = useRecoilState(removeCategory);
-  const [addMarker, addSetMarker] = useRecoilState(currentMarker); // 지금 선택한 마커 정보
+  const addSetMarker = useSetRecoilState(currentMarker); // 지금 선택한 마커 정보
   const [isCategory, setIsCategory] = useRecoilState(categoryCheck);
   const [selectMarkers, setSelectMarkers] = useRecoilState(userMarkers); // 유저가 선택한 마커 모음
+
+  // 유저 마커 색깔
+  const userMarkerColor = '#8059D1';
 
   // 초기 맵 셋팅
   const position = new kakao.maps.LatLng(36.466911994323, 127.5130882732);
@@ -148,7 +149,7 @@ function Map() {
               id: searchData[i].id,
               category: searchData[i].category_group_code,
               category_name: searchData[i].category_group_name,
-              userColor: 'red',
+              userColor: userMarkerColor,
               dayColor: '',
               isConfirmed: false,
               title: searchData[i].place_name,

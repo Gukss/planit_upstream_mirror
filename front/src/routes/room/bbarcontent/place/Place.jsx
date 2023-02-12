@@ -6,14 +6,7 @@ import PlaceBox from './PlaceBox';
 import { userMarkers } from '../../../../app/store';
 
 function Place() {
-  // const boxTitles = ['숙소', '식당', '관광지', '카페', '기타'];
   const items = useRecoilValue(userMarkers);
-
-  // const [itemHotel, setItemHotel] = useState([]);
-  // const [itemRestaurant, setItemRestaurant] = useState([]);
-  // const [itemSpot, setItemSpot] = useState([]);
-  // const [itemCafe, setItemCafe] = useState([]);
-  // const [itemElse, setItemElse] = useState([]);
 
   console.log('여기', items);
 

@@ -73,6 +73,7 @@ function ChatControl() {
     connect();
     return () => disconnect();
   }, []);
+
   console.log(messages);
 
   return (

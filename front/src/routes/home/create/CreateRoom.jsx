@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import FriendListItem from './friendbox/friendListItem';
 import { dateRangeState, roomPK, userInfoState } from '../../../app/store';
 import logoImg from '../../../app/assets/images/naver_login.png';
+
 import Header from '../../../common/header/Header';
 import classes from './CreateRoom.module.scss';
 
@@ -20,7 +21,6 @@ function CreateRoom() {
     '#FF7BBA',
   ];
   const [dateRange, setDateRange] = useRecoilState(dateRangeState);
-  const [roomId, setRoomId] = useRecoilState(roomPK);
   const [startD, setStartDate] = useState(dateRange.startDate);
   const [endD, setEndDate] = useState(dateRange.endDate);
   const [roomName, setRoomName] = useState('');
@@ -57,24 +57,18 @@ function CreateRoom() {
 
   // 방 만들기 axios
   const createRoom = async e => {
+    const subUrl = `/rooms`;
     const requestData = {
       startDate: dateToString(startD),
       endDate: dateToString(endD),
       roomName: `${roomName}`,
     };
-    const responseCreateRoom = await instance.post(`/rooms`, requestData);
-    const makeInviteList = selectFriends.map(friend => ({
-      receiverMemberId: friend.memberAppId,
-      roomId: responseCreateRoom.data.roomId,
-    }));
-    console.log(makeInviteList);
-    const responseInviteFriends = await instance.post(
-      '/notification',
-      makeInviteList
+    console.log(dateToString(endD));
+    const response = await axios.post(
+      `https://i8b202.p.ssafy.io/api/${subUrl}`,
+      requestData
     );
-    console.log(responseCreateRoom.data);
-    setRoomId(responseCreateRoom.data);
-
+    console.log(response);
     navigate('/room/search');
   };
 
@@ -96,7 +90,6 @@ function CreateRoom() {
         const response = await axios.get(
           `https://i8b202.p.ssafy.io/api/members/${event}`
         );
-        console.log(response.data);
         setDropDownFriends(response.data);
         setShowDropdown(true);
       } catch (error) {
@@ -109,32 +102,23 @@ function CreateRoom() {
   const handleInputChange = event => {
     setInputValue(event.target.value);
     checkFriend(event.target.value);
-    console.log(1);
   };
 
   // 보낼 친구 저장
   const handleFriendClick = friend => {
-    console.log(userInfo);
     setInputValue('');
-    console.log(friend);
     setSelectFriends([...selectFriends, friend]);
     setShowDropdown(false);
-    // console.log(2);
+    console.log(2);
   };
 
   // 보낼 리스트에서 삭제
   const handleRemoveClick = noF => {
+    console.log(3);
     setSelectFriends(
       selectFriends.filter(selectFriend => selectFriend !== noF)
     );
-    console.log(selectFriends);
   };
-
-  const filteredfriends = dropDownFriends.filter(
-    option =>
-      !selectFriends.includes(option) &&
-      userInfo.memberAppId !== option.memberAppId
-  );
 
   return (
     <div>
@@ -210,7 +194,7 @@ function CreateRoom() {
                               <div>
                                 {selectFriends.map((friend, i) => (
                                   <div>
-                                    <FriendListItem user={friend.memberName} />
+                                    <FriendListItem user={friend.name} />
                                     <button
                                       onClick={() => handleRemoveClick(friend)}
                                     >
@@ -231,9 +215,9 @@ function CreateRoom() {
                                 />
                                 {showDropdown && (
                                   <ul>
-                                    {filteredfriends.map((friend, i) => (
+                                    {dropDownFriends.map((friend, i) => (
                                       <li key={friend.appId}>
-                                        {friend.memberName}
+                                        {friend.name}
                                         <button
                                           onMouseDown={() =>
                                             handleFriendClick(friend)
@@ -249,7 +233,6 @@ function CreateRoom() {
                               <button
                                 className={classes.main__button}
                                 type='submit'
-                                onClick={createRoom}
                               >
                                 방 생성하기
                               </button>

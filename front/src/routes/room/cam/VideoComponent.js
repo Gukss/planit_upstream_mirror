@@ -295,9 +295,9 @@ class VideoComponent extends Component {
             <div className={classes.ctb}>
               <div className={classes.ctblist}>
                 <div className={classes.ctblist__item}>
-                  <div>
+                  {/* <div>
                     <i className='bx bxs-user-plus' />
-                  </div>
+                  </div> */}
                   <div>
                     {this.state.videoEnable ? (
                       <i className='bx bxs-video' onClick={this.videoEnv} />

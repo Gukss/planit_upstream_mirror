@@ -49,6 +49,7 @@ export const userMarkers = atom({
       dayColor: '',
       isConfirmed: false,
       title: '숙소1',
+      category_name: '숙박',
       x: 126.44,
       y: 32.44,
       marker: {},
@@ -73,6 +74,7 @@ export const userMarkers = atom({
       dayColor: '',
       isConfirmed: false,
       title: '식당1',
+      category_name: '식당',
       x: 126.44,
       y: 32.44,
       marker: {},
@@ -84,6 +86,7 @@ export const userMarkers = atom({
       dayColor: '',
       isConfirmed: false,
       title: '관광명소 성심당',
+      category_name: '식당',
       x: 126.44,
       y: 32.44,
       marker: {},
@@ -111,19 +114,15 @@ export const categoryCheck = atom({
   },
 });
 
-// // 카테고리 마커 정보(검색 시 카테고리 마커 초기화용)
-// export const removeCategory = atom({
-//   key: '',
-//   default: [],
-// });
-
 // -----------------------------------------------------------
 
+// socket data 관리
 export const chatMessages = atom({
   key: 'chatMessages',
   default: [],
 });
 
+// token 값.
 export const userInfoState = atom({
   key: 'userInfo',
   default: { memberId: -1, memberAppId: '', memberAppName: '', token: '' },
@@ -158,7 +157,13 @@ export const voteInformation = atom({
 // 친구 초대 알림 체크
 export const eventSource = atom({
   key: 'eventSource',
-  default: {},
+  default: [],
+});
+
+// 유저 방 조회(axios)
+export const checkUserRoom = atom({
+  key: 'checkUserRoom',
+  default: [],
 });
 
 // room ID 받았슴당
