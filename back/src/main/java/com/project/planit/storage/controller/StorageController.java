@@ -31,7 +31,7 @@ public class StorageController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateStorageResponse> createStorage(@RequestBody CreateStorageRequest request, @CookieValue String access) {
+    public ResponseEntity<CreateStorageResponse> createStorage(@RequestBody CreateStorageRequest request, @RequestHeader("Authorization") String access) {
         // @TODO : 토큰 아이디로 변환 => O
 //        Long reqestMemberId=1L;
 
@@ -56,7 +56,7 @@ public class StorageController {
     }
 
     @PatchMapping
-    public ResponseEntity<UpdateStorageResponse> updateStorage(@RequestBody UpdateStorageRequest request, @CookieValue String access) {
+    public ResponseEntity<UpdateStorageResponse> updateStorage(@RequestBody UpdateStorageRequest request, @RequestHeader("Authorization") String access) {
         // @TODO : 토큰 아이디로 변환 => O
 //        Long memberId=1L;
 

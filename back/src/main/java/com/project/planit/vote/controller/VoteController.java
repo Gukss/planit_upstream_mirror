@@ -45,7 +45,7 @@ public class VoteController {
   private final JwtProvider jwtProvider;
 
   @PostMapping
-  public ResponseEntity<CreateVoteResponse> createVote(@RequestBody CreateVoteRequest request, @CookieValue String access) {
+  public ResponseEntity<CreateVoteResponse> createVote(@RequestBody CreateVoteRequest request, @RequestHeader("Authorization") String access) {
 //    log.info("vote controller");
 
     String parseToken = returnAccessToken(access);
@@ -77,7 +77,7 @@ public class VoteController {
   }
 
   @PatchMapping
-  public ResponseEntity<UpdatevoteResponse> updateVote(@RequestBody UpdateVoteRequest request, @CookieValue String access) {
+  public ResponseEntity<UpdatevoteResponse> updateVote(@RequestBody UpdateVoteRequest request, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Long id = Long.parseLong(claims.get("memberId").toString());

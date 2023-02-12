@@ -39,7 +39,7 @@ public class MemberRoomController {
   private final JwtProvider jwtProvider;
 
   @GetMapping
-  public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(@CookieValue String access) {
+  public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(@RequestHeader("Authorization") String access) {
 //    Long id=1L; // @TODO : 나중에 토큰 아이디로 변환 => O
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
@@ -57,7 +57,7 @@ public class MemberRoomController {
   }
 
   @PostMapping
-  public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request, @CookieValue String access) {
+  public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Long memberId = Long.parseLong(claims.get("memberId").toString());
@@ -72,7 +72,7 @@ public class MemberRoomController {
   }
 
   @PatchMapping
-  public ResponseEntity<UpdateMemberRoomResponse> updateMemberRoom(@RequestBody UpdateMemberRoomRequest request, @CookieValue String access) {
+  public ResponseEntity<UpdateMemberRoomResponse> updateMemberRoom(@RequestBody UpdateMemberRoomRequest request, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Long memberId = Long.parseLong(claims.get("memberId").toString());

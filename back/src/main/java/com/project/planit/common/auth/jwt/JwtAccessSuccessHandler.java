@@ -48,7 +48,7 @@ public class JwtAccessSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
         .build();
 
     clearAuthenticationAttributes(request, response);
-
+    log.info("set-cookie ,,,");
     response.addHeader("Set-Cookie", cookie.toString());
     response.getWriter().write(accessToken);
   }

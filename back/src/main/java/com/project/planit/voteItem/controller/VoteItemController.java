@@ -36,7 +36,7 @@ public class VoteItemController {
   private final VoteServiceImpl voteService;
   private final JwtProvider jwtProvider;
   @PostMapping
-  public ResponseEntity<CreateVoteItemResponse> createVoteItem(@RequestBody CreateVoteItemRequest request, @CookieValue String access) {
+  public ResponseEntity<CreateVoteItemResponse> createVoteItem(@RequestBody CreateVoteItemRequest request, @RequestHeader("Authorization") String access) {
     //todo: token에서 updator 가져오기
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
@@ -65,7 +65,7 @@ public class VoteItemController {
   }
 
   @PatchMapping
-  public ResponseEntity<UpdateVoteItemResponse> updateVoteItem(@RequestBody UpdateVoteItemRequest request, @CookieValue String access) {
+  public ResponseEntity<UpdateVoteItemResponse> updateVoteItem(@RequestBody UpdateVoteItemRequest request, @RequestHeader("Authorization") String access) {
     //todo: token에서 updator 가져오기
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);

@@ -102,6 +102,7 @@ public class SecurityConfig {
 
         .authorizeRequests()
         //로컬용
+//          .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //        .antMatchers( "/stoarges").authenticated()
 //        .antMatchers( "/votes").authenticated()
 //        .antMatchers( "/rooms").authenticated()
@@ -117,7 +118,6 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
         .antMatchers( "/api/stoarges").authenticated()
         .antMatchers( "/api/votes").authenticated()
-        .antMatchers( "/api/rooms").authenticated()
         .antMatchers( "/api/rooms").authenticated()
         .antMatchers( "/api/rooms/users").authenticated()
         .antMatchers( "/api/chatting").authenticated()
@@ -141,6 +141,8 @@ public class SecurityConfig {
     configuration.addAllowedMethod("*");
     configuration.addExposedHeader(HttpHeaders.AUTHORIZATION);
     configuration.setAllowCredentials(true);
+
+    configuration.addExposedHeader("Authorization");
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);

@@ -82,18 +82,27 @@ public class JwtFilter extends GenericFilterBean {
   }
 
   // 헤더에서 토큰 정보를 꺼내온다.
+//  private String parseBearerToken(HttpServletRequest request) {
+//    Cookie[] cookies = request.getCookies();
+//    Cookie newCookie = null;
+//    for(Cookie x: cookies) {
+//      if (x.getName().equals("access")) {
+//        newCookie = x;
+//      }
+//    }
+//    String bearerToken = newCookie.getValue();
+//    if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
+//      return bearerToken.substring(7);
+//    }
+//    return null;
+//  }
   private String parseBearerToken(HttpServletRequest request) {
-    Cookie[] cookies = request.getCookies();
-    Cookie newCookie = null;
-    for(Cookie x: cookies) {
-      if (x.getName().equals("access")) {
-        newCookie = x;
-      }
+    String bearerToken = request.getHeader("Authorization");
+
+    if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+      return bearerToken.substring((7));
     }
-    String bearerToken = newCookie.getValue();
-    if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-      return bearerToken.substring(7);
-    }
+
     return null;
   }
 }
