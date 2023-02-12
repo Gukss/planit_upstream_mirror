@@ -3,8 +3,6 @@ package com.project.planit.notification.service;
 import com.project.planit.common.exception.NotFoundExceptionMessage;
 import com.project.planit.member.entity.Member;
 import com.project.planit.member.repository.MemberRepository;
-import com.project.planit.memberRoom.entity.MemberRoom;
-import com.project.planit.memberRoom.repository.MemberRoomRepository;
 import com.project.planit.notification.dto.CreateNotificationRequest;
 import com.project.planit.notification.dto.FindNotificationResponse;
 import com.project.planit.notification.dto.UpdateNotificationRequest;
@@ -31,10 +29,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 public class NotificationServiceImpl implements NotificationService{
     private final NotificationRepository notificationRepository;
     private final MemberRepository memberRepository;
-    private final MemberRoomRepository memberRoomRepository;
-    
     private final RoomRepository roomRepository;
-
     private final EmitterRepository emitterRepository;
 
     @Override
@@ -59,7 +54,8 @@ public class NotificationServiceImpl implements NotificationService{
                         .roomName(room.getRoomName())
                         .createdAt(notificationItem.getCreated_at())
                         .readOrNot(notificationItem.getReadOrNot())
-                        .roomId(notificationItem.getId())
+                        .roomId(room.getId())
+                        .notificationId(notificationItem.getId())
                     .build());
             }
         }

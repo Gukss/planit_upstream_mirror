@@ -29,4 +29,6 @@ public class FindNotificationResponse {
   private Boolean readOrNot;
   @NotNull
   private Long roomId;
+  @NotNull
+  private Long notificationId;
 }
