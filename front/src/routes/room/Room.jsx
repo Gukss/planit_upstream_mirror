@@ -2,7 +2,6 @@ import 'boxicons/css/boxicons.min.css';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import RoomLayout from './RoomLayout';
 import Search from './bbarcontent/search/Search';
-import Tmp from '../Tmp';
 import Place from './bbarcontent/place/Place';
 import Schedule from './bbarcontent/schedule/Schedule';
 import Vote from './bbarcontent/vote/Vote';

@@ -9,19 +9,43 @@
 .overlay {
   position: relative;
   background-color: white;
-  width: 20rem;
+  width: 18rem;
   height: 13rem;
   border-radius: 1rem;
-  &__title {
+  .title_container {
+    position: absolute;
+    width: 15.5rem;
+    top: 13%;
+    margin: 0rem 1.5rem 0rem 1rem;
     display: flex;
     justify-content: space-between;
-    margin: 0rem 1.5rem 0rem 1rem;
-    font-size: 2rem;
-    font-weight: bold;
+    // flex-wrap: wrap;
+    .overlay__title {
+      width: 15rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      white-space: normal;
+    }
+    .overlay__close {
+      border: none;
+      background-color: white;
+      font-size: 1.5rem;
+    }
   }
-  &__close {
+  .category_name {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+  }
+  .marker_add {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    color: white;
+    background-color: #2b3f6b;
     border: none;
-    background-color: white;
-    font-size: 1.75rem;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    width: 6rem;
   }
 }

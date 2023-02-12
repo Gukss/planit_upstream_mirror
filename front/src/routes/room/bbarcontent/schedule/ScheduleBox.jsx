@@ -19,7 +19,10 @@ function ScheduleBox(props) {
             {props.items.map((item, index) => {
               return <ScheduleBoxItem item={item} index={index} />;
             })}
+<<<<<<< HEAD
             {/* <p>{props.items}</p> */}
+=======
+>>>>>>> 30e8382671700a1771cf49d48f00a131798f14fb
             {provided.placeholder}
           </div>
         )}

@@ -16,8 +16,8 @@ header {
     align-items: center;
 
     img {
-      width: 2rem;
-      height: 2rem;
+      width: 3rem;
+      height: 3rem;
     }
 
     .logoText {
@@ -49,11 +49,18 @@ header {
         font-weight: bold;
       }
       .alarm {
+        border: none;
+        cursor: pointer;
+        transition: all ease-in 0.3s;
         i {
           font-size: 2rem;
           color: #2b3f6b;
         }
       }
+      .alarm:hover {
+        transform: scale(1.1);
+      }
+
       .profile {
         display: flex;
         align-items: center;

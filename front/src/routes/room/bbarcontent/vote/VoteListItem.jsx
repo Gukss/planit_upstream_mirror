@@ -41,6 +41,7 @@ function VoteListItem(props) {
     <div className={classes.item_box}>
       <div className={classes.item_box_title}>
         {props.vote.isVote ? (
+        
           <i className='bx bxs-circle' style={{ color: '#1AD117' }}></i>
         ) : (
           <i className='bx bxs-circle' style={{ color: '#f94545' }}></i>

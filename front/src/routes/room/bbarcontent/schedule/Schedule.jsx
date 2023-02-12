@@ -15,6 +15,7 @@ import ScheduleBox from './ScheduleBox';
 function Schedule() {
   const [presentSche, setPresentSche] = useRecoilState(scheduleInfo);
   const [isDropped, setIsDropped] = useRecoilState(isScheduleChanged);
+
   // 시작 날짜, 끝 날짜 받아서 중간 날짜들 구하는 함수
   function getDatesStartToLast(startDate, lastDate) {
     const regex = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;

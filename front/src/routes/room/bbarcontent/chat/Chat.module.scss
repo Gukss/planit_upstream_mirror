@@ -1,10 +1,10 @@
 .chat_title {
+  padding-top: 0;
+
   .title_title {
     font-size: 1.5rem;
     font-weight: bold;
   }
-  // height: 200px;
-  // width: 200px;
 
   p {
     color: grey;
@@ -13,6 +13,5 @@
 }
 
 .chat_body {
-  background-color: rgb(224, 254, 76);
   height: 83vh;
 }

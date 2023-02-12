@@ -16,11 +16,11 @@ const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 class VideoComponent extends Component {
   constructor(props) {
     super(props);
-
+    const joinSessionId = `Session${this.props.sessionId}`;
     // These properties are in the state's component in order to re-render the HTML whenever their values change
     this.state = {
       // 참가 세션 id
-      mySessionId: 'SessionA',
+      mySessionId: joinSessionId,
       // 참가자 이름
       myUserName: Math.floor(Math.random() * 100),
       // 세션
@@ -229,7 +229,7 @@ class VideoComponent extends Component {
     this.setState({
       session: undefined,
       subscribers: [],
-      mySessionId: 'SessionA',
+      mySessionId: this.joinSessionId,
       myUserName: `Participant${Math.floor(Math.random() * 100)}`,
       mainStreamManager: undefined,
       publisher: undefined,

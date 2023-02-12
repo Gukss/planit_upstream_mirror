@@ -1,9 +1,71 @@
-import React from 'react';
+import { Cookies } from 'react-cookie';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import kakaoLogin from '../../../app/assets/images/kakao_login.jpg';
 import naverLogin from '../../../app/assets/images/naver_login.png';
 import classes from './Login.module.scss';
+import { isLogin, userInfoState } from '../../../app/store';
 
 function Login() {
+  const [AppId, setAppId] = useState('');
+  const [AppPwd, setAppPwd] = useState('');
+  const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const navigate = useNavigate();
+
+  // 로그인 한 회원이 접속 시도 시, 메인페이지로 보내줌
+  const checkLoginValue = isLoginState => {
+    if (isLoginState) {
+      navigate('/');
+    }
+  };
+
+  // id 확인
+  const handleIdChange = e => {
+    setAppId(e.target.value);
+    console.log(e.target.value);
+  };
+
+  // pwd 확인
+  const handlePwdChange = e => {
+    setAppPwd(e.target.value);
+  };
+
+  // 로그인 axios
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        'https://i8b202.p.ssafy.io/api/sign-in',
+        {
+          memberAppId: AppId,
+          memberAppPwd: AppPwd,
+        },
+        { withCredentials: true }
+      );
+      // const jwtToken = response.data.token;
+      // const cookies = new Cookies();
+      // cookies.set('access', `Bearer ${jwtToken}`, {
+      //   path: '/',
+      //   sameSite: 'none',
+      //   secure: true,
+      // });
+      await setIsLoginState(true);
+      await setUserInfo({
+        memberId: response.data.memberId,
+        memberAppId: response.data.memberAppId,
+        memberAppName: response.data.memberName,
+        token: response.data.token,
+      });
+
+      navigate('/');
+    } catch (error) {
+      alert('아이디 및 비밀번호를 확인해주세요!');
+    }
+  };
+
   return (
     <div className={classes.login}>
       <div className={classes.login__bar}>
@@ -13,17 +75,27 @@ function Login() {
           </div>
           <div className={classes.login__main__signin}>
             <h1>PLAN!T</h1>
-            <div className={classes.login_box}>
-              {/* ID, PW 입력 */}
-              <div className={classes.login_inputbox}>
-                <p>ID</p>
-                <input type='text' placeholder='아이디를 입력해주세요.' />
-                <p>PASSWORD</p>
-                <input type='text' placeholder='비밀번호를 입력해주세요.' />
+            <form onSubmit={handleSubmit}>
+              <div className={classes.login_box}>
+                {/* ID, PW 입력 */}
+                <div className={classes.login_inputbox}>
+                  <p>ID</p>
+                  <input
+                    type='text'
+                    placeholder='아이디를 입력해주세요.'
+                    onChange={handleIdChange}
+                  />
+                  <p>PASSWORD</p>
+                  <input
+                    type='password'
+                    placeholder='비밀번호를 입력해주세요.'
+                    onChange={handlePwdChange}
+                  />
+                </div>
+                {/* Login 버튼 */}
+                <button>Login</button>
               </div>
-              {/* Login 버튼 */}
-              <button>Login</button>
-            </div>
+            </form>
 
             {/* ID 저장 및 패스워드 찾기 줄 */}
             <label htmlFor='id_save'>
@@ -39,7 +111,7 @@ function Login() {
             {/* 소셜로그인 줄 */}
             <div className={classes.member_check}>
               <span>
-                아직 회원이 아니신가요?<a href='#!'>회원가입 하기</a>
+                아직 회원이 아니신가요?<Link to='/signup'>회원가입 하기</Link>
               </span>
               <span>
                 간편 로그인
