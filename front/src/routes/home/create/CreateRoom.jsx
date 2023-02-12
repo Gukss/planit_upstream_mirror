@@ -2,22 +2,41 @@ import DatePicker from 'react-datepicker';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import axios from 'axios';
+import { Cookies, useCookies } from 'react-cookie';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 import FriendListItem from './friendbox/friendListItem';
-import { dateRangeState } from '../../../app/store';
+import { dateRangeState, roomPK, userInfoState } from '../../../app/store';
 import logoImg from '../../../app/assets/images/naver_login.png';
-
 import Header from '../../../common/header/Header';
 
 import classes from './CreateRoom.module.scss';
 
 function CreateRoom() {
+  const [cookies, setCookie, removeCookie] = useCookies(['id']);
   const [dateRange, setDateRange] = useRecoilState(dateRangeState);
+  const [roomId, setRoomId] = useRecoilState(roomPK);
   const [startD, setStartDate] = useState(dateRange.startDate);
   const [endD, setEndDate] = useState(dateRange.endDate);
   const [roomName, setRoomName] = useState('');
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [inviteUserPk, setInviteUserPk] = useState([]);
   const navigate = useNavigate();
+
+  // 친구 검색을 위한 dropdown 작업
+  const [inputValue, setInputValue] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropDownFriends, setDropDownFriends] = useState([]);
+  const [selectFriends, setSelectFriends] = useState([]);
+
+  // axios 인스턴스 기본값 설정
+  const instance = axios.create({
+    baseURL: 'https://i8b202.p.ssafy.io/api',
+    headers: {
+      Authorization: `Bearer ${userInfo.token}`,
+      contentType: 'application/json',
+    },
+  });
 
   // 룸 이름 실시간 확인
   const changeRoomName = e => {
@@ -33,18 +52,24 @@ function CreateRoom() {
 
   // 방 만들기 axios
   const createRoom = async e => {
-    const subUrl = `/rooms`;
     const requestData = {
       startDate: dateToString(startD),
       endDate: dateToString(endD),
       roomName: `${roomName}`,
     };
-    console.log(dateToString(endD));
-    const response = await axios.post(
-      `https://i8b202.p.ssafy.io/api/${subUrl}`,
-      requestData
+    const responseCreateRoom = await instance.post(`/rooms`, requestData);
+    const makeInviteList = selectFriends.map(friend => ({
+      receiverMemberId: friend.memberAppId,
+      roomId: responseCreateRoom.data.roomId,
+    }));
+    console.log(makeInviteList);
+    const responseInviteFriends = await instance.post(
+      '/notification',
+      makeInviteList
     );
-    console.log(response);
+    console.log(responseCreateRoom.data);
+    setRoomId(responseCreateRoom.data);
+
     navigate('/room/search');
   };
 
@@ -58,12 +83,6 @@ function CreateRoom() {
     setDateRange({ startDate: start, endDate: end });
   };
 
-  // 친구 검색을 위한 dropdown 작업
-  const [inputValue, setInputValue] = useState('');
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [dropDownFriends, setDropDownFriends] = useState([]);
-  const [selectFriends, setSelectFriends] = useState([]);
-
   // 친구 검색 axios
   const checkFriend = async event => {
     const InputValue = inputValue;
@@ -72,6 +91,7 @@ function CreateRoom() {
         const response = await axios.get(
           `https://i8b202.p.ssafy.io/api/members/${event}`
         );
+        console.log(response.data);
         setDropDownFriends(response.data);
         setShowDropdown(true);
       } catch (error) {
@@ -84,23 +104,32 @@ function CreateRoom() {
   const handleInputChange = event => {
     setInputValue(event.target.value);
     checkFriend(event.target.value);
+    console.log(1);
   };
 
   // 보낼 친구 저장
   const handleFriendClick = friend => {
+    console.log(userInfo);
     setInputValue('');
+    console.log(friend);
     setSelectFriends([...selectFriends, friend]);
     setShowDropdown(false);
-    console.log(2);
+    // console.log(2);
   };
 
   // 보낼 리스트에서 삭제
   const handleRemoveClick = noF => {
-    console.log(3);
     setSelectFriends(
       selectFriends.filter(selectFriend => selectFriend !== noF)
     );
+    console.log(selectFriends);
   };
+
+  const filteredfriends = dropDownFriends.filter(
+    option =>
+      !selectFriends.includes(option) &&
+      userInfo.memberAppId !== option.memberAppId
+  );
 
   return (
     <div>
@@ -176,7 +205,7 @@ function CreateRoom() {
                               <div>
                                 {selectFriends.map((friend, i) => (
                                   <div>
-                                    <FriendListItem user={friend.name} />
+                                    <FriendListItem user={friend.memberName} />
                                     <button
                                       onClick={() => handleRemoveClick(friend)}
                                     >
@@ -197,9 +226,9 @@ function CreateRoom() {
                                 />
                                 {showDropdown && (
                                   <ul>
-                                    {dropDownFriends.map((friend, i) => (
+                                    {filteredfriends.map((friend, i) => (
                                       <li key={friend.appId}>
-                                        {friend.name}
+                                        {friend.memberName}
                                         <button
                                           onMouseDown={() =>
                                             handleFriendClick(friend)
@@ -215,6 +244,7 @@ function CreateRoom() {
                               <button
                                 className={classes.main__button}
                                 type='submit'
+                                onClick={createRoom}
                               >
                                 방 생성하기
                               </button>

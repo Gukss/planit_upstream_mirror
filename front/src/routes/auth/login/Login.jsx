@@ -1,6 +1,7 @@
+import { Cookies } from 'react-cookie';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import kakaoLogin from '../../../app/assets/images/kakao_login.jpg';
 import naverLogin from '../../../app/assets/images/naver_login.png';
@@ -41,12 +42,24 @@ function Login() {
         {
           memberAppId: AppId,
           memberAppPwd: AppPwd,
-        }
+        },
+        { withCredentials: true }
       );
-      setIsLoginState(true);
-      console.log(response.data);
-      setUserInfo({ memberId: -1, memberAppId: AppId, memberAppName: AppPwd });
-      console.log(isLoginState);
+      // const jwtToken = response.data.token;
+      // const cookies = new Cookies();
+      // cookies.set('access', `Bearer ${jwtToken}`, {
+      //   path: '/',
+      //   sameSite: 'none',
+      //   secure: true,
+      // });
+      await setIsLoginState(true);
+      await setUserInfo({
+        memberId: response.data.memberId,
+        memberAppId: response.data.memberAppId,
+        memberAppName: response.data.memberName,
+        token: response.data.token,
+      });
+
       navigate('/');
     } catch (error) {
       alert('아이디 및 비밀번호를 확인해주세요!');
@@ -98,7 +111,7 @@ function Login() {
             {/* 소셜로그인 줄 */}
             <div className={classes.member_check}>
               <span>
-                아직 회원이 아니신가요?<a href='#!'>회원가입 하기</a>
+                아직 회원이 아니신가요?<Link to='/signup'>회원가입 하기</Link>
               </span>
               <span>
                 간편 로그인
