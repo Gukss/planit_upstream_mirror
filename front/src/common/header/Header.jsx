@@ -17,13 +17,8 @@ function Header() {
 
   const FindNotification = async () => {
     // 나중에 토큰 값 던져 주세용!
-    const member = {
-      memberId: 1,
-      memberName: 'youngman',
-      memberAppId: 'sksn12',
-    };
 
-    setNotificationList(await ServiceFindNotification(member));
+    setNotificationList(await ServiceFindNotification(userInfo));
   };
 
   return (
