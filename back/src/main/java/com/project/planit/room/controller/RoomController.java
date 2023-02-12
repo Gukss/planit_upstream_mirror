@@ -38,7 +38,7 @@ public class RoomController {
   private final JwtProvider jwtProvider;
 
   @PostMapping
-  public ResponseEntity<CreateRoomResponse> createRoom(@RequestBody CreateRoomRequest request, @CookieValue String access) {
+  public ResponseEntity<CreateRoomResponse> createRoom(@RequestBody CreateRoomRequest request, @RequestHeader("Authorization") String access) {
     //todo: token에서 id값으로 변환 => O
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
@@ -54,7 +54,7 @@ public class RoomController {
   }
 
   @PatchMapping
-  public ResponseEntity<UpdateRoomResponse> updateRoom(@RequestBody UpdateRoomRequest request, @CookieValue String access) {
+  public ResponseEntity<UpdateRoomResponse> updateRoom(@RequestBody UpdateRoomRequest request, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Long memberId = Long.parseLong(claims.get("memberId").toString());

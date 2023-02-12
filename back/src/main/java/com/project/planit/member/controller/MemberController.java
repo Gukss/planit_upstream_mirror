@@ -39,7 +39,7 @@ public class MemberController {
 
   // 회원 정보 수정
   @PatchMapping()
-  public ResponseEntity<String> updateMember(@RequestBody UpdateMemberRequest request, @CookieValue String access) {
+  public ResponseEntity<String> updateMember(@RequestBody UpdateMemberRequest request, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
 //    log.info("회원수정 회원번호"+claims.get("memberId").toString());
@@ -52,11 +52,13 @@ public class MemberController {
 
   // 회원 정보 조회 (토큰에 있는 아이디로 받아올거임)
   @GetMapping()
-  public ResponseEntity<ReadMemberResponse> readMember(@CookieValue String access) {
+  public ResponseEntity<ReadMemberResponse> readMember(@RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
 //    Long id =1L; // @TODO : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함 => O
     Long id = Long.parseLong(claims.get("memberId").toString());
+    log.info("Id="+id);
+    log.info("access: "+access);
     String memberId= claims.get("memberId").toString();
 
 //    String memberId="sksn12"; // 토큰에 있는 아이디 값으로 변경할거임

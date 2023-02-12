@@ -34,7 +34,7 @@ public class VoteItemMemberController {
   private final JwtProvider jwtProvider;
 
   @PostMapping
-  public ResponseEntity<CreateVoteItemMemberResponse> createVoteItemMember(@RequestBody CreateVoteItemMemberRequest request, @CookieValue String access) {
+  public ResponseEntity<CreateVoteItemMemberResponse> createVoteItemMember(@RequestBody CreateVoteItemMemberRequest request, @RequestHeader("Authorization") String access) {
     //todo: token에서 updator 가져오기
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);

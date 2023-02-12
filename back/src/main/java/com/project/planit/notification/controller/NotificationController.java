@@ -31,7 +31,7 @@ public class NotificationController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FindNotificationResponse>> findNotification(@CookieValue String access) {
+    public ResponseEntity<List<FindNotificationResponse>> findNotification(@RequestHeader("Authorization") String access) {
         // todo : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함 => O
 //        Long id=1L;
 
@@ -46,7 +46,7 @@ public class NotificationController {
     // 알림 생성
     // TODO : 헤더 토큰에 sendMemberId가져와서 사용 => O
     @PostMapping
-    public ResponseEntity<String> createNotification(@RequestBody List<CreateNotificationRequest> request, @CookieValue String access) {
+    public ResponseEntity<String> createNotification(@RequestBody List<CreateNotificationRequest> request, @RequestHeader("Authorization") String access) {
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
         Long id = Long.parseLong(claims.get("memberId").toString());
@@ -56,7 +56,7 @@ public class NotificationController {
     }
 
     @PatchMapping
-    public ResponseEntity<String> updateNotification(@RequestBody UpdateNotificationRequest request, @CookieValue String access) {
+    public ResponseEntity<String> updateNotification(@RequestBody UpdateNotificationRequest request, @RequestHeader("Authorization") String access) {
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
         Long id = Long.parseLong(claims.get("memberId").toString());
