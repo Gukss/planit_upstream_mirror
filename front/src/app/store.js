@@ -102,7 +102,7 @@ export const chatMessages = atom({
 
 export const userInfoState = atom({
   key: 'userInfo',
-  default: { memberId: -1, memberAppId: '', memberAppName: '' },
+  default: { memberId: -1, memberAppId: '', memberAppName: '', token: '' },
 });
 
 //
@@ -120,4 +120,10 @@ export const scheduleArray = atom({
 export const eventSource = atom({
   key: 'eventSource',
   default: {},
+});
+
+// room ID 받았슴당
+export const roomPK = atom({
+  key: 'roomId',
+  default: null,
 });

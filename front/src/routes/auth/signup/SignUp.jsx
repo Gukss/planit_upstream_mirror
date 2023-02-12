@@ -18,7 +18,6 @@ function SignUp() {
   const [idValid, setIdValid] = useState(true);
   const [realIdValid, setrealIdValid] = useState(false);
   const [idValidMessage, setIdValidMessage] = useState('');
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   const idChange = useCallback(
     e => {
@@ -47,6 +46,7 @@ function SignUp() {
   const [pwCheck, setPwCheck] = useState('');
   const [pwCheckValid, setPwCheckValid] = useState(true);
   const [pwCheckValidMessage, setPwCheckValidMessage] = useState('');
+  const [realCheckValid, setRealCheckValid] = useState(false);
 
   const pwChange = e => {
     setPw(e.target.value);
@@ -59,9 +59,11 @@ function SignUp() {
 
       if (pw === pwCheck) {
         setPwCheckValid(true);
+        setRealCheckValid(true);
       } else {
         setPwCheckValid(false);
         setPwCheckValidMessage('비밀번호가 일치하지 않습니다');
+        setRealCheckValid(false);
       }
       if (pwCheck.length === 0) {
         setPwCheckValid(true);
@@ -77,6 +79,7 @@ function SignUp() {
     setMemberName(event.target.value);
   };
 
+  // Email 체크
   const [Email, setMemberEmail] = useState('');
 
   const handleEmail = event => {
@@ -93,7 +96,7 @@ function SignUp() {
     if (realIdValid && pwCheckValid) {
       try {
         const response = await axios.post(
-          'https://i8b202.p.ssafy.io/api/members/',
+          'https://i8b202.p.ssafy.io/api/members',
           {
             memberAppId: loginId,
             memberAppPwd: pw,
@@ -101,14 +104,10 @@ function SignUp() {
             memberEmail: Email,
           }
         );
-        const data = JSON.parse(response.data);
-        setUserInfo({
-          memberId: data.memberId,
-          memberAppId: data.memberAppId,
-          memberAppName: data.memberName,
-        });
-        console.log(data);
-        navigate('/');
+        if (response.status === 200) {
+          alert('아이디가 생성되었습니다.');
+          navigate('/');
+        }
       } catch (error) {
         console.log(error);
         alert('아이디 생성에 실패하였습니다.');
@@ -134,7 +133,7 @@ function SignUp() {
         alert('아이디가 중복되었습니다.');
       } else {
         setrealIdValid(response.data);
-        setIdValidMessage('사용 가능한 아이디입니다.');
+        setIdValidMessage('사용 가능합니다.');
       }
     }
   };
@@ -177,7 +176,9 @@ function SignUp() {
         <div className={classes.input_wrap}>
           <p>비밀번호</p>
           <input
-            className={classes.input_pw}
+            className={
+              realCheckValid ? classes.correct_input : classes.input_pw
+            }
             onChange={pwChange}
             type='password'
           />
@@ -185,7 +186,10 @@ function SignUp() {
         <div className={classes.input_wrap}>
           <p>비밀번호 확인</p>
           <input
-            className={pwCheckValid ? classes.pw_valid : classes.invalid_input}
+            className={
+              (pwCheckValid ? classes.pw_valid : classes.invalid_input,
+              realCheckValid ? classes.correct_input : classes.pw_valid)
+            }
             onChange={pwCheckHandler}
             type='password'
           />
