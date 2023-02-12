@@ -21,6 +21,7 @@ import lombok.*;
 public class FindMemberRoomResponse {
 //    private String colorCode;
     private Boolean participation;
+    private String colorCode;
     private Long memberId;
     private Long roomId;
 

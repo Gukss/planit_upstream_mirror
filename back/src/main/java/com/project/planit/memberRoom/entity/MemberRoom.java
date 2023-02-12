@@ -40,6 +40,9 @@ public class MemberRoom extends BaseEntity {
     @NotNull
     private Boolean participation;
 
+    @NotNull
+    private String colorCode;
+
     @Embedded
     @NotNull
     private BaseRequest baseRequest;
@@ -57,6 +60,7 @@ public class MemberRoom extends BaseEntity {
                 .participation(true)
                 .room(room)
                 .member(member)
+                .colorCode(request.getColorCode())
                 .baseRequest(BaseRequest.builder()
                         .constructor(request.getInvitedName())
                         .updater(request.getInvitedName())
@@ -80,7 +84,7 @@ public class MemberRoom extends BaseEntity {
                 .roomId(this.room.getId())
                 .memberId(this.member.getId())
                 .participation(this.participation)
-//                .colorCode(this.)
+                .colorCode(this.colorCode)
                 .build();
     }
 }
