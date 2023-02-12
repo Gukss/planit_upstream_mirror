@@ -2,17 +2,11 @@ import DatePicker from 'react-datepicker';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-import 'react-datepicker/dist/react-datepicker.css';
-import { useNavigate } from 'react-router-dom';
-import { dateRangeState } from '../../../app/store';
-=======
 import { Cookies, useCookies } from 'react-cookie';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 import FriendListItem from './friendbox/friendListItem';
 import { dateRangeState, roomPK, userInfoState } from '../../../app/store';
->>>>>>> 30e8382671700a1771cf49d48f00a131798f14fb
 import logoImg from '../../../app/assets/images/naver_login.png';
 import Header from '../../../common/header/Header';
 
@@ -25,36 +19,9 @@ function CreateRoom() {
   const [startD, setStartDate] = useState(dateRange.startDate);
   const [endD, setEndDate] = useState(dateRange.endDate);
   const [roomName, setRoomName] = useState('');
-<<<<<<< HEAD
-  const navigate = useNavigate();
-
-  const changeRoomName = e => {
-    setRoomName(e.target.value);
-  };
-
-  const dateToString = date => {
-    return `${date.getFullYear()}-${(date.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-  };
-
-  const createRoom = async e => {
-    const subUrl = `/rooms`;
-    const requestData = {
-      startDate: dateToString(startD),
-      endDate: dateToString(endD),
-      roomName: `${roomName}`,
-    };
-    console.log(dateToString(endD));
-    await axios.post(`http://localhost:8080${subUrl}`, requestData);
-
-    navigate('/room');
-  };
-=======
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [inviteUserPk, setInviteUserPk] = useState([]);
   const navigate = useNavigate();
->>>>>>> 30e8382671700a1771cf49d48f00a131798f14fb
 
   // 친구 검색을 위한 dropdown 작업
   const [inputValue, setInputValue] = useState('');
