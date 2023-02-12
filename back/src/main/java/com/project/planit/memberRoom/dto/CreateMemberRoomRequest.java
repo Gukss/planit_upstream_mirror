@@ -18,5 +18,7 @@ public class CreateMemberRoomRequest {
     @NotNull
     private String invitedName;
     @NotNull
+    private String colorCode;
+    @NotNull
     private BaseRequest baseRequest;
 }
