@@ -7,11 +7,10 @@ import com.project.planit.notification.dto.UpdateNotificationRequest;
 import com.project.planit.notification.service.NotificationServiceImpl;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -25,11 +24,12 @@ public class NotificationController {
 
     // SSE객체 생성을 위한 컨트롤러
     @GetMapping(value = "/subscribe", produces = "text/event-stream")
-    public SseEmitter subscribe(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId, @CookieValue String access) {
+    public SseEmitter subscribe(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId,@RequestHeader("Authorization") String access) {
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
-        Long id = Long.parseLong(claims.get("memberId").toString());
-        return notificationService.subscribe(id,lastEventId);
+        Long memberId = Long.parseLong(claims.get("memberId").toString());
+
+        return notificationService.subscribe(memberId,lastEventId);
     }
 
 

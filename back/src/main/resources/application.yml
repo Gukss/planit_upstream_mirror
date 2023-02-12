@@ -25,6 +25,7 @@ spring:
       format_sql: true
       ddl-auto: none
 
+
   #socket test
   devtools:
     livereload:
