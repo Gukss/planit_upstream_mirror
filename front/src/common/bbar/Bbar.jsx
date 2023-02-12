@@ -5,6 +5,32 @@ import Swal from 'sweetalert2';
 import './Bbar.scss';
 
 function Bbar(props) {
+  // 일정 카카오톡 공유
+  // const createKakaoButton = () => {
+  //   if (window.Kakao) {
+  //     // 카카오 스크립트가 로드된 경우 init
+  //     const kakao = window.Kakao;
+  //     // if (!kakao.isInitialized()) {
+  //     //   kakao.init('7c01e88163ab50f09cc5f765bf7f5037');
+  //     // }
+  //     kakao.Share.createDefaultButton({
+  //       container: '#kakaotalk-sharing-btn',
+  //       objectType: 'feed',
+  //       content: {
+  //         title: 'planit',
+  //         description: '#test_content',
+  //         // imageUrl 이 없으면 동작 안하기 때문에 default 이미지를 준비해 두기
+  //         imageUrl: 'https://cdn-icons-png.flaticon.com/512/3448/3448653.png',
+  //         link: {
+  //           mobileWebUrl: 'http://localhost:3000',
+  //           webUrl: 'http://localhost:3000',
+  //         },
+  //       },
+  //     });
+  //   }
+  // };
+
+  // 일정 이미지로 저장 코드
   const title = 'planit';
 
   const onDownloadBtn = () => {
@@ -30,14 +56,12 @@ function Bbar(props) {
               timer: 3000,
               showConfirmButton: false,
             });
+
             saveAs(blob, `${title}.png`);
+            console.log('photo', blob);
           }
         });
       });
-
-    // .then(blob => {
-    //   saveAs(blob, `${title}.png`);
-    // });
   };
 
   return (
@@ -58,6 +82,12 @@ function Bbar(props) {
       </div>
 
       <hr />
+      {/* <button id='kakaotalk-sharing-btn' onClick={createKakaoButton}>
+        <img
+          src='https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png'
+          alt='카카오톡 공유 보내기 버튼'
+        />
+      </button> */}
 
       <div className='bbar__menu'>{props.children}</div>
     </div>

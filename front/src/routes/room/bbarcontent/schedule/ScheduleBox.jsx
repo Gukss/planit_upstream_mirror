@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import classes from './ScheduleBox.module.scss';
 import ScheduleBoxItem from './ScheduleBoxItem';
 

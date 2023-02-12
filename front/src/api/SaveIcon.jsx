@@ -16,10 +16,10 @@ function SaveIcon() {
       role='button'
     >
       <img src='https://cdn-icons-png.flaticon.com/512/423/423081.png' alt='' />
-      <img
+      {/* <img
         src='https://cdn-icons-png.flaticon.com/512/4087/4087925.png'
         alt=''
-      />
+      /> */}
     </div>
   );
 }

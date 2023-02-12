@@ -7,21 +7,16 @@
     cursor: pointer;
   }
 
-  //   img {
-  //     width: 3rem;
-  //     height: 3rem;
-  //   }
-
   img {
     width: 3rem;
     height: 3rem;
-    animation: rotate_image 3s linear infinite;
-    transform-origin: 50% 50%;
+    // animation: rotate_image 3s linear infinite;
+    // transform-origin: 50% 50%;
 
-    @keyframes rotate_image {
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+    // @keyframes rotate_image {
+    //   100% {
+    //     transform: rotate(360deg);
+    //   }
+    // }
   }
 }

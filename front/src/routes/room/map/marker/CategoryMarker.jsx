@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   currentMarker,
   userMarkers,
   categoryCheck,
-  // removeCategory,
 } from '../../../../app/store';
 
 const { kakao } = window;
@@ -29,10 +28,10 @@ const deleteMarker = () => {
 // 맵 이동해서 중심좌표 바꾸니까 거기에 맞게 형성됨...
 // 즉 이 컴포넌트 자체를 호출 할 때 컴포넌트를 클릭하면 해당 카테고리를 정보로 넘기고
 function CategoryMarker(props) {
+  const userMarkerColor = '#8059D1';
   const existMap = props.map;
   const categoryValue = useRecoilValue(categoryCheck);
-  // const [removeAtSearch, setRemoveAtSearch] = useRecoilState(removeCategory);
-  const [setMarker, addSetMarker] = useRecoilState(currentMarker); // 지금 선택한 마커 정보
+  const addSetMarker = useSetRecoilState(currentMarker); // 지금 선택한 마커 정보
   const setSelectMarkers = useSetRecoilState(userMarkers); // 유저가 선택한 마커 모음
 
   useEffect(() => {
@@ -116,7 +115,8 @@ function CategoryMarker(props) {
           {
             id: place.id,
             category: place.category_group_code,
-            userColor: 'red',
+            category_name: place.category_group_name,
+            userColor: userMarkerColor,
             dayColor: '',
             isConfirmed: false,
             title: place.place_name,

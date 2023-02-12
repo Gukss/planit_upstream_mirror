@@ -6,6 +6,12 @@ import {
   removeInformation,
   categoryCheck,
 } from '../../../../app/store';
+import pinkMarker from '../../../../app/assets/images/marker_pink.png';
+import redMarker from '../../../../app/assets/images/marker_red.png';
+import purpleMarker from '../../../../app/assets/images/marker_purple.png';
+import greenMarker from '../../../../app/assets/images/marker_green.png';
+import emeraldMarker from '../../../../app/assets/images/marker_emerald.png';
+import blueMarker from '../../../../app/assets/images/marker_blue.png';
 import './Marker.scss';
 
 const { kakao } = window;
@@ -18,6 +24,23 @@ function Marker(props) {
   const [removeMarker, setRemoveMarker] = useRecoilState(removeInformation);
   const [userSelectMarkers, setUserSelectMarker] = useRecoilState(userMarkers);
 
+  // 유저 색깔 마커
+  const userColor = '#8059D1';
+
+  const colorList = [
+    { color: '#EB5252', img: redMarker },
+    { color: '#7997FE', img: blueMarker },
+    { color: '#90CE0A', img: greenMarker },
+    { color: '#61D9C3', img: emeraldMarker },
+    { color: '#8059D1', img: purpleMarker },
+    { color: '#FF7BBA	', img: pinkMarker },
+  ];
+  const markerColor = colorList.filter(item => item.color === userColor);
+  console.log('마커 색깔', markerColor[0]);
+
+  const myMarkerImg = markerColor[0].img;
+
+  // overlay Open
   const openOverlay = (map, overlay) => {
     return function () {
       overlay.setMap(map);
@@ -29,12 +52,23 @@ function Marker(props) {
     console.log('너는 마커');
     const pos = userSelectMarkers.length - 1;
 
+    const imageSrc = myMarkerImg;
+    const imageSize = new kakao.maps.Size(40, 40);
+    const imageOption = { offset: new kakao.maps.Point(15, 40) };
+
+    const markerImage = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption
+    );
+
     const marker = new kakao.maps.Marker({
       map: existMap,
       position: new kakao.maps.LatLng(
         userSelectMarkers[pos].y,
         userSelectMarkers[pos].x
       ),
+      image: markerImage,
     });
     marker.setMap(existMap);
 
