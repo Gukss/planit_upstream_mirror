@@ -37,10 +37,7 @@ public class MemberRoomServiceImpl implements MemberRoomService{
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
-        Room room=roomRepository.findById(member.getId())
-            .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
-
-        return memberRoomRepository.findAllByMemberAndRoom(member,room).orElseThrow(()->new NotFoundMemberRoomException());
+        return memberRoomRepository.findAllByMember(member);
 
     }
 

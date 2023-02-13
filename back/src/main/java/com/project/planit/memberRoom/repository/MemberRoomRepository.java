@@ -16,6 +16,5 @@ import java.util.Optional;
  * 생성
  */
 public interface MemberRoomRepository extends JpaRepository<MemberRoom,Long> {
-    Optional<List<MemberRoom>> findAllByMemberAndRoom(Member member, Room room);
     List<MemberRoom> findAllByMember(Member member);
 }
