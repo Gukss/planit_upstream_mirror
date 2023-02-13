@@ -52,7 +52,7 @@ public class MemberRoom extends BaseEntity {
     private Room room;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="member_id")
     private Member member;
 
     public static MemberRoom create(CreateMemberRoomRequest request,Room room,Member member) {
@@ -62,8 +62,8 @@ public class MemberRoom extends BaseEntity {
                 .member(member)
                 .colorCode(request.getColorCode())
                 .baseRequest(BaseRequest.builder()
-                        .constructor(request.getInvitedName())
-                        .updater(request.getInvitedName())
+                        .constructor(member.getAppId())
+                        .updater(member.getAppId())
                         .build())
                 .build();
 
