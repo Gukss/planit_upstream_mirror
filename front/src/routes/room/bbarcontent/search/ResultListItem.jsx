@@ -9,6 +9,7 @@ import {
 import classes from './ResultListItem.module.scss';
 
 function ResultListItem(props) {
+  const userMarkerColor = '#8059D1';
   const fullCategory = props.place.category_name;
   const fullCategoryList = fullCategory.split('>');
   console.log('ResultItem 생성마다 호출');
@@ -38,7 +39,8 @@ function ResultListItem(props) {
     const newMarker = {
       id: props.place.id,
       category: props.place.category_group_code,
-      userColor: 'red', // 동적으로 전달해야 함
+      category_name: props.place.category_group_name,
+      userColor: userMarkerColor,
       dayColor: '',
       isConfirmed: false,
       title: props.place.place_name,

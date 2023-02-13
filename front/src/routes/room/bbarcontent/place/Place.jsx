@@ -22,31 +22,13 @@ function Place() {
       item.category !== 'CE7'
   );
 
-  // useEffect(() => {
-  //   items.map(item => {
-  //     console.log(item);
-  //     if (item.category === 'AD5') {
-  //       setItemHotel([...itemHotel, item]);
-  //     } else if (item.category === 'FD6') {
-  //       setItemRestaurant([...itemRestaurant, item]);
-  //     } else if (item.category === 'AT4') {
-  //       setItemSpot([...itemSpot, item]);
-  //     } else if (item.category === 'CE7') {
-  //       setItemCafe([...itemCafe, item]);
-  //     } else {
-  //       setItemElse([...itemElse, item]);
-  //     }
-  //     return 0;
-  //   });
-  // }, [items]);
-
   return (
     <Bbar>
       <div className={classes.place_title}>
         <div className={classes.title_title}>장소 보관함</div>
         <p>
           가고 싶은 장소를 담고 장소를 클릭하여 일정에 들어갈 확정 장소를
-          선택하세요!
+          선택하세요! 색깔을 눌러 해당 위치로 이동하세요!
         </p>
       </div>
       <div className={classes.placebox_section}>
