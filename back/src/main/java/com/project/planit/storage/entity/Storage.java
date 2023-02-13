@@ -44,7 +44,10 @@ public class Storage extends BaseEntity {
     private Boolean confirmed;
 
     @Column(name="day_order")
-    private int dayOrder;
+    private String dayOrder; //int=>string으로 바꿈
+
+    @Column(name="index_order")
+    private Long indexOrder;
 
     private double lat;
 
@@ -71,6 +74,7 @@ public class Storage extends BaseEntity {
             .storageName(request.getStorageName())
             .confirmed(request.getConfirmed())
             .dayOrder(request.getDayOrder())
+            .indexOrder(request.getIndexOrder())
             .lat(request.getLat())
             .lng(request.getLng())
             .member(member)
@@ -87,6 +91,7 @@ public class Storage extends BaseEntity {
     public void update(UpdateStorageRequest request,Member member){
         this.confirmed=request.getConfirmed();
         this.dayOrder=request.getDayOrder();
+        this.indexOrder=request.getIndexOrder();
         this.baseRequest=BaseRequest.builder()
             .constructor(this.baseRequest.getConstructor())
             .updater(member.getAppId())

@@ -32,7 +32,9 @@ public class CreateStorageRequest {
       @NotNull
       private Double lng;
       @NotNull
-      private Integer dayOrder;
+      private String dayOrder;
+      @NotNull
+      private Long indexOrder;
       @NotNull
       @Enumerated(EnumType.STRING)
       private Category categoryName;

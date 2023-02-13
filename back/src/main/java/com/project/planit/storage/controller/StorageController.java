@@ -57,12 +57,13 @@ public class StorageController {
         Long storagesId = newStorage.getId();
         double lat = newStorage.getLat();
         double lng = newStorage.getLng();
-        int dayOrder = newStorage.getDayOrder();
+        String dayOrder = newStorage.getDayOrder();
+        Long indexOrder = newStorage.getIndexOrder();
         Category categoryName = newStorage.getCategoryName();
         Long roomId = newStorage.getRoom().getId();
         Long memberId = newStorage.getMember().getId();
         Boolean confirmed = newStorage.getConfirmed();
-        CreateStorageResponse createStorageResponse = CreateStorageResponse.create(memberId, storagesId, name, confirmed, lat, lng, dayOrder, categoryName, roomId);
+        CreateStorageResponse createStorageResponse = CreateStorageResponse.create(memberId, storagesId, name, confirmed, lat, lng, dayOrder,indexOrder, categoryName, roomId);
 
         ResponseEntity res = ResponseEntity.ok().body(createStorageResponse);
         return res;
@@ -80,7 +81,7 @@ public class StorageController {
         Storage updatedStorage = storageService.updateStorage(request, memberId);
         Member member = updatedStorage.getMember();
         Room room = updatedStorage.getRoom();
-        UpdateStorageResponse updateStorageResponse = UpdateStorageResponse.create(member.getId(), updatedStorage.getId(), updatedStorage.getStorageName(), updatedStorage.getConfirmed(), updatedStorage.getLat(), updatedStorage.getLng(), updatedStorage.getDayOrder(), updatedStorage.getCategoryName(), room.getId());
+        UpdateStorageResponse updateStorageResponse = UpdateStorageResponse.create(member.getId(), updatedStorage.getId(), updatedStorage.getStorageName(), updatedStorage.getConfirmed(), updatedStorage.getLat(), updatedStorage.getLng(), updatedStorage.getDayOrder(), updatedStorage.getIndexOrder(), updatedStorage.getCategoryName(), room.getId());
         ResponseEntity res = ResponseEntity.ok().body(updateStorageResponse);
         return res;
     }

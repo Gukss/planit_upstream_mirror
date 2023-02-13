@@ -40,7 +40,9 @@ public class UpdateStorageResponse {
     private Double lng;
 
     @NotNull
-    private Integer dayOrder;
+    private String dayOrder;
+    @NotNull
+    private Long indexOrder;
 
     @NotNull
     private Category categoryName;
@@ -48,7 +50,7 @@ public class UpdateStorageResponse {
     @NotNull
     private Long roomId;
 
-    public static UpdateStorageResponse create(Long memberId, Long storagesId, String name, Boolean confirmed, Double lat, Double lng, Integer dayOrder, Category categoryName, Long roomId) {
+    public static UpdateStorageResponse create(Long memberId, Long storagesId, String name, Boolean confirmed, Double lat, Double lng, String dayOrder,Long indexOrder, Category categoryName, Long roomId) {
         return UpdateStorageResponse.builder()
                 .memberId(memberId)
                 .storagesId(storagesId)
@@ -57,6 +59,7 @@ public class UpdateStorageResponse {
                 .lat(lat)
                 .lng(lng)
                 .dayOrder(dayOrder)
+                .indexOrder(indexOrder)
                 .categoryName(categoryName)
                 .roomId(roomId)
                 .build();

@@ -19,8 +19,6 @@ public class SocketStorageItem {
   @NotNull
   private String categoryName; //관광명소 등
   @NotNull
-  private Integer dayColor;
-  @NotNull
   private Double y;
   @NotNull
   private Double x;
