@@ -50,6 +50,7 @@ public class MemberRoomController {
     List<FindMemberRoomResponse> resList = new ArrayList<>();
 
     for(MemberRoom memberRoom : foundMemberRoom){
+
       resList.add(memberRoom.createFindMemberRoomResponse());
     }
     ResponseEntity<List<FindMemberRoomResponse>> res = ResponseEntity.ok().body(resList);

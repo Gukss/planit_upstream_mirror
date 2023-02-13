@@ -55,6 +55,7 @@ public class NotificationController {
         notificationService.createNotification(request, id);
 
         for (CreateNotificationRequest notificationItem:request){
+            System.out.println("여기여기요기여기되;나요?!!!!!!!!!");
             String inviteMessage=notificationItem.getReceiverMemberId()+"님이 초대 하셨습니다";
             // value header에서 받아오는 id값으로 변경
             notificationService.send(id, inviteMessage,"message");
