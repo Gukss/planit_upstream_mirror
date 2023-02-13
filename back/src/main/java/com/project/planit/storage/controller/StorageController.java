@@ -1,6 +1,7 @@
 package com.project.planit.storage.controller;
 
 
+import com.project.planit.chatting.dto.CreateChattingMessageRequest;
 import com.project.planit.common.auth.jwt.JwtProvider;
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.dto.UpdateRoomResponse;
@@ -15,6 +16,8 @@ import com.project.planit.storage.service.StorageServiceImpl;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +27,15 @@ import org.springframework.web.bind.annotation.*;
 public class StorageController {
     private final StorageServiceImpl storageService;
     private final JwtProvider jwtProvider;
+
+    private final SimpMessageSendingOperations messagingTemplate;
+
+    // pub, sub관리 컨트롤러 RequestMapping 무시..
+    @MessageMapping("/markers")
+    public void message(CreateStorageRequest createStorageRequest){
+        System.out.println(createStorageRequest.getStorageName());
+        messagingTemplate.convertAndSend("/sub/markers/" + createStorageRequest.getRoomId(), createStorageRequest);
+    }
 
     @GetMapping(path="/rooms/{roomId}")
     public ResponseEntity<?> findStorageList(@PathVariable Long roomId){
