@@ -17,4 +17,5 @@ public class CreateMemberRoomRequest {
     private Long roomId;
     @NotNull
     private String colorCode;
+
 }

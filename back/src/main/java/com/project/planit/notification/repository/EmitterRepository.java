@@ -23,8 +23,13 @@ public class EmitterRepository {
     }
 
     public Map<String, SseEmitter> findAllStartWithById(String id) {
-        System.out.println(emitters.containsKey(id));
-        System.out.println("여기!!!!!!!!!");
+        System.out.println(emitters.entrySet().stream());
+        System.out.println(emitters.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith(id)));
+        System.out.println(emitters.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith(id))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+
         return emitters.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith(id))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

@@ -57,6 +57,8 @@ public class NotificationServiceImpl implements NotificationService{
                         .roomId(room.getId())
                         .notificationId(notificationItem.getId())
                     .build());
+
+
             }
         }
 
@@ -143,11 +145,18 @@ public class NotificationServiceImpl implements NotificationService{
     public void send(Long userId, String value, String target) {
         String id = String.valueOf(userId);
         System.out.println(id);
+        // 로그인 한 유저의 SseEmitter 모두 가져오기
         Map<String, SseEmitter> sseEmitters = emitterRepository.findAllStartWithById(id);
         System.out.println(sseEmitters);
+        System.out.println("에밋 안되겟지?");
         sseEmitters.forEach(
                 (key, emitter) -> {
+                    System.out.println(key);
+                    System.out.println(emitter);
                     System.out.println(value);
+                    System.out.println(target);
+                    System.out.println("뜨아..");
+                    // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
                     emitterRepository.saveEventCache(key, value);
                     sendToClient(emitter, key, value, target);
                 }
