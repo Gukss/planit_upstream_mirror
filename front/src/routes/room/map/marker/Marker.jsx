@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+
+import * as StompJs from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+
 import {
   userMarkers,
   currentMarker,
   removeInformation,
   categoryCheck,
+  socketMarkers,
+  stompClient,
 } from '../../../../app/store';
 import pinkMarker from '../../../../app/assets/images/marker_pink.png';
 import redMarker from '../../../../app/assets/images/marker_red.png';
@@ -23,6 +29,81 @@ function Marker(props) {
   const [roomMarkers, setRoomMarkers] = useState([]);
   const [removeMarker, setRemoveMarker] = useRecoilState(removeInformation);
   const [userSelectMarkers, setUserSelectMarker] = useRecoilState(userMarkers);
+  const [wsUserMarkers, setWsUserMarkers] = useRecoilState(socketMarkers);
+  const test = useRecoilValue(stompClient);
+
+  const client = useRef({});
+
+  console.log('socket 저장 마커', wsUserMarkers);
+  console.log('client', test);
+
+  // 여기 1 나중에 룸번호로 변경해야함
+  const subscribe = async () => {
+    console.log('subscribe');
+    await client.current.subscribe('/sub/markers/1', ({ body }) => {
+      setWsUserMarkers(JSON.parse(body));
+      console.log('정보 들어가냐?', body);
+    });
+  };
+
+  const publish = async userMarker => {
+    console.log('publish');
+    if (!client.current.connected) {
+      return;
+    }
+    console.log('publish info', userMarker);
+    await client.current.publish({
+      destination: '/pub/markers',
+      // 여기 1 나중에 룸번호로 변경해야함
+      body: JSON.stringify({ roomId: 1, storageItemList: userMarker }),
+    });
+  };
+
+  const connect = () => {
+    console.log('connect');
+    client.current = new StompJs.Client({
+      // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
+      webSocketFactory: () =>
+        new SockJS('https://i8b202.p.ssafy.io/api/ws-stomp'), // proxy를 통한 접속
+      connectHeaders: {},
+      debug: str => {
+        console.log(str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        console.log('커넥트 되는 시점');
+        subscribe();
+      },
+      onStompError: frame => {
+        console.error(frame);
+      },
+    });
+
+    client.current.activate();
+  };
+
+  const disconnect = () => {
+    console.log('disconnect');
+    client.current.deactivate();
+  };
+
+  const start = async () => {
+    // await connect();
+    await publish(userSelectMarkers);
+  };
+
+  useEffect(() => {
+    // start();
+    connect();
+    // publish(wsUserMarkers);
+    return () => disconnect();
+  }, []);
+
+  useEffect(() => {
+    start();
+  }, [userSelectMarkers]);
 
   // 유저 색깔 마커
   const userColor = '#8059D1';
@@ -113,7 +194,7 @@ function Marker(props) {
     const CategoryName = document.createElement('div');
     CategoryName.classList.add('category_name');
     CategoryName.appendChild(
-      document.createTextNode([userSelectMarkers[pos].category_name])
+      document.createTextNode([userSelectMarkers[pos].categoryName])
     );
     content.appendChild(CategoryName);
     // 이용자 마커 제거
@@ -153,7 +234,6 @@ function Marker(props) {
       const roomMarker = roomMarkers.filter(
         roomMarker => roomMarker.id === removeMarker.id
       );
-      // const check = roomMarkers.findIndex(i => i.id === roomMarker[0].id);
 
       setRoomMarkers(roomMarkers.filter(room => room.id !== roomMarker[0].id));
 

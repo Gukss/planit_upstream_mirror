@@ -114,10 +114,9 @@ function CategoryMarker(props) {
           ...selectMarkers,
           {
             id: place.id,
-            category: place.category_group_code,
-            category_name: place.category_group_name,
-            userColor: userMarkerColor,
-            dayColor: '',
+            categoryCode: place.category_group_code,
+            categoryName: place.category_group_name,
+            colorCode: userMarkerColor,
             isConfirmed: false,
             title: place.place_name,
             x: place.x,

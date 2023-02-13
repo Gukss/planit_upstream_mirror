@@ -165,17 +165,19 @@ function Schedule() {
       <br />
       <hr />
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='schedulebox_section'>
-          <br />
-          {Object.values(presentSche).map((item, index) => {
-            return (
-              <ScheduleBox
-                items={item.items}
-                boxDate={item.date}
-                order={String(index)}
-              />
-            );
-          })}
+        <div className='schedulebox_section_list'>
+          <div className='schedulebox_section'>
+            <br />
+            {Object.values(presentSche).map((item, index) => {
+              return (
+                <ScheduleBox
+                  items={item.items}
+                  boxDate={item.date}
+                  order={String(index)}
+                />
+              );
+            })}
+          </div>
         </div>
       </DragDropContext>
     </Bbar>

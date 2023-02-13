@@ -50,7 +50,7 @@ function PlaceBoxItem(props) {
     <div className={classes.item_body}>
       <div
         className={classes.item_tag}
-        style={{ backgroundColor: `${props.item.userColor}` }}
+        style={{ backgroundColor: `${props.item.colorCode}` }}
         onClick={moveMarker}
         onKeyDown={moveMarker}
         role='button'

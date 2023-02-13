@@ -44,63 +44,54 @@ export const userMarkers = atom({
   default: [
     {
       id: 'dummy_1',
-      category: 'AD5',
-      userColor: '#EB5252',
-      dayColor: '',
+      categoryCode: 'AD5',
+      colorCode: '#EB5252',
       isConfirmed: false,
       title: '숙소1',
-      category_name: '숙박',
+      categoryName: '숙박',
       x: 126.44,
       y: 32.44,
-      marker: {},
     },
 
     {
       id: 'dummy_2',
-      category: 'AD5',
-      userColor: '#EB5252',
-      dayColor: '',
+      categoryCode: 'AD5',
+      colorCode: '#EB5252',
       isConfirmed: false,
       title: '숙소2',
       x: 126.44,
       y: 32.44,
-      marker: {},
     },
 
     {
       id: 'dummy_3',
-      category: 'FD6',
-      userColor: '#90CE0A',
-      dayColor: '',
+      categoryCode: 'FD6',
+      colorCode: '#90CE0A',
       isConfirmed: false,
       title: '식당1',
-      category_name: '식당',
+      categoryName: '식당',
       x: 126.44,
       y: 32.44,
-      marker: {},
     },
     {
       id: 'dummy_4',
-      category: 'AT4',
-      userColor: '#7997FE',
-      dayColor: '',
+      categoryCode: 'AT4',
+      colorCode: '#7997FE',
       isConfirmed: false,
       title: '관광명소 성심당',
-      category_name: '식당',
+      categoryName: '식당',
       x: 126.44,
       y: 32.44,
-      marker: {},
     },
     {
       id: 'dummy_5',
-      category: 'CE7',
-      userColor: '#FAE635',
-      dayColor: '',
+      categoryCode: 'CE7',
+      colorCode: '#FAE635',
+      categoryName: '카페',
       isConfirmed: false,
       title: '카페 아자카파',
       x: 126.44,
       y: 32.44,
-      isMarker: {},
     },
   ],
 });
@@ -119,6 +110,12 @@ export const categoryCheck = atom({
 // socket data 관리
 export const chatMessages = atom({
   key: 'chatMessages',
+  default: [],
+});
+
+// socket data Marker 관리
+export const socketMarkers = atom({
+  key: 'socketMarkers',
   default: [],
 });
 
@@ -170,4 +167,10 @@ export const checkUserRoom = atom({
 export const roomPK = atom({
   key: 'roomId',
   default: -1,
+});
+
+// 전역에 처리하는 용
+export const stompClient = atom({
+  key: 'stompClient',
+  default: null,
 });

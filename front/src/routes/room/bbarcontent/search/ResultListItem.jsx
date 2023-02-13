@@ -38,10 +38,9 @@ function ResultListItem(props) {
 
     const newMarker = {
       id: props.place.id,
-      category: props.place.category_group_code,
-      category_name: props.place.category_group_name,
-      userColor: userMarkerColor,
-      dayColor: '',
+      categoryCode: props.place.category_group_code,
+      categoryName: props.place.category_group_name,
+      colorCode: userMarkerColor,
       isConfirmed: false,
       title: props.place.place_name,
       x: props.place.x,
