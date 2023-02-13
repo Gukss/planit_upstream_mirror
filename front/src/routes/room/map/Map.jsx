@@ -147,10 +147,9 @@ function Map() {
             ...selectMarkers,
             {
               id: searchData[i].id,
-              category: searchData[i].category_group_code,
-              category_name: searchData[i].category_group_name,
-              userColor: userMarkerColor,
-              dayColor: '',
+              categoryCode: searchData[i].category_group_code,
+              categoryName: searchData[i].category_group_name,
+              colorCode: userMarkerColor,
               isConfirmed: false,
               title: searchData[i].place_name,
               x: searchData[i].x,

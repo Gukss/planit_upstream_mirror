@@ -10,16 +10,16 @@ function Place() {
 
   console.log('여기', items);
 
-  const itemHotels = items.filter(item => item.category === 'AD5');
-  const itemRestaurants = items.filter(item => item.category === 'FD6');
-  const itemSpots = items.filter(item => item.category === 'AT4');
-  const itemCafes = items.filter(item => item.category === 'CE7');
+  const itemHotels = items.filter(item => item.categoryCode === 'AD5');
+  const itemRestaurants = items.filter(item => item.categoryCode === 'FD6');
+  const itemSpots = items.filter(item => item.categoryCode === 'AT4');
+  const itemCafes = items.filter(item => item.categoryCode === 'CE7');
   const itemElses = items.filter(
     item =>
-      item.category !== 'AD5' &&
-      item.category !== 'FD6' &&
-      item.category !== 'AT4' &&
-      item.category !== 'CE7'
+      item.categoryCode !== 'AD5' &&
+      item.categoryCode !== 'FD6' &&
+      item.categoryCode !== 'AT4' &&
+      item.categoryCode !== 'CE7'
   );
 
   return (

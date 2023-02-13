@@ -15,6 +15,7 @@ function ChatControl() {
   const subscribe = async () => {
     console.log('subscribe');
     await client.current.subscribe('/sub/room/1', ({ body }) => {
+      console.log('바디', body);
       setMessages(messages => [...messages, JSON.parse(body)]);
     });
   };

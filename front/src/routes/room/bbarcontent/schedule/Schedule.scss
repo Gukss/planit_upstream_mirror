@@ -11,12 +11,7 @@
     font-size: 1rem;
   }
 }
-
-.schedulebox_section {
-  // background-color: #e6e9ef;
-  background-color: rgb(224, 254, 76);
-  border-radius: 8px;
-  // padding: 16px 16px 0px 16px;
+.schedulebox_section_list {
   overflow: auto;
   // height: 30rem;
   height: 53vh;
@@ -28,5 +23,11 @@
   &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
+  }
+  .schedulebox_section {
+    // background-color: #e6e9ef;
+    background-color: rgb(224, 254, 76);
+    border-radius: 8px;
+    // padding: 16px 16px 0px 16px;
   }
 }
