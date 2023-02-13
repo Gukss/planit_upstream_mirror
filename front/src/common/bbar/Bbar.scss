@@ -34,6 +34,9 @@ hr {
     }
     i {
       font-size: 2rem;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
