@@ -1,6 +1,11 @@
 package com.project.planit.storage.dto;
 
 import com.project.planit.storage.entity.Category;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -10,6 +15,10 @@ import javax.validation.constraints.NotNull;
  * NOTE ----------------------------------------------------------- 2023-02-13        SSAFY       최초
  * 생성
  */
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+@Builder
 public class SocketStorageItem {
 
   @NotNull
