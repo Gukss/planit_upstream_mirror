@@ -85,6 +85,7 @@ function Vote() {
           여행 일정을 짜는 중 의견이 정해지지 않을 땐 투표를 만들어
           진행해보세요.
         </p>
+        <br />
       </div>
       <div className={classes.vote_body}>
         <div className={classes.vote_body_head}>

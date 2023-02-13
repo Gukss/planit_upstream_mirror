@@ -13,4 +13,13 @@
     font-weight: bold;
     margin-bottom: 1rem;
   }
+
+  .box_content_empty {
+    margin-top: 1rem;
+    p {
+      color: grey;
+      font-size: 0.9rem;
+      font-weight: lighter;
+    }
+  }
 }

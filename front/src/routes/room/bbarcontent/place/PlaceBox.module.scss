@@ -16,4 +16,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  .box_content_empty {
+    margin-bottom: 1rem;
+    margin-left: 5.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: grey;
+    }
+  }
 }

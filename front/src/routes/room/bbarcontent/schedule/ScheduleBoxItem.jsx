@@ -17,10 +17,33 @@ function ScheduleBoxItem(props) {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
         >
-          <div className={classes.item_tag}></div>
+          <div className={classes.item_tag}>
+            {/* {props.item.category === 'AD5' ? (
+              <i className='bx bx-home' />
+            ) : props.item.category === 'FD6' ? (
+              <i className='bx bx-restaurant' />
+            ) : (
+              <p>반갑</p>
+            )} */}
+
+            {(props.item.category === 'AD5' && <i className='bx bx-home' />) ||
+              (props.item.category === 'FD6' && (
+                <i className='bx bx-restaurant' />
+              )) ||
+              (props.item.category === 'CE7' && (
+                <i className='bx bx-coffee' />
+              )) ||
+              (props.item.category === 'AT4' && (
+                <i className='bx bxs-castle' />
+              )) ||
+              (props.item.category === 'AD5' && (
+                <i className='bx bx-home' />
+              )) || <i className='bx bx-map' />}
+          </div>
+
           <div className={classes.item_title}>
             <h3>{props.item.title}</h3>
-            <p>인덱스 {props.index}</p>
+            {/* <p>인덱스 {props.item.category}</p> */}
           </div>
         </div>
       )}

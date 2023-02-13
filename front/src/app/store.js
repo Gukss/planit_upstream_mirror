@@ -143,8 +143,8 @@ export const scheduleInfo = atom({
 });
 
 // 일정 변동 여부 - 재방문했을 때 기존 일정 유지하기 위한 변수
-export const isScheduleChanged = atom({
-  key: 'isScheduleChanged',
+export const isConfirmedChanged = atom({
+  key: 'isConfirmedChanged',
   default: false,
 });
 

@@ -35,7 +35,7 @@ function Bbar(props) {
 
   const onDownloadBtn = () => {
     domtoimage
-      .toBlob(document.querySelector('.Schedule_schedulebox_section__ITIpX'))
+      .toBlob(document.querySelector('.schedulebox_section'))
       // schedulebox_section
       .then(blob => {
         Swal.fire({
