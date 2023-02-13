@@ -68,7 +68,6 @@ public class RoomController {
   }
 
   @GetMapping(path = "{roomId}")
-  @PreAuthorize("hasAnyRole('MEMBER','ADMIN')")
   public ResponseEntity<ReadRoomResponse> readRoom(@PathVariable Long roomId){
     Room foundRoom = roomService.findById(roomId);
     //todo: 프론트랑 반환값 상의해서 넣어주기
