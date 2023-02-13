@@ -23,7 +23,7 @@ public class SocketStorageRequest {
   private Long roomId;
 
   @NotNull
-  private List<SocketStorageRequest> storageItemList;
+  private List<SocketStorageItem> storageItemList;
 
 
 }
