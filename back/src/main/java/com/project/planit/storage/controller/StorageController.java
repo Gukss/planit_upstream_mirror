@@ -8,6 +8,7 @@ import com.project.planit.room.dto.UpdateRoomResponse;
 import com.project.planit.room.entity.Room;
 import com.project.planit.storage.dto.CreateStorageRequest;
 import com.project.planit.storage.dto.CreateStorageResponse;
+import com.project.planit.storage.dto.SocketStorageRequest;
 import com.project.planit.storage.dto.UpdateStorageRequest;
 import com.project.planit.storage.dto.UpdateStorageResponse;
 import com.project.planit.storage.entity.Category;
@@ -32,9 +33,9 @@ public class StorageController {
 
     // pub, sub관리 컨트롤러 RequestMapping 무시..
     @MessageMapping("/markers")
-    public void message(CreateStorageRequest createStorageRequest){
-        System.out.println(createStorageRequest.getStorageName());
-        messagingTemplate.convertAndSend("/sub/markers/" + createStorageRequest.getRoomId(), createStorageRequest);
+    public void message(SocketStorageRequest socketStorageRequest){
+//        System.out.println(socketStorageRequest);
+        messagingTemplate.convertAndSend("/sub/markers/" + socketStorageRequest.getRoomId(), socketStorageRequest);
     }
 
     @GetMapping(path="/rooms/{roomId}")
