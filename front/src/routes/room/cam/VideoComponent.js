@@ -9,14 +9,14 @@ import React, { Component } from 'react';
 import UserVideoComponent from './UserVideoComponent';
 import classes from './VideoComponent.module.scss';
 
-// const OPENVIDU_SERVER_URL = 'https://i8b202.p.ssafy.io:8443';
-const OPENVIDU_SERVER_URL = 'https://i8b202.p.ssafy.io';
+const OPENVIDU_SERVER_URL = 'https://i8b202.p.ssafy.io:8443';
+// const OPENVIDU_SERVER_URL = 'https://i8b202.p.ssafy.io';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 
 class VideoComponent extends Component {
   constructor(props) {
     super(props);
-    const joinSessionId = `Session${this.props.sessionId}`;
+    const joinSessionId = `session-${this.props.sessionId}`;
     // These properties are in the state's component in order to re-render the HTML whenever their values change
     this.state = {
       // 참가 세션 id
@@ -45,12 +45,17 @@ class VideoComponent extends Component {
 
   componentDidMount() {
     console.log('VC-componentDidMount');
+    console.log(this.props);
     this.joinSession();
     this.setState({
       videoEnable: true,
       audioEnable: true,
     });
     window.addEventListener('beforeunload', this.onbeforeunload);
+  }
+
+  componentWillUnmount() {
+    this.leaveSession();
   }
 
   handleMainVideoStream(stream) {
@@ -352,6 +357,8 @@ class VideoComponent extends Component {
   // eslint-disable-next-line class-methods-use-this
   createSession(sessionId) {
     console.log('VC-createSession');
+    console.log('----------------');
+    console.log(sessionId);
     return new Promise((resolve, reject) => {
       const data = JSON.stringify({ customSessionId: sessionId });
 

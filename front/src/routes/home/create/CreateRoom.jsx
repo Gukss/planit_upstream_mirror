@@ -1,6 +1,6 @@
 import DatePicker from 'react-datepicker';
 import { useRecoilState } from 'recoil';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
@@ -72,9 +72,14 @@ function CreateRoom() {
       '/notification',
       makeInviteList
     );
+    const reqMemRoomData = {
+      roomId: responseCreateRoom.data.roomId,
+      colorCode: '#EB5252',
+    };
+    const resMemberRoom = await instance.post('/rooms/users', reqMemRoomData);
+    console.log(resMemberRoom);
     console.log(responseCreateRoom.data);
-    setRoomId(responseCreateRoom.data);
-
+    setRoomId(responseCreateRoom.data.roomId);
     navigate('/room/search');
   };
 

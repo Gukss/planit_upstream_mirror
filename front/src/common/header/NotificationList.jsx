@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import classes from './NotificationList.module.scss';
 import Notification from './Notification';
 
-function NotificationList({ notificationList, setNotificationList }) {
+function NotificationList({ notificationList, setNotificationList, userInfo }) {
   const onDelete = () => {
     setNotificationList('');
   };
@@ -19,7 +19,7 @@ function NotificationList({ notificationList, setNotificationList }) {
       <div className={classes.notificationList_header_line}></div>
       {notificationList &&
         notificationList.data.map(notificaiton => (
-          <Notification notificaiton={notificaiton} />
+          <Notification notificaiton={notificaiton} userInfo={userInfo} />
         ))}
     </div>
   );

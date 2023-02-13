@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import axios from 'axios';
+import { useEffect } from 'react';
 import { userInfoState } from '../../../app/store';
 import Header from '../../../common/header/Header';
 import classes from './MyPage.module.scss';
@@ -13,14 +14,24 @@ function MyPage() {
     baseURL: 'https://i8b202.p.ssafy.io/api',
     headers: {
       Authorization: `Bearer ${userInfo.token}`,
+      contentType: 'application/json',
     },
   });
 
-  // const resRoomData = async e => {
-  //   try {
-  //     await instance.post('/')
-  //   }
-  // }
+  const reqRoomData = async e => {
+    try {
+      const resMemRoomData = await instance.get('/rooms/users');
+      // const resRoomData = await resMemRoomData.map(roomInfo =>
+      //   instance.get(`/rooms/${roomInfo.roomId}`)
+      // );
+      console.log(resMemRoomData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    reqRoomData();
+  }, []);
 
   return (
     <div className={classes.mypage}>
