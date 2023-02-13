@@ -5,6 +5,7 @@ import {
   userMarkers,
   searchedPlace,
   removeInformation,
+  isConfirmedChanged,
 } from '../../../../app/store';
 
 function PlaceBoxItem(props) {
@@ -13,6 +14,8 @@ function PlaceBoxItem(props) {
   const [markerPosition, setMarkerPosition] = useRecoilState(searchedPlace);
   const [markers, setMarkers] = useRecoilState(userMarkers);
   const [isClick, setIsClick] = useState(props.item.isConfirmed);
+  const [confirmedChanged, setConfirmedChanged] =
+    useRecoilState(isConfirmedChanged);
 
   // tag 클릭시 이동
   const moveMarker = e => {
@@ -30,6 +33,7 @@ function PlaceBoxItem(props) {
 
   const onConfirmPlace = e => {
     console.log('확정 버튼 누름', e);
+    setConfirmedChanged(true);
 
     setMarkers(
       markers.map(marker =>

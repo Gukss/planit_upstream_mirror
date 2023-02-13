@@ -10,7 +10,7 @@ function ChatSection() {
       {messageList.map(messageListItem => {
         return (
           <div className={classes.chat_message_section}>
-            {messageListItem.message}
+            <p>{messageListItem.message}</p>
           </div>
         );
       })}

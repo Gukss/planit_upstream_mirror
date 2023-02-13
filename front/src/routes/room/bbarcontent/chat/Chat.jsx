@@ -11,9 +11,10 @@ function Chat() {
         <div className={classes.title_title}>채팅</div>
         <p>채팅으로 친구들과 실시간으로 소통할 수 있습니다.</p>
       </div>
+      <br />
       <div className={classes.chat_body}>
         <ChatSection />
-        <hr />
+        {/* <hr /> */}
         <ChatControl />
       </div>
     </Bbar>

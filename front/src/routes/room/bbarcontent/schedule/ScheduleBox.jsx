@@ -16,9 +16,15 @@ function ScheduleBox(props) {
             ref={provided.innerRef}
           >
             <p>{props.boxDate}</p>
-            {props.items.map((item, index) => {
-              return <ScheduleBoxItem item={item} index={index} />;
-            })}
+            {props.items.length ? (
+              props.items.map((item, index) => {
+                return <ScheduleBoxItem item={item} index={index} />;
+              })
+            ) : (
+              <div className={classes.box_content_empty}>
+                <p>등록한 일정이 없습니다</p>
+              </div>
+            )}
             {provided.placeholder}
           </div>
         )}
