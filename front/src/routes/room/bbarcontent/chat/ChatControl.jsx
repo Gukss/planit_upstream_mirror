@@ -13,12 +13,14 @@ function ChatControl() {
 
   // 여기 1 나중에 룸번호로 변경해야함
   const subscribe = async () => {
+    console.log('subscribe');
     await client.current.subscribe('/sub/room/1', ({ body }) => {
       setMessages(messages => [...messages, JSON.parse(body)]);
     });
   };
 
   const publish = async message => {
+    console.log('publish');
     if (!client.current.connected) {
       return;
     }
@@ -31,6 +33,7 @@ function ChatControl() {
   };
 
   const connect = () => {
+    console.log('connect');
     client.current = new StompJs.Client({
       // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
       webSocketFactory: () =>
@@ -55,11 +58,13 @@ function ChatControl() {
   };
 
   const disconnect = () => {
+    console.log('disconnect');
     client.current.deactivate();
   };
 
   // 제출한 메세지를 state에 담는 함수
   const submitMessage = e => {
+    console.log('submitMessage');
     if (e.keyCode === 13) {
       e.preventDefault();
 

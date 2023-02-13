@@ -13,11 +13,12 @@ function Header() {
   const userInfo = useRecoilValue(userInfoState);
   const [notificationList, setNotificationList] = useState();
   console.log(notificationList);
+  console.log(userInfo);
   const login = useRecoilValue(isLogin);
 
-  const FindNotification = async () => {
+  const FindNotification = async e => {
     // 나중에 토큰 값 던져 주세용!
-
+    e.preventDefault();
     setNotificationList(await ServiceFindNotification(userInfo));
   };
 
@@ -65,6 +66,7 @@ function Header() {
       </header>
       {notificationList && (
         <NotificationList
+          userInfo={userInfo}
           notificationList={notificationList}
           setNotificationList={setNotificationList}
         />

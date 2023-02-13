@@ -169,5 +169,5 @@ export const checkUserRoom = atom({
 // room ID 받았슴당
 export const roomPK = atom({
   key: 'roomId',
-  default: null,
+  default: -1,
 });
