@@ -24,7 +24,9 @@ public class UpdateStorageRequest {
   @NotNull
   private Boolean confirmed;
   @NotNull
-  private Integer dayOrder;
+  private String dayOrder;
+  @NotNull
+  private Long indexOrder;
   @NotNull
   private Long roomId;
   @NotNull
