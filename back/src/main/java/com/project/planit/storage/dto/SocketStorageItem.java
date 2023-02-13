@@ -22,15 +22,15 @@ import javax.validation.constraints.NotNull;
 public class SocketStorageItem {
 
   @NotNull
-  private Long id; //이 id 값은 카카오 api의 id값
+  private String id; //이 id 값은 카카오 api의 id값
   @NotNull
-  private Category categoryCode; //코드
+  private String categoryCode; //코드
   @NotNull
   private String categoryName; //관광명소 등
   @NotNull
-  private Double y;
+  private String y;
   @NotNull
-  private Double x;
+  private String x;
   @NotNull
   private Boolean isConfirmed;
   @NotNull
