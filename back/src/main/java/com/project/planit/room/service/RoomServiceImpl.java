@@ -45,10 +45,6 @@ public class RoomServiceImpl implements RoomService{
     @Override
     @Transactional
     public Room createRoom(CreateRoomRequest request, Long memberId) {
-//        System.out.println(request.getStartDate()+" "+request.getStartDate().getClass().getName());
-//        System.out.println(request.getEndDate()+" "+request.getEndDate().getClass().getName());
-//        System.out.println("여기!!");
-        //todo: tocken에서 memberAppId 가져다 사용하기
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 

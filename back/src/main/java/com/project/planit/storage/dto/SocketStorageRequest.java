@@ -24,6 +24,4 @@ public class SocketStorageRequest {
 
   @NotNull
   private List<SocketStorageItem> storageItemList;
-
-
 }

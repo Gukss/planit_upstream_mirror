@@ -19,6 +19,7 @@ import java.util.Map;
 import com.project.planit.room.entity.Room;
 import com.project.planit.room.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationServiceImpl implements NotificationService{
     private final NotificationRepository notificationRepository;
     private final MemberRepository memberRepository;
@@ -116,7 +118,7 @@ public class NotificationServiceImpl implements NotificationService{
 
         // 클라이언트가 미수신한 Event 목록이 존재할 경우 전송하여 Event 유실을 예방
         if (!lastEventId.isEmpty()) {
-            System.out.println("미수신한 이벤트가 있습니다");
+            log.info("미수신한 이벤트가 있습니다");
             Map<String, Object> events = emitterRepository.findAllEventCacheStartWithId(String.valueOf(memberId));
             events.entrySet().stream()
                     .filter(entry -> lastEventId.compareTo(entry.getKey()) < 0)
@@ -144,18 +146,10 @@ public class NotificationServiceImpl implements NotificationService{
     @Transactional
     public void send(Long userId, String value, String target) {
         String id = String.valueOf(userId);
-        System.out.println(id);
         // 로그인 한 유저의 SseEmitter 모두 가져오기
         Map<String, SseEmitter> sseEmitters = emitterRepository.findAllStartWithById(id);
-        System.out.println(sseEmitters);
-        System.out.println("에밋 안되겟지?");
         sseEmitters.forEach(
                 (key, emitter) -> {
-                    System.out.println(key);
-                    System.out.println(emitter);
-                    System.out.println(value);
-                    System.out.println(target);
-                    System.out.println("뜨아..");
                     // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
                     emitterRepository.saveEventCache(key, value);
                     sendToClient(emitter, key, value, target);

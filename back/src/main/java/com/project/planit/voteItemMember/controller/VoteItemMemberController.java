@@ -35,7 +35,6 @@ public class VoteItemMemberController {
 
   @PostMapping
   public ResponseEntity<CreateVoteItemMemberResponse> createVoteItemMember(@RequestBody CreateVoteItemMemberRequest request, @RequestHeader("Authorization") String access) {
-    //todo: token에서 updator 가져오기
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Long memberId = Long.parseLong(claims.get("memberId").toString());
@@ -49,7 +48,6 @@ public class VoteItemMemberController {
 
   @GetMapping(path = "{voteItemId}")
   public ResponseEntity<List<FindVoteItemMemberResponse>> findVoteItemMemberListByVoteItemId(@PathVariable Long voteItemId){
-    //todo: token값으로 바꾸기
     List<VoteItemMember> foundVoteItemMemberList = voteItemMemberService.findAllByVoteItemIdAndMemberId(voteItemId, 1L);
 
     List<FindVoteItemMemberResponse> resList = new ArrayList<>();

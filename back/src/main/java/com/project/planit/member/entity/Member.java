@@ -87,7 +87,6 @@ public class Member extends BaseEntity{
   }
 
   public static Member of(PrincipalDetails principalDetails) {
-    //todo: 여기도 조금 이상하다 한 번 더 보기
     Member member = principalDetails.getMember();
     return member;
   }

@@ -6,11 +6,7 @@ import com.project.planit.common.auth.jwt.JwtProvider;
 import com.project.planit.member.entity.Member;
 import com.project.planit.room.dto.UpdateRoomResponse;
 import com.project.planit.room.entity.Room;
-import com.project.planit.storage.dto.CreateStorageRequest;
-import com.project.planit.storage.dto.CreateStorageResponse;
-import com.project.planit.storage.dto.SocketStorageRequest;
-import com.project.planit.storage.dto.UpdateStorageRequest;
-import com.project.planit.storage.dto.UpdateStorageResponse;
+import com.project.planit.storage.dto.*;
 import com.project.planit.storage.entity.Category;
 import com.project.planit.storage.entity.Storage;
 import com.project.planit.storage.service.StorageServiceImpl;
@@ -34,7 +30,6 @@ public class StorageController {
     // pub, sub관리 컨트롤러 RequestMapping 무시..
     @MessageMapping("/markers")
     public void message(SocketStorageRequest socketStorageRequest){
-//        System.out.println(socketStorageRequest);
         messagingTemplate.convertAndSend("/sub/markers/" + socketStorageRequest.getRoomId(), socketStorageRequest);
     }
 
@@ -45,9 +40,6 @@ public class StorageController {
 
     @PostMapping
     public ResponseEntity<CreateStorageResponse> createStorage(@RequestBody CreateStorageRequest request, @RequestHeader("Authorization") String access) {
-        // @TODO : 토큰 아이디로 변환 => O
-//        Long reqestMemberId=1L;
-
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
         Long reqestMemberId = Long.parseLong(claims.get("memberId").toString());
@@ -71,9 +63,6 @@ public class StorageController {
 
     @PatchMapping
     public ResponseEntity<UpdateStorageResponse> updateStorage(@RequestBody UpdateStorageRequest request, @RequestHeader("Authorization") String access) {
-        // @TODO : 토큰 아이디로 변환 => O
-//        Long memberId=1L;
-
         String parseToken = returnAccessToken(access);
         Claims claims = jwtProvider.parseClaims(parseToken);
         Long memberId = Long.parseLong(claims.get("memberId").toString());
@@ -93,4 +82,9 @@ public class StorageController {
         }
         return parseToken;
     }
+    @MessageMapping("/schedule")
+    public void schedule(SocketScheduleRequest socketScheduleRequest){
+        messagingTemplate.convertAndSend("/sub/schedule/" + socketScheduleRequest.getRoomId(), socketScheduleRequest);
+    }
+
 }

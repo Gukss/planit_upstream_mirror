@@ -38,7 +38,6 @@ public class MemberServiceImpl implements MemberService {
   @Transactional
   @Override
   public Long createMember(CreateMemberRequest request) {
-    // @TODO : 토큰으로 던져줘야함
     Member member=Member.create(request);
     Member newMember=memberRepository.save(member);
     return newMember.getId();

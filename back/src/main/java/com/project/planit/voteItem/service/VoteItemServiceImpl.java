@@ -50,7 +50,6 @@ public class VoteItemServiceImpl implements VoteItemService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
-        //todo: constructor, updator 토큰에서 가지고 오기
         String constructor = member.getAppId();
         String updator = member.getAppId();
         BaseRequest baseRequest = BaseRequest.builder()

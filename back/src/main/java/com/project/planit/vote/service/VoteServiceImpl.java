@@ -52,8 +52,6 @@ public class VoteServiceImpl implements VoteService{
     Member member = memberRepository.findById(memberId)
             .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
-
-    //todo: tocken에서 memberAppId 가져다 사용하기 => O
     String updater = member.getAppId();
     String constructor = member.getAppId();
 
