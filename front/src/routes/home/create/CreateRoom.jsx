@@ -72,7 +72,11 @@ function CreateRoom() {
     console.log(resMemberRoom);
     console.log(responseCreateRoom.data);
     setRoomId(responseCreateRoom.data.roomId);
-    navigate('/room/search');
+    if (roomId !== -1) {
+      navigate('/room/search');
+    } else {
+      setTimeout(() => navigate('/room/search'), 1000);
+    }
   };
 
   // startDate, endDate 변경
