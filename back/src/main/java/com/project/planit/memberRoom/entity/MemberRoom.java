@@ -48,11 +48,11 @@ public class MemberRoom extends BaseEntity {
     @NotNull
     private BaseRequest baseRequest;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="room_id")
     private Room room;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="member_id")
     private Member member;
 
