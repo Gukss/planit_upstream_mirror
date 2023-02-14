@@ -55,8 +55,9 @@ public class StorageServiceImpl implements StorageService{
   }
 
   @Override
-  public List<Storage> findStorageList(Long roomId) {
-      Member member=memberRepository.findById(1L)
+  public List<Storage> findStorageList(Long roomId, Long reqestMemberId) {
+      // @TODO : 아이디 토큰 값으로 변경
+      Member member=memberRepository.findById(reqestMemberId)
           .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
 
       Room room=roomRepository.findById(roomId)

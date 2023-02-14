@@ -15,5 +15,5 @@ import java.util.List;
 public interface StorageService {
   Storage createStorage(CreateStorageRequest request, Long id);
   Storage updateStorage(UpdateStorageRequest request,Long memberId);
-  List<Storage> findStorageList(Long storageId);
+  List<Storage> findStorageList(Long storageId, Long reqestMemberId);
 }
