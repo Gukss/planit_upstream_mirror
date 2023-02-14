@@ -13,4 +13,5 @@ public class CreateChattingMessageRequest {
     private Long roomId;
 
     private String message;
+    private Long memberId;
 }
