@@ -6,6 +6,7 @@ import kakaoLogin from '../../../app/assets/images/kakao_login.jpg';
 import naverLogin from '../../../app/assets/images/naver_login.png';
 import classes from './Login.module.scss';
 import { isLogin, userInfoState } from '../../../app/store';
+import planitLogo from '../../../app/assets/images/planit_logo.svg';
 
 function Login() {
   const [AppId, setAppId] = useState('');
@@ -68,9 +69,15 @@ function Login() {
   return (
     <div className={classes.login}>
       <div className={classes.login__bar}>
+        <div className={classes.login__ticket}>
+          PLANIT TICKET PLANIT TICKET PLANIT TICKET PLANIT TICKET PLANIT TICKET
+          PLANIT TICKET PLANIT TICKETPLANIT TICKET PLANIT TICKETPLANIT TICKET
+          PLANIT TICKETPLANIT TICKET PLANIT TICKETPLANIT TICKET PLANIT TICKET
+          PLANIT TICKET{' '}
+        </div>
         <div className={classes.login__main}>
           <div className={classes.login__main__logo}>
-            <i className='bx bx-box' />
+            <img alt='logo' src={planitLogo} width='100%' height='100%' />
           </div>
           <div className={classes.login__main__signin}>
             <h1>PLAN!T</h1>

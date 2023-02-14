@@ -169,6 +169,17 @@ export const roomPK = atom({
   default: -1,
 });
 
+export const roomInfoState = atom({
+  key: 'roomInfo',
+  default: {
+    roomId: -1,
+    roomName: '',
+    startDate: '',
+    endDate: '',
+    colorCode: '',
+  },
+});
+
 // 전역에 처리하는 용
 export const stompClient = atom({
   key: 'stompClient',

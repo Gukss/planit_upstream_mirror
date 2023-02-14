@@ -7,6 +7,7 @@ function NotificationList({ notificationList, setNotificationList, userInfo }) {
   const onDelete = () => {
     setNotificationList('');
   };
+  console.log(notificationList.data);
 
   return (
     <div className={classes.notificationlist}>
@@ -18,9 +19,11 @@ function NotificationList({ notificationList, setNotificationList, userInfo }) {
       </div>
       <div className={classes.notificationList_header_line}></div>
       {notificationList &&
-        notificationList.data.map(notificaiton => (
-          <Notification notificaiton={notificaiton} userInfo={userInfo} />
-        ))}
+        notificationList.data
+          // .filter(tmp => !tmp.readOrNot)
+          .map(notificaiton => (
+            <Notification notificaiton={notificaiton} userInfo={userInfo} />
+          ))}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { categoryCheck } from '../../../../app/store';
 import classes from './ControlBox.module.scss';
 
@@ -42,6 +42,9 @@ function ControlBox() {
   //     };
   //   });
   // };
+
+  // 방정보 가져오기
+  // const
 
   return (
     <div className={classes.control_box}>

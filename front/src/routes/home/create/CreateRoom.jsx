@@ -11,14 +11,6 @@ import Header from '../../../common/header/Header';
 import classes from './CreateRoom.module.scss';
 
 function CreateRoom() {
-  const colorCode = [
-    '#EB5252',
-    '#7997FE',
-    '#90CE0A',
-    '#61D9C3',
-    '#8059D1',
-    '#FF7BBA',
-  ];
   const [dateRange, setDateRange] = useRecoilState(dateRangeState);
   const [roomId, setRoomId] = useRecoilState(roomPK);
   const [startD, setStartDate] = useState(dateRange.startDate);
@@ -122,7 +114,11 @@ function CreateRoom() {
     console.log(userInfo);
     setInputValue('');
     console.log(friend);
-    setSelectFriends([...selectFriends, friend]);
+    if (selectFriends.length < 5) {
+      setSelectFriends([...selectFriends, friend]);
+    } else {
+      alert('5명까지 초대가능합니다.');
+    }
     setShowDropdown(false);
     // console.log(2);
   };
