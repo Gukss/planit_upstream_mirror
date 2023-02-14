@@ -57,7 +57,7 @@ public class MemberRoomController {
     return res;
   }
 
-  @GetMapping(path = {"roomId"})
+  @GetMapping(path = {"/{roomId}"})
   public ResponseEntity<List<FindMemberRoomByRoomIdResponse>> findMemberRoomByRoomId(@PathVariable Long roomId, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
