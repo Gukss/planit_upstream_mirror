@@ -1,5 +1,6 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import Bbar from '../../../../common/bbar/Bbar';
 import ResultList from './ResultList';
 
@@ -62,8 +63,15 @@ function Search() {
         //   console.log('검색 결과 중 오류가 발생했습니다.');
         // }
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        alert('검색 결과가 존재하지 않습니다.');
+        Swal.fire({
+          icon: 'error',
+          // title: '검색 결과가 존재하지 않습니다.',
+          text: '검색 결과가 존재하지 않습니다.',
+          // footer: '<a href="">Why do I have this issue?</a>',
+          confirmButtonColor: '#2B3F6B',
+        });
         setSearchedPlaces([]);
+        setValue('');
       } else if (status === kakao.maps.services.Status.ERROR) {
         alert('검색 결과 중 오류가 발생했습니다.');
       }
