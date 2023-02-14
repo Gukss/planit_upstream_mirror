@@ -19,7 +19,7 @@ function PlaceBox(props) {
   //   //   bg.classList.add(classClicked);
   //   // }
   // };
-  console.log('placebox에 옴', props);
+  // console.log('placebox에 옴', props);
 
   return (
     <div>

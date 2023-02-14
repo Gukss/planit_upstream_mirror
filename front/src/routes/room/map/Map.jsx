@@ -6,8 +6,11 @@ import {
   userMarkers,
   currentMarker,
   categoryCheck,
+  markerFlag,
+  roomInfoState,
 } from '../../../app/store';
 import Marker from './marker/Marker';
+import SocketMarker from './marker/SocketMarker';
 import CategoryMarker from './marker/CategoryMarker';
 import './Map.scss';
 
@@ -32,14 +35,16 @@ const removeMarker = () => {
 function Map() {
   const mapContainer = useRef(null);
   const [map, setNewMap] = useState(null);
+  const roomInfo = useRecoilValue(roomInfoState);
   const clickData = useRecoilValue(searchedPlace);
   const searchData = useRecoilValue(searchedPlaces);
   const addSetMarker = useSetRecoilState(currentMarker); // 지금 선택한 마커 정보
   const [isCategory, setIsCategory] = useRecoilState(categoryCheck);
   const [selectMarkers, setSelectMarkers] = useRecoilState(userMarkers); // 유저가 선택한 마커 모음
+  const [publishMarkerFlag, setPublishMarkerFlag] = useRecoilState(markerFlag);
 
   // 유저 마커 색깔
-  const userMarkerColor = '#8059D1';
+  const userMarkerColor = roomInfo.colorCode;
 
   // 초기 맵 셋팅
   const position = new kakao.maps.LatLng(36.466911994323, 127.5130882732);
@@ -59,7 +64,7 @@ function Map() {
     console.log('너는 Map');
     console.log('유저가 선택한 마커들', selectMarkers);
     if (searchData.length >= 1) {
-      setIsCategory({ code: '', imageUrl: '' });
+      setIsCategory({ code: '', imageUrl: '' }); // 카테고리 검색 마커를 초기화 하는 용
       removeMarker();
       // removeCategoryMarker();
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가합니다
@@ -157,6 +162,7 @@ function Map() {
             },
           ]);
           overlay.setMap(null);
+          setPublishMarkerFlag([...publishMarkerFlag, 1]);
         };
         content.appendChild(markerAdd);
         overlay.setContent(content);
@@ -194,13 +200,15 @@ function Map() {
       <div className='map' ref={mapContainer}>
         <Marker map={map} />
         <CategoryMarker map={map} />
+        {/* <SocketMarker map={map} /> */}
       </div>
     );
   }
   return (
     <div className='map' ref={mapContainer}>
-      {/* <Marker map={map} /> */}
+      <Marker map={map} />
       <CategoryMarker map={map} />
+      {/* <SocketMarker map={map} /> */}
     </div>
   );
 }

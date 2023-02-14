@@ -6,6 +6,7 @@ import {
   searchedPlace,
   removeInformation,
   isConfirmedChanged,
+  markerFlag,
 } from '../../../../app/store';
 
 function PlaceBoxItem(props) {
@@ -14,6 +15,7 @@ function PlaceBoxItem(props) {
   const [markerPosition, setMarkerPosition] = useRecoilState(searchedPlace);
   const [markers, setMarkers] = useRecoilState(userMarkers);
   const [isClick, setIsClick] = useState(props.item.isConfirmed);
+  const [publishMarkerFlag, setPublishMarkerFlag] = useRecoilState(markerFlag);
   const [confirmedChanged, setConfirmedChanged] =
     useRecoilState(isConfirmedChanged);
 
@@ -44,6 +46,7 @@ function PlaceBoxItem(props) {
     );
 
     setIsClick(props.isConfirmed);
+    setPublishMarkerFlag([...publishMarkerFlag, 1]);
     console.log('컨펌 후 마커', markers);
   };
   return (

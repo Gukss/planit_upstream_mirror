@@ -14,6 +14,7 @@ function RoomManageItem(props) {
   const navigate = useNavigate();
   const [roomInfo, setRoomInfo] = useRecoilState(roomInfoState);
   const [forLoadMarker, setForLoadMarker] = useRecoilState(userMarkers);
+  console.log(props.roomInfo);
   const userInfo = useRecoilValue(userInfoState);
   const resJoinMem = useRef('');
   const [memNameList, setMemNameList] = useState('');
@@ -27,7 +28,6 @@ function RoomManageItem(props) {
 
   const joinMemberInfo = async e => {
     try {
-      console.log(1);
       resJoinMem.current = await instance.get(
         `/rooms/users/${props.roomData.roomId}`
       );
@@ -50,7 +50,13 @@ function RoomManageItem(props) {
     try {
       // 방 정보 가져오기
       const resRoomInfo = await instance.get(`/rooms/${roomPk}`);
-      setRoomInfo(resRoomInfo.data);
+      setRoomInfo({
+        roomId: resRoomInfo.data.roomId,
+        roomName: resRoomInfo.data.roomName,
+        startDate: resRoomInfo.data.startDate,
+        endDate: resRoomInfo.data.endDate,
+        colorCode: props.roomInfo.colorCode,
+      });
       // 보관함 정보 가져오기
       const storageInfo = await instance.get(`/storages/rooms/${roomPk}`);
       console.log(storageInfo.data);
@@ -82,6 +88,7 @@ function RoomManageItem(props) {
       if (roomInfo.roomId !== -1) {
         setTimeout(() => navigate('/room/search'), 1000);
       } else {
+        console.log(roomInfo);
         navigate('/room/search');
       }
     } catch (error) {

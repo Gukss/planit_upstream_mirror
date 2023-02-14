@@ -11,6 +11,8 @@ import {
   categoryCheck,
   socketMarkers,
   stompClient,
+  markerFlag,
+  roomInfoState,
 } from '../../../../app/store';
 import pinkMarker from '../../../../app/assets/images/marker_pink.png';
 import redMarker from '../../../../app/assets/images/marker_red.png';
@@ -24,89 +26,25 @@ const { kakao } = window;
 
 function Marker(props) {
   const existMap = props.map;
-  const category = useRecoilValue[categoryCheck];
+  const category = useRecoilValue(categoryCheck);
+  const roomInfo = useRecoilValue(roomInfoState);
   const selectMarker = useRecoilValue(currentMarker);
   const [roomMarkers, setRoomMarkers] = useState([]);
   const [removeMarker, setRemoveMarker] = useRecoilState(removeInformation);
   const [userSelectMarkers, setUserSelectMarker] = useRecoilState(userMarkers);
-  const [wsUserMarkers, setWsUserMarkers] = useRecoilState(socketMarkers);
-  const test = useRecoilValue(stompClient);
-
-  const client = useRef({});
-
-  console.log('socket 저장 마커', wsUserMarkers);
-  console.log('client', test);
-
-  // 여기 1 나중에 룸번호로 변경해야함
-  const subscribe = async () => {
-    console.log('subscribe');
-    await client.current.subscribe('/sub/markers/1', ({ body }) => {
-      setWsUserMarkers(JSON.parse(body));
-      console.log('정보 들어가냐?', body);
-    });
-  };
-
-  const publish = async userMarker => {
-    console.log('publish');
-    if (!client.current.connected) {
-      return;
-    }
-    console.log('publish info', userMarker);
-    await client.current.publish({
-      destination: '/pub/markers',
-      // 여기 1 나중에 룸번호로 변경해야함
-      body: JSON.stringify({ roomId: 1, storageItemList: userMarker }),
-    });
-  };
-
-  const connect = () => {
-    console.log('connect');
-    client.current = new StompJs.Client({
-      // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
-      webSocketFactory: () =>
-        new SockJS('https://i8b202.p.ssafy.io/api/ws-stomp'), // proxy를 통한 접속
-      connectHeaders: {},
-      debug: str => {
-        console.log(str);
-      },
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
-      onConnect: () => {
-        console.log('커넥트 되는 시점');
-        subscribe();
-      },
-      onStompError: frame => {
-        console.error(frame);
-      },
-    });
-
-    client.current.activate();
-  };
-
-  const disconnect = () => {
-    console.log('disconnect');
-    client.current.deactivate();
-  };
-
-  const start = async () => {
-    // await connect();
-    await publish(userSelectMarkers);
-  };
-
-  useEffect(() => {
-    // start();
-    connect();
-    // publish(wsUserMarkers);
-    return () => disconnect();
-  }, []);
-
-  useEffect(() => {
-    start();
-  }, [userSelectMarkers]);
+  const [publishMarkerFlag, setPublishMarkerFlag] = useRecoilState(markerFlag);
 
   // 유저 색깔 마커
-  const userColor = '#8059D1';
+  const userColor = roomInfo.colorCode;
+  console.log(userSelectMarkers);
+  console.log('리랜더링 되나유?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
+  // useEffect(() => {
+  //   console.log('marker컴포넌트');
+  //   if (socketMarkers.length > 0) {
+  //     setUserSelectMarker(socketMarkers);
+  //   }
+  // }, [socketMarkers]);
 
   const colorList = [
     { color: '#EB5252', img: redMarker },
@@ -114,12 +52,20 @@ function Marker(props) {
     { color: '#90CE0A', img: greenMarker },
     { color: '#61D9C3', img: emeraldMarker },
     { color: '#8059D1', img: purpleMarker },
-    { color: '#FF7BBA	', img: pinkMarker },
+    { color: '#FF7BBA', img: pinkMarker },
   ];
-  const markerColor = colorList.filter(item => item.color === userColor);
-  console.log('마커 색깔', markerColor[0]);
 
-  const myMarkerImg = markerColor[0].img;
+  let myMarkerImg = '';
+
+  if (userSelectMarkers.length > 0) {
+    const pos = userSelectMarkers.length - 1;
+    const markerColor = colorList.filter(
+      item => item.color === userSelectMarkers[pos].colorCode
+    );
+    myMarkerImg = markerColor[0].img;
+  }
+
+  // console.log('마커 색깔', markerColor[0]);
 
   // overlay Open
   const openOverlay = (map, overlay) => {
@@ -130,104 +76,109 @@ function Marker(props) {
 
   // 유저가 장소 마커 등록했을 때만 표시하게.
   useEffect(() => {
-    console.log('너는 마커');
-    const pos = userSelectMarkers.length - 1;
+    if (userSelectMarkers.length > 0) {
+      console.log('너는 마커');
+      const pos = userSelectMarkers.length - 1;
+      console.log('너는 마커', userSelectMarkers.length);
 
-    const imageSrc = myMarkerImg;
-    const imageSize = new kakao.maps.Size(40, 40);
-    const imageOption = { offset: new kakao.maps.Point(15, 40) };
+      const imageSrc = myMarkerImg;
+      const imageSize = new kakao.maps.Size(40, 40);
+      const imageOption = { offset: new kakao.maps.Point(15, 40) };
 
-    const markerImage = new kakao.maps.MarkerImage(
-      imageSrc,
-      imageSize,
-      imageOption
-    );
+      const markerImage = new kakao.maps.MarkerImage(
+        imageSrc,
+        imageSize,
+        imageOption
+      );
 
-    const marker = new kakao.maps.Marker({
-      map: existMap,
-      position: new kakao.maps.LatLng(
-        userSelectMarkers[pos].y,
-        userSelectMarkers[pos].x
-      ),
-      image: markerImage,
-    });
-    marker.setMap(existMap);
+      const marker = new kakao.maps.Marker({
+        map: existMap,
+        position: new kakao.maps.LatLng(
+          userSelectMarkers[pos].y,
+          userSelectMarkers[pos].x
+        ),
+        image: markerImage,
+      });
 
-    setRoomMarkers([
-      ...roomMarkers,
-      {
-        id: userSelectMarkers[pos].id,
-        marker,
-      },
-    ]);
+      console.log('원래 마커임', marker);
+      marker.setMap(existMap);
 
-    const overlay = new kakao.maps.CustomOverlay({
-      map: existMap,
-      position: marker.getPosition(),
-    });
+      setRoomMarkers([
+        ...roomMarkers,
+        {
+          id: userSelectMarkers[pos].id,
+          marker,
+        },
+      ]);
 
-    overlay.setMap(null); // 처음에 커스텀오버레이 안보여주기 위함
+      const overlay = new kakao.maps.CustomOverlay({
+        map: existMap,
+        position: marker.getPosition(),
+      });
 
-    // 최상단 div 커스텀 오버레이
-    const content = document.createElement('div');
-    content.classList.add('overlay');
-    // 커스텀 오버레이 제목 박스
-    const titleContainer = document.createElement('div');
-    titleContainer.classList.add('title_container');
-    content.appendChild(titleContainer);
-    // 커스텀 오버레이 제목 글자
-    const markerTitle = document.createElement('div');
-    markerTitle.classList.add('overlay__title');
-    markerTitle.appendChild(
-      document.createTextNode(userSelectMarkers[pos].title)
-    );
-    titleContainer.appendChild(markerTitle);
-    // 커스텀 오버레이 닫기
-    const closeBtn = document.createElement('button');
-    closeBtn.classList.add('overlay__close');
-    closeBtn.appendChild(document.createTextNode('X'));
-    closeBtn.onclick = function () {
-      overlay.setMap(null);
-    };
-    titleContainer.appendChild(closeBtn);
-    // 커스텀 오버레이 카테고리
-    const CategoryName = document.createElement('div');
-    CategoryName.classList.add('category_name');
-    CategoryName.appendChild(
-      document.createTextNode([userSelectMarkers[pos].categoryName])
-    );
-    content.appendChild(CategoryName);
-    // 이용자 마커 제거
-    const markerRemove = document.createElement('button');
-    markerRemove.classList.add('marker_remove');
-    markerRemove.appendChild(document.createTextNode('장소 제거 -'));
-    markerRemove.onclick = function () {
-      // recoilstate에서 해당 마커 지우기.
-      overlay.setMap(null);
-      marker.setMap(null);
-      const removeInfo = {
-        id: userSelectMarkers[pos].id,
-        y: userSelectMarkers[pos].y,
-        x: userSelectMarkers[pos].x,
+      overlay.setMap(null); // 처음에 커스텀오버레이 안보여주기 위함
+
+      // 최상단 div 커스텀 오버레이
+      const content = document.createElement('div');
+      content.classList.add('overlay');
+      // 커스텀 오버레이 제목 박스
+      const titleContainer = document.createElement('div');
+      titleContainer.classList.add('title_container');
+      content.appendChild(titleContainer);
+      // 커스텀 오버레이 제목 글자
+      const markerTitle = document.createElement('div');
+      markerTitle.classList.add('overlay__title');
+      markerTitle.appendChild(
+        document.createTextNode(userSelectMarkers[pos].title)
+      );
+      titleContainer.appendChild(markerTitle);
+      // 커스텀 오버레이 닫기
+      const closeBtn = document.createElement('button');
+      closeBtn.classList.add('overlay__close');
+      closeBtn.appendChild(document.createTextNode('X'));
+      closeBtn.onclick = function () {
+        overlay.setMap(null);
       };
-      setRemoveMarker(removeInfo);
-    };
-    content.appendChild(markerRemove);
-    overlay.setContent(content);
+      titleContainer.appendChild(closeBtn);
+      // 커스텀 오버레이 카테고리
+      const CategoryName = document.createElement('div');
+      CategoryName.classList.add('category_name');
+      CategoryName.appendChild(
+        document.createTextNode([userSelectMarkers[pos].categoryName])
+      );
+      content.appendChild(CategoryName);
+      // 이용자 마커 제거
+      const markerRemove = document.createElement('button');
+      markerRemove.classList.add('marker_remove');
+      markerRemove.appendChild(document.createTextNode('장소 제거 -'));
+      markerRemove.onclick = function () {
+        // recoilstate에서 해당 마커 지우기.
+        overlay.setMap(null);
+        marker.setMap(null);
+        const removeInfo = {
+          id: userSelectMarkers[pos].id,
+          y: userSelectMarkers[pos].y,
+          x: userSelectMarkers[pos].x,
+        };
+        setRemoveMarker(removeInfo);
+      };
+      content.appendChild(markerRemove);
+      overlay.setContent(content);
 
-    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-    kakao.maps.event.addListener(
-      marker,
-      'click',
-      openOverlay(existMap, overlay)
-    );
-  }, [selectMarker, category]);
+      // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+      kakao.maps.event.addListener(
+        marker,
+        'click',
+        openOverlay(existMap, overlay)
+      );
+    }
+  }, [userSelectMarkers, category]);
 
   useEffect(() => {
     // 처음에 생성했을때 룸마커가 비어있기에 필터링이안됨
     // 지금 문제점은 그냥 처음에 생성했을때 다 문제가 됨.
 
-    if (roomMarkers.length > 0) {
+    if (roomMarkers.length > 0 && userSelectMarkers.length > 0) {
       console.log('마커필터링');
 
       // 선택한 마커 정보만 따로 빼기.
@@ -244,6 +195,8 @@ function Marker(props) {
           usermarker => usermarker.id !== removeMarker.id
         )
       );
+
+      setPublishMarkerFlag([...publishMarkerFlag, 1]);
     }
   }, [removeMarker]);
 
