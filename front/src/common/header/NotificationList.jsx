@@ -20,7 +20,7 @@ function NotificationList({ notificationList, setNotificationList, userInfo }) {
       <div className={classes.notificationList_header_line}></div>
       {notificationList &&
         notificationList.data
-          // .filter(tmp => !tmp.readOrNot)
+          .filter(tmp => !tmp.readOrNot)
           .map(notificaiton => (
             <Notification notificaiton={notificaiton} userInfo={userInfo} />
           ))}

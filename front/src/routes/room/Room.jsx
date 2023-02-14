@@ -18,17 +18,22 @@ import {
   stompClient,
   userMarkers,
   socketMarkers,
+  markerFlag,
   userInfoState,
+  roomInfoState,
 } from '../../app/store';
 
 function Room() {
   const client = useRef({});
-  const [messages, setMessages] = useRecoilState(chatMessages);
+  const publishMarkerFlag = useRecoilValue(markerFlag);
+  // const [sClient, setSClient] = useRecoilState(stompClient);
   const [markers, setMarkers] = useRecoilState(userMarkers);
+  const [messages, setMessages] = useRecoilState(chatMessages);
   const [socketMarker, setSocketMarker] = useRecoilState(socketMarkers);
   const userInfo = useRecoilValue(userInfoState);
+  const roomInfo = useRecoilValue(roomInfoState);
 
-  console.log('여기는 룸 입니다.');
+  console.log('여기는 룸 입니다.', roomInfo);
 
   // 여기 1 나중에 룸번호로 변경해야함
   const subscribeChatting = async () => {
@@ -43,9 +48,11 @@ function Room() {
   const subscribeMarkers = async () => {
     console.log('마커 subscribe');
     await client.current.subscribe('/sub/markers/1', ({ body }) => {
-      setSocketMarker(JSON.parse(body).storageItemList);
-      console.log('마커', body);
-      console.log('파스 리스트', JSON.parse(body).storageItemList);
+      // const newStorageItemList = JSON.parse(body).storageItemList;
+      setMarkers(JSON.parse(body).storageItemList);
+      // setSocketMarker(JSON.parse(body).storageItemList);
+      // console.log('마커', body);
+      // console.log('파스 리스트', JSON.parse(body).storageItemList);
     });
   };
 
@@ -122,7 +129,7 @@ function Room() {
   useEffect(() => {
     console.log('퍼블리시 유저마커');
     publishMarker(markers);
-  }, [markers]);
+  }, [publishMarkerFlag]);
 
   return (
     <div>

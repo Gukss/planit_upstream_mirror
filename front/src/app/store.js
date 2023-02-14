@@ -38,61 +38,59 @@ export const removeInformation = atom({
   default: {},
 });
 
-// 커스텀할 유저마커
+// 커스텀할 유저마커 ( 배열 안에 빈 객체 추가 )
 export const userMarkers = atom({
   key: 'userMarkers',
   default: [
-    {
-      id: 'dummy_1',
-      categoryCode: 'AD5',
-      colorCode: '#EB5252',
-      isConfirmed: false,
-      title: '숙소1',
-      categoryName: '숙박',
-      x: 126.44,
-      y: 32.44,
-    },
-
-    {
-      id: 'dummy_2',
-      categoryCode: 'AD5',
-      colorCode: '#EB5252',
-      isConfirmed: false,
-      title: '숙소2',
-      x: 126.44,
-      y: 32.44,
-    },
-
-    {
-      id: 'dummy_3',
-      categoryCode: 'FD6',
-      colorCode: '#90CE0A',
-      isConfirmed: false,
-      title: '식당1',
-      categoryName: '식당',
-      x: 126.44,
-      y: 32.44,
-    },
-    {
-      id: 'dummy_4',
-      categoryCode: 'AT4',
-      colorCode: '#7997FE',
-      isConfirmed: false,
-      title: '관광명소 성심당',
-      categoryName: '식당',
-      x: 126.44,
-      y: 32.44,
-    },
-    {
-      id: 'dummy_5',
-      categoryCode: 'CE7',
-      colorCode: '#FAE635',
-      categoryName: '카페',
-      isConfirmed: false,
-      title: '카페 아자카파',
-      x: 126.44,
-      y: 32.44,
-    },
+    // {
+    // id: '',
+    // categoryCode: '',
+    // colorCode: '#',
+    // isConfirmed: false,
+    // title: '',
+    // categoryName: '',
+    // x: '',
+    // y: '',
+    // },
+    // {
+    //   id: 'dummy_2',
+    //   categoryCode: 'AD5',
+    //   colorCode: '#EB5252',
+    //   isConfirmed: false,
+    //   title: '숙소2',
+    //   x: 126.44,
+    //   y: 32.44,
+    // },
+    // {
+    //   id: 'dummy_3',
+    //   categoryCode: 'FD6',
+    //   colorCode: '#90CE0A',
+    //   isConfirmed: false,
+    //   title: '식당1',
+    //   categoryName: '식당',
+    //   x: 126.44,
+    //   y: 32.44,
+    // },
+    // {
+    //   id: 'dummy_4',
+    //   categoryCode: 'AT4',
+    //   colorCode: '#7997FE',
+    //   isConfirmed: false,
+    //   title: '관광명소 성심당',
+    //   categoryName: '식당',
+    //   x: 126.44,
+    //   y: 32.44,
+    // },
+    // {
+    //   id: 'dummy_5',
+    //   categoryCode: 'CE7',
+    //   colorCode: '#FAE635',
+    //   categoryName: '카페',
+    //   isConfirmed: false,
+    //   title: '카페 아자카파',
+    //   x: 126.44,
+    //   y: 32.44,
+    // },
   ],
 });
 
@@ -103,6 +101,11 @@ export const categoryCheck = atom({
     code: '',
     imageUrl: '',
   },
+});
+
+export const markerFlag = atom({
+  key: 'markerFlag',
+  default: [],
 });
 
 // -----------------------------------------------------------
@@ -172,11 +175,11 @@ export const roomPK = atom({
 export const roomInfoState = atom({
   key: 'roomInfo',
   default: {
-    roomId: -1,
-    roomName: '',
-    startDate: '',
-    endDate: '',
-    colorCode: '',
+    // roomId: -1,
+    // roomName: '',
+    // startDate: '',
+    // endDate: '',
+    // colorCode: '',
   },
 });
 

@@ -1,22 +1,28 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import classes from './ChatSection.module.scss';
-import { chatMessages, userInfoState } from '../../../../app/store';
+import {
+  chatMessages,
+  userInfoState,
+  roomInfoState,
+} from '../../../../app/store';
 
 function ChatSection() {
   const messageList = useRecoilValue(chatMessages);
   const memberInfo = useRecoilValue(userInfoState);
-  const memberColor = '#EB5252';
+  const roomInfo = useRecoilValue(roomInfoState);
+  const memberColor = roomInfo.colorCode;
   // const date = new Date();
   // console.log('date', date);
   const scrollRef = useRef();
 
   useEffect(() => {
     console.log('메세지 리스트 바뀔 때마다 호출', scrollRef.current);
-
-    scrollRef.current.lastElementChild.scrollIntoView({
-      behavior: 'smooth',
-    });
+    if (scrollRef.current.lastElementChild) {
+      scrollRef.current.lastElementChild.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
   }, [messageList.length]);
 
   return (

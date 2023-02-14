@@ -11,6 +11,7 @@ function MyPage() {
   const userInfo = useRecoilValue(userInfoState);
   const [myRoomInfo, setMyRoomInfo] = useState([]);
   const [tmpRoom, setTmpRoom] = useState({});
+  const [roomInfo, setRoomInfo] = useState([]);
 
   const instance = axios.create({
     baseURL: 'https://i8b202.p.ssafy.io/api',
@@ -28,7 +29,7 @@ function MyPage() {
           .get(`/rooms/${roomInfo.roomId}`)
           .then(res => setMyRoomInfo(myRoomInfo => [...myRoomInfo, res]))
       );
-      // console.log(resultRoomData);
+      setRoomInfo(resMemRoomData);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +44,7 @@ function MyPage() {
       <div>빈공간</div>
       <section className={classes.content_section}>
         <ProfileBar userInfo={userInfo} />
-        <RoomMange userInfo={myRoomInfo} />
+        <RoomMange userInfo={myRoomInfo} roomInfo={roomInfo} />
       </section>
     </div>
   );
