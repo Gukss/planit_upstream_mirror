@@ -65,7 +65,7 @@ public class SecurityConfig {
   }
 
   @Bean
-  public WebSecurityCustomizer webSecurityCustomizer() { //todo: 밑에 인자들 생각해보기
+  public WebSecurityCustomizer webSecurityCustomizer() {
     return (web) -> web.ignoring()
         .antMatchers(
             "/h2/**"

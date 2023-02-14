@@ -39,7 +39,6 @@ public class RoomController {
 
   @PostMapping
   public ResponseEntity<CreateRoomResponse> createRoom(@RequestBody CreateRoomRequest request, @RequestHeader("Authorization") String access) {
-    //todo: token에서 id값으로 변환 => O
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Room newRoom = roomService.createRoom(request, Long.parseLong(claims.get("memberId").toString()));
@@ -70,7 +69,6 @@ public class RoomController {
   @GetMapping(path = "{roomId}")
   public ResponseEntity<ReadRoomResponse> readRoom(@PathVariable Long roomId){
     Room foundRoom = roomService.findById(roomId);
-    //todo: 프론트랑 반환값 상의해서 넣어주기
     ReadRoomResponse readRoomResponse = ReadRoomResponse.create(foundRoom.getId(), foundRoom.getRoomName(), foundRoom.getStartDate(), foundRoom.getEndDate());
     return ResponseEntity.ok().body(readRoomResponse);
   }

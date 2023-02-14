@@ -29,10 +29,8 @@ public class MemberController {
   private final MemberServiceImpl memberService;
   private final JwtProvider jwtProvider;
   // 회원가입
-  // TODO: 회원가입 부분은 토큰을 반환할것이여서 다시 만져야함
   @PostMapping()
   public ResponseEntity<?> createMember(@RequestBody CreateMemberRequest request){
-    // TODO : 토큰 아이디로 변경
     Long id=memberService.createMember(request);
     return new ResponseEntity<>(HttpStatus.OK);
   }
@@ -55,7 +53,6 @@ public class MemberController {
   public ResponseEntity<ReadMemberResponse> readMember(@RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
-//    Long id =1L; // @TODO : 헤더 토큰에 있는 멤버 id값으로 넣어줘야함 => O
     Long id = Long.parseLong(claims.get("memberId").toString());
     log.info("Id="+id);
     log.info("access: "+access);
@@ -67,7 +64,6 @@ public class MemberController {
     return  ResponseEntity.ok(findMember);
   }
 
-  // 회원 목록 조회 // TODO : ( 반환 어떻게 할지 다시보기!!!)
   @GetMapping(path = "/{memberAppId}")
   public ResponseEntity<List<ReadMemberResponse>> readMemberList(@PathVariable String memberAppId){
     List<ReadMemberResponse> memberList=memberService.readMemberListByMemberId(memberAppId);

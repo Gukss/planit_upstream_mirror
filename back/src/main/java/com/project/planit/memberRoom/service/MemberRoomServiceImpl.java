@@ -59,7 +59,6 @@ public class MemberRoomServiceImpl implements MemberRoomService{
         Room room=roomRepository.findById(request.getRoomId())
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.ROOM_NOT_FOUND));
 
-        // @TODO : 토큰에 어떤 값을 넣을지에 따라 바뀜
         Member member=memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
         MemberRoom savedMemberRoom = memberRoomRepository.save(MemberRoom.create(request, room, member));

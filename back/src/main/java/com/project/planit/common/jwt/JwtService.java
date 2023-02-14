@@ -87,10 +87,8 @@ public class JwtService {
           .getExpiration()
           .before(new Date());
     }catch(ExpiredJwtException e){
-      //todo: logger 적어주기
       return false;
     }catch(JwtException e){
-      //todo: logger 적어주기
       return false;
     }
   }

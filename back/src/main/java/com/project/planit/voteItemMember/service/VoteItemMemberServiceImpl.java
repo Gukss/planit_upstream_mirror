@@ -40,10 +40,9 @@ public class VoteItemMemberServiceImpl implements VoteItemMemberService {
     @Override
     @Transactional
     public VoteItemMember createVoteItemMember(CreateVoteItemMemberRequest request, Long memberId) {
-        //todo: memberId는 토큰에서 받아온다. 변경하기 => O
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundExceptionMessage(NotFoundExceptionMessage.USER_NOT_FOUND));
-        //todo: BaseRequest 내용도 토큰에서 appId 받아오기 => O
+
         String constructor = member.getAppId();
         String updater = member.getAppId();
         BaseRequest baseRequest = BaseRequest.builder()

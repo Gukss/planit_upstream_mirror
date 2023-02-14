@@ -1,5 +1,6 @@
 package com.project.planit.notification.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -8,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class EmitterRepository {
 
     private final Map<String, SseEmitter> emitters = new ConcurrentHashMap<>();
@@ -23,12 +25,12 @@ public class EmitterRepository {
     }
 
     public Map<String, SseEmitter> findAllStartWithById(String id) {
-        System.out.println(emitters.entrySet().stream());
-        System.out.println(emitters.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith(id)));
-        System.out.println(emitters.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith(id))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+//        System.out.println(emitters.entrySet().stream());
+//        System.out.println(emitters.entrySet().stream()
+//                .filter(entry -> entry.getKey().startsWith(id)));
+//        System.out.println(emitters.entrySet().stream()
+//                .filter(entry -> entry.getKey().startsWith(id))
+//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 
         return emitters.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith(id))

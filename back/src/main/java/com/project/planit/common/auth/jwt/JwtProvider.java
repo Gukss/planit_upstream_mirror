@@ -100,7 +100,6 @@ public class JwtProvider {
     String memberAppId = String.valueOf(claims.get("memberAppId"));
     String memberAppName = String.valueOf(claims.get("memberName"));
     Long memberId = Long.parseLong(String.valueOf(claims.get("memberId")));
-    //todo: ???authorities가 뭐하는지 알아보기
     Collection<? extends GrantedAuthority> authorities =
         Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
             .map(SimpleGrantedAuthority::new).collect(Collectors.toList());

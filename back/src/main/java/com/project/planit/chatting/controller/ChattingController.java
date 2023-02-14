@@ -25,7 +25,6 @@ public class ChattingController {
     // pub, sub관리 컨트롤러 RequestMapping 무시..
     @MessageMapping("/message")
     public void message(CreateChattingMessageRequest chatMessage){
-        System.out.println(chatMessage.getMessage());
         messagingTemplate.convertAndSend("/sub/room/" + chatMessage.getRoomId(), chatMessage);
     }
 

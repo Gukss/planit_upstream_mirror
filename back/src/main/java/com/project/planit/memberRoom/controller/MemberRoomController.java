@@ -40,7 +40,6 @@ public class MemberRoomController {
 
   @GetMapping
   public ResponseEntity<List<FindMemberRoomResponse>> findMemberRoom(@RequestHeader("Authorization") String access) {
-//    Long id=1L; // @TODO : 나중에 토큰 아이디로 변환 => O
     String parseToken = returnAccessToken(access);
     Claims claims = jwtProvider.parseClaims(parseToken);
     Long id = Long.parseLong(claims.get("memberId").toString());

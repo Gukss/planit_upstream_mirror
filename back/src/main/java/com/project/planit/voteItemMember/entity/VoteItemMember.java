@@ -28,8 +28,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class VoteItemMember extends BaseEntity {
-
-    //todo: auto_increment 안되고 전체에서 auto_increment되는것 확인하기
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vote_item_member_id")
     private Long id;
