@@ -3,6 +3,7 @@ package com.project.planit.memberRoom.entity;
 import com.project.planit.member.dto.UpdateMemberRequest;
 import com.project.planit.member.entity.Member;
 import com.project.planit.memberRoom.dto.CreateMemberRoomRequest;
+import com.project.planit.memberRoom.dto.FindMemberRoomByRoomIdResponse;
 import com.project.planit.memberRoom.dto.FindMemberRoomResponse;
 import com.project.planit.memberRoom.dto.UpdateMemberRoomRequest;
 import com.project.planit.room.entity.Room;
@@ -78,7 +79,6 @@ public class MemberRoom extends BaseEntity {
                 .build();
     }
 
-    //todo: 일단 colorCode 없는 버전으로 만들었다.
     public FindMemberRoomResponse createFindMemberRoomResponse(){
         return FindMemberRoomResponse.builder()
                 .roomId(this.room.getId())
@@ -86,5 +86,12 @@ public class MemberRoom extends BaseEntity {
                 .participation(this.participation)
                 .colorCode(this.colorCode)
                 .build();
+    }
+
+    public FindMemberRoomByRoomIdResponse createFindMemberRoomByRoomIdResponse(){
+        return FindMemberRoomByRoomIdResponse.builder()
+            .memberName(this.member.getName())
+            .memberId(this.member.getId())
+            .build();
     }
 }
