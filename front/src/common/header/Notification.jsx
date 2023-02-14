@@ -5,8 +5,18 @@ import axios from 'axios';
 import { roomPK } from '../../app/store';
 import classes from './Notification.module.scss';
 
+const colorCode = [
+  '#EB5252',
+  '#7997FE',
+  '#90CE0A',
+  '#61D9C3',
+  '#8059D1',
+  '#FF7BBA',
+];
+
 function Notification({ notificaiton, userInfo }) {
   const [roomPk, setRoomPk] = useRecoilState(roomPK);
+  setRoomPk(-1);
   console.log(notificaiton);
   const navigate = useNavigate();
   const instance = axios.create({
@@ -19,23 +29,28 @@ function Notification({ notificaiton, userInfo }) {
 
   const onConfirm = async () => {
     setRoomPk(notificaiton.roomId);
-    console.log(notificaiton.roomId);
-
     try {
-      // const resNotification = await instance.patch(
-      //   '/notification',
-      //   notificaiton.notificationId
-      // );
-      // console.log(resNotification);
+      const resNotification = await instance.patch('/notification', {
+        notificationId: notificaiton.notificationId,
+      });
+      const resRoomMemList = await instance.get(
+        `/rooms/users/${notificaiton.roomId}`
+      );
+      console.log(typeof notificaiton.roomId);
+      const resRoomRegist = await instance.post('/rooms/users', {
+        roomId: notificaiton.roomId,
+        colorCode: colorCode[resRoomMemList.data.length],
+      });
+      console.log(resRoomRegist.data);
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    if (roomPk === notificaiton.roomId) {
-      navigate('/room/search');
-    }
-  }, [roomPk, notificaiton.roomId, navigate]);
+  // useEffect(() => {
+  //   if (roomPk === notificaiton.roomId) {
+  //     navigate('/room/search');
+  //   }
+  // }, [roomPk, notificaiton.roomId, navigate]);
 
   return (
     <div className={classes.notificaiton_container}>

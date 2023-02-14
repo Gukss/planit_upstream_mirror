@@ -1,19 +1,16 @@
 import classes from './RoomManage.module.scss';
 import RoomManageItem from './RoomManageItem';
 
-function RoomManage() {
+function RoomManage(props) {
+  console.log(props.userInfo);
   return (
     <div className={classes.room_manage}>
       <section className={classes.schedule_ing}>
         <p className={classes.title}>진행 중인 여행 일정</p>
         <div className={classes.schedulebox}>
-          <RoomManageItem />
-          <RoomManageItem />
-          <RoomManageItem />
-          <RoomManageItem />
-          <RoomManageItem />
-          <RoomManageItem />
-          <RoomManageItem />
+          {props.userInfo.map(info => (
+            <RoomManageItem roomData={info.data} />
+          ))}
         </div>
       </section>
       <section className={classes.schedule_done}>

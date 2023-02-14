@@ -19,10 +19,12 @@
     background-color: white;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
     width: 100%;
+    // text-align: left;
     &:hover + .hover_box {
       display: block;
     }
     .item_title {
+      margin-left: 0.5rem;
       width: 7rem;
       overflow: hidden;
       white-space: nowrap;
@@ -47,10 +49,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      // text-align: left;
       border-radius: 0rem 0.5rem 0.5rem 0rem;
       width: 100%;
       background-color: #fdf2bc;
       .item_title {
+        margin-left: 0.5rem;
         width: 7rem;
         overflow: hidden;
         white-space: nowrap;

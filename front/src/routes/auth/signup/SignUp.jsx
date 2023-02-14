@@ -138,6 +138,14 @@ function SignUp() {
     }
   };
 
+  const handleKeyPress = e => {
+    console.log('ee');
+    if (e.key === 'Enter') {
+      console.log('enter');
+      sumbmitHandler();
+    }
+  };
+
   return (
     <form className={classes.signup} onSubmit={sumbmitHandler}>
       {/* 로고자리 or 제목 */}
@@ -213,6 +221,7 @@ function SignUp() {
             className={classes.input_email}
             type='text'
             onChange={handleEmail}
+            onKeyDown={handleKeyPress}
           />
         </div>
         <button type='submit' onClick={sumbmitHandler}>

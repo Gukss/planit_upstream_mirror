@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import classes from './Abar.module.scss';
+import planitLogo from '../../../app/assets/images/planit_logo.svg';
 
 const abarNavItems = [
   {
@@ -45,7 +46,9 @@ function Abar() {
     <div className={classes.sidebar}>
       <div className={classes.abar}>
         <div className={classes.abar__logo}>
-          <Link to='/'>PLAN!T</Link>
+          <Link to='/'>
+            <img alt='logo' src={planitLogo} width='100%' height='100%' />
+          </Link>
         </div>
         <div className={classes.abar__menu}>
           {abarNavItems.map(item => (

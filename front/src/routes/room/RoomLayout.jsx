@@ -5,12 +5,12 @@ import Map from './map/Map';
 import ControlBox from './map/controlbox/ControlBox';
 import VideoComponent from './cam/VideoComponent';
 import SaveIcon from '../../api/SaveIcon';
-import { roomPK } from '../../app/store';
+import { roomInfoState } from '../../app/store';
 
 import './RoomLayout.scss';
 
 function RoomLayout() {
-  const sessionRoom = useRecoilValue(roomPK);
+  const sessionRoom = useRecoilValue(roomInfoState);
 
   return (
     <div className='roomlayout'>
@@ -18,7 +18,7 @@ function RoomLayout() {
       <div className='map_camlist'>
         <Map />
         <ControlBox />
-        <VideoComponent sessionId={sessionRoom} />
+        <VideoComponent sessionId={sessionRoom.roomId} />
         <SaveIcon />
       </div>
     </div>

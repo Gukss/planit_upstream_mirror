@@ -1,12 +1,12 @@
 import classes from './ProfileBar.module.scss';
 
-function ProfileBar() {
+function ProfileBar(props) {
   return (
     <div className={classes.profilebar}>
       <section className={classes.profile}>
         <i className='bx bxs-user-circle' />
-        <p className={classes.nickname}>Eondo the Sea</p>
-        <p className={classes.username}>vov06144@naver.com</p>
+        <p className={classes.nickname}>{props.userInfo.memberAppName}</p>
+        <p className={classes.username}>{props.userInfo.memberAppId}</p>
       </section>
       <section className={classes.manage}>
         <div className={classes.manageitem}>
