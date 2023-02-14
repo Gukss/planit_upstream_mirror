@@ -20,4 +20,5 @@ public interface MemberRoomService {
 
   MemberRoom createMemberRoom(CreateMemberRoomRequest request, Long memberId);
 
+  List<MemberRoom> findAllMemberRoomByRoomId(Long roomId);
 }

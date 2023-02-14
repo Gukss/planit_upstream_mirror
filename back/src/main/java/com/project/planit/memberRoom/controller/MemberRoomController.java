@@ -57,6 +57,21 @@ public class MemberRoomController {
     return res;
   }
 
+  @GetMapping(path = {"roomId"})
+  public ResponseEntity<List<FindMemberRoomByRoomIdResponse>> findMemberRoomByRoomId(@PathVariable Long roomId, @RequestHeader("Authorization") String access) {
+    String parseToken = returnAccessToken(access);
+    Claims claims = jwtProvider.parseClaims(parseToken);
+    Long id = Long.parseLong(claims.get("memberId").toString());
+
+    List<MemberRoom> foundMemberRoom = memberRoomService.findAllMemberRoomByRoomId(roomId);
+    List<FindMemberRoomByRoomIdResponse> resList = new ArrayList<>();
+    for(MemberRoom memberRoom : foundMemberRoom){
+      resList.add(memberRoom.createFindMemberRoomByRoomIdResponse());
+    }
+    ResponseEntity<List<FindMemberRoomByRoomIdResponse>> res = ResponseEntity.ok().body(resList);
+    return res;
+  }
+
   @PostMapping
   public ResponseEntity<CreateMemberRoomResponse> createMemberRoom(@RequestBody CreateMemberRoomRequest request, @RequestHeader("Authorization") String access) {
     String parseToken = returnAccessToken(access);
