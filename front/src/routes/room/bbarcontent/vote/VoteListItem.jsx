@@ -7,6 +7,16 @@ function VoteListItem(props) {
   const [voteInfo, setVoteInfo] = useRecoilState(voteInformation);
   console.log('item', props.vote);
 
+  // 투표 프로그래스바 너비 용 변수 voteCnt
+  let voteCnt = 0;
+
+  for (let i = 0; i < props.vote.voteItem.length; i += 1) {
+    voteCnt += props.vote.voteItem[i].count;
+  }
+
+  console.log('voteCnt', voteCnt);
+
+  // vote 관련 함수
   const getChecked = () => {
     const inputNodeList = document.getElementsByName(props.vote.title);
     console.log('chocie', inputNodeList);
@@ -74,7 +84,16 @@ function VoteListItem(props) {
                     <p>{item.voteItem}</p>
                     <p>{item.count}명</p>
                   </div>
-                  <div className={classes.content_progressbar}></div>
+                  <div className={classes.content_progressbar}>
+                    {voteCnt > 0 ? (
+                      <div
+                        className={classes.highlight}
+                        style={{
+                          width: `${(item.count / voteCnt) * 100}%`,
+                        }}
+                      ></div>
+                    ) : null}
+                  </div>
                 </div>
               </label>
             );

@@ -33,6 +33,21 @@
       font-size: 1.25rem;
     }
     i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+    }
+    i:hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(255, 243, 156);
+      border-radius: 0.5rem;
+      width: 2rem;
+      height: 2rem;
     }
   }
 }

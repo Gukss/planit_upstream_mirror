@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Bbar from '../../../../common/bbar/Bbar';
 import classes from './Chat.module.scss';
 import ChatControl from './ChatControl';
 import ChatSection from './ChatSection';
 
-function Chat() {
+function Chat({ publishMessage }) {
   return (
     <Bbar>
       <div className={classes.chat_title}>
@@ -15,7 +15,7 @@ function Chat() {
       <div className={classes.chat_body}>
         <ChatSection />
         {/* <hr /> */}
-        <ChatControl />
+        <ChatControl publishMessage={publishMessage} />
       </div>
     </Bbar>
   );

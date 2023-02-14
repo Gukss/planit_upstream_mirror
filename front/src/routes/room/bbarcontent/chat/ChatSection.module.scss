@@ -19,19 +19,32 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
   }
-  .chat_message_section {
-    // padding: 2rem;
-    background-color: #ffffff;
-    color: rgb(36, 36, 36);
-    width: 50%;
-    min-height: 2.5rem;
-    height: auto;
-    font-size: 18px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 0;
-    // box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  i {
+    font-size: 1.75rem;
+  }
+  .chat_message_section_you {
+    word-break: break-all;
+    display: inline-block;
+    background: #e0e0e0;
+    border-radius: 0px 22px 22px 22px;
+    max-width: 70%;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  .chat_message_section_me {
+    word-break: break-all;
+    display: inline-block;
+    background: #ffdb81;
+    border-radius: 22px 0px 22px 22px;
+    max-width: 70%;
+    padding: 10px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    float: right;
+    p {
+      color: #3e3e3e;
+    }
   }
 }

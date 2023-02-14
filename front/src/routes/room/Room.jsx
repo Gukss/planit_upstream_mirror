@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import 'boxicons/css/boxicons.min.css';
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -12,78 +13,73 @@ import Place from './bbarcontent/place/Place';
 import Schedule from './bbarcontent/schedule/Schedule';
 import Vote from './bbarcontent/vote/Vote';
 import Chat from './bbarcontent/chat/Chat';
-import { chatMessages, stompClient, userMarkers } from '../../app/store';
+import {
+  chatMessages,
+  stompClient,
+  userMarkers,
+  socketMarkers,
+  userInfoState,
+} from '../../app/store';
 
 function Room() {
   const client = useRef({});
-  const [sClient, setSClient] = useRecoilState(stompClient);
   const [messages, setMessages] = useRecoilState(chatMessages);
   const [markers, setMarkers] = useRecoilState(userMarkers);
+  const [socketMarker, setSocketMarker] = useRecoilState(socketMarkers);
+  const userInfo = useRecoilValue(userInfoState);
 
-  console.log('여기는 룸 입니다.', sClient);
-
-  useEffect(() => {
-    console.log('퍼블리시 유저마커');
-  }, [userMarkers]);
+  console.log('여기는 룸 입니다.');
 
   // 여기 1 나중에 룸번호로 변경해야함
   const subscribeChatting = async () => {
     console.log('채팅');
-    await sClient.subscribe('/sub/room/1', ({ body }) => {
+    await client.current.subscribe('/sub/room/1', ({ body }) => {
       console.log(body);
-      setMessages(messages => [...messages, JSON.parse(body)]);
+      setMessages(pre => [...pre, JSON.parse(body)]);
     });
   };
 
   // 여기 1 나중에 룸번호로 변경해야함
   const subscribeMarkers = async () => {
-    console.log('subscribe');
-    await sClient.subscribe('/sub/markers/1', ({ body }) => {
-      console.log(body);
+    console.log('마커 subscribe');
+    await client.current.subscribe('/sub/markers/1', ({ body }) => {
+      setSocketMarker(JSON.parse(body).storageItemList);
+      console.log('마커', body);
+      console.log('파스 리스트', JSON.parse(body).storageItemList);
     });
   };
 
-  const newStomp = new StompJs.Client({
-    // brokerURL: "ws://localhost:8080/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
-    webSocketFactory: () =>
-      new SockJS('https://i8b202.p.ssafy.io/api/ws-stomp'), // proxy를 통한 접속
-    connectHeaders: {},
-    debug: str => {
-      console.log(str);
-    },
-    reconnectDelay: 5000,
-    heartbeatIncoming: 4000,
-    heartbeatOutgoing: 4000,
-    onConnect: () => {
-      console.log('커넥트 되는 시점');
-      subscribeChatting();
-      subscribeMarkers();
-    },
-    onStompError: frame => {
-      console.error(frame);
-    },
-  });
-
   const stompActive = async () => {
-    console.log('client 등록 시점');
-    console.log(sClient);
-    newStomp.activate();
-  };
-
-  const setStompClient = async () => {
-    console.log('client 값 => state 관리 시점');
-    setSClient(newStomp);
+    await client.current.activate();
   };
 
   const connect = async () => {
+    client.current = new StompJs.Client({
+      webSocketFactory: () =>
+        new SockJS('https://i8b202.p.ssafy.io/api/ws-stomp'), // proxy를 통한 접속
+      connectHeaders: {},
+      debug: str => {
+        console.log(str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        console.log('커넥트 되는 시점');
+        subscribeChatting();
+        subscribeMarkers();
+      },
+      onStompError: frame => {
+        console.error(frame);
+      },
+    });
     console.log('connect');
     await stompActive();
-    await setStompClient();
   };
 
   const disconnect = () => {
     console.log('disconnect');
-    sClient.deactivate();
+    client.current.deactivate();
   };
 
   useEffect(() => {
@@ -91,6 +87,42 @@ function Room() {
     connect();
     return () => disconnect();
   }, []);
+
+  const publishMarker = async markers => {
+    console.log('publish marker');
+    if (!client.current.connected) {
+      return;
+    }
+    console.log('publish markers info: ', markers);
+    await client.current.publish({
+      destination: '/pub/markers',
+      // 여기 1 나중에 룸번호로 변경해야함
+      body: JSON.stringify({ roomId: 1, storageItemList: [...markers] }),
+      // body: { roomId: 1, markers },
+    });
+  };
+
+  const publishMessage = async message => {
+    console.log('publish messages');
+    console.log(messages);
+    if (!client.current.connected) {
+      return;
+    }
+    await client.current.publish({
+      destination: '/pub/message',
+      // 여기 1 나중에 룸번호로 변경해야함
+      body: JSON.stringify({
+        roomId: 1,
+        message,
+        memberId: userInfo.memberId,
+      }),
+    });
+  };
+
+  useEffect(() => {
+    console.log('퍼블리시 유저마커');
+    publishMarker(markers);
+  }, [markers]);
 
   return (
     <div>
@@ -101,7 +133,10 @@ function Room() {
           <Route path='place' element={<Place />} />
           <Route path='schedule' element={<Schedule />} />
           <Route path='vote' element={<Vote />} />
-          <Route path='chat' element={<Chat />} />
+          <Route
+            path='chat'
+            element={<Chat publishMessage={publishMessage} />}
+          />
         </Route>
       </Routes>
       <Outlet />

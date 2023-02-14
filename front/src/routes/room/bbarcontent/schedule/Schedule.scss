@@ -11,10 +11,14 @@
     font-size: 1rem;
   }
 }
+.schedule_storage {
+  overflow: auto;
+}
 .schedulebox_section_list {
   overflow: auto;
   // height: 30rem;
   height: 53vh;
+  // height: 80%;
 
   &::-webkit-scrollbar {
     width: 0.5rem; /* 스크롤바의 너비 */

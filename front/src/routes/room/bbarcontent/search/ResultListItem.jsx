@@ -77,8 +77,8 @@ function ResultListItem(props) {
           role='button'
           tabIndex={0}
         >
-          <button>+</button>
-          {/* <i className='bx bx-plus'></i> */}
+          {/* <button>+</button> */}
+          <i className='bx bx-plus'></i>
         </div>
       </div>
       <div className={classes.resultitem__content}>
@@ -94,7 +94,8 @@ function ResultListItem(props) {
         )}
         <div>
           <a href={detailUrl} target='_blank' rel='noopener noreferrer'>
-            가게 정보 확인하기
+            <i className='bx bxs-map' style={{ color: '#464545' }}></i>가게 정보
+            확인하기
           </a>
         </div>
       </div>

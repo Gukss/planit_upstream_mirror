@@ -76,7 +76,7 @@ function Schedule() {
   }, [itemsRaw]);
 
   useEffect(() => {
-    if (Object.keys(presentSche).length === 0) {
+    if (itemsFiltered.length === 0 || Object.keys(presentSche).length === 0) {
       console.log('📌📌아직 아무것도 확정 안 했을 때', isReset);
 
       // 가변성의 여행 날짜에 따른 placebox에 넣을 마커들 이중배열로 만들기
@@ -161,7 +161,9 @@ function Schedule() {
           장소는 같은 색으로 지도에 표기됩니다.<div className=''></div>
         </p>
       </div>
-      <PlaceBox boxTitle='보관함' items={itemsFiltered} />
+      <div className='schedule_storage'>
+        <PlaceBox boxTitle='보관함' items={itemsFiltered} />
+      </div>
       <br />
       <hr />
       <DragDropContext onDragEnd={onDragEnd}>

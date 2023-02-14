@@ -26,17 +26,19 @@ function ScheduleBoxItem(props) {
               <p>반갑</p>
             )} */}
 
-            {(props.item.category === 'AD5' && <i className='bx bx-home' />) ||
-              (props.item.category === 'FD6' && (
+            {(props.item.categoryCode === 'AD5' && (
+              <i className='bx bx-home' />
+            )) ||
+              (props.item.categoryCode === 'FD6' && (
                 <i className='bx bx-restaurant' />
               )) ||
-              (props.item.category === 'CE7' && (
+              (props.item.categoryCode === 'CE7' && (
                 <i className='bx bx-coffee' />
               )) ||
-              (props.item.category === 'AT4' && (
+              (props.item.categoryCode === 'AT4' && (
                 <i className='bx bxs-castle' />
               )) ||
-              (props.item.category === 'AD5' && (
+              (props.item.categoryCode === 'AD5' && (
                 <i className='bx bx-home' />
               )) || <i className='bx bx-map' />}
           </div>
