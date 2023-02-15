@@ -55,7 +55,7 @@ function Marker(props) {
     { color: '#FF7BBA', img: pinkMarker },
   ];
 
-  let myMarkerImg = '';
+  let myMarkerImg = userColor;
 
   if (userSelectMarkers.length > 0) {
     const pos = userSelectMarkers.length - 1;
@@ -177,8 +177,9 @@ function Marker(props) {
   useEffect(() => {
     // 처음에 생성했을때 룸마커가 비어있기에 필터링이안됨
     // 지금 문제점은 그냥 처음에 생성했을때 다 문제가 됨.
+    // && userSelectMarkers.length > 0
 
-    if (roomMarkers.length > 0 && userSelectMarkers.length > 0) {
+    if (roomMarkers.length > 0) {
       console.log('마커필터링');
 
       // 선택한 마커 정보만 따로 빼기.

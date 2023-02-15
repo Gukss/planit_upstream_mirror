@@ -21,12 +21,16 @@ import {
   markerFlag,
   userInfoState,
   roomInfoState,
+  voteInformation,
+  voteFlag,
 } from '../../app/store';
 
 function Room() {
   const client = useRef({});
   const publishMarkerFlag = useRecoilValue(markerFlag);
+  const publishVoteFlag = useRecoilValue(voteFlag);
   // const [sClient, setSClient] = useRecoilState(stompClient);
+  const [votes, setVotes] = useRecoilState(voteInformation);
   const [markers, setMarkers] = useRecoilState(userMarkers);
   const [messages, setMessages] = useRecoilState(chatMessages);
   const [socketMarker, setSocketMarker] = useRecoilState(socketMarkers);
@@ -38,22 +42,39 @@ function Room() {
   // 여기 1 나중에 룸번호로 변경해야함
   const subscribeChatting = async () => {
     console.log('채팅');
-    await client.current.subscribe('/sub/room/1', ({ body }) => {
-      console.log(body);
-      setMessages(pre => [...pre, JSON.parse(body)]);
-    });
+    await client.current.subscribe(
+      `/sub/room/${roomInfo.roomId}`,
+      ({ body }) => {
+        console.log(body);
+        setMessages(pre => [...pre, JSON.parse(body)]);
+      }
+    );
   };
 
   // 여기 1 나중에 룸번호로 변경해야함
   const subscribeMarkers = async () => {
     console.log('마커 subscribe');
-    await client.current.subscribe('/sub/markers/1', ({ body }) => {
-      // const newStorageItemList = JSON.parse(body).storageItemList;
-      setMarkers(JSON.parse(body).storageItemList);
-      // setSocketMarker(JSON.parse(body).storageItemList);
-      // console.log('마커', body);
-      // console.log('파스 리스트', JSON.parse(body).storageItemList);
-    });
+    await client.current.subscribe(
+      `/sub/markers/${roomInfo.roomId}`,
+      ({ body }) => {
+        setMarkers(JSON.parse(body).storageItemList);
+        // setSocketMarker(JSON.parse(body).storageItemList);
+        // console.log('마커', body);
+        // console.log('파스 리스트', JSON.parse(body).storageItemList);
+      }
+    );
+  };
+
+  const subscribeVotes = async () => {
+    console.log('투표 구독');
+    await client.current.subscribe(
+      `/sub/votes/${roomInfo.roomId}`,
+      ({ body }) => {
+        // setVotes(pre => [...pre, JSON.parse(body).votesList]);
+        setVotes(JSON.parse(body).votesList);
+        console.log('투표 구독 정보', JSON.parse(body).votesList);
+      }
+    );
   };
 
   const stompActive = async () => {
@@ -75,6 +96,7 @@ function Room() {
         console.log('커넥트 되는 시점');
         subscribeChatting();
         subscribeMarkers();
+        subscribeVotes();
       },
       onStompError: frame => {
         console.error(frame);
@@ -84,16 +106,35 @@ function Room() {
     await stompActive();
   };
 
+  // 웹 소켓 끊기.
   const disconnect = () => {
     console.log('disconnect');
     client.current.deactivate();
   };
 
+  // 방 시작 후 웹 소켓 연결
   useEffect(() => {
     console.log('방 처음');
     connect();
     return () => disconnect();
   }, []);
+
+  // 웹소켓 투표
+  const publishVote = async votes => {
+    console.log('publish vote');
+    if (!client.current.connected) {
+      return;
+    }
+    console.log('publish vote Info: ', votes);
+    await client.current.publish({
+      destination: '/pub/votes',
+      body: JSON.stringify({
+        roomId: roomInfo.roomId,
+        votesList: [...votes],
+      }),
+      // body: { roomId: 1, markers },
+    });
+  };
 
   const publishMarker = async markers => {
     console.log('publish marker');
@@ -104,7 +145,10 @@ function Room() {
     await client.current.publish({
       destination: '/pub/markers',
       // 여기 1 나중에 룸번호로 변경해야함
-      body: JSON.stringify({ roomId: 1, storageItemList: [...markers] }),
+      body: JSON.stringify({
+        roomId: roomInfo.roomId,
+        storageItemList: [...markers],
+      }),
       // body: { roomId: 1, markers },
     });
   };
@@ -119,17 +163,24 @@ function Room() {
       destination: '/pub/message',
       // 여기 1 나중에 룸번호로 변경해야함
       body: JSON.stringify({
-        roomId: 1,
+        roomId: roomInfo.roomId,
         message,
         memberId: userInfo.memberId,
       }),
     });
   };
 
+  // publish Marker 호출용
   useEffect(() => {
     console.log('퍼블리시 유저마커');
     publishMarker(markers);
   }, [publishMarkerFlag]);
+
+  // publish Vote 호출용
+  useEffect(() => {
+    console.log('퍼블리시 투표');
+    publishVote(votes);
+  }, [publishVoteFlag]);
 
   return (
     <div>

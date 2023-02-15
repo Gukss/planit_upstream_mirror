@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 import FriendListItem from './friendbox/friendListItem';
 import { dateRangeState, roomPK, userInfoState } from '../../../app/store';
-import logoImg from '../../../app/assets/images/naver_login.png';
+import logoImg from '../../../app/assets/images/planit_logo_reverse.png';
 import Header from '../../../common/header/Header';
 import classes from './CreateRoom.module.scss';
 
@@ -148,11 +148,10 @@ function CreateRoom() {
         <div className={classes.create}>
           <div className={classes.create__title}>
             <div className={classes.create_title_text}>
-              <div>PLAN</div>
-              <div>!T</div>
-            </div>
-            <div className={classes.create_title_img}>
-              <img src={logoImg} alt='' />
+              <div className={classes.create_title_img}>
+                <img src={logoImg} alt='' />
+              </div>
+              PLAN!T
             </div>
           </div>
         </div>
@@ -212,14 +211,14 @@ function CreateRoom() {
                         <div className={classes.card_back}>
                           <div className={classes.center_wrap}>
                             <div className={classes.center_section}>
-                              <div>
+                              <div className={classes.friend_list}>
                                 {selectFriends.map((friend, i) => (
-                                  <div>
+                                  <div className={classes.friend_item}>
                                     <FriendListItem user={friend.memberName} />
                                     <button
                                       onClick={() => handleRemoveClick(friend)}
                                     >
-                                      X
+                                      x
                                     </button>
                                   </div>
                                 ))}

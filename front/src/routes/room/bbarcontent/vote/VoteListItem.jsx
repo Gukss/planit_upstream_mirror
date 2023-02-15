@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { voteInformation } from '../../../../app/store';
+import { voteInformation, isVoted, voteFlag } from '../../../../app/store';
 import classes from './VoteListItem.module.scss';
 
 function VoteListItem(props) {
+  const [voteCheck, setVoteCheck] = useState(false);
+  const [isVote, setIsVote] = useRecoilState(isVoted);
   const [voteInfo, setVoteInfo] = useRecoilState(voteInformation);
-  console.log('item', props.vote);
+  const [publishVoteFlag, setPublishVoteFlag] = useRecoilState(voteFlag);
+  console.log('item', voteCheck, props.vote);
 
   // 투표 프로그래스바 너비 용 변수 voteCnt
   let voteCnt = 0;
 
-  for (let i = 0; i < props.vote.voteItem.length; i += 1) {
-    voteCnt += props.vote.voteItem[i].count;
+  for (let i = 0; i < props.vote.votesListItem.length; i += 1) {
+    voteCnt += props.vote.votesListItem[i].count;
   }
 
-  console.log('voteCnt', voteCnt);
+  // const voteCheck = isVote.filter(vote => {
+  //   return vote.voteTitle === props.vote.title;
+  // });
+
+  // console.log('voteCnt', voteCnt, voteCheck[0].memberVote);
 
   // vote 관련 함수
   const getChecked = () => {
@@ -25,24 +32,33 @@ function VoteListItem(props) {
       if (node.checked) {
         console.log(node.value, '에 투표하겠다');
 
-        const newVoteInfo = props.vote.voteItem.map(item =>
-          item.voteItem === node.value
-            ? { ...item, count: item.count + 1 }
-            : item
+        const newVoteInfo = props.vote.votesListItem.map(item =>
+          item.name === node.value ? { ...item, count: item.count + 1 } : item
         );
 
         console.log('change', newVoteInfo);
+        // setIsVote(
+        //   isVote.map(item =>
+        //     item.voteTitle === props.vote.title
+        //       ? { ...item, memberVote: true }
+        //       : item
+        //   )
+        // );
+        setVoteCheck(prev => {
+          return true;
+        });
         setVoteInfo(
           voteInfo.map(voteList =>
             voteList.title === props.vote.title
               ? {
                   title: props.vote.title,
-                  voteItem: newVoteInfo,
-                  isVote: true,
+                  votesListItem: newVoteInfo,
+                  // isVote: true,
                 }
               : voteList
           )
         );
+        setPublishVoteFlag([...publishVoteFlag, 1]);
       }
     });
   };
@@ -50,7 +66,7 @@ function VoteListItem(props) {
   return (
     <div className={classes.item_box}>
       <div className={classes.item_box_title}>
-        {props.vote.isVote ? (
+        {voteCheck ? (
           <i className='bx bxs-circle' style={{ color: '#1AD117' }}></i>
         ) : (
           <i className='bx bxs-circle' style={{ color: '#f94545' }}></i>
@@ -60,28 +76,28 @@ function VoteListItem(props) {
 
       <div className={classes.item_box_content}>
         <fieldset style={{ border: 'none' }}>
-          {props.vote.voteItem.map(item => {
+          {props.vote.votesListItem.map(item => {
             return (
               <label>
-                {props.vote.isVote ? (
+                {voteCheck ? (
                   <input
                     disabled
                     type='radio'
-                    value={item.voteItem}
+                    value={item.name}
                     name={props.vote.title}
                     // ref={JSON.stringify(props.vote.title)}
                   />
                 ) : (
                   <input
                     type='radio'
-                    value={item.voteItem}
+                    value={item.name}
                     name={props.vote.title}
                     // ref={JSON.stringify(props.vote.title)}
                   />
                 )}
                 <div className={classes.content_div}>
                   <div className={classes.content_namecount}>
-                    <p>{item.voteItem}</p>
+                    <p>{item.name}</p>
                     <p>{item.count}명</p>
                   </div>
                   <div className={classes.content_progressbar}>
@@ -101,7 +117,7 @@ function VoteListItem(props) {
         </fieldset>
       </div>
       <div className={classes.item_box_button}>
-        {props.vote.isVote ? (
+        {voteCheck ? (
           <button
             style={{
               backgroundColor: '#E6E9EF',
