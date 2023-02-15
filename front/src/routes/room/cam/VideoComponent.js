@@ -313,19 +313,15 @@ class VideoComponent extends Component {
                   <div>
                     {this.state.audioEnable ? (
                       <i
-                        className='bx bxs-volume-full'
+                        className='bx bxs-microphone'
                         onClick={this.audioEnv}
                       />
                     ) : (
                       <i
-                        className='bx bxs-volume-mute'
+                        className='bx bxs-microphone-off'
                         onClick={this.audioEnv}
                       />
                     )}
-                  </div>
-                  <div>
-                    <i className='bx bxs-microphone' onClick={this.audioEnv} />
-                    {/* <i className='bx bxs-microphone-off' /> */}
                   </div>
                 </div>
               </div>

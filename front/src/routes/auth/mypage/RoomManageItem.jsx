@@ -7,6 +7,7 @@ import {
   roomInfoState,
   userMarkers,
   scheduleInfo,
+  chatMessages,
 } from '../../../app/store';
 import classes from './RoomManageItem.module.scss';
 
@@ -14,7 +15,7 @@ function RoomManageItem(props) {
   const navigate = useNavigate();
   const [roomInfo, setRoomInfo] = useRecoilState(roomInfoState);
   const [forLoadMarker, setForLoadMarker] = useRecoilState(userMarkers);
-  console.log(props.roomInfo);
+  const [chatMessa, setChatMessa] = useRecoilState(chatMessages);
   const userInfo = useRecoilValue(userInfoState);
   const resJoinMem = useRef('');
   const [memNameList, setMemNameList] = useState('');
@@ -46,10 +47,11 @@ function RoomManageItem(props) {
   }, []);
 
   const handleSubmitItem = async e => {
-    const roomPk = props.roomData.roomId;
+    const roomID = props.roomData.roomId;
+    console.log(roomID);
     try {
       // 방 정보 가져오기
-      const resRoomInfo = await instance.get(`/rooms/${roomPk}`);
+      const resRoomInfo = await instance.get(`/rooms/${roomID}`);
       setRoomInfo({
         roomId: resRoomInfo.data.roomId,
         roomName: resRoomInfo.data.roomName,
@@ -58,7 +60,8 @@ function RoomManageItem(props) {
         colorCode: props.roomInfo.colorCode,
       });
       // 보관함 정보 가져오기
-      const storageInfo = await instance.get(`/storages/rooms/${roomPk}`);
+      const storageInfo = await instance.get(`/storages/rooms/${roomID}`);
+      console.log('이거슨 스토리쥐');
       console.log(storageInfo.data);
       if (storageInfo.data.length > 0) {
         const storageMarkerData = storageInfo.data.map(marker =>
@@ -67,9 +70,10 @@ function RoomManageItem(props) {
             {
               x: marker.lng,
               y: marker.lat,
-              confirmed: marker.isConfirmed,
-              categoryName: marker.category,
-              storageName: marker.title,
+              isconfirmed: marker.confirmed,
+              categoryCode: marker.categoryName,
+              title: marker.storageName,
+              // colorCode:
             },
           ])
         );
@@ -80,11 +84,15 @@ function RoomManageItem(props) {
         //   )
         //   .map();
       }
+      // 채팅 가져오기
+      const chatInfo = await instance.get(`/chatting/${roomID}`);
+      setChatMessa(chatInfo.data);
+      console.log(chatInfo.data);
       // 투표 나중에
-      const voteInfo = await instance.get(`/votes/${roomPk}`);
+      const voteInfo = await instance.get(`/votes/${roomID}`);
       console.log(voteInfo.data);
       // if (voteInfo.data.length > 0) {
-      // }
+      // // }
       if (roomInfo.roomId !== -1) {
         setTimeout(() => navigate('/room/search'), 1000);
       } else {

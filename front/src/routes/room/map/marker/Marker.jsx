@@ -56,12 +56,18 @@ function Marker(props) {
   ];
 
   let myMarkerImg = userColor;
+  console.log(userSelectMarkers);
 
   if (userSelectMarkers.length > 0) {
     const pos = userSelectMarkers.length - 1;
+    console.log('dhfbelqrld');
+    console.log(pos);
+    console.log(userSelectMarkers);
     const markerColor = colorList.filter(
       item => item.color === userSelectMarkers[pos].colorCode
     );
+    console.log('whffu');
+    console.log(markerColor);
     myMarkerImg = markerColor[0].img;
   }
 
