@@ -40,4 +40,7 @@ public class CreateStorageRequest {
       private Category categoryName;
       @NotNull
       private Long roomId;
+
+      @NotNull
+      private String colorCode;
 }

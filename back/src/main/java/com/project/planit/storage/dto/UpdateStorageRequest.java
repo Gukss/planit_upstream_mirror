@@ -31,4 +31,6 @@ public class UpdateStorageRequest {
   private Long roomId;
   @NotNull
   private BaseRequest baseRequest;
+  @NotNull
+  private String colorCode;
 }
