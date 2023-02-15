@@ -27,7 +27,7 @@ function Notification({ notificaiton, userInfo }) {
   });
 
   const moveNavi = () => {
-    return navigate('room/search');
+    return navigate('/room/search');
   };
 
   const onConfirm = async () => {
@@ -42,9 +42,10 @@ function Notification({ notificaiton, userInfo }) {
           `/rooms/users/${notificaiton.roomId}`
         );
         console.log(notificaiton.roomId);
+        const colorCoded = colorCode[resRoomMemList.data.length];
         const resRoomRegist = await instance.post('/rooms/users', {
           roomId: notificaiton.roomId,
-          colorCode: colorCode[resRoomMemList.data.length],
+          colorCode: colorCoded,
         });
         console.log(resRoomRegist.data);
         setRoomInfo({
@@ -52,7 +53,7 @@ function Notification({ notificaiton, userInfo }) {
           roomName: resRoomInfo.data.roomName,
           startDate: resRoomInfo.data.startDate,
           endDate: resRoomInfo.data.endDate,
-          colorCode: resRoomRegist.data.colorCode,
+          colorCode: colorCoded,
         });
         moveNavi();
       } catch (error) {

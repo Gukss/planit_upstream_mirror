@@ -45,18 +45,32 @@ function SaveIcon() {
       const storageConfirm = [];
       const storageNotConfirm = userMarkerInfo
         .filter(userMark => !userMark.isConfirmed)
-        .map(userMark => ({
-          lng: userMark.x,
-          lat: userMark.y,
-          confirmed: userMark.isConfirmed,
-          categoryName: userMark.categoryCode,
-          storageName: userMark.title,
-          dayOrder: 0,
-          indexOrder: 0,
-          roomId: roomInfo.roomId,
-          // saved: roomInfo.saved + 1
-        }));
-      console.log(scheduleInFo);
+        .map(userMark =>
+          userMark.categoryCode
+            ? {
+                lng: userMark.x,
+                lat: userMark.y,
+                confirmed: userMark.isConfirmed,
+                categoryName: userMark.categoryCode,
+                storageName: userMark.title,
+                dayOrder: 0,
+                indexOrder: 0,
+                roomId: roomInfo.roomId,
+                colorCode: userMark.colorCode,
+                // saved: roomInfo.saved + 1
+              }
+            : {
+                lng: userMark.x,
+                lat: userMark.y,
+                confirmed: userMark.isConfirmed,
+                categoryName: '-',
+                storageName: userMark.title,
+                dayOrder: 0,
+                indexOrder: 0,
+                roomId: roomInfo.roomId,
+                colorCode: userMark.colorCode,
+              }
+        );
       const schedules = Object.values(scheduleInFo).map((schedule, j) => {
         if (schedule.items.length > 0) {
           const item = schedule.items.map((scMarker, i) => {
@@ -64,20 +78,21 @@ function SaveIcon() {
               lng: scMarker.x,
               lat: scMarker.y,
               confirmed: scMarker.isConfirmed,
-              category: scMarker.categoryName,
+              category: scMarker.categoryCode,
               storageName: scMarker.title,
               indexOrder: i,
               dayOrder: j,
               roomId: roomInfo.roomId,
+              colorCode: scMarker.colorCode,
             });
           });
           return item;
         }
         return [];
       });
-      console.log(storageConfirm);
       storageConfirm.map(confirmes => instance.post('/storages', confirmes));
       storageNotConfirm.map(notCon => instance.post('/storages', notCon));
+      alert('저장되었습니다.');
     } catch (error) {
       console.log(error);
     }
