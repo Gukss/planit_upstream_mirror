@@ -79,16 +79,12 @@ public class StorageController {
         return res;
     }
 
-    private String returnAccessToken(String fullToken){
+    private String returnAccessToken(String fullToken) {
         String parseToken = "";
         if (StringUtils.hasText(fullToken) && fullToken.startsWith("Bearer")) {
             parseToken = fullToken.substring(7);
         }
         return parseToken;
-    }
-    @MessageMapping("/schedule")
-    public void schedule(SocketScheduleRequest socketScheduleRequest){
-        messagingTemplate.convertAndSend("/sub/schedule/" + socketScheduleRequest.getRoomId(), socketScheduleRequest);
     }
 
 }
