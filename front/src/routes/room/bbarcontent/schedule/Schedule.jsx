@@ -12,7 +12,7 @@ import {
 } from '../../../../app/store';
 import ScheduleBox from './ScheduleBox';
 
-function Schedule() {
+function Schedule({ publishSchedule }) {
   const startEndDate = useRecoilValue(roomDateInfo); // 여행 시작,끝 날짜
   const [presentSche, setPresentSche] = useRecoilState(scheduleInfo); // 일정 정보
   const [isReset, setIsReset] = useRecoilState(isConfirmedChanged); // 일정 변경 여부
@@ -47,7 +47,7 @@ function Schedule() {
   const itemsFiltered = itemsRaw.filter(item => item.isConfirmed === true);
   const dateResult = getDatesStartToLast(startEndDate[0], startEndDate[1]);
 
-  let scheduleboxs = {};
+  let scheduleboxs = [];
 
   // 확정된 place가 1개 이상 있고, 보관함 변경해서 리셋됐을 때
   useEffect(() => {
@@ -69,6 +69,7 @@ function Schedule() {
       // scheduleboxs 반영 및 리셋 true -> false로 해제
       setPresentSche(scheduleboxs);
       setIsReset(false);
+      publishSchedule(Object.values(scheduleboxs));
     } else if (itemsFiltered.length > 0) {
       // 확정 장소 한 개 이상, 리셋이 안 일어났을 때(일정 작업 중)
       // setPresentSche(presentSche);
@@ -91,6 +92,7 @@ function Schedule() {
       }
 
       setPresentSche(scheduleboxs);
+      publishSchedule(Object.values(scheduleboxs));
     }
   }, [itemsRaw]);
 
@@ -132,6 +134,7 @@ function Schedule() {
       };
       console.log('tmp 확인', tmp);
       setPresentSche(tmp);
+      publishSchedule(Object.values(tmp));
     } else {
       // 같은 날짜 안에서의 순서 변경
       const column = presentSche[parseInt(source.droppableId, 10)];
@@ -148,9 +151,14 @@ function Schedule() {
       };
       console.log('tmp 확인', tmp);
       setPresentSche(tmp);
+      publishSchedule(Object.values(tmp));
     }
     console.log('📍 onDropEnd 끝남');
   };
+
+  // useEffect(() => {
+  //   publishSchedule(Object.values(presentSche));
+  // }, [presentSche]);
 
   return (
     <Bbar>

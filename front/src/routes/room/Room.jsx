@@ -23,6 +23,7 @@ import {
   roomInfoState,
   voteInformation,
   voteFlag,
+  scheduleInfo,
 } from '../../app/store';
 
 function Room() {
@@ -36,6 +37,7 @@ function Room() {
   const [socketMarker, setSocketMarker] = useRecoilState(socketMarkers);
   const userInfo = useRecoilValue(userInfoState);
   const roomInfo = useRecoilValue(roomInfoState);
+  const [presentSche, setPresentSche] = useRecoilState(scheduleInfo); // 일정 정보
 
   console.log('여기는 룸 입니다.', roomInfo);
 
@@ -77,6 +79,21 @@ function Room() {
     );
   };
 
+  const subscribeSchedule = async () => {
+    console.log('일정 구독');
+    await client.current.subscribe(
+      `/sub/schedule/${roomInfo.roomId}`,
+      ({ body }) => {
+        // setVotes(pre => [...pre, JSON.parse(body).votesList]);
+        // setVotes(JSON.parse(body).votesList);
+        // console.log('투표 구독 정보', JSON.parse(body).votesList);
+        console.log('========', JSON.parse(body));
+        setPresentSche(JSON.parse(body).presentSche);
+        // setMessages(pre => [...pre, JSON.parse(body)]);
+      }
+    );
+  };
+
   const stompActive = async () => {
     await client.current.activate();
   };
@@ -97,6 +114,7 @@ function Room() {
         subscribeChatting();
         subscribeMarkers();
         subscribeVotes();
+        subscribeSchedule();
       },
       onStompError: frame => {
         console.error(frame);
@@ -131,6 +149,25 @@ function Room() {
       body: JSON.stringify({
         roomId: roomInfo.roomId,
         votesList: [...votes],
+      }),
+      // body: { roomId: 1, markers },
+    });
+  };
+
+  // 웹소켓 일정
+  const publishSchedule = async schedule => {
+    console.log('publish schedule');
+    if (!client.current.connected) {
+      return;
+    }
+    console.log('publish schedule Info: ', schedule);
+    await client.current.publish({
+      destination: '/pub/schedule',
+      body: JSON.stringify({
+        roomId: roomInfo.roomId,
+        presentSche: schedule.map(item => {
+          return { items: item.items, date: item.date };
+        }),
       }),
       // body: { roomId: 1, markers },
     });
@@ -189,7 +226,10 @@ function Room() {
         <Route path='/' element={<RoomLayout />}>
           <Route path='search' element={<Search />} />
           <Route path='place' element={<Place />} />
-          <Route path='schedule' element={<Schedule />} />
+          <Route
+            path='schedule'
+            element={<Schedule publishSchedule={publishSchedule} />}
+          />
           <Route path='vote' element={<Vote />} />
           <Route
             path='chat'

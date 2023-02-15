@@ -130,7 +130,7 @@ export const roomDateInfo = atom({
 // 일정 관리
 export const scheduleInfo = atom({
   key: 'scheduleInfo',
-  default: {},
+  default: [],
 });
 
 // 일정 변동 여부 - 재방문했을 때 기존 일정 유지하기 위한 변수
