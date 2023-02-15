@@ -15,6 +15,14 @@
   // // 숫자 유니코드 : U+0030-0039
 }
 
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   font-family: 'NotoSans';
   font-size: 16px;

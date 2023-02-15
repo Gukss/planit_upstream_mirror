@@ -81,16 +81,6 @@ export const userMarkers = atom({
     //   x: 126.44,
     //   y: 32.44,
     // },
-    // {
-    //   id: 'dummy_5',
-    //   categoryCode: 'CE7',
-    //   colorCode: '#FAE635',
-    //   categoryName: '카페',
-    //   isConfirmed: false,
-    //   title: '카페 아자카파',
-    //   x: 126.44,
-    //   y: 32.44,
-    // },
   ],
 });
 
@@ -103,12 +93,13 @@ export const categoryCheck = atom({
   },
 });
 
+// -----------------------------------------------------------
+
+// 마커 publish 용
 export const markerFlag = atom({
   key: 'markerFlag',
   default: [],
 });
-
-// -----------------------------------------------------------
 
 // socket data 관리
 export const chatMessages = atom({
@@ -151,6 +142,19 @@ export const isConfirmedChanged = atom({
 // 투표 관리
 export const voteInformation = atom({
   key: 'voteInformation',
+  default: [],
+});
+
+// 투표 여부 확인(local 별 관리)
+export const isVoted = atom({
+  key: 'isVoted',
+  default: [],
+  // { voteTitle: info.value.title, memberVote: false }
+});
+
+// 투표 publish 용
+export const voteFlag = atom({
+  key: 'voteFlag',
   default: [],
 });
 

@@ -1,14 +1,16 @@
 import { useRecoilState } from 'recoil';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { voteInformation } from '../../../../app/store';
+import { voteInformation, voteFlag, isVoted } from '../../../../app/store';
 import Bbar from '../../../../common/bbar/Bbar';
 import classes from './Vote.module.scss';
 import VoteList from './VoteList';
 
 function Vote() {
   // const [voteInfo, setVoteInfo] = useState([]);
+  const [isVote, setIsVote] = useRecoilState(isVoted);
   const [voteInfo, setVoteInfo] = useRecoilState(voteInformation);
+  const [publishVoteFlag, setPublishVoteFlag] = useRecoilState(voteFlag);
   // 투표 생성 모달
   const onCreateVote = () => {
     const { value: getVoteInfo } = Swal.fire({
@@ -59,7 +61,7 @@ function Vote() {
         const voteInfos = [];
         for (let i = 0; i < voteItems.length; i += 1) {
           voteInfos.push({
-            voteItem: voteItems[i],
+            name: voteItems[i],
             count: 0,
           });
         }
@@ -68,10 +70,17 @@ function Vote() {
           ...voteInfo,
           {
             title: info.value.title,
-            voteItem: voteInfos,
-            isVote: false,
+            votesListItem: voteInfos,
+            // isVote: false,
           },
         ]);
+
+        setIsVote([
+          ...isVote,
+          { voteTitle: info.value.title, memberVote: false },
+        ]);
+
+        setPublishVoteFlag([...publishVoteFlag, 1]);
       }
     });
   };
