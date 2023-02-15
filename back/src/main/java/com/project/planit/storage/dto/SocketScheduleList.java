@@ -26,7 +26,7 @@ import java.util.List;
 @Builder
 public class SocketScheduleList {
     @NotNull
-    private LocalDateTime date;
+    private String date;
     @NotNull
     private List<SocketScheduleListItem> items;
 }
