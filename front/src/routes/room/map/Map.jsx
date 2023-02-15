@@ -12,6 +12,7 @@ import {
 import Marker from './marker/Marker';
 import SocketMarker from './marker/SocketMarker';
 import CategoryMarker from './marker/CategoryMarker';
+import blueMarker from '../../../app/assets/images/marker_blue.png';
 import './Map.scss';
 
 const { kakao } = window;

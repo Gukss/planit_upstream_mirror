@@ -65,6 +65,7 @@ function RoomManageItem(props) {
       console.log(storageInfo.data);
       if (storageInfo.data.length > 0) {
         const storageMarkerData = storageInfo.data.map(marker =>
+          // const markerColor = await instance.get('')
           setForLoadMarker(forLoadMarker => [
             ...forLoadMarker,
             {
@@ -73,16 +74,25 @@ function RoomManageItem(props) {
               isconfirmed: marker.confirmed,
               categoryCode: marker.categoryName,
               title: marker.storageName,
-              // colorCode:
+              colorCode: marker.colorCode,
             },
           ])
         );
-        // 스케쥴 관련 store 정리
-        // const storageSchedule = storageInfo.data
-        //   .filter(
-        //     data => data.dayOrder !== undefined && data.indexOrder !== undefined
-        //   )
-        //   .map();
+        // // 스케쥴 관련 store 정리
+        // const scheduleData = {};
+        // const storageSchedule = storageInfo.data.filter(
+        //   data => data.confirmed !== false
+        // );
+        // if (storageSchedule.length > 0) {
+        //   // max 값 구하기
+        //   let maxDayOrder = 0;
+        //   for (let i = 0; i < storageSchedule.length; i++) {
+        //     if (maxDayOrder < storageSchedule[i].dayOrder) {
+        //       maxDayOrder = storageSchedule[i].dayOrder;
+        //     }
+        //   }
+
+        // }
       }
       // 채팅 가져오기
       const chatInfo = await instance.get(`/chatting/${roomID}`);
