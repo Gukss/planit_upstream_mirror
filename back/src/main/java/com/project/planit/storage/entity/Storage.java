@@ -69,6 +69,8 @@ public class Storage extends BaseEntity {
     @JoinColumn(name="room_id",referencedColumnName = "room_id")
     private Room room;
 
+    private String colorCode;
+
     public static Storage create(CreateStorageRequest request,Member member,Room room){
         Storage storage=Storage.builder()
             .storageName(request.getStorageName())
@@ -79,6 +81,7 @@ public class Storage extends BaseEntity {
             .lng(request.getLng())
             .member(member)
             .room(room)
+            .colorCode(request.getColorCode())
             .categoryName(request.getCategoryName())
             .baseRequest(BaseRequest.builder()
                 .updater(member.getName())
@@ -96,5 +99,6 @@ public class Storage extends BaseEntity {
             .constructor(this.baseRequest.getConstructor())
             .updater(member.getAppId())
             .build();
+        this.colorCode=request.getColorCode();
     }
 }
