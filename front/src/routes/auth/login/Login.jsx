@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -14,6 +14,11 @@ function Login() {
   const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const navigate = useNavigate();
+  const idInput = useRef(null);
+
+  useEffect(() => {
+    idInput.current.focus();
+  }, []);
 
   // 로그인 한 회원이 접속 시도 시, 메인페이지로 보내줌
   const checkLoginValue = isLoginState => {
@@ -25,7 +30,6 @@ function Login() {
   // id 확인
   const handleIdChange = e => {
     setAppId(e.target.value);
-    console.log(e.target.value);
   };
 
   // pwd 확인
@@ -58,7 +62,6 @@ function Login() {
         memberAppName: response.data.memberName,
         token: response.data.token,
       });
-      console.log(userInfo);
 
       navigate('/');
     } catch (error) {
@@ -90,6 +93,7 @@ function Login() {
                     type='text'
                     placeholder='아이디를 입력해주세요.'
                     onChange={handleIdChange}
+                    ref={idInput}
                   />
                   <p>PASSWORD</p>
                   <input

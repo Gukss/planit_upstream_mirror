@@ -5,18 +5,22 @@ import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 import FriendListItem from './friendbox/friendListItem';
-import { dateRangeState, roomPK, userInfoState } from '../../../app/store';
+import {
+  dateRangeState,
+  userInfoState,
+  roomInfoState,
+} from '../../../app/store';
 import logoImg from '../../../app/assets/images/planit_logo_reverse.png';
 import Header from '../../../common/header/Header';
 import classes from './CreateRoom.module.scss';
 
 function CreateRoom() {
   const [dateRange, setDateRange] = useRecoilState(dateRangeState);
-  const [roomId, setRoomId] = useRecoilState(roomPK);
   const [startD, setStartDate] = useState(dateRange.startDate);
   const [endD, setEndDate] = useState(dateRange.endDate);
   const [roomName, setRoomName] = useState('');
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [roomInfo, setRoomInfo] = useRecoilState(roomInfoState);
   const [inviteUserPk, setInviteUserPk] = useState([]);
   const navigate = useNavigate();
 
@@ -69,13 +73,18 @@ function CreateRoom() {
       colorCode: '#EB5252',
     };
     const resMemberRoom = await instance.post('/rooms/users', reqMemRoomData);
-    console.log(resMemberRoom);
-    console.log(responseCreateRoom.data);
-    setRoomId(responseCreateRoom.data.roomId);
-    if (roomId !== -1) {
-      navigate('/room/search');
+    setRoomInfo({
+      roomId: responseCreateRoom.data.roomId,
+      startDate: dateToString(startD),
+      endDate: dateToString(endD),
+      roomName: `${roomName}`,
+      colorCode: '#EB5252',
+    });
+    if (!roomInfo.roomId) {
+      console.log(roomInfo);
+      setTimeout(() => navigate('/room/search'), 600);
     } else {
-      setTimeout(() => navigate('/room/search'), 1000);
+      navigate('/room/search');
     }
   };
 

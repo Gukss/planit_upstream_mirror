@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import axios from 'axios';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import Swal from 'sweetalert2';
-import { roomPK, userInfoState, roomInfoState } from '../../app/store';
+import { userInfoState, roomInfoState } from '../../app/store';
 import './Bbar.scss';
 
 function Bbar(props) {
@@ -35,8 +35,7 @@ function Bbar(props) {
 
   // 일정 이미지로 저장 코드
   const userInfo = useRecoilValue(userInfoState);
-  const roomId = useRecoilValue(roomPK);
-  const [roomInfo, setRoomInfo] = useRecoilState(roomInfoState);
+  const roomInfo = useRecoilValue(roomInfoState);
 
   const instance = axios.create({
     baseURL: 'https://i8b202.p.ssafy.io/api',
@@ -46,19 +45,7 @@ function Bbar(props) {
     },
   });
 
-  const roomInfoInstance = async e => {
-    if (roomId > -1) {
-      const resRoomInfo = instance.get(`/rooms/${roomId}`).then(res => {
-        setRoomInfo(res.data);
-      });
-      console.log(resRoomInfo);
-    }
-  };
   const title = 'planit';
-
-  useEffect(() => {
-    roomInfoInstance();
-  }, []);
 
   const onDownloadBtn = () => {
     domtoimage

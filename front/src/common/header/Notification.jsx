@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { roomPK } from '../../app/store';
+import { roomInfoState } from '../../app/store';
 import classes from './Notification.module.scss';
 
 const colorCode = [
@@ -15,9 +15,8 @@ const colorCode = [
 ];
 
 function Notification({ notificaiton, userInfo }) {
-  const [roomPk, setRoomPk] = useRecoilState(roomPK);
-  setRoomPk(-1);
-  console.log(notificaiton);
+  const [roomInfo, setRoomInfo] = useRecoilState(roomInfoState);
+  const [moveFlag, setMoveFlag] = useState(false);
   const navigate = useNavigate();
   const instance = axios.create({
     baseURL: `https://i8b202.p.ssafy.io/api`,
@@ -27,30 +26,40 @@ function Notification({ notificaiton, userInfo }) {
     },
   });
 
+  const moveNavi = () => {
+    return navigate('room/search');
+  };
+
   const onConfirm = async () => {
-    setRoomPk(notificaiton.roomId);
-    try {
-      const resNotification = await instance.patch('/notification', {
-        notificationId: notificaiton.notificationId,
-      });
-      const resRoomMemList = await instance.get(
-        `/rooms/users/${notificaiton.roomId}`
-      );
-      console.log(typeof notificaiton.roomId);
-      const resRoomRegist = await instance.post('/rooms/users', {
-        roomId: notificaiton.roomId,
-        colorCode: colorCode[resRoomMemList.data.length],
-      });
-      console.log(resRoomRegist.data);
-    } catch (error) {
-      console.log(error);
+    console.log(notificaiton.readOrNot);
+    if (!notificaiton.readOrNot) {
+      try {
+        const resNotification = await instance.patch('/notification', {
+          notificationId: notificaiton.notificationId,
+        });
+        const resRoomInfo = await instance.get(`/rooms/${notificaiton.roomId}`);
+        const resRoomMemList = await instance.get(
+          `/rooms/users/${notificaiton.roomId}`
+        );
+        console.log(notificaiton.roomId);
+        const resRoomRegist = await instance.post('/rooms/users', {
+          roomId: notificaiton.roomId,
+          colorCode: colorCode[resRoomMemList.data.length],
+        });
+        console.log(resRoomRegist.data);
+        setRoomInfo({
+          roomId: resRoomInfo.data.roomId,
+          roomName: resRoomInfo.data.roomName,
+          startDate: resRoomInfo.data.startDate,
+          endDate: resRoomInfo.data.endDate,
+          colorCode: resRoomRegist.data.colorCode,
+        });
+        moveNavi();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
-  // useEffect(() => {
-  //   if (roomPk === notificaiton.roomId) {
-  //     navigate('/room/search');
-  //   }
-  // }, [roomPk, notificaiton.roomId, navigate]);
 
   return (
     <div className={classes.notificaiton_container}>
