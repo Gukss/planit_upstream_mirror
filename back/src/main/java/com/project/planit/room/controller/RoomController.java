@@ -69,7 +69,8 @@ public class RoomController {
   @GetMapping(path = "{roomId}")
   public ResponseEntity<ReadRoomResponse> readRoom(@PathVariable Long roomId){
     Room foundRoom = roomService.findById(roomId);
-    ReadRoomResponse readRoomResponse = ReadRoomResponse.create(foundRoom.getId(), foundRoom.getRoomName(), foundRoom.getStartDate(), foundRoom.getEndDate());
+
+    ReadRoomResponse readRoomResponse = ReadRoomResponse.create(foundRoom.getId(), foundRoom.getRoomName(), foundRoom.getStartDate(), foundRoom.getEndDate(), foundRoom.getCreated_at());
     return ResponseEntity.ok().body(readRoomResponse);
   }
 

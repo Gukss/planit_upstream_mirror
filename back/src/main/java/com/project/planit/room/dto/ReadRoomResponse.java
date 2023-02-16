@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * packageName    : com.project.planit.room.dto fileName       : ReadRoomResponse author         :
@@ -25,12 +26,15 @@ public class ReadRoomResponse {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public static ReadRoomResponse create(Long roomId, String roomName, LocalDate startDate, LocalDate endDate){
+    private LocalDateTime createdAt;
+
+    public static ReadRoomResponse create(Long roomId, String roomName, LocalDate startDate, LocalDate endDate, LocalDateTime createdAt){
         return ReadRoomResponse.builder()
                 .roomId(roomId)
                 .roomName(roomName)
                 .startDate(startDate)
                 .endDate(endDate)
+                .createdAt(createdAt)
                 .build();
     }
 }
