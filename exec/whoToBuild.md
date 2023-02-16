@@ -157,6 +157,11 @@ jwt:
 - 최상위 폴더 (/)에 .env 파일 생성 후 카카오API키 입력
 
 ```
+npm i
+npm start
+```
+
+```
 REACT_APP_KAKAO_API_KEY = '7c01e88163ab50f09cc5f765bf7f5037'
 ```
 
