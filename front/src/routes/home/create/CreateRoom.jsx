@@ -1,5 +1,5 @@
 import DatePicker from 'react-datepicker';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,12 +9,15 @@ import {
   dateRangeState,
   userInfoState,
   roomInfoState,
+  loadingState,
 } from '../../../app/store';
 import logoImg from '../../../app/assets/images/planit_logo_reverse.png';
+import Loading from '../../../common/loading/Loading';
 import Header from '../../../common/header/Header';
 import classes from './CreateRoom.module.scss';
 
 function CreateRoom() {
+  const [loadingRecoil, setLoadingRecoil] = useRecoilState(loadingState);
   const [dateRange, setDateRange] = useRecoilState(dateRangeState);
   const [startD, setStartDate] = useState(dateRange.startDate);
   const [endD, setEndDate] = useState(dateRange.endDate);
@@ -80,22 +83,28 @@ function CreateRoom() {
       roomName: `${roomName}`,
       colorCode: '#EB5252',
     });
-    if (!roomInfo.roomId) {
-      console.log(roomInfo);
-      setTimeout(() => navigate('/room/search'), 600);
-    } else {
+    setLoadingRecoil(true);
+    setTimeout(() => {
+      setLoadingRecoil(false);
       navigate('/room/search');
-    }
+    }, 1000);
   };
-
+  const today = new Date();
   // startDate, endDate 변경
   const handleChange = dates => {
     const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-    console.log(start);
-    console.log(end);
-    setDateRange({ startDate: start, endDate: end });
+    console.log(today > start);
+    if (start >= today || end >= today) {
+      setStartDate(start);
+      setEndDate(end);
+      console.log(start);
+      console.log(end);
+      setDateRange({ startDate: start, endDate: end });
+    } else {
+      setStartDate(today);
+      setEndDate(today);
+      alert('날짜 선택이 잘못되었습니다.');
+    }
   };
 
   // 친구 검색 axios
@@ -152,6 +161,7 @@ function CreateRoom() {
 
   return (
     <div>
+      {loadingRecoil ? <Loading /> : null}
       <Header />
       <div className={classes.background_img}>
         <div className={classes.create}>

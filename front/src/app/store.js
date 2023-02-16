@@ -162,3 +162,8 @@ export const stompClient = atom({
   key: 'stompClient',
   default: null,
 });
+
+export const loadingState = atom({
+  key: 'loading',
+  default: false,
+});

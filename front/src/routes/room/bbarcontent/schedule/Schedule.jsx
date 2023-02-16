@@ -6,7 +6,7 @@ import './Schedule.scss';
 // import PlaceBox from '../place/PlaceBox';
 import {
   userMarkers,
-  roomDateInfo,
+  roomInfoState,
   scheduleInfo,
   isConfirmedChanged,
 } from '../../../../app/store';
@@ -14,7 +14,7 @@ import ScheduleBox from './ScheduleBox';
 import ScheduleStorage from './ScheduleStorage';
 
 function Schedule({ publishSchedule }) {
-  const startEndDate = useRecoilValue(roomDateInfo); // 여행 시작,끝 날짜
+  const roomDateInfo = useRecoilValue(roomInfoState); // 여행 시작,끝 날짜
   const [presentSche, setPresentSche] = useRecoilState(scheduleInfo); // 일정 정보
   const [isReset, setIsReset] = useRecoilState(isConfirmedChanged); // 일정 변경 여부
 
@@ -37,16 +37,22 @@ function Schedule({ publishSchedule }) {
   // 날짜 변경할 때마다 startEndDate 다시 구하기
   useMemo(() => {
     console.log('startEndDate가 업데이트됨');
-    const dateResult = getDatesStartToLast(startEndDate[0], startEndDate[1]);
+    const dateResult = getDatesStartToLast(
+      roomDateInfo.startDate,
+      roomDateInfo.endDate
+    );
     console.log(dateResult);
-  }, [startEndDate]);
+  }, [roomDateInfo]);
 
   // -----------------일정 관련-----------------
 
   // 보관함, PlaceBox에 넣을 일정 데이터 만들기
   const itemsRaw = useRecoilValue(userMarkers);
   const itemsFiltered = itemsRaw.filter(item => item.isConfirmed === true);
-  const dateResult = getDatesStartToLast(startEndDate[0], startEndDate[1]);
+  const dateResult = getDatesStartToLast(
+    roomDateInfo.startDate,
+    roomDateInfo.endDate
+  );
 
   let scheduleboxs = [];
 
