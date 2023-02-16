@@ -42,6 +42,14 @@
 
 ## 🖥 서비스 화면
 
+![일정검색](https://user-images.githubusercontent.com/76477531/219439998-930cd427-2a06-4641-aa9b-51d0bb8b4b2c.gif)
+![채팅투표](https://user-images.githubusercontent.com/76477531/219439992-3c6cc475-ee23-4e6d-af8f-778d8de843fc.gif)
+![일정변경](https://user-images.githubusercontent.com/76477531/219439982-ca1e29e1-8d6d-4c49-8f24-d1159b3007b8.gif)
+
+---
+
+---
+
 ## 🎨 화면 설계서
 
 ### 로그인
