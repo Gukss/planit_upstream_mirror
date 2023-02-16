@@ -203,6 +203,7 @@ function Room() {
         roomId: roomInfo.roomId,
         message,
         memberId: userInfo.memberId,
+        colorCode: roomInfo.colorCode,
       }),
     });
   };

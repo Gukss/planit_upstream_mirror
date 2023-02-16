@@ -34,7 +34,7 @@ function ChatSection() {
               <div>
                 <i
                   className='bx bxs-user-circle'
-                  style={{ color: memberColor }}
+                  style={{ color: messageListItem.colorCode }}
                 ></i>
               </div>
             ) : null}

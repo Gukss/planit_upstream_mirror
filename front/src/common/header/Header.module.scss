@@ -53,7 +53,8 @@ header {
       .alarm {
         border: none;
         cursor: pointer;
-        transition: all ease-in 0.3s;
+        background-color: white;
+        width: 3rem; // transition: all ease-in 0.3s;
         i {
           font-size: 2rem;
           color: #2b3f6b;
@@ -61,6 +62,7 @@ header {
       }
       .alarm:hover {
         transform: scale(1.1);
+        // color: red;
       }
 
       .profile {

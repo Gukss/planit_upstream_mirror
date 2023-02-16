@@ -47,7 +47,7 @@ function Header() {
               </button>
               {/* 프로필 */}
               <div className={classes.profile}>
-                반갑습니다.{' '}
+                반갑습니다.
                 <span className={classes.nickname}>
                   {userInfo.memberAppName}
                 </span>
