@@ -1,0 +1,41 @@
+.box_title {
+  background-color: #f5f5f5;
+  width: 4rem;
+  height: 1.5rem;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.box_content {
+  overflow: overlay;
+  background-color: #f5f5f5;
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
+  min-height: 8rem;
+  max-height: 15rem;
+  text-align: center;
+  padding: 1rem 1rem 0rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem; /* 스크롤바의 너비 */
+    background-color: #e3e3e3;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+  }
+
+  .box_content_empty {
+    margin-bottom: 1rem;
+    margin-left: 5.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: grey;
+    }
+  }
+}
