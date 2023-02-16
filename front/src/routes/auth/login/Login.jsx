@@ -73,9 +73,9 @@ function Login() {
     <div className={classes.login}>
       <div className={classes.login__bar}>
         <div className={classes.login__ticket}>
-          PLANIT TICKET PLANIT TICKET PLANIT TICKET PLANIT TICKET PLANIT TICKET
-          PLANIT TICKET PLANIT TICKETPLANIT TICKET PLANIT TICKETPLANIT TICKET
-          PLANIT TICKETPLANIT TICKET PLANIT TICKETPLANIT TICKET PLANIT TICKET
+          PLAN!T T!CKET PLAN!T T!CKET PLAN!T T!CKET PLAN!T T!CKET PLAN!T T!CKET
+          PLAN!T T!CKET PLAN!T T!CKET PLAN!T T!CKET PLAN!T TICKETPLANIT TICKET
+          PLANIT TICKET PLANIT TICKET PLANIT TICKETPLANIT TICKET PLANIT TICKET
           PLANIT TICKET{' '}
         </div>
         <div className={classes.login__main}>
@@ -83,7 +83,7 @@ function Login() {
             <img alt='logo' src={planitLogo} width='100%' height='100%' />
           </div>
           <div className={classes.login__main__signin}>
-            <h1>PLAN!T</h1>
+            {/* <h1>PLAN!T</h1> */}
             <form onSubmit={handleSubmit}>
               <div className={classes.login_box}>
                 {/* ID, PW 입력 */}
@@ -95,7 +95,7 @@ function Login() {
                     onChange={handleIdChange}
                     ref={idInput}
                   />
-                  <p>PASSWORD</p>
+                  <p className={classes.login_inputbox_pwd}>PASSWORD</p>
                   <input
                     type='password'
                     placeholder='비밀번호를 입력해주세요.'
@@ -120,13 +120,8 @@ function Login() {
             </label>
             {/* 소셜로그인 줄 */}
             <div className={classes.member_check}>
-              <span>
+              <span className={classes.signUp}>
                 아직 회원이 아니신가요?<Link to='/signup'>회원가입 하기</Link>
-              </span>
-              <span>
-                간편 로그인
-                <img src={kakaoLogin} alt='' />
-                <img src={naverLogin} alt='' />
               </span>
             </div>
           </div>

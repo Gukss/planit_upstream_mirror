@@ -9,7 +9,7 @@ header {
   width: 100vw;
   height: 4rem;
   padding: 0 6rem;
-  background-color: white;
+  background-color: #fff;
 
   .logoBtn {
     display: flex;
@@ -24,6 +24,7 @@ header {
       margin-left: 0.5rem;
       font-size: 1.5rem;
       font-family: 'yg-jalnan';
+      color: #2b3f6b;
       // font-style: 'bold';
     }
   }
