@@ -30,6 +30,11 @@ hr {
       }
       &__date {
         font-weight: normal;
+        i {
+          font-size: 1.5rem;
+          color: #4a4a4a;
+          margin-right: 0.25rem;
+        }
       }
     }
     i {
@@ -42,5 +47,6 @@ hr {
 
   &__menu {
     margin-top: 1.5rem;
+    height: 87%;
   }
 }

@@ -66,15 +66,27 @@
     .content_easyaddress {
       color: grey;
     }
-    .content_phone {
+    .content_phone_url {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-    }
-    a {
-      // display: inline-block;
-      background-color: #ffd56b;
-      border-radius: 0.5rem;
-      padding: 0.25rem;
+
+      .content_phone {
+        display: flex;
+        background-color: #eeeeee;
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+        min-width: 121.78px;
+        i {
+          margin-top: 0.5rem;
+        }
+      }
+      a {
+        // display: inline-block;
+        background-color: #ffd56b;
+        border-radius: 0.5rem;
+        padding: 0.4rem;
+      }
     }
   }
   &__photo {

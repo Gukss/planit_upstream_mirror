@@ -72,7 +72,6 @@ function Bbar(props) {
             });
 
             saveAs(blob, `${title}.png`);
-            console.log('photo', blob);
           }
         });
       });
@@ -84,20 +83,23 @@ function Bbar(props) {
         <div className='bbar__header'>
           <div className='bbar__header__title'>{roomInfo.roomName}</div>
           <div className='bbar__header__date'>
-            일정 : {roomInfo.startDate} ~ {roomInfo.endDate}
+            <i className='bx bxs-plane-alt'></i>
+            {roomInfo.startDate} ~ {roomInfo.endDate}
           </div>
         </div>
-        <i
-          className='bx bx-export'
-          onClick={onDownloadBtn}
-          onKeyDown={onDownloadBtn}
-          role='button'
-          tabIndex={0}
-          aria-label='export'
-        />
+        {props.children[0].props.className === 'schedule_title' && (
+          <i
+            className='bx bx-export'
+            onClick={onDownloadBtn}
+            onKeyDown={onDownloadBtn}
+            role='button'
+            tabIndex={0}
+            aria-label='export'
+          />
+        )}
       </div>
+      <hr></hr>
 
-      <hr />
       {/* <button id='kakaotalk-sharing-btn' onClick={createKakaoButton}>
         <img
           src='https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png'
