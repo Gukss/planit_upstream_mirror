@@ -1,14 +1,14 @@
 .profilebar {
   background-color: whitesmoke;
-  padding-top: 11.5rem;
+  padding-top: 6.5rem;
   padding-left: 5.5rem;
   padding-right: 5.5rem;
   text-align: center;
-
+  width: 30%;
   .profile {
     i {
       // margin-left: 1rem;
-      font-size: 10rem;
+      font-size: 15rem;
       color: #2b3f6b;
     }
     .nickname {
@@ -40,7 +40,7 @@
       margin-bottom: 1rem;
     }
     p {
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: #9e9e9e;
     }
   }

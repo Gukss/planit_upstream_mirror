@@ -3,7 +3,7 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Bbar from '../../../../common/bbar/Bbar';
 import './Schedule.scss';
-import PlaceBox from '../place/PlaceBox';
+// import PlaceBox from '../place/PlaceBox';
 import {
   userMarkers,
   roomDateInfo,
@@ -11,6 +11,7 @@ import {
   isConfirmedChanged,
 } from '../../../../app/store';
 import ScheduleBox from './ScheduleBox';
+import ScheduleStorage from './ScheduleStorage';
 
 function Schedule({ publishSchedule }) {
   const startEndDate = useRecoilValue(roomDateInfo); // 여행 시작,끝 날짜
@@ -170,10 +171,10 @@ function Schedule({ publishSchedule }) {
         </p>
       </div>
       <div className='schedule_storage'>
-        <PlaceBox boxTitle='보관함' items={itemsFiltered} />
+        <ScheduleStorage boxTitle='보관함' items={itemsFiltered} />
       </div>
       <br />
-      <hr />
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className='schedulebox_section_list'>
           <div className='schedulebox_section'>

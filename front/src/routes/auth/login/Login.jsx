@@ -9,12 +9,16 @@ import { isLogin, userInfoState } from '../../../app/store';
 import planitLogo from '../../../app/assets/images/planit_logo.svg';
 
 function Login() {
+  const idInput = useRef(null);
   const [AppId, setAppId] = useState('');
   const [AppPwd, setAppPwd] = useState('');
   const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const navigate = useNavigate();
-  const idInput = useRef(null);
+
+  useEffect(() => {
+    idInput.current.focus();
+  }, []);
 
   useEffect(() => {
     idInput.current.focus();

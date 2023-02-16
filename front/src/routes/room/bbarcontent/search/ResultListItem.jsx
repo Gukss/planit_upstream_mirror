@@ -91,17 +91,24 @@ function ResultListItem(props) {
         <div className={classes.content_easyaddress}>
           (지번) {props.place.address_name}
         </div>
-        {props.place.phone && (
-          <div className={classes.content_phone}>
-            <i className='bx bxs-phone'></i>
-            <p>{props.place.phone}</p>
+        <div className={classes.content_phone_url}>
+          <div>
+            <a href={detailUrl} target='_blank' rel='noopener noreferrer'>
+              <i className='bx bxs-map' style={{ color: '#464545' }}></i>
+              상세 정보 보기
+            </a>
           </div>
-        )}
-        <div>
-          <a href={detailUrl} target='_blank' rel='noopener noreferrer'>
-            <i className='bx bxs-map' style={{ color: '#464545' }}></i>가게 정보
-            확인하기
-          </a>
+          {props.place.phone ? (
+            <div className={classes.content_phone}>
+              <i className='bx bxs-phone'></i>
+              <p>{props.place.phone}</p>
+            </div>
+          ) : (
+            <div
+              className={classes.content_phone}
+              style={{ backgroundColor: '#FFF' }}
+            ></div>
+          )}
         </div>
       </div>
     </div>

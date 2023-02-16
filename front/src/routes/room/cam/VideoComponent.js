@@ -6,6 +6,8 @@ import { OpenVidu } from 'openvidu-browser';
 
 import axios from 'axios';
 import React, { Component } from 'react';
+import { useRecoilValue } from 'recoil';
+import { roomInfoState } from '../../../app/store';
 import UserVideoComponent from './UserVideoComponent';
 import classes from './VideoComponent.module.scss';
 
@@ -17,6 +19,8 @@ class VideoComponent extends Component {
   constructor(props) {
     super(props);
     const joinSessionId = `session-${this.props.sessionId}`;
+    const myColor = this.props.memberColor;
+
     // These properties are in the state's component in order to re-render the HTML whenever their values change
     this.state = {
       // 참가 세션 id
@@ -32,6 +36,7 @@ class VideoComponent extends Component {
       subscribers: [],
       videoEnable: true,
       audioEnable: true,
+      memberColor: myColor,
     };
 
     this.joinSession = this.joinSession.bind(this);
@@ -45,7 +50,6 @@ class VideoComponent extends Component {
 
   componentDidMount() {
     console.log('VC-componentDidMount');
-    console.log(this.props);
     this.joinSession();
     this.setState({
       videoEnable: true,
@@ -282,6 +286,7 @@ class VideoComponent extends Component {
   render() {
     const { mySessionId } = this.state;
     const { myUserName } = this.state;
+    const { memberColor } = this.state.memberColor;
 
     return (
       <div>
@@ -303,6 +308,12 @@ class VideoComponent extends Component {
                   {/* <div>
                     <i className='bx bxs-user-plus' />
                   </div> */}
+                  <div>
+                    <i
+                      className='bx bxs-user-circle'
+                      style={{ color: this.state.memberColor }}
+                    ></i>
+                  </div>
                   <div>
                     {this.state.videoEnable ? (
                       <i className='bx bxs-video' onClick={this.videoEnv} />

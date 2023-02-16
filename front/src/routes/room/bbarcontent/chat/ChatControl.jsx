@@ -26,7 +26,9 @@ function ChatControl({ publishMessage }) {
         placeholder='채팅을 입력해주세요'
         onKeyDown={submitMessage}
       />
-      <button>보내기</button>
+      <button>
+        <i className='bx bxs-paper-plane' style={{ color: '#ffffff' }}></i>
+      </button>
     </div>
   );
 }

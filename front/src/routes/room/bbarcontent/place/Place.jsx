@@ -8,8 +8,6 @@ import { userMarkers } from '../../../../app/store';
 function Place() {
   const items = useRecoilValue(userMarkers);
 
-  console.log('여기', items);
-
   const itemHotels = items.filter(item => item.categoryCode === 'AD5');
   const itemRestaurants = items.filter(item => item.categoryCode === 'FD6');
   const itemSpots = items.filter(item => item.categoryCode === 'AT4');
@@ -32,16 +30,6 @@ function Place() {
         </p>
       </div>
       <div className={classes.placebox_section}>
-        {/* {boxTitles.map(boxTitle => {
-          return <PlaceBox boxTitle={boxTitle} />;
-        })} */}
-        {/* {items.map((item, index) => (
-          // if (item.category === 'AD5') {
-          <PlaceBox key={item} boxTitle='숙소' item={item} />
-          // } else if (item.category === 'FD6') {
-          //   return <PlaceBox boxTtile='음식점' item={item} />;
-          // }
-        ))} */}
         <PlaceBox boxTitle='숙소' items={itemHotels} />
         <PlaceBox boxTitle='음식점' items={itemRestaurants} />
         <PlaceBox boxTitle='관광지' items={itemSpots} />

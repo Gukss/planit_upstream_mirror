@@ -11,6 +11,7 @@ import './RoomLayout.scss';
 
 function RoomLayout() {
   const sessionRoom = useRecoilValue(roomInfoState);
+  const memberColor = sessionRoom.colorCode;
 
   return (
     <div className='roomlayout'>
@@ -18,7 +19,10 @@ function RoomLayout() {
       <div className='map_camlist'>
         <Map />
         <ControlBox />
-        <VideoComponent sessionId={sessionRoom.roomId} />
+        <VideoComponent
+          sessionId={sessionRoom.roomId}
+          memberColor={memberColor}
+        />
         <SaveIcon />
       </div>
     </div>

@@ -1,25 +1,34 @@
 .room_manageitem {
   background-color: #fdfdfd;
-  margin-top: 2.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  // padding: 1.5rem;
+  margin-bottom: 1.3rem;
+  margin-right: 1.3rem;
+  width: 31%;
+  height: 45%;
   border-radius: 1rem;
-  max-width: 21.5rem;
-  max-height: 13rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  transition: ease-in-out 0.2s;
 
   .title_section {
     display: flex;
     justify-content: space-between;
+    background-color: #2b3f6b;
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
     // padding: 1rem;
     .title {
-      padding: 0.5rem;
-      font-size: 1rem;
-      font-weight: bold;
+      padding: 0.4rem 0.6rem;
+      font-size: 1.1rem;
+      // font-weight: bold;
+      color: white;
     }
     .date {
-      padding: 0.5rem;
-      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      font-size: 1.1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: white;
+      font-family: 500;
     }
   }
 
@@ -28,39 +37,60 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-bottom: 0.5rem;
-    \ .created_at {
-      font-size: 1rem;
+    .created_at {
+      font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .participants {
-      font-size: 1rem;
+      font-size: 1.2rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
   .button_section {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    // margin-bottom: 0.5rem;
     display: flex;
     justify-content: flex-end;
 
     .button_remove {
-      font-size: 0.75rem;
+      font-size: 1.1rem;
       border: none;
       padding: 0.5rem;
-      border-radius: 1rem;
-      background-color: #2b3f6b;
-      color: white;
+      border-radius: 0.5rem;
+      background-color: rgb(229, 228, 228);
+      color: black;
+      transition: ease-in 0.2s;
     }
+
+    .button_remove:hover {
+      background-color: rgb(199, 198, 198);
+    }
+
     .button_enter {
       // max-width: 1.5rem;
-      font-size: 0.75rem;
+      font-size: 1.1rem;
       margin-left: 0.5rem;
-      margin-right: 1.5rem;
+      margin-right: 0.5rem;
       border: none;
       padding: 0.5rem;
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       background-color: #ffd56b;
+      transition: ease-in 0.2s;
+    }
+
+    .button_enter:hover {
+      background-color: rgb(255, 173, 10);
     }
   }
+}
+
+.room_manageitem:hover {
+  transform: scale(1.05);
 }

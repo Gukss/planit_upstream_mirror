@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classes from './PlaceBoxItem.module.scss';
 import {
@@ -10,31 +10,29 @@ import {
 } from '../../../../app/store';
 
 function PlaceBoxItem(props) {
-  // const [removeMar, setRemoveMarker] = useRecoilState(removeInformation);
-  const setRemoveMarker = useSetRecoilState(removeInformation);
-  const [markerPosition, setMarkerPosition] = useRecoilState(searchedPlace);
   const [markers, setMarkers] = useRecoilState(userMarkers);
+  const setMarkerPosition = useSetRecoilState(searchedPlace);
+  const setRemoveMarker = useSetRecoilState(removeInformation);
   const [isClick, setIsClick] = useState(props.item.isConfirmed);
   const [publishMarkerFlag, setPublishMarkerFlag] = useRecoilState(markerFlag);
   const [confirmedChanged, setConfirmedChanged] =
     useRecoilState(isConfirmedChanged);
 
   // tag 클릭시 이동
-  const moveMarker = e => {
+  const moveMarker = () => {
     setMarkerPosition({
       x: props.item.x,
       y: props.item.y,
     });
   };
 
-  const removeMarker = e => {
-    // console.log('제거버튼', props.item);
+  const removeMarker = () => {
     setRemoveMarker(props.item);
     setMarkers(markers.filter(marker => marker.id !== props.item.id));
   };
 
-  const onConfirmPlace = e => {
-    console.log('확정 버튼 누름', e);
+  const onConfirmPlace = () => {
+    // console.log('확정 버튼 누름', e);
     setConfirmedChanged(true);
 
     setMarkers(
@@ -47,7 +45,6 @@ function PlaceBoxItem(props) {
 
     setIsClick(props.isConfirmed);
     setPublishMarkerFlag([...publishMarkerFlag, 1]);
-    console.log('컨펌 후 마커', markers);
   };
   return (
     <div className={classes.item_body}>
@@ -78,10 +75,6 @@ function PlaceBoxItem(props) {
           <i className='bx bx-x' />
         </button>
       </div>
-      {/* <div className={classes.hover_box}>
-        <button>이동</button>
-        <button>확정</button>
-      </div> */}
     </div>
   );
 }
