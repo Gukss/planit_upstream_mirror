@@ -1,0 +1,36 @@
+.schedule_title {
+  .title_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  // height: 200px;
+  // width: 200px;
+
+  p {
+    color: grey;
+    font-size: 1rem;
+  }
+}
+.schedule_storage {
+  overflow: auto;
+}
+.schedulebox_section_list {
+  overflow: auto;
+  // height: 30rem;
+  height: 63%;
+  // height: 80%;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem; /* 스크롤바의 너비 */
+    background-color: #e3e3e3;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+  }
+  .schedulebox_section {
+    background-color: #e6e9ef;
+    border-radius: 8px;
+    // padding: 16px 16px 0px 16px;
+  }
+}

@@ -1,0 +1,104 @@
+.resultitem {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+
+  //   display: flex;
+  //   flex-direction: column;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // font-size: 24px;
+    // font-style: bold;
+    .title_namecategory {
+      display: flex;
+      align-items: center;
+    }
+    .title_name {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+    .title_category {
+      color: grey;
+    }
+    .title_plus {
+      z-index: 3;
+      // background-color: crimson;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+
+      :hover {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(235, 235, 235);
+        border-radius: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+      }
+      button {
+        background-color: #f5f5f5;
+        border: none;
+        font-size: 1.5rem;
+      }
+    }
+    .box {
+      border: black;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    * {
+      margin: 0.25rem;
+    }
+    .content_easyaddress {
+      color: grey;
+    }
+    .content_phone_url {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .content_phone {
+        display: flex;
+        background-color: #eeeeee;
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+        min-width: 121.78px;
+        i {
+          margin-top: 0.5rem;
+        }
+      }
+      a {
+        // display: inline-block;
+        background-color: #ffd56b;
+        border-radius: 0.5rem;
+        padding: 0.4rem;
+      }
+    }
+  }
+  &__photo {
+    display: flex;
+    margin: 1rem 0;
+
+    &__item {
+      background-color: grey;
+      border-radius: 0.5rem;
+      margin: 0.5rem;
+      height: 6rem;
+      width: 6rem;
+    }
+  }
+}
