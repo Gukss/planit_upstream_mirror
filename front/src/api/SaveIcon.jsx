@@ -93,6 +93,7 @@ function SaveIcon() {
       storageConfirm.map(confirmes => instance.post('/storages', confirmes));
       storageNotConfirm.map(notCon => instance.post('/storages', notCon));
       alert('저장되었습니다.');
+      setTimeout(() => console.log(storageConfirm), 1000);
     } catch (error) {
       console.log(error);
     }
