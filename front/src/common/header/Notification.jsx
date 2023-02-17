@@ -169,7 +169,7 @@ function Notification({ notificaiton, userInfo }) {
         {/* 부산갈래에 방 제목으로 바꾸기 */}
         <p>
           {notificaiton.sendMemberName}님의 &apos;{notificaiton.roomName}&apos;
-          초대 되었습니다
+          에 초대 되었습니다
         </p>
       </div>
       <div className={classes.btnList}>

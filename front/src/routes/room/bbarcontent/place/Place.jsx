@@ -25,8 +25,8 @@ function Place() {
       <div className={classes.place_title}>
         <div className={classes.title_title}>장소 보관함</div>
         <p>
-          가고 싶은 장소를 담고 장소를 클릭하여 일정에 들어갈 확정 장소를
-          선택하세요! 색깔을 눌러 해당 위치로 이동하세요!
+          가고 싶은 장소를 담고 태그를 클릭하여 최종 일정에 들어갈 확정 장소를
+          선택하세요. 색상 태그를 클릭하여 해당 장소의 위치로 이동해보세요.
         </p>
       </div>
       <div className={classes.placebox_section}>

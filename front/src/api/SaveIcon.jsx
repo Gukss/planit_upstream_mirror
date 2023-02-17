@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
+import Swal from 'sweetalert2';
 import {
   userInfoState,
   scheduleInfo,
@@ -92,7 +93,12 @@ function SaveIcon() {
       });
       storageConfirm.map(confirmes => instance.post('/storages', confirmes));
       storageNotConfirm.map(notCon => instance.post('/storages', notCon));
-      alert('저장되었습니다.');
+      Swal.fire({
+        icon: 'success',
+        title: '성공적으로 저장되었습니다',
+        text: '마이페이지에서 저장한 일정을 확인해보세요!',
+        confirmButtonColor: '#2B3F6B',
+      });
       setTimeout(() => console.log(storageConfirm), 1000);
     } catch (error) {
       console.log(error);

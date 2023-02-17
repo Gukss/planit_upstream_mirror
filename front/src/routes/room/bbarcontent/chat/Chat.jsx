@@ -9,7 +9,10 @@ function Chat({ publishMessage }) {
     <Bbar>
       <div className={classes.chat_title}>
         <div className={classes.title_title}>채팅</div>
-        <p>채팅으로 친구들과 실시간으로 소통할 수 있습니다.</p>
+        <p>
+          참여 중 말을 하기 어려울 때에는 채팅으로 친구들과 실시간으로
+          소통해보세요.
+        </p>
       </div>
       <br />
       <div className={classes.chat_body}>

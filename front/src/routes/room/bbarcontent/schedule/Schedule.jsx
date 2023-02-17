@@ -172,8 +172,8 @@ function Schedule({ publishSchedule }) {
       <div className='schedule_title'>
         <div className='title_title'>일정</div>
         <p>
-          원하는 날짜에 장소를 드래그하여 일정을 조정할 수 있습니다. 날짜 별
-          장소는 같은 색으로 지도에 표기됩니다.<div className=''></div>
+          원하는 날짜에 장소를 드래그 앱 드랍하여 일정을 조정할 수 있습니다.
+          실시간으로 친구들과 함께 일정을 바꾸어보세요.<div className=''></div>
         </p>
       </div>
       <div className='schedule_storage'>

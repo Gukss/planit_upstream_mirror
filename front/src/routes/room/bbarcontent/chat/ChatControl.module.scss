@@ -4,9 +4,16 @@
   width: 100%;
 
   input {
-    width: 80%;
+    width: 100%;
     border: none;
     padding: 0.25rem;
+    border-radius: 0.5rem;
+  }
+  input:focus {
+    // outline: none !important;
+    outline-color: #ffd56b;
+    // border-color: #2b3f6b;
+    // box-shadow: 0 0 10px #2b3f6b;
   }
 
   button {
@@ -17,7 +24,7 @@
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    transition: all ease-in 0.4s;
+    transition: all ease-i/n 0.4s;
   }
 
   button:hover {

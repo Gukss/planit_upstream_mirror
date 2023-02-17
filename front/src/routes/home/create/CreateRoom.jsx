@@ -230,8 +230,9 @@ function CreateRoom() {
                                     <FriendListItem user={friend.memberName} />
                                     <button
                                       onClick={() => handleRemoveClick(friend)}
+                                      className={classes.friend_plus}
                                     >
-                                      x
+                                      <i className='bx bx-x'></i>
                                     </button>
                                   </div>
                                 ))}
@@ -256,7 +257,7 @@ function CreateRoom() {
                                             handleFriendClick(friend)
                                           }
                                         >
-                                          +
+                                          <i className='bx bx-plus'></i>
                                         </button>
                                       </li>
                                     ))}

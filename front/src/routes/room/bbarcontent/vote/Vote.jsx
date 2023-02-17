@@ -91,7 +91,7 @@ function Vote() {
       <div className={classes.vote_title}>
         <div className={classes.title_title}>투표</div>
         <p>
-          여행 일정을 짜는 중 의견이 정해지지 않을 땐 투표를 만들어
+          여행 계획을 세우는 도중 의견을 모아야 할 때는 투표를 만들어
           진행해보세요.
         </p>
         <br />

@@ -1,4 +1,7 @@
 .vote_title {
+  p {
+    word-break: keep-all;
+  }
   .title_title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -44,7 +47,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgb(235, 235, 235);
+      background-color: rgb(221, 221, 221);
       border-radius: 0.5rem;
       width: 2rem;
       height: 2rem;

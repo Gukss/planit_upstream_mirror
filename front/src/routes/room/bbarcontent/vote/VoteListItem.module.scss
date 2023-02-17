@@ -68,6 +68,9 @@
     width: 90%;
     margin: 1rem 0 1rem 0;
   }
+  button:hover {
+    background-color: #1f2d4d;
+  }
   .disabled {
     cursor: not-allowed;
   }

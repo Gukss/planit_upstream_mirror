@@ -19,7 +19,7 @@ function RoomManage(props) {
       <section className={classes.schedule_done}>
         <p className={classes.title}>완료된 여행 일정</p>
         <div className={classes.schedulebox}>
-          <p>스케줄 아이템들이 들어갈 공간입니당.</p>
+          <div>완료된 일정이 없습니다</div>
         </div>
       </section>
     </div>
