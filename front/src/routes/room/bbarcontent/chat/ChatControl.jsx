@@ -18,6 +18,15 @@ function ChatControl({ publishMessage }) {
       e.target.value = '';
     }
   };
+  // const submitMessageByButton = e => {
+  //   console.log(input.value);
+
+  //   e.preventDefault();
+
+  //   // publishMessage(e.target.value);
+
+  //   e.target.value = '';
+  // };
 
   return (
     <div className={classes.chat_input_button}>

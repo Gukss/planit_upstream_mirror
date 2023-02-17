@@ -318,7 +318,7 @@ input[type='checkbox'] {
         * {
           font-size: 1.5rem;
         }
-        button {
+        .friend_plus {
           background-color: white;
           border: none;
           margin: 0 0.5rem;
@@ -357,6 +357,11 @@ input[type='checkbox'] {
   display: block;
   margin-top: 1rem;
   padding: 0;
+  button {
+    margin-left: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+  }
   input {
     &:-ms-input-placeholder {
       color: #c4c3ca;

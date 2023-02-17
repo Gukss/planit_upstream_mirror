@@ -12,9 +12,9 @@ function Home4() {
         <div className={classes.title_wrap}>
           <p className={classes.title}>언제든지 쉽게 꺼내볼 수 있는 일정</p>
           <div className={classes.content_wrap}>
-            <p className={classes.content}>여행 일정이 어떻게 되었더라?</p>
+            <p className={classes.content}>다음 일정이 어디였더라?</p>
             <p className={classes.content}>
-              다시 사이트를 방문할 필요 없이, 일정을 이미지로 저장하여 여행 시
+              사이트를 다시 방문할 필요 없이, 일정을 이미지로 저장하여 여행 시
               언제나 손쉽게 꺼내보아요!
             </p>
           </div>

@@ -63,10 +63,11 @@ function Bbar(props) {
         }).then(result => {
           if (result.isConfirmed) {
             Swal.fire({
-              title: '행복한 여행 보내세요!',
+              title: '🚀 행복한 여행 보내세요!',
+              text: 'PLAN WITH PLAN!T',
               imageUrl:
                 'https://cdn.pixabay.com/animation/2022/07/31/20/14/20-14-05-792_512.gif',
-              imageHeight: 300,
+              imageHeight: 200,
               timer: 3000,
               showConfirmButton: false,
             });
