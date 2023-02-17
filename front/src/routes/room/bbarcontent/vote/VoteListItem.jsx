@@ -8,7 +8,6 @@ function VoteListItem(props) {
   const [isVote, setIsVote] = useRecoilState(isVoted);
   const [voteInfo, setVoteInfo] = useRecoilState(voteInformation);
   const [publishVoteFlag, setPublishVoteFlag] = useRecoilState(voteFlag);
-  console.log('item', voteCheck, props.vote);
 
   // 투표 프로그래스바 너비 용 변수 voteCnt
   let voteCnt = 0;
@@ -26,17 +25,13 @@ function VoteListItem(props) {
   // vote 관련 함수
   const getChecked = () => {
     const inputNodeList = document.getElementsByName(props.vote.title);
-    console.log('chocie', inputNodeList);
 
     inputNodeList.forEach(node => {
       if (node.checked) {
-        console.log(node.value, '에 투표하겠다');
-
         const newVoteInfo = props.vote.votesListItem.map(item =>
           item.name === node.value ? { ...item, count: item.count + 1 } : item
         );
 
-        console.log('change', newVoteInfo);
         // setIsVote(
         //   isVote.map(item =>
         //     item.voteTitle === props.vote.title

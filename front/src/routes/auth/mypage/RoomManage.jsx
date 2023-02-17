@@ -2,7 +2,6 @@ import classes from './RoomManage.module.scss';
 import RoomManageItem from './RoomManageItem';
 
 function RoomManage(props) {
-  console.log(props.roomInfo);
   return (
     <div className={classes.room_manage}>
       <section className={classes.schedule_ing}>

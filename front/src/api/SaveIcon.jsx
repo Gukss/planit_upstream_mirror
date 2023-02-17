@@ -99,7 +99,6 @@ function SaveIcon() {
         text: '마이페이지에서 저장한 일정을 확인해보세요!',
         confirmButtonColor: '#2B3F6B',
       });
-      setTimeout(() => console.log(storageConfirm), 1000);
     } catch (error) {
       console.log(error);
     }

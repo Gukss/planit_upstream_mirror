@@ -29,7 +29,6 @@ function Search() {
     if (e.keyCode === 13) {
       e.preventDefault();
       setKeyword(e.target.value);
-      console.log(keyword);
     }
   };
 

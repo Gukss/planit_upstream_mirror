@@ -4,7 +4,6 @@ import classes from './ScheduleBox.module.scss';
 import ScheduleBoxItem from './ScheduleBoxItem';
 
 function ScheduleBox(props) {
-  console.log('ScheduleBox에 초기 props', props);
   return (
     <div>
       {/* <DragDropContext> */}

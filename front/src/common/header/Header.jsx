@@ -12,8 +12,6 @@ import { ServiceFindNotification } from '../../service/notificationService';
 function Header() {
   const userInfo = useRecoilValue(userInfoState);
   const [notificationList, setNotificationList] = useState();
-  console.log(notificationList);
-  console.log(userInfo);
   const login = useRecoilValue(isLogin);
 
   const FindNotification = async e => {

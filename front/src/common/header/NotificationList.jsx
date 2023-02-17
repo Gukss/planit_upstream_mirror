@@ -7,7 +7,6 @@ function NotificationList({ notificationList, setNotificationList, userInfo }) {
   const onDelete = () => {
     setNotificationList('');
   };
-  console.log(notificationList.data);
 
   return (
     <div className={classes.notificationlist}>

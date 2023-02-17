@@ -2,9 +2,6 @@ import axios from 'axios';
 
 export const ServiceFindNotification = async userInfo => {
   try {
-    console.log(2);
-    console.log(userInfo);
-
     const success = await axios.get(
       `https://i8b202.p.ssafy.io/api/notification`,
       {
@@ -18,7 +15,6 @@ export const ServiceFindNotification = async userInfo => {
         // },
       }
     );
-    console.log(success);
 
     return success;
   } catch (err) {

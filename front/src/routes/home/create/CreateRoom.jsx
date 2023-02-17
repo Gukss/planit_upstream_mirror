@@ -66,7 +66,6 @@ function CreateRoom() {
       receiverMemberId: friend.memberAppId,
       roomId: responseCreateRoom.data.roomId,
     }));
-    console.log(makeInviteList);
     const responseInviteFriends = await instance.post(
       '/notification',
       makeInviteList
@@ -93,11 +92,8 @@ function CreateRoom() {
   // startDate, endDate 변경
   const handleChange = dates => {
     const [start, end] = dates;
-    console.log(today > start);
     setStartDate(start);
     setEndDate(end);
-    console.log(start);
-    console.log(end);
     setDateRange({ startDate: start, endDate: end });
   };
 
@@ -109,7 +105,6 @@ function CreateRoom() {
         const response = await axios.get(
           `https://i8b202.p.ssafy.io/api/members/${event}`
         );
-        console.log(response.data);
         setDropDownFriends(response.data);
         setShowDropdown(true);
       } catch (error) {
@@ -122,21 +117,17 @@ function CreateRoom() {
   const handleInputChange = event => {
     setInputValue(event.target.value);
     checkFriend(event.target.value);
-    console.log(1);
   };
 
   // 보낼 친구 저장
   const handleFriendClick = friend => {
-    console.log(userInfo);
     setInputValue('');
-    console.log(friend);
     if (selectFriends.length < 5) {
       setSelectFriends([...selectFriends, friend]);
     } else {
       alert('5명까지 초대가능합니다.');
     }
     setShowDropdown(false);
-    // console.log(2);
   };
 
   // 보낼 리스트에서 삭제
@@ -144,7 +135,6 @@ function CreateRoom() {
     setSelectFriends(
       selectFriends.filter(selectFriend => selectFriend !== noF)
     );
-    console.log(selectFriends);
   };
 
   const filteredfriends = dropDownFriends.filter(

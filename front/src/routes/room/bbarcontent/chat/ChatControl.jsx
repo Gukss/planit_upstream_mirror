@@ -9,7 +9,6 @@ function ChatControl({ publishMessage }) {
 
   // 제출한 메세지를 state에 담는 함수
   const submitMessage = e => {
-    console.log('submitMessage');
     if (e.keyCode === 13) {
       e.preventDefault();
 

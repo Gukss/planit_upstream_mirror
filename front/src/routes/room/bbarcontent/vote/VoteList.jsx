@@ -5,9 +5,7 @@ import VoteListItem from './VoteListItem';
 import logo2 from '../../../../app/assets/images/logo2.png';
 
 function VoteList(props) {
-  console.log('votelist');
   const votes = props.voteInfo;
-  console.log(votes);
   // testApiCall();
 
   if (votes.length > 0) {

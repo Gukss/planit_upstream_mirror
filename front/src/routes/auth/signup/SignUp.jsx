@@ -139,9 +139,7 @@ function SignUp() {
   };
 
   const handleKeyPress = e => {
-    console.log('ee');
     if (e.key === 'Enter') {
-      console.log('enter');
       sumbmitHandler();
     }
   };

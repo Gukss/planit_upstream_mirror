@@ -32,16 +32,12 @@ function Schedule({ publishSchedule }) {
     return result;
   }
 
-  console.log('들어오면? isDropped', isReset);
-
   // 날짜 변경할 때마다 startEndDate 다시 구하기
   useMemo(() => {
-    console.log('startEndDate가 업데이트됨');
     const dateResult = getDatesStartToLast(
       roomDateInfo.startDate,
       roomDateInfo.endDate
     );
-    console.log(dateResult);
   }, [roomDateInfo]);
 
   // -----------------일정 관련-----------------
@@ -59,7 +55,6 @@ function Schedule({ publishSchedule }) {
   // 확정된 place가 1개 이상 있고, 보관함 변경해서 리셋됐을 때
   useEffect(() => {
     if (itemsFiltered.length > 0 && isReset === true) {
-      console.log('🟢🟢확정 장소가 있을 때 & 리셋됨', isReset);
       scheduleboxs = [];
 
       // 가변성의 여행 날짜에 따른 placebox에 넣을 마커들 이중배열로 만들기
@@ -85,8 +80,6 @@ function Schedule({ publishSchedule }) {
 
   useEffect(() => {
     if (itemsFiltered.length === 0 || Object.keys(presentSche).length === 0) {
-      console.log('📌📌아직 아무것도 확정 안 했을 때', isReset);
-
       // 가변성의 여행 날짜에 따른 placebox에 넣을 마커들 이중배열로 만들기
       scheduleboxs = [];
 
@@ -107,7 +100,6 @@ function Schedule({ publishSchedule }) {
   const onDragEnd = DropResult => {
     const { destination, source, draggableId } = DropResult;
     if (!destination) {
-      console.log('잘못된 영역에 드랍했다');
       return;
     }
     if (
@@ -117,7 +109,6 @@ function Schedule({ publishSchedule }) {
       return;
 
     if (source.droppableId !== destination.droppableId) {
-      console.log('다른 날짜 간의 인덱스 변경');
       const sourceColumn = presentSche[parseInt(source.droppableId, 10)];
       // console.log('sc', sourceColumn);
       const destColumn = presentSche[parseInt(destination.droppableId, 10)];
@@ -139,7 +130,6 @@ function Schedule({ publishSchedule }) {
           items: destItems,
         },
       };
-      console.log('tmp 확인', tmp);
       setPresentSche(tmp);
       publishSchedule(Object.values(tmp));
     } else {
@@ -156,11 +146,9 @@ function Schedule({ publishSchedule }) {
           items: copiedItems,
         },
       };
-      console.log('tmp 확인', tmp);
       setPresentSche(tmp);
       publishSchedule(Object.values(tmp));
     }
-    console.log('📍 onDropEnd 끝남');
   };
 
   // useEffect(() => {
