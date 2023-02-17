@@ -94,16 +94,16 @@ function CreateRoom() {
   const handleChange = dates => {
     const [start, end] = dates;
     console.log(today > start);
-    if (start >= today || end >= today) {
+    if (start < today || end < today) {
+      setStartDate(today);
+      setEndDate(today);
+      alert('날짜 선택이 잘못되었습니다.');
+    } else {
       setStartDate(start);
       setEndDate(end);
       console.log(start);
       console.log(end);
       setDateRange({ startDate: start, endDate: end });
-    } else {
-      setStartDate(today);
-      setEndDate(today);
-      alert('날짜 선택이 잘못되었습니다.');
     }
   };
 
