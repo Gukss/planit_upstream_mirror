@@ -43,7 +43,6 @@ function Notification({ notificaiton, userInfo }) {
   };
 
   const onConfirm = async () => {
-    console.log(notificaiton.readOrNot);
     if (!notificaiton.readOrNot) {
       try {
         const resNotification = await instance.patch('/notification', {
@@ -53,13 +52,11 @@ function Notification({ notificaiton, userInfo }) {
         const resRoomMemList = await instance.get(
           `/rooms/users/${notificaiton.roomId}`
         );
-        console.log(notificaiton.roomId);
         const colorCoded = colorCode[resRoomMemList.data.length];
         const resRoomRegist = await instance.post('/rooms/users', {
           roomId: notificaiton.roomId,
           colorCode: colorCoded,
         });
-        console.log(resRoomRegist.data);
         setRoomInfo({
           roomId: resRoomInfo.data.roomId,
           roomName: resRoomInfo.data.roomName,
@@ -71,8 +68,6 @@ function Notification({ notificaiton, userInfo }) {
         const storageInfo = await instance.get(
           `/storages/rooms/${notificaiton.roomId}`
         );
-        console.log('이거슨 스토리쥐');
-        console.log(storageInfo.data);
         if (storageInfo.data.length > 0) {
           const storageMarkerData = storageInfo.data.map(marker =>
             // const markerColor = await instance.get('')
@@ -142,7 +137,6 @@ function Notification({ notificaiton, userInfo }) {
         // 채팅 가져오기
         const chatInfo = await instance.get(`/chatting/${notificaiton.roomId}`);
         setChatMessa(chatInfo.data);
-        console.log(chatInfo.data);
         // // 투표 나중에
         // const voteInfo = await instance.get(`/votes/${roomID}`);
         // console.log(voteInfo.data);

@@ -105,7 +105,6 @@ function CategoryMarker(props) {
       markerAdd.appendChild(document.createTextNode('장소 추가 +'));
       // 유저 선택 마커 추가
       markerAdd.onclick = function () {
-        console.log('usermarker');
         // 현재 클릭한 값 찾기.
         addSetMarker({
           id: place.id,

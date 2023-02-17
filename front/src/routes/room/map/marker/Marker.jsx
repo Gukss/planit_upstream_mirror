@@ -36,8 +36,6 @@ function Marker(props) {
 
   // 유저 색깔 마커
   const userColor = roomInfo.colorCode;
-  console.log(userSelectMarkers);
-  console.log('리랜더링 되나유?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
   // useEffect(() => {
   //   console.log('marker컴포넌트');
@@ -77,9 +75,7 @@ function Marker(props) {
   // 유저가 장소 마커 등록했을 때만 표시하게.
   useEffect(() => {
     if (userSelectMarkers.length > 0) {
-      console.log('너는 마커');
       const pos = userSelectMarkers.length - 1;
-      console.log('너는 마커', userSelectMarkers.length);
 
       const imageSrc = myMarkerImg;
       const imageSize = new kakao.maps.Size(40, 40);
@@ -100,7 +96,6 @@ function Marker(props) {
         image: markerImage,
       });
 
-      console.log('원래 마커임', marker);
       marker.setMap(existMap);
 
       setRoomMarkers([
@@ -180,8 +175,6 @@ function Marker(props) {
     // && userSelectMarkers.length > 0
 
     if (roomMarkers.length > 0) {
-      console.log('마커필터링');
-
       // 선택한 마커 정보만 따로 빼기.
       const roomMarker = roomMarkers.filter(
         roomMarker => roomMarker.id === removeMarker.id

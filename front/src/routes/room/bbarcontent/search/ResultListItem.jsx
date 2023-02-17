@@ -16,7 +16,6 @@ function ResultListItem(props) {
 
   const fullCategory = props.place.category_name;
   const fullCategoryList = fullCategory.split('>');
-  console.log('ResultItem 생성마다 호출');
   const categoryKeyword = fullCategoryList[fullCategoryList.length - 1];
   const detailUrl = props.place.place_url;
 
@@ -34,12 +33,9 @@ function ResultListItem(props) {
   };
 
   const onAddPlace = e => {
-    console.log('장소 추가 버튼 누름');
     // 장소 추가하면 해줄 작업
     // 전역 state인 searchedPlaces를 업데이트할 함수 setSearchedPlaces
     // 전역 state에서 가져온 markers에 추가하려는 장소가 이미 있다면?
-
-    console.log(markers);
 
     const newMarker = {
       id: props.place.id,

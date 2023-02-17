@@ -13,9 +13,7 @@ function HomeLayout() {
   const eventSourceValue = useRecoilValue(eventSource);
   const loadingRecoil = useRecoilValue(loadingState);
 
-  useEffect(() => {
-    console.log(eventSourceValue);
-  }, [eventSourceValue]);
+  useEffect(() => {}, [eventSourceValue]);
 
   return (
     <div>

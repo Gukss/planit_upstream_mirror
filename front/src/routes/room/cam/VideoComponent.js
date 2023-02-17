@@ -49,7 +49,6 @@ class VideoComponent extends Component {
   }
 
   componentDidMount() {
-    console.log('VC-componentDidMount');
     this.joinSession();
     this.setState({
       videoEnable: true,
@@ -63,7 +62,6 @@ class VideoComponent extends Component {
   }
 
   handleMainVideoStream(stream) {
-    console.log('VC-handleMainVideoStream');
     if (this.state.mainStreamManager !== stream) {
       this.setState({
         mainStreamManager: stream,
@@ -72,13 +70,11 @@ class VideoComponent extends Component {
   }
 
   onbeforeunload(event) {
-    console.log('VC-onbeforeunload');
     this.leaveSession();
   }
 
   // eslint-disable-next-line react/sort-comp
   deleteSubscriber(streamManager) {
-    console.log('VC-deleteSubscriber');
     const { subscribers } = this.state;
     const index = subscribers.indexOf(streamManager, 0);
     if (index > -1) {
@@ -101,8 +97,6 @@ class VideoComponent extends Component {
         audioEnable: true,
       });
     }
-    console.log(this.state.publisher);
-    console.log(this.state.subscribers);
   }
 
   videoEnv() {
@@ -120,7 +114,6 @@ class VideoComponent extends Component {
   }
 
   joinSession() {
-    console.log('VC-joinSession');
     // --- 1) Get an OpenVidu object ---
     // openvidu 개체 가져오기
     this.OV = new OpenVidu();
@@ -134,7 +127,6 @@ class VideoComponent extends Component {
       () => {
         // 세션 이벤트를 읽음
         const mySession = this.state.session;
-        console.log(mySession);
 
         // --- 3) 세션에서 이벤트가 발생할 때 수행할 작업 지정 ---
 
@@ -224,7 +216,6 @@ class VideoComponent extends Component {
   }
 
   leaveSession() {
-    console.log('VC-leaveSession');
     // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
 
     const mySession = this.state.session;
@@ -246,7 +237,6 @@ class VideoComponent extends Component {
   }
 
   async switchCamera() {
-    console.log('VC-switchCamera');
     try {
       const devices = await this.OV.getDevices();
       const videoDevices = devices.filter(
@@ -355,7 +345,6 @@ class VideoComponent extends Component {
    */
 
   getToken() {
-    console.log('VC-getToken');
     return this.createSession(this.state.mySessionId).then(sessionId =>
       this.createToken(sessionId)
     );
@@ -363,9 +352,6 @@ class VideoComponent extends Component {
 
   // eslint-disable-next-line class-methods-use-this
   createSession(sessionId) {
-    console.log('VC-createSession');
-    console.log('----------------');
-    console.log(sessionId);
     return new Promise((resolve, reject) => {
       const data = JSON.stringify({ customSessionId: sessionId });
 
@@ -401,7 +387,6 @@ class VideoComponent extends Component {
 
   // eslint-disable-next-line class-methods-use-this
   createToken(sessionId) {
-    console.log('VC-createToken');
     return new Promise((resolve, reject) => {
       const data = {};
 

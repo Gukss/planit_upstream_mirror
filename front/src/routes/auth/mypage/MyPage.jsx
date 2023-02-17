@@ -47,7 +47,6 @@ function MyPage() {
           .get(`/rooms/${roomInfo.roomId}`)
           .then(res => setMyRoomInfo(myRoomInfo => [...myRoomInfo, res]))
       );
-      console.log(resMemRoomData);
       setRoomInfo(resMemRoomData);
       // const today = toStringByFormatting(new Date(), '-');
       // const resMemRoomDataBefore = resMemRoomData.filter(

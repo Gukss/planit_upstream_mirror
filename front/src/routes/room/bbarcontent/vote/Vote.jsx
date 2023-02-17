@@ -84,7 +84,6 @@ function Vote() {
       }
     });
   };
-  console.log('투표정보', voteInfo);
 
   return (
     <Bbar>

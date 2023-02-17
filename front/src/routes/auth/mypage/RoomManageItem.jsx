@@ -39,8 +39,6 @@ function RoomManageItem(props) {
       setMemNameList(
         await resJoinMem.current.data.map(memName => `${memName.memberName}, `)
       );
-      console.log(resJoinMem.current.data);
-      console.log(memNameList.current);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +63,6 @@ function RoomManageItem(props) {
   const handleSubmitItem = async e => {
     setLoading(true);
     const roomID = props.roomData.roomId;
-    console.log(roomID);
     try {
       // 방 정보 가져오기
       const resRoomInfo = await instance.get(`/rooms/${roomID}`);
@@ -78,8 +75,6 @@ function RoomManageItem(props) {
       });
       // 보관함 정보 가져오기
       const storageInfo = await instance.get(`/storages/rooms/${roomID}`);
-      console.log('이거슨 스토리쥐');
-      console.log(storageInfo);
       if (storageInfo.data.length > 0) {
         const storageMarkerData = storageInfo.data.map(marker =>
           // const markerColor = await instance.get('')
@@ -154,7 +149,6 @@ function RoomManageItem(props) {
       const chatInfo = await instance.get(`/chatting/${roomID}`);
       if (chatInfo.data.length > 0) {
         setChatMessa(chatInfo.data);
-        console.log(chatInfo.data);
       } else {
         setChatMessa([]);
       }

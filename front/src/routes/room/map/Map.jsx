@@ -62,8 +62,6 @@ function Map() {
 
   // 검색 시 바로 여러 마커 표시되게 하는법
   useEffect(() => {
-    console.log('너는 Map');
-    console.log('유저가 선택한 마커들', selectMarkers);
     if (searchData.length >= 1) {
       setIsCategory({ code: '', imageUrl: '' }); // 카테고리 검색 마커를 초기화 하는 용
       removeMarker();
@@ -138,7 +136,6 @@ function Map() {
         markerAdd.appendChild(document.createTextNode('장소 추가 +'));
         // 유저 선택 마커 추가
         markerAdd.onclick = function () {
-          console.log('usermarker');
           // 문제점 : 이제 이미 있는 거라면 추가 안시켜야함.... 어캐함?
           // 있 없 = t/ 없 있 =t / 없 없=t / 있 있 = f
           // 현재 클릭한 값 찾기.

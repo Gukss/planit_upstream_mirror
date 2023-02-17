@@ -17,7 +17,6 @@ function ChatSection() {
   const scrollRef = useRef();
 
   useEffect(() => {
-    console.log('메세지 리스트 바뀔 때마다 호출', scrollRef.current);
     if (scrollRef.current.lastElementChild) {
       scrollRef.current.lastElementChild.scrollIntoView({
         behavior: 'smooth',
