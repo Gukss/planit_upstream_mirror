@@ -1,0 +1,57 @@
+.home3 {
+  background-color: #fff;
+  height: 70vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.text_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  width: 25%;
+  height: 50%;
+  word-break: keep-all;
+  // height: 30rem;
+
+  button {
+    color: white;
+    background-color: #2b3f6b;
+    border-radius: 1rem;
+    border: 0;
+    width: 25rem;
+    height: 4.5rem;
+    font-size: 2rem;
+    margin-top: 7rem;
+  }
+  .title_wrap {
+    margin-left: 2rem;
+    .title {
+      font-family: 'yg-jalnan';
+      font-size: 3rem;
+      margin: 1rem 0rem;
+      &_logo {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #2b3f6b;
+      }
+    }
+    .content {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.gif_section {
+  margin: 1rem;
+  width: 48rem;
+  height: auto;
+  img {
+    width: 48rem;
+    height: 30rem;
+  }
+}
