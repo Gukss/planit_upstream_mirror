@@ -46,6 +46,18 @@ function RoomManageItem(props) {
     }
   };
 
+  function formatDate(date) {
+    const d = new Date(date);
+    let month = `${d.getMonth() + 1}`;
+    let day = `${d.getDate()}`;
+    const year = d.getFullYear();
+
+    if (month.length < 2) month = `0${month}`;
+    if (day.length < 2) day = `0${day}`;
+
+    return [year, month, day].join('-');
+  }
+
   useEffect(() => {
     joinMemberInfo();
   }, []);
@@ -114,9 +126,12 @@ function RoomManageItem(props) {
               return result;
             };
             for (let j = 0; j < maxDayOrder; j += 1) {
-              const filteredSc = storageSchedule.filter(
-                storageSchedule.dayOrder === j
-              );
+              const filteredSc = [];
+              for (let k = 0; k < storageSchedule.length; k += 1) {
+                if (storageSchedule[k].dayOrder === j) {
+                  filteredSc.push(storageSchedule[k]);
+                }
+              }
               const forSetDate = AddDays(resRoomInfo.data.startDate, j);
               const scheduleIndiData = {
                 data: forSetDate,
@@ -166,7 +181,9 @@ function RoomManageItem(props) {
       </section>
       <hr />
       <section className={classes.content_section}>
-        <p className={classes.created_at}>생성일 : 2023.01.01</p>
+        <p className={classes.created_at}>
+          생성일 : {formatDate(props.roomData.createdAt)}
+        </p>
         <p className={classes.participants}>
           참여자:
           {memNameList}
