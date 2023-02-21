@@ -114,7 +114,7 @@ function RoomManageItem(props) {
               }
             }
           } else {
-            const scheduleAllData = {};
+            const scheduleAllData = [];
             const AddDays = (date, day) => {
               const result = new Date(date);
               result.setDate(result.getDate() + day);
