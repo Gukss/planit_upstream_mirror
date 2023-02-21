@@ -19,7 +19,13 @@ export default class OpenViduVideoComponent extends Component {
   }
 
   render() {
-    // eslint-disable-next-line jsx-a11y/media-has-caption
-    return <video autoPlay ref={this.videoRef} style={{ height: '100%' }} />;
+    return (
+      // eslint-disable-next-line jsx-a11y/media-has-caption
+      <video
+        autoPlay
+        ref={this.videoRef}
+        style={{ height: '100%', width: '100%' }}
+      />
+    );
   }
 }
