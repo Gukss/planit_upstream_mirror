@@ -173,7 +173,7 @@
 
 ## ⚙ 아키텍쳐
 
-![시스템아키텍쳐](https://user-images.githubusercontent.com/76477531/219374775-ee6d8400-cd60-4982-be07-adebd8f4e1f7.png)
+![Ver_2 0_아키텍쳐](https://user-images.githubusercontent.com/76477531/221129700-0f1da3bf-52c0-4f81-9388-caec465fe4e5.png)
 
 ---
 
